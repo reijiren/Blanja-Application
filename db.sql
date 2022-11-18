@@ -6,6 +6,7 @@ create table users(
     phone varchar(20),
     user_type integer, -- 0 customer, 1 seller
     image text,
+    main_address integer,
     user_created date
 );
 
@@ -41,4 +42,15 @@ create table order(
     color varchar(20),
     size integer,
     status integer -- 0 paid, 1 unpaid
+);
+
+create table address(
+    id_address serial primary key,
+    user integer references users(id_user) on delete cascade,
+    address_name varchar(40), -- ex: rumah, kantor, gudang
+    recipient_name varchar(40),
+    recipient_phone varchar(20),
+    address text,
+    post_code varchar(10),
+    city varchar(40)
 );
