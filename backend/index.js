@@ -8,6 +8,8 @@ const xss = require("xss-clean");
 const socket = require('socket.io');
 const socketController = require('./src/socket/index');
 const http = require('http');
+const userRouter = require('./src/routes/user.routes.js')
+const productRouter = require ('./src/routes/product.routes')
 
 const app = express();
 
@@ -18,6 +20,8 @@ try {
 	app.use(xss());
 	app.use(cors());
 
+	app.use(userRouter)
+	app.use(productRouter)
 	const server = http.createServer(app);
 	const io = socket(server, {
 		cors: {
