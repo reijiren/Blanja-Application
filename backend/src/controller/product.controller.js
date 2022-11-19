@@ -34,7 +34,7 @@ const userController = {
       const { product_name,price ,stock,condition,color,size,category,description} = req.body;
 
           const data = {
-             product_name,price ,stock,condition,photo,color,size,category,description
+            product_name,price ,stock,condition,photo,color,size,category,description
           }
 
           productModel.store(data).then((result) => {
