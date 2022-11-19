@@ -1,13 +1,32 @@
+@font-face {
+  font-family: 'metropolis';
+  src: url('../src/assets/fonts/metropolis/Metropolis-Light.otf');
+}
+
+@font-face {
+  font-family: 'metropolis-medium';
+  src: url('../src/assets/fonts/metropolis/Metropolis-Medium.otf');
+}
+
+@font-face {
+  font-family: 'metropolis-bold';
+  src: url('../src/assets/fonts/metropolis/Metropolis-Bold.otf');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'metropolis'
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.fontBold {
+  font-family: 'metropolis-bold';
+}
+
+.fontMedium {
+  font-family: 'metropolis-medium';
 }
