@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { useState } from "react";
 import logo from "../../assets/images/blanja_icon.png";
 import style from "./style.module.css";
-import CustomerRegister from "../../components/CustomerRegister";
-import SellerRegister from "../../components/SellerRegister";
+import CustomerRegister from "../../components/auth/CustomerRegister";
+import SellerRegister from "../../components/auth/SellerRegister";
 
 const Register = () => {
 	const [active, setActive] = useState(1);

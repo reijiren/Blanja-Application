@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { useState } from "react";
 import logo from "../../assets/images/blanja_icon.png";
 import style from "./style.module.css";
-import SellerLogin from "../../components/SellerLogin";
-import CustomerLogin from "../../components/CustomerLogin";
+import SellerLogin from "../../components/auth/SellerLogin";
+import CustomerLogin from "../../components/auth/CustomerLogin";
 
 const Login = () => {
 	const [active, setActive] = useState(1);
