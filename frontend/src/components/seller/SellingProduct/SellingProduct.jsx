@@ -81,27 +81,27 @@ const SellingProduct = () => {
               </label>
             </div>
             <div className="radio-menu d-flex flex-row ms-3 gap-5">
-              <div class="form-check">
+              <div className="form-check">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="condition"
                   id="flexRadioDefault1"
                   value="baru"
                 />
-                <label class="form-check-label" for="flexRadioDefault1">
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Baru
                 </label>
               </div>
-              <div class="form-check">
+              <div className="form-check">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="condition"
                   id="flexRadioDefault2"
                   value="bekas"
                 />
-                <label class="form-check-label" for="flexRadioDefault2">
+                <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Bekas
                 </label>
               </div>
@@ -214,7 +214,7 @@ const SellingProduct = () => {
                 style={{ border: "2px solid #D4D4D4 " }}
               >
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="5"
                 ></textarea>

@@ -39,7 +39,7 @@ const MyProfile = () => {
               <div className="wrapper-side-form-input col-8 col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
                 <div className="mb-3 row">
                   <label
-                    htmlhtmlFor="name"
+                    htmlFor="name"
                     className="col-4 col-form-label d-flex "
                   >
                     <p className="fontMedium h6 text-muted">Name</p>
@@ -50,7 +50,7 @@ const MyProfile = () => {
                 </div>
                 <div className="mb-3 row">
                   <label
-                    htmlhtmlFor="email"
+                    htmlFor="email"
                     className="col-4 col-form-label d-flex "
                   >
                     <p className="fontMedium h6 text-muted">Email</p>
@@ -61,7 +61,7 @@ const MyProfile = () => {
                 </div>
                 <div className="mb-3 row">
                   <label
-                    htmlhtmlFor="phone"
+                    htmlFor="phone"
                     className="col-4 col-form-label d-flex "
                   >
                     <p className="fontMedium h6 text-muted">Phone number</p>
@@ -72,7 +72,7 @@ const MyProfile = () => {
                 </div>
                 <div className="mb-3 row">
                   <label
-                    htmlhtmlFor="phone"
+                    htmlFor="phone"
                     className="col-4 col-form-label d-flex "
                   >
                     <p className="fontMedium h6 text-muted">Gender</p>
@@ -114,7 +114,7 @@ const MyProfile = () => {
                 </div>
                 <div className="mb-3 row">
                   <label
-                    htmlhtmlFor="phone"
+                    htmlFor="phone"
                     className="col-4 col-form-label d-flex "
                   >
                     <p className="fontMedium h6 text-muted">Date of birth</p>
@@ -132,7 +132,7 @@ const MyProfile = () => {
                 </div>
                 <div className="mb-3 row">
                   <label
-                    htmlhtmlFor="-"
+                    htmlFor="-"
                     className="col-4 col-form-label d-flex "
                   ></label>
                   <div className="col-8 d-flex gap-3">

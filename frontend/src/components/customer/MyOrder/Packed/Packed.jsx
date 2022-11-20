@@ -51,7 +51,21 @@ const Packed = () => {
           </p>
         </div>
         <div className="col-2 d-flex align-items-center">
-          <p className="fontBold h">Packed</p>
+        <div className="status-wrapper d-flex flex-column align-items-center">
+            <p className="fontBold h">Packed</p>
+            <button
+              type="button"
+              className="fontBold text-white"
+              style={{
+                border: "none",
+                outline: "none",
+                borderRadius: "25px",
+                background: "#F01F0E",
+              }}
+            >
+              Cancel Order
+            </button>
+          </div>
         </div>
       </div>
 
