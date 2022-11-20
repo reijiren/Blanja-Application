@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import style from "../assets/style/style.module.css";
+import style from "../../assets/style/style.module.css";
 
-const CustomerLogin = () => {
+const SellerLogin = () => {
 	return (
 		<Fragment>
 			<form className="col-12 col-md-8">
@@ -43,4 +43,4 @@ const CustomerLogin = () => {
 	);
 };
 
-export default CustomerLogin;
+export default SellerLogin;

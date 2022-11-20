@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import style from "../assets/style/style.module.css";
+import style from "../../assets/style/style.module.css";
 
-const SellerRegister = () => {
+const CustomerRegister = () => {
 	return (
 		<Fragment>
 			<form className="col-12 col-md-8">
@@ -24,22 +24,6 @@ const SellerRegister = () => {
 				</div>
 				<div className="mb-3">
 					<input
-						type="text"
-						className={`form-control ${style.buttons}`}
-						id="phoneInput"
-						placeholder="Phone number"
-					/>
-				</div>
-				<div className="mb-3">
-					<input
-						type="text"
-						className={`form-control ${style.buttons}`}
-						id="storeInput"
-						placeholder="Store name"
-					/>
-				</div>
-				<div className="mb-3">
-					<input
 						type="password"
 						className={`form-control ${style.buttons}`}
 						id="passwordInput"
@@ -48,7 +32,7 @@ const SellerRegister = () => {
 				</div>
 				<button
 					type="submit"
-					className={`col-12 mb-3 mt-4 ${style.buttonsActive}`}>
+					className={`col-12 mt-4 mb-3 ${style.buttonsActive}`}>
 					Register
 				</button>
 			</form>
@@ -56,7 +40,7 @@ const SellerRegister = () => {
 				<p>
 					Already have a Blanja account?{" "}
 					<span>
-						<Link className={`${style.links} text-danger`}> Log in</Link>
+						<Link className={`${style.links} text-danger`}> Log In</Link>
 					</span>
 				</p>
 			</div>
@@ -64,4 +48,4 @@ const SellerRegister = () => {
 	);
 };
 
-export default SellerRegister;
+export default CustomerRegister;

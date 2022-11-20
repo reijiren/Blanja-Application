@@ -16,3 +16,163 @@
 .links {
   text-decoration: none;
 }
+
+.thumbs {
+  border-radius: 8px;
+}
+
+.thumbnails {
+  height: 248px;
+}
+
+.margins {
+  margin: 0;
+  padding: 0;
+}
+
+.review {
+  font-size: 12px;
+}
+
+.ups {
+  margin-top: -15px;
+}
+
+.button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+
+.colorActive {
+  border: 1px solid #DB3022;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #FFF;
+}
+
+.black {
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+.blackActive {
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+
+.red {
+  background-color: #DB3022;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+.redActive {
+  background-color: #DB3022;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+
+.blue {
+  background-color: #4290D8;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+.blueActive {
+  background-color: #4290D8;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+.green {
+  background-color: #42D86C;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+.greenActive {
+  background-color: #42D86C;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 0.15rem;
+}
+
+.buttonProductDetail {
+  height: 45px;
+  border-radius: 24px;
+}
+
+.ratings{
+  font-size: 60px;
+}
+
+.borderBottom {
+  border-bottom: 2px solid #D4D4D4;
+}
+
+.cardsImage{
+  height: 13rem;
+}
+
+.cardProductTitle {
+  font-size: 16px;
+}
+
+.cardProductShop {
+  font-size: 12px;
+}
+
+.cardSpacing {
+  padding-right: 10px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .mobiles {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+    height: 270px;
+  }
+
+  .navSearch {
+    margin-left: -35px;
+  }
+
+  .cardMobiles{
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+  }
+
+  .cardsImage{
+    height: 10rem;
+  }
+
+  .thumbnails {
+    height: 270px;
+  }
+}
