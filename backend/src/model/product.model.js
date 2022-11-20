@@ -21,10 +21,22 @@ const productModel = {
         resolve(result)
       })
     })
-  }
-  , checknProduct:(search )=>{
+  },
+  selectJoin: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`select * from product left join seller on seller.id_seller  = product.seller where id_product=${id}`
+      , (err, result) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(result)
+      })
+    })
+  },
+   checknProduct:(search )=>{
     return new Promise((resolve, reject)=>{
-      db.query(`select * from product where product_name ='${search}'`, (err, result)=>{
+      db.query(`select * from product where product_name ='${search}'`
+      , (err, result)=>{
         if (err) {
           reject(err)
         }
@@ -35,9 +47,9 @@ const productModel = {
   store: ( data) => {
     return new Promise((resolve, reject) => {
       db.query(`
-            INSERT INTO product (product_name, price ,stock,condition,photo,color,size,category,description)
+            INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
             VALUES
-            ('${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}',${data.size},'${data.category}','${data.description}')
+            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}',${data.size},'${data.category}','${data.description}')
             `, (err, res) => {
         if (err) {
           reject(err)
@@ -84,16 +96,5 @@ const productModel = {
       })
     })
   },
-  checkUEmail:(email)=>{
-    return new Promise((resolve, reject)=>{
-      db.query(`select * from product where email='${email}'`, (err, result)=>{
-        if (err) {
-          reject(err)
-        }
-        resolve(result);
-      })
-    })
-  },  
-
 }
 module.exports = productModel
