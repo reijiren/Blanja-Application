@@ -1,7 +1,7 @@
 const productModel = require('../model/product.model');
-const {successWithToken ,failed, success}= require('../helper/response');
+const {failed, success}= require('../helper/response');
 
-const userController = {
+const productController = {
   // method
   list: (req, res) => {
     productModel
@@ -26,15 +26,37 @@ const userController = {
         failed(res, err.message,'failed','by id user failed')
       })
   },
+  detailProduct: (req, res) => {
+    const id = req.params.id;
+    productModel
+    .selectJoin(id)
+    .then((result) => {
+      success(res, result, 'success', 'get detail product success')
+    })
+    .catch((err) => {
+      failed(res, err.message, 'failed', 'failed to get product failed')
+    })
+},
+searchName: (req, res) => {
+  const search = req.params.search
+  productModel
+    .checknProduct(search)
+    .then((result) => {
+      success(res, result, 'success', 'get detail product success')
+    })
+    .catch((err) => {
+      failed(res, err.message, 'failed', 'failed to get product failed')
+    })
+},
   insert: (req, res) => {
     try {
       //image
       const photo = req.file.filename
       //tangkap data dari body
-      const { product_name,price ,stock,condition,color,size,category,description} = req.body;
+      const { seller,product_name,price ,stock,condition,color,size,category,description} = req.body;
 
           const data = {
-            product_name,price ,stock,condition,photo,color,size,category,description
+            seller,product_name,price ,stock,condition,photo,color,size,category,description
           }
 
           productModel.store(data).then((result) => {
@@ -59,25 +81,26 @@ const userController = {
       .updateProduct(data)
       .then((result) => {
         // res.json('Account Updated')
-        success(res, result, 'success', 'upload product success')
+        success(res, result, 'success', 'update product success')
       })
       .catch((err) => {
         // console.log(data)
         // console.log(err)
         // res.json(err)
-        failed(res, err.message, 'failed', 'internal server error');
+        failed(res, err.message, 'failed', 'update product failed')
       })
+      failed(res, err.message, 'failed', 'internal server error');
   },
   destroy: (req, res) => {
     productModel
       .delete(req.params.id)
       .then((result) => {
-        res.json('Account Deleted')
+        success(res, result, 'success', 'delete product success')
       })
       .catch((err) => {
-        res.json(err)
+        failed(res, err.message, 'failed', 'delete product failed')
       })
   },
 }
 
-module.exports = userController
+module.exports = productController

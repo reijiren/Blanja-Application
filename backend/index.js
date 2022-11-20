@@ -10,6 +10,7 @@ const socketController = require('./src/socket/index');
 const http = require('http');
 const userRouter = require('./src/routes/user.routes.js')
 const productRouter = require ('./src/routes/product.routes')
+const order = require ('./src/routes/order.routes')
 
 const app = express();
 
@@ -22,6 +23,7 @@ try {
 
 	app.use(userRouter)
 	app.use(productRouter)
+	app.use(order)
 	const server = http.createServer(app);
 	const io = socket(server, {
 		cors: {
