@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ScrollToTop from '../components/ScrollToTop';
 
 import Login from '../pages/login/login';
-import Product from '../pages/product/product';
+import Profile from '../pages/user/profile/Profile';
 import Register from '../pages/register/register';
 import MyBag from '../pages/myBag/myBag';
 import Category from '../pages/category/category';

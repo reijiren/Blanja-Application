@@ -116,8 +116,9 @@ const userModel = {
       birth_date = coalesce ($9, customer.birth_date)
       from upd
       where customer.id_customer = $8;
-      `, [data.name, data.email, pass, data.phone, data.gender, data.image, data.main_address, id, data.birth_date]
-      , (err, res) => {
+      `,
+      [data.name, data.email, pass, data.phone, data.gender, data.image, data.main_address, id, data.birth_date],
+      (err, res) => {
           if(err) return reject(err);
           resolve(res);
       })
@@ -143,8 +144,9 @@ const userModel = {
       store_desc = coalesce ($5, seller.store_desc)
       from upd
       where seller.id_seller = $8;
-      `, [data.name, data.email, pass, data.phone, data.store_desc, data.image, data.main_address, id]
-      , (err, res) => {
+      `,
+      [data.name, data.email, pass, data.phone, data.store_desc, data.image, data.main_address, id],
+      (err, res) => {
           if(err) return reject(err);
           resolve(res);
       })
