@@ -31,7 +31,8 @@ create table product(
     photo text,
     color text,
     size integer, -- 0 XS, 1 S, 2 M, 3 L, 4 XL
-    category text
+    category text,
+    description text
 );
 
 create table orders(
