@@ -1,0 +1,42 @@
+.border {
+  border: 3px solid black;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  height: 80vh;
+  border-radius: 20px;
+}
+
+.name {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.photo {
+  border-radius: 50%;
+}
+
+.chat {
+  margin-bottom: 3rem;
+  font-size: 30px;
+}
+
+.image {
+  margin-top: 10px;
+  border-radius: 50%;
+}
+
+.inpur {
+  margin-top: 23rem;
+  margin-left: 2rem;
+}
+input {
+  width: 94%;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  border: 2px solid black;
+}
