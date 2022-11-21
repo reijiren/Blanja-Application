@@ -12,10 +12,10 @@ import styles from '../assets/style/style.module.css';
 const Navbar = () => {
   return (
     <>
-      <nav style={{ height: '70px' }} className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <nav style={{ height: '70px' }} className={`${styles.nav} navbar navbar-expand-lg navbar-light bg-light fixed-top`}>
         <div className="container">
           <div className={styles.logo}>
-            <img src={logo} alt="" />
+            <img className={styles.img} src={logo} alt="" />
             <span className={`${styles.textLogo} mt-5 ms-2 `}>Belanja</span>
           </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,21 +38,11 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <Link className="nav-link active" aria-current="page" to="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <Link className="nav-link active" aria-current="page" to="">
                     <img src={notif} className="d-inline-block align-text-center" alt="" />
                   </Link>
                 </li>
 
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div className="modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div className="modal-body">No notification yet</div>
-                    </div>
-                  </div>
-                </div>
                 <li>
                   <Link className="nav-link active" aria-current="page" to="">
                     <img src={mail} className="d-inline-block align-text-center" alt="" />
