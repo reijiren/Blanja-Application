@@ -19,9 +19,9 @@ const HomeAdmin = () => {
 						<h1>
 							Hello, <span>{name}</span>!
 						</h1>
-						<p>Welcome to Blaja Admin Page</p>
+						<p>Welcome to Blanja Admin Page</p>
 						<Link className="btn btn-primary" to="/" role="button">
-							Blaja Home
+							Blanja Home
 						</Link>
 					</div>
 				</div>

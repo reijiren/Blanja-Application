@@ -1,10 +1,6 @@
 @media only screen and (min-width: 576px) {
 }
 
-body {
-  background-size: 100vw 100vh;
-  background: #ffffff;
-}
 .buttons {
   height: 45px;
   border: 1px solid #9b9b9b;
@@ -22,6 +18,25 @@ body {
 
 .links {
   text-decoration: none;
+}
+
+.butts {
+  width: 100%;
+}
+
+.mid {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.sideLink {
+  text-decoration: none;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #a3b0bc;
+  border-radius: 10px;
+  color: white;
 }
 
 /* ////////////////// */

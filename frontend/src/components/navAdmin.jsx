@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../assets/style/style.module.css";
+import style from "../assets/style/style.module.css";
 
 const NavAdmin = () => {
 	const name = JSON.parse(localStorage.getItem("name"));
@@ -9,7 +9,6 @@ const NavAdmin = () => {
 		<>
 			<nav className="navbar bg-light">
 				<div className="container-fluid">
-					{/* <Link className="navbar-brand">Navbar</Link> */}
 					<div>
 						<button
 							className="btn btn-light"
@@ -41,7 +40,7 @@ const NavAdmin = () => {
 							<div className="offcanvas-body">
 								<div>
 									<button
-										className="btn btn-secondary butts"
+										className={`btn btn-secondary ${style.butts}`}
 										type="button"
 										data-bs-toggle="collapse"
 										data-bs-target="#airlines"
@@ -52,19 +51,21 @@ const NavAdmin = () => {
 									<div className="collapse" id="airlines">
 										<div className="card card-body">
 											<Link
-												className="side-link mid"
+												className={`${style.sideLink} ${style.mid}`}
 												to="/admin/search-airlines/1">
 												Search Airlines
 											</Link>
-											<Link className="side-link" to="/admin/insert-airlines">
+											<Link
+												className={`${style.sideLink}`}
+												to="/admin/insert-airlines">
 												Insert Airlines
 											</Link>
 										</div>
 									</div>
 								</div>
-								<div className="mid">
+								<div className={`${style.mid}`}>
 									<button
-										className="btn btn-secondary butts"
+										className={`btn btn-secondary ${style.butts}`}
 										type="button"
 										data-bs-toggle="collapse"
 										data-bs-target="#flight"
@@ -75,11 +76,13 @@ const NavAdmin = () => {
 									<div className="collapse" id="flight">
 										<div className="card card-body">
 											<Link
-												className="side-link mid"
+												className={`${style.sideLink} ${style.mid}`}
 												to="/admin/search-flights">
 												Search Flight
 											</Link>
-											<Link className="side-link" to="/admin/insert-flights">
+											<Link
+												className={`${style.sideLink}`}
+												to="/admin/insert-flights">
 												Insert Flights
 											</Link>
 										</div>
@@ -87,7 +90,7 @@ const NavAdmin = () => {
 								</div>
 								<div>
 									<button
-										className="btn btn-secondary butts"
+										className={`btn btn-secondary ${style.butts}`}
 										type="button"
 										data-bs-toggle="collapse"
 										data-bs-target="#user"
@@ -97,7 +100,9 @@ const NavAdmin = () => {
 									</button>
 									<div className="collapse" id="user">
 										<div className="card card-body">
-											<Link className="side-link mid" to="/admin/search-user">
+											<Link
+												className={`${style.sideLink} ${style.mid}`}
+												to="/admin/search-user">
 												Search User
 											</Link>
 										</div>
