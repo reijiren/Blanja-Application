@@ -3,7 +3,7 @@ import style from '../liveChat/chat.module.css';
 import cristian from '../../assets/images/christian.png';
 import Navbar from '../../components/NavbarLogin';
 
-const chat = () => {
+const Chat = () => {
   return (
     <>
       <Navbar />
@@ -36,4 +36,4 @@ const chat = () => {
   );
 };
 
-export default chat;
+export default Chat;

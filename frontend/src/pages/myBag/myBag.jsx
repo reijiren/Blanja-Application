@@ -4,7 +4,7 @@ import style from '../myBag/style.module.css';
 import jas from '../../assets/images/jas.png';
 import Navbar from '../../components/NavbarLogin';
 
-const myBag = () => {
+const MyBag = () => {
   return (
     <>
       <Navbar />
@@ -79,4 +79,4 @@ const myBag = () => {
   );
 };
 
-export default myBag;
+export default MyBag;

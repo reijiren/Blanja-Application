@@ -1,10 +1,10 @@
 import React from 'react';
-import style from '../t-shirt/tshirt.module.css';
+import style from '../category/category.module.css';
 import { Link } from 'react-router-dom';
 import product from '../../assets/images/gez-xavier-mansfield-b34E1vh1tYU-unsplash 1.jpg';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/NavbarLogin';
 
-const tshirt = () => {
+const Category = () => {
   return (
     <>
       <div className="container">
@@ -55,4 +55,4 @@ const tshirt = () => {
   );
 };
 
-export default tshirt;
+export default Category;

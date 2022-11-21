@@ -2,7 +2,7 @@ import React from 'react';
 
 import style from '../landing/style.module.css';
 
-const landing = () => {
+const Landing = () => {
   return (
     <>
       <div>haha</div>
@@ -10,4 +10,4 @@ const landing = () => {
   );
 };
 
-export default landing;
+export default Landing;
