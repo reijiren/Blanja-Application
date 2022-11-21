@@ -3,7 +3,7 @@ const productModel = {
   // router 
   selectAll: () => {
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM product', (err, result) => {
+      db.query('SELECT * FROM product join seller on seller.id_seller = product.seller', (err, result) => {
         if (err) {
           reject(err)
         } else {
@@ -24,7 +24,7 @@ const productModel = {
   },
   selectJoin: (id) => {
     return new Promise((resolve, reject) => {
-      db.query(`select * from product left join seller on seller.id_seller  = product.seller where id_product=${id}`
+      db.query(`select * from product left join seller on seller.id_seller = product.seller where id_product=${id}`
       , (err, result) => {
         if (err) {
           reject(err)
@@ -33,9 +33,9 @@ const productModel = {
       })
     })
   },
-   checknProduct:(search )=>{
+  checkProduct:(data)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`select * from product where product_name ='${search}'`
+      db.query(`select * from product where product_name ilike '${data}'`
       , (err, result)=>{
         if (err) {
           reject(err)
@@ -72,7 +72,7 @@ const productModel = {
         color = COALESCE ($6, color),
         size = COALESCE ($7, size),
         category = COALESCE ($8, category),
-        category = COALESCE ($9, description)
+        description = COALESCE ($9, description)
         WHERE id_product = $10
         `,
         [data.product_name, data.price , data.stock, data.condition, data.photo, data.color, data.size, data.category, data.id,data.description],
@@ -88,7 +88,7 @@ const productModel = {
   
   delete: (id) => {
     return new Promise((resolve, reject) => {
-      db.query(`DELETE FROM product WHERE id_product  = ${id};`, (err, res) => {
+      db.query(`DELETE FROM product WHERE id_product = ${id};`, (err, res) => {
         if (err) {
           reject(err)
         }

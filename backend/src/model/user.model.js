@@ -72,20 +72,21 @@ const userModel = {
         })
     })
   },
-
-  register:({name,email,password,user_type,store_desc,image})=>{
+  
+  // register user
+  register:({name, email, password, user_type, store_desc, phone, image})=>{
     return new Promise((resolve,reject)=>{
       db.query(`
       with ins1 as (
-        insert into users (name, email, password, user_type, image, user_created) 
+        insert into users (name, email, password, user_type, phone, image, user_created) 
         values
-        ('${name}','${email}','${password}', ${user_type},'${image}', now())
+        ('${name}','${email}','${password}', ${user_type}, '${phone}', '${image}', now())
         returning id_user as user_id
       )
       insert into ${user_type === 1 ? 'customer' : 'seller'}
-      (id_${user_type === 2 ? 'seller, store_desc': 'customer' }) 
+      (id_${user_type === 1 ? 'customer' : 'seller, store_desc' }) 
       values ((select user_id from ins1)
-      ${user_type === 2 ? `, '${store_desc}'` : ''});
+      ${user_type === 1 ? '' : `, '${store_desc}'`});
       `, (err,res)=>{
         if (err) {
             reject(err)
@@ -94,8 +95,9 @@ const userModel = {
         }
       )
     })
-  },  
+  },
   
+  // update customer
   updateCustomer: (id, data, pass) => {
     return new Promise((resolve, reject) => {
       db.query(`
@@ -125,6 +127,7 @@ const userModel = {
     })
   },
   
+  // update seller
   updateSeller: (id, data, pass) => {
     return new Promise((resolve, reject) => {
       db.query(`
@@ -153,6 +156,7 @@ const userModel = {
     })
   },
   
+  // update image
   updatePhoto: (id, data) => {
     return new Promise((resolve, reject) => {
       db.query(`
@@ -164,6 +168,7 @@ const userModel = {
     })
   },
   
+  // delete user
   delete: (id) => {
     return new Promise((resolve, reject) => {
       db.query(`DELETE FROM users WHERE id_user = ${id};`, (err, res) => {
