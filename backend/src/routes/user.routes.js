@@ -1,9 +1,7 @@
-require('dotenv').config()
-// deklare exprees
 const express = require('express')
 const { list, destroy, detail, register,login,listSeller,detailSeller,updatePhoto, listCustomer, detailCustomer, updateCustomer, updateSeller, checkEmail } = require('../controller/user.controller')
 const {uploadPhotouser} = require ('../middleware/uploadImg');
-const {removePhotoUser} = require('../middleware/deleteImg')
+const {removePhotoUser} = require('../middleware/deleteImg');
 
 const router = express.Router()
 

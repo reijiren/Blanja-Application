@@ -50,7 +50,7 @@ const addressController = {
         .then((result) => {
             addressModel.selectAddressDetail(id)
             .then((result) => {
-                success(res, result.rowCount, 'success', 'update user address success')
+                success(res, result.rows, 'success', 'update user address success')
             })
             .catch((err) => {
                 failed(res, err.message, 'failed', 'failed to get address detail')

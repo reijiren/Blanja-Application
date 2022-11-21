@@ -1,5 +1,3 @@
-require('dotenv').config()
-// deklare exprees
 const express = require('express')
 const { list, destroy, detail, update,insert,detailProduct,searchName } = require('../controller/product.controller')
 const {uploadPhoto} = require('../middleware/uploadImg')
