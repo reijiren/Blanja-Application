@@ -74,13 +74,13 @@ const userModel = {
   },
   
   // register user
-  register:({name,email,password,user_type,store_desc,image})=>{
+  register:({name, email, password, user_type, store_desc, phone, image})=>{
     return new Promise((resolve,reject)=>{
       db.query(`
       with ins1 as (
-        insert into users (name, email, password, user_type, image, user_created) 
+        insert into users (name, email, password, user_type, phone, image, user_created) 
         values
-        ('${name}','${email}','${password}', ${user_type},'${image}', now())
+        ('${name}','${email}','${password}', ${user_type}, '${phone}', '${image}', now())
         returning id_user as user_id
       )
       insert into ${user_type === 1 ? 'customer' : 'seller'}

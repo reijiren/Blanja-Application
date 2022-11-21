@@ -162,7 +162,7 @@ const userController = {
 
   register:(req, res)=>{
     try{
-      const { name, email, password, user_type, store_desc } = req.body;
+      const { name, email, password, user_type, phone, store_desc } = req.body;
 
       bcrypt.hash(password,10,(err,hash)=>{
         if (err) {
@@ -175,6 +175,7 @@ const userController = {
           password: hash,
           user_type,
           image: "default.png",
+          phone,
           store_desc,
         }
 
