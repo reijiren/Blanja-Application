@@ -35,7 +35,7 @@ const productModel = {
   },
   checkProduct:(data)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`select * from product where product_name ilike '${data}'`
+      db.query(`select * from product where product_name ilike '%${data}%'`
       , (err, result)=>{
         if (err) {
           reject(err)
