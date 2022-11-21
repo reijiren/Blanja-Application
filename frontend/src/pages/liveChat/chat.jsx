@@ -1,7 +1,7 @@
 import React from 'react';
 import style from '../liveChat/chat.module.css';
 import cristian from '../../assets/images/christian.png';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/NavbarLogin';
 
 const chat = () => {
   return (

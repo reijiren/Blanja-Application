@@ -2,7 +2,7 @@ import React from 'react';
 
 import style from '../myBag/style.module.css';
 import jas from '../../assets/images/jas.png';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/NavbarLogin';
 
 const myBag = () => {
   return (

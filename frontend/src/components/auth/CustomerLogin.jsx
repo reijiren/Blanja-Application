@@ -1,19 +1,11 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import style from "../assets/style/style.module.css";
+import style from "../../assets/style/style.module.css";
 
-const CustomerRegister = () => {
+const CustomerLogin = () => {
 	return (
 		<Fragment>
 			<form className="col-12 col-md-8">
-				<div className="mb-3">
-					<input
-						type="text"
-						className={`form-control ${style.buttons}`}
-						id="nameInput"
-						placeholder="Name"
-					/>
-				</div>
 				<div className="mb-3">
 					<input
 						type="email"
@@ -30,17 +22,20 @@ const CustomerRegister = () => {
 						placeholder="Password"
 					/>
 				</div>
-				<button
-					type="submit"
-					className={`col-12 mt-4 mb-3 ${style.buttonsActive}`}>
-					Register
+				<div className="d-flex flex-row-reverse mb-3">
+					<Link className={`${style.links}`}>
+						<p className="text-danger">Forget Password?</p>
+					</Link>
+				</div>
+				<button type="submit" className={`col-12 mb-3 ${style.buttonsActive}`}>
+					Log in
 				</button>
 			</form>
 			<div className="text-center">
 				<p>
-					Already have a Blanja account?{" "}
+					Don't have a Blanja account?{" "}
 					<span>
-						<Link className={`${style.links} text-danger`}> Log In</Link>
+						<Link className={`${style.links} text-danger`}> Register</Link>
 					</span>
 				</p>
 			</div>
@@ -48,4 +43,4 @@ const CustomerRegister = () => {
 	);
 };
 
-export default CustomerRegister;
+export default CustomerLogin;
