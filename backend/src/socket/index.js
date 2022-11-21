@@ -1,5 +1,4 @@
-const { writeFile } = require("fs");
-const {store, list} = require('../model/chat.model')
+const {store, list, userChat} = require('../model/chat.model')
 
 module.exports = (io, socket) => {
     // sender
@@ -25,11 +24,6 @@ module.exports = (io, socket) => {
         })
     });
 
-    // upload image
-    // socket.on('upload-image', (data) => {
-    //     console.log(data)
-    // })
-
     // history
     socket.on("chat-history", async(data) => {
         try{
@@ -38,5 +32,5 @@ module.exports = (io, socket) => {
         }catch(err){
             console.log('Error fetching chat history')
         }
-    })
+    });
 }

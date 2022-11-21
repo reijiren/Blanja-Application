@@ -7,11 +7,10 @@ const productController = {
     productModel
       .selectAll()
       .then((result) => {
-        success(res, result, 'success','get all user succes')
+        success(res, result, 'success','get all products success')
       })
       .catch((err) => {
-        // res.json(err)
-        failed(res, err.message,'failed','get all user failed')
+        failed(res, err.message,'failed','failed to get all products')
       })
   },
   detail: (req, res) => {
@@ -36,60 +35,68 @@ const productController = {
     .catch((err) => {
       failed(res, err.message, 'failed', 'failed to get product failed')
     })
-},
-searchName: (req, res) => {
-  const search = req.params.search
-  productModel
-    .checknProduct(search)
-    .then((result) => {
-      success(res, result, 'success', 'get detail product success')
-    })
-    .catch((err) => {
-      failed(res, err.message, 'failed', 'failed to get product failed')
-    })
-},
+  },
+  searchName: (req, res) => {
+    const search = req.params.search
+    productModel
+      .checkProduct(search)
+      .then((result) => {
+        success(res, result, 'success', 'find product by name success')
+      })
+      .catch((err) => {
+        failed(res, err.message, 'failed', 'failed to find product by name')
+      })
+  },
   insert: (req, res) => {
     try {
       //image
       const photo = req.file.filename
       //tangkap data dari body
-      const { seller,product_name,price ,stock,condition,color,size,category,description} = req.body;
+      const { seller,product_name,price ,stock,condition,color,size,category,description } = req.body;
 
-          const data = {
-            seller,product_name,price ,stock,condition,photo,color,size,category,description
-          }
+      const data = {
+        seller,
+        product_name,
+        price,
+        stock,
+        condition,
+        photo,
+        color,
+        size,
+        category,
+        description
+      }
 
-          productModel.store(data).then((result) => {
-              success(res, result, 'success', 'upload product success')
+      productModel.store(data).then((result) => {
+          success(res, result, 'success', 'insert product success')
 
-          }).catch((err) => {
-              console.log(data)
-              failed(res, err.message, 'failed', 'upload product failed')
-          })
-        } catch(err) {
+      }).catch((err) => {
+          failed(res, err.message, 'failed', 'insert product failed')
+      })
+    } catch(err) {
       failed(res, err.message, 'failed', 'internal server error');
-  }
+    }
   },
   update: (req, res) => {
-    const id = req.params.id
-    const photo=req.file.filename
-    // eslint-disable-next-line camelcase
-    console.log(id)
-    const { product_name, price ,stock,condition,color,size,category,description} = req.body
-    const data = {product_name,price ,stock,condition,photo,color,size,category,description,id}
-    productModel
+    try{
+      const id = req.params.id
+      const photo = req.file.filename;
+      
+      const { product_name, price ,stock,condition,color,size,category,description} = req.body
+      const data = {product_name,price ,stock,condition,photo,color,size,category,description,id}
+      
+      
+      productModel
       .updateProduct(data)
       .then((result) => {
-        // res.json('Account Updated')
         success(res, result, 'success', 'update product success')
       })
       .catch((err) => {
-        // console.log(data)
-        // console.log(err)
-        // res.json(err)
         failed(res, err.message, 'failed', 'update product failed')
       })
+    } catch(err){
       failed(res, err.message, 'failed', 'internal server error');
+    }
   },
   destroy: (req, res) => {
     productModel

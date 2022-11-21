@@ -1,0 +1,623 @@
+{
+	"info": {
+		"_postman_id": "4fdd34f6-a808-44a7-a6cf-904a518f07b0",
+		"name": "Blanja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23292697"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "REGISTER CUSTOMER",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"rhefa\",\r\n    \"email\": \"rhefa@gmail.com\",\r\n    \"password\": \"rhefa\",\r\n    \"phone\": \"08161\",\r\n    \"user_type\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3001/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL CUSTOMER",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3001/customer",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"customer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET CUSTOMER DETAIL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3001/customer/1",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE CUSTOMER",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"rere\",\r\n    \"password\": \"ee\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3001/customer/1",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Seller",
+					"item": [
+						{
+							"name": "REGISTER SELLER",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"lays.co\",\r\n    \"email\": \"lays@gmail.com\",\r\n    \"password\": \"lays\",\r\n    \"user_type\": 2,\r\n    \"phone\": \"08151\",\r\n    \"store_desc\": \"your best snack\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3001/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ALL SELLER",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3001/seller",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"seller"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET SELLER DETAIL",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3001/seller/2",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"seller",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE SELLER",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"eleccc\",\r\n    \"password\": \"ecc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3001/seller/2",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"seller",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "USER LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTER ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin\",\r\n    \"phone\": \"08161\",\r\n    \"user_type\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/userlist",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"userlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DETAIL USER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/user/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/user/email/rere@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"email",
+								"rere@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE IMAGE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/Niall Horan.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3001/user/image/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"image",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/user/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "GET USER ADDRESSES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/address/user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"address",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ADDRESS DETAIL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/address/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT ADDRESS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": 1,\r\n    \"address_name\": \"Home\",\r\n    \"recipient_name\": \"rere\",\r\n    \"recipient_phone\": \"08151\",\r\n    \"address\": \"Gang Jeruk\",\r\n    \"post_code\": \"16161\",\r\n    \"city\": \"Depok\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/address",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ADDRESS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Gang Rambutan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/address/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"address",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ADDRESS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/address/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GET ALL PRODUCTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/product",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRODUCT DETAIL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/product/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEARCH PRODUCT BY NAME",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/product/search/ ",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"search",
+								" "
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "seller",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "product_name",
+									"value": "Sepatu LED",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "condition",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "black, white, blue",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Shoes",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Sepatu LED cocok untuk kamu yang suka jedag jedug",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/banner 2.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3001/product",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
