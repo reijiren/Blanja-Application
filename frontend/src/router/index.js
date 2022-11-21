@@ -2,13 +2,15 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
 
-// admin
-import HomeAdmin from "../pages/admin/home/adminHome";
-
-// user dan seller
 import Login from "../pages/login/login";
-import Product from "../pages/product/product";
+import Profile from "../pages/user/profile/Profile";
 import Register from "../pages/register/register";
+import MyBag from "../pages/myBag/myBag";
+import Category from "../pages/category/category";
+import Product from "../pages/product/product";
+import CheckOut from "../pages/user/checkout/CheckOut";
+import Chat from "../pages/liveChat/chat";
+import Landing from "../pages/landing/landing";
 
 export default function Router() {
 	return (
@@ -19,9 +21,12 @@ export default function Router() {
 					<Route path="login" element={<Login />} />
 					<Route path="register" element={<Register />} />
 					<Route path="product" element={<Product />} />
-				</Route>
-				<Route path="/admin/">
-					<Route path="home" element={<HomeAdmin />} />
+					<Route path="checkout" element={<CheckOut />} />
+					<Route path="profile" element={<Profile />} />
+					<Route path="mybag" element={<MyBag />} />
+					<Route path="category" element={<Category />} />
+					<Route path="chat" element={<Chat />} />
+					<Route path="landing" element={<Landing />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

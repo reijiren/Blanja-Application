@@ -45,24 +45,25 @@ module.exports = {
         multerSingle(req, res, (err) => {
             if(err){
                 res.json({
-                    message: 'upload failed bor',
+                    message: 'upload product photo failed bor',
                     error: err
                 })
-                console.log('upload failed');
+                console.log(err);
             }else{
                 next();
             }
         })
     },
+
     uploadPhotouser: (req, res, next) => {
         const multerSingle = multerUpload.single('image');
         multerSingle(req, res, (err) => {
             if(err){
                 res.json({
-                    message: 'upload failed bor',
+                    message: 'upload user image failed',
                     error: err
                 })
-                console.log('upload failed');
+                console.log(err);
             }else{
                 next();
             }

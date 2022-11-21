@@ -4,7 +4,7 @@ create table users(
     email varchar(50),
     password text,
     phone varchar(20),
-    user_type integer, -- 0 customer, 1 seller
+    user_type integer, -- 0 admin, 1 customer, 2 seller
     image text,
     main_address integer,
     user_created date
@@ -34,9 +34,9 @@ create table product(
     category text
 );
 
-create table order(
+create table orders(
     id_order serial primary key,
-    user integer references users(id_user) on delete cascade,
+    userid integer references users(id_user) on delete cascade,
     item integer references product(id_product) on delete cascade,
     quantity integer,
     color varchar(20),
@@ -46,11 +46,28 @@ create table order(
 
 create table address(
     id_address serial primary key,
-    user integer references users(id_user) on delete cascade,
+    userid integer references users(id_user) on delete cascade,
     address_name varchar(40), -- ex: rumah, kantor, gudang
     recipient_name varchar(40),
     recipient_phone varchar(20),
     address text,
     post_code varchar(10),
     city varchar(40)
+);
+
+create table chat(
+    id serial primary key,
+    sender integer references users(id_user) on delete cascade,
+    receiver integer references users(id_user) on delete cascade,
+    message text,
+    date_time date
+);
+
+create table transactions(
+    id serial primary key,
+    userid integer references users(id_user) on delete cascade,
+    id_order integer references orders(id_order) on delete cascade,
+    payment_method varchar(30),
+    total_price integer,
+    transaction_date date
 );
