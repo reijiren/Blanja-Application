@@ -16,5 +16,5 @@ router
   .put('/product/:id',removePhoto,uploadPhoto,update)
   .delete('/product/:id',removePhoto, destroy)
   .post('/product',uploadPhoto,insert)
-  .post('/productscoy',insert)
+  
 module.exports = router

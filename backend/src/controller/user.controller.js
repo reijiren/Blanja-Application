@@ -9,11 +9,11 @@ const userController = {
     userModel
     .selectAll()
     .then((result) => {
-      success(res, result, 'success','get all user succes')
+      success(res, result, 'success', 'get all user success')
     })
     .catch((err) => {
       // res.json(err)
-      failed(res, err.message,'failed','get all user failed')
+      failed(res, err.message, 'failed', 'get all user failed')
     })
   },
 
