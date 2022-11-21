@@ -7,11 +7,10 @@ const productController = {
     productModel
       .selectAll()
       .then((result) => {
-        success(res, result, 'success','get all user succes')
+        success(res, result, 'success','get all products success')
       })
       .catch((err) => {
-        // res.json(err)
-        failed(res, err.message,'failed','get all user failed')
+        failed(res, err.message,'failed','failed to get all products')
       })
   },
   detail: (req, res) => {
@@ -40,7 +39,7 @@ const productController = {
 searchName: (req, res) => {
   const search = req.params.search
   productModel
-    .checknProduct(search)
+    .checkProduct(search)
     .then((result) => {
       success(res, result, 'success', 'get detail product success')
     })
