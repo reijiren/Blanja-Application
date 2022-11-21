@@ -11,6 +11,7 @@ import Product from "../pages/product/product";
 import CheckOut from "../pages/user/checkout/CheckOut";
 import Chat from "../pages/liveChat/chat";
 import Landing from "../pages/landing/landing";
+import HomeAdmin from "../pages/admin/home/adminHome";
 
 export default function Router() {
 	return (
@@ -27,6 +28,9 @@ export default function Router() {
 					<Route path="category" element={<Category />} />
 					<Route path="chat" element={<Chat />} />
 					<Route path="landing" element={<Landing />} />
+				</Route>
+				<Route path="/admin/">
+					<Route path="home" element={<HomeAdmin />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
