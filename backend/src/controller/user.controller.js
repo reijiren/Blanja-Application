@@ -4,7 +4,7 @@ const bcrypt= require('bcrypt');
 const jwtToken = require('../helper/generateJWT');
 
 const userController = {
-  // method
+  // get list user
   list: (req, res) => {
     userModel
     .selectAll()
@@ -17,19 +17,36 @@ const userController = {
     })
   },
 
+  // get detail user
   detail: (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
+
     userModel
-      .selectDetail(id)
-      .then((result) => {
-        success(res, result, 'success','get user by id success')
-      })
-      .catch((err) => {
-        // res.json(err)
-        failed(res, err.message,'failed','failed to get user by id user')
-      })
+    .selectDetail(id)
+    .then((result) => {
+      success(res, result, 'success','get user by id success')
+    })
+    .catch((err) => {
+      // res.json(err)
+      failed(res, err.message,'failed','failed to get user by id')
+    })
   },
 
+  // check email user
+  checkEmail: (req, res) => {
+    const email = req.params.email;
+
+    userModel.checkUEmail(email)
+    .then((result) => {
+      success(res, result.rows, 'success','get user by email success')
+    })
+    .catch((err) => {
+      // res.json(err)
+      failed(res, err.message,'failed','failed to get user by email')
+    })
+  },
+
+  // get all customer
   listCustomer: (req, res) => {
     userModel.selectCustomer()
     .then((result) => {
@@ -40,6 +57,7 @@ const userController = {
     })
   },
 
+  // get all seller
   listSeller: (req, res) => {
     userModel.selectSeller()
     .then((result) => {
@@ -50,6 +68,7 @@ const userController = {
     })
   },
 
+  // get customer detail
   detailCustomer: (req, res) => {
     const id = req.params.id;
 
@@ -62,6 +81,7 @@ const userController = {
     })
   },
 
+  // get seller detail
   detailSeller: (req, res) => {
     const id = req.params.id;
 
@@ -74,6 +94,7 @@ const userController = {
     })
   },
 
+  // update customer
   updateCustomer: (req, res) => {
     const id = req.params.id;
     const body = req.body;
@@ -94,6 +115,7 @@ const userController = {
     });
   },
 
+  // update seller
   updateSeller: (req, res) => {
     const id = req.params.id;
     const body = req.body;

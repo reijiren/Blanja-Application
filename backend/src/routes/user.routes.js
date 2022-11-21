@@ -1,7 +1,7 @@
 require('dotenv').config()
 // deklare exprees
 const express = require('express')
-const { list, destroy, detail, register,login,listSeller,detailSeller,updatePhoto, listCustomer, detailCustomer, updateCustomer, updateSeller } = require('../controller/user.controller')
+const { list, destroy, detail, register,login,listSeller,detailSeller,updatePhoto, listCustomer, detailCustomer, updateCustomer, updateSeller, checkEmail } = require('../controller/user.controller')
 const {uploadPhotouser} = require ('../middleware/uploadImg');
 const {removePhotoUser} = require('../middleware/deleteImg')
 
@@ -10,6 +10,7 @@ const router = express.Router()
 router
   .get('/userlist', list)
   .get('/user/:id', detail)
+  .get('/user/email/:email', checkEmail)
   .get('/customer', listCustomer)
   .get('/customer/:id', detailCustomer)
   .get('/seller', listSeller)
