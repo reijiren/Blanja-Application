@@ -8,9 +8,10 @@ const xss = require("xss-clean");
 const socket = require('socket.io');
 const socketController = require('./src/socket/index');
 const http = require('http');
-const userRouter = require('./src/routes/user.routes.js')
-const productRouter = require ('./src/routes/product.routes')
-const order = require ('./src/routes/order.routes')
+const userRouter = require('./src/routes/user.routes.js');
+const productRouter = require ('./src/routes/product.routes');
+const order = require ('./src/routes/order.routes');
+const address = require('./src/routes/address.routes');
 
 const app = express();
 
@@ -24,6 +25,8 @@ try {
 	app.use(userRouter)
 	app.use(productRouter)
 	app.use(order)
+	app.use(address)
+
 	const server = http.createServer(app);
 	const io = socket(server, {
 		cors: {
