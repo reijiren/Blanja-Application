@@ -12,6 +12,7 @@ import CheckOut from "../pages/user/checkout/CheckOut";
 import Chat from "../pages/liveChat/chat";
 import Landing from "../pages/landing/landing";
 import HomeAdmin from "../pages/admin/home/adminHome";
+import LoginAdmin from "../pages/admin/login/adminLogin";
 
 export default function Router() {
 	return (
@@ -31,6 +32,7 @@ export default function Router() {
 				</Route>
 				<Route path="/admin/">
 					<Route path="home" element={<HomeAdmin />} />
+					<Route path="login" element={<LoginAdmin />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
