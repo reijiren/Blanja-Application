@@ -511,14 +511,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/product/2",
+							"raw": "localhost:3001/product/3",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"product",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -600,7 +600,7 @@
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/banner 2.png"
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/Peworld icon.png"
 								}
 							]
 						},
@@ -612,6 +612,83 @@
 							"port": "3001",
 							"path": [
 								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODUCT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_name\": \"Baju Meme Indonesia\",\r\n    \"color\": \"black, white, yellow\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/product/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD PHOTO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/banner 2.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3001/product/photo/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"photo",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUCT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/product/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"3"
 							]
 						}
 					},
