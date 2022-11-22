@@ -1,4 +1,4 @@
-const orderModel = require('../model/order.module');
+const orderModel = require('../model/order.model');
 const {failed, success}= require('../helper/response');
 
 const orderController = {
@@ -10,7 +10,6 @@ const orderController = {
         success(res, result, 'success','get all orders succes')
       })
       .catch((err) => {
-        // res.json(err)
         failed(res, err.message,'failed','get all orders failed')
       })
   },
@@ -31,32 +30,33 @@ const orderController = {
 
     orderModel.selectJoin(id)
     .then((result) => {
-        success(res, result.rows, 'success', `get detail orders success`);
+        success(res, result.rows, 'success', `get detail order success`);
     })
     .catch((err) => {
-        failed(res, err.message, 'failed', `failed to get orders detail`);
+        failed(res, err.message, 'failed', `failed to get order detail`);
     })
-},
+  },
   insert: (req, res) => {
     try {
-      //image
-    //   const photo = req.file.filename
-      //tangkap data dari body
-      const {userid,item, quantity,color,size,status} = req.body;
+      const {userid, item, quantity, color, size, status} = req.body;
 
-          const data = {
-            userid,item,quantity,color,size,status
-          }
+      const data = {
+        userid,
+        item,
+        quantity,
+        color,
+        size,
+        status
+      }
 
-          orderModel.store(data).then((result) => {
-              success(res, result, 'success', 'upload orders success')
-          }).catch((err) => {
-              console.log(data)
-              failed(res, err.message, 'failed', 'upload orders failed')
-          })
-        } catch(err) {
+      orderModel.store(data).then((result) => {
+          success(res, result, 'success', 'insert order success')
+      }).catch((err) => {
+          failed(res, err.message, 'failed', 'insert order failed')
+      })
+    } catch(err) {
       failed(res, err.message, 'failed', 'internal server error');
-  }
+    }
   },
   update: (req, res) => {
     const id = req.params.id
