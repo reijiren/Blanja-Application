@@ -35,6 +35,18 @@ const orderModel = {
       })
     })
   },
+  selectUserOrder: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`select * from orders join users on users.id_user = orders.userid where userid = ${id}
+      `, 
+      (err, result) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(result)
+      })
+    })
+  },
   store: (data) => {
     return new Promise((resolve, reject) => {
       db.query(`
@@ -49,7 +61,7 @@ const orderModel = {
       })
     })
   },
-  updateProduct: (data) => {
+  updateOrder: (data) => {
     console.log(data)
     return new Promise((resolve, reject) => {
       db.query(`
@@ -78,6 +90,42 @@ const orderModel = {
           reject(err)
         }
         resolve(res)
+      })
+    })
+  },
+  storeTransaksi: (data) => {
+    return new Promise((resolve, reject) => {
+      db.query(`
+          INSERT INTO transactions (userid, id_order, payment_method, total_price,transaction_date)
+          VALUES
+          (${data.userid}, ${data.id_order}, '${data.payment_method}', ${data.total_price}, now())
+          `, (err, res) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(res)
+      })
+    })
+  },
+  selectAllTransaction: () => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM transactions', (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  },
+  selectTransactionID: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`SELECT * FROM transactions where id =${id}`, (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
       })
     })
   },
