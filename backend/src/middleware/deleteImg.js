@@ -6,25 +6,24 @@ module.exports = {
     removePhoto: async (req, res, next) => {
 		const id = req.params.id;
 
-		const data = await productModel.selectDetail(id);
+		const data = await productModel.selectJoin(id);
 		if(data) {
 			if (data.rows[0].photo) {
 				const img = data.rows[0].photo;
-				if (img !== "abc.png") {
-					fs.unlink(`./public/${img}`, (err) => {
-						if (err) {
-							res.json({
-								message: "delete failed",
-								error: err,
-							});
-							console.log(err)
-						}
-					});
-				}
+				img.split('||').map((e) => {
+					if (e !== "abc.png") {
+						fs.unlink(`./public/${e}`, (err) => {
+							if (err) {
+								console.log(err)
+							}
+						});
+					}
+				})
+				
+				next();
 			} else {
-				res.json("There is no profile picture");
+				res.json("There is no product photo");
 			}
-			next();
 		}else{
 			res.json("User ID is not found");
 		}

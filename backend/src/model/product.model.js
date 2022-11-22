@@ -35,7 +35,7 @@ const productModel = {
   },
   checkProduct:(data)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`select * from product where product_name ilike '${data}'`
+      db.query(`select * from product where product_name ilike '%${data}%'`
       , (err, result)=>{
         if (err) {
           reject(err)
@@ -60,7 +60,6 @@ const productModel = {
     })
   },
   updateProduct: (data) => {
-    console.log(data)
     return new Promise((resolve, reject) => {
       db.query(`
         UPDATE product SET
@@ -75,7 +74,7 @@ const productModel = {
         description = COALESCE ($9, description)
         WHERE id_product = $10
         `,
-        [data.product_name, data.price , data.stock, data.condition, data.photo, data.color, data.size, data.category, data.id,data.description],
+        [data.product_name, data.price , data.stock, data.condition, data.photo, data.color, data.size, data.category, data.description, data.id],
         (err, res) => {
           if (err) {
             reject(err)
