@@ -1,116 +1,185 @@
-import React, { Fragment, useState } from "react";
+import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import star from "../../assets/images/Star.png";
 import style from "../../assets/style/style.module.css";
 
 const ProductOptions = () => {
 	const [active, setActive] = useState(1);
+	const [color, setColor] = useState("");
+	const { id_product } = useParams();
+	// const userData = localStorage.getItem("persist:root");
+	const [jumlah, setJumlah] = useState(1);
 
+	const user = useSelector((state) => state.user.user);
+
+	// Get product detail
+	useEffect(() => {
+		axios
+			.get(`${process.env.REACT_APP_BACKEND_URL}/product/${id_product}`)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [id_product]);
+
+	const [product, setProduct] = useState({
+		userid: user.id_user,
+		item: parseInt(id_product),
+		size: 1,
+		color: color,
+		quantity: jumlah,
+		status: "",
+	});
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		console.log(product);
+	};
 	return (
 		<Fragment>
 			<div className="container-fluid row">
-				<div className="col-12">
-					<h4 className="fontBold">Baju muslim pria</h4>
-					<p className={`text-secondary ${style.ups}`}>Zalora Cloth</p>
-					<div className="d-flex">
-						<div className="me-2">
-							<img src={star} alt="tydac ramah" />
+				<form onSubmit={(e) => onSubmit(e)}>
+					<div className="col-12">
+						<h4 className="fontBold">Baju muslim pria</h4>
+						<p className={`text-secondary ${style.ups}`}>Zalora Cloth</p>
+						<div className="d-flex">
+							<div className="me-2">
+								<img src={star} alt="tydac ramah" />
+							</div>
+							<p className={`text-secondary my-auto ${style.review}`}>
+								Tydac ramah bintang 1
+							</p>
 						</div>
-						<p className={`text-secondary my-auto ${style.review}`}>
-							Tydac ramah bintang 1
-						</p>
-					</div>
-					<div className="my-3">
-						<p className="text-secondary">Price</p>
-						<h4 className={`fontBold ${style.ups}`}>Rp. 20.000</h4>
-					</div>
-					<div className="my-3">
-						<p className="fontBold">Color</p>
+						<div className="my-3">
+							<p className="text-secondary">Price</p>
+							<h4 className={`fontBold ${style.ups}`}>Rp. 20.000</h4>
+						</div>
+						<div className="my-3">
+							<p className="fontBold">Color</p>
+							<div className="d-flex flex-row">
+								<div
+									onClick={() => {
+										setActive(1);
+									}}>
+									{active === 1 ? (
+										<div className={`me-2 ${style.colorActive}`}>
+											<div className={`mx-auto ${style.blackActive}`}></div>
+										</div>
+									) : (
+										<div className={`me-2 ${style.black}`}></div>
+									)}
+								</div>
+								<div onClick={() => setActive(2)}>
+									{active === 2 ? (
+										<div className={`me-2 ${style.colorActive}`}>
+											<div className={`mx-auto ${style.redActive}`}></div>
+										</div>
+									) : (
+										<div className={`me-2 ${style.red}`}></div>
+									)}
+								</div>
+								<div onClick={() => setActive(3)}>
+									{active === 3 ? (
+										<div className={`me-2 ${style.colorActive}`}>
+											<div className={`mx-auto ${style.blueActive}`}></div>
+										</div>
+									) : (
+										<div className={`me-2 ${style.blue}`}></div>
+									)}
+								</div>
+								<div onClick={() => setActive(4)}>
+									{active === 4 ? (
+										<div className={`me-2 ${style.colorActive}`}>
+											<div className={`mx-auto ${style.greenActive}`}></div>
+										</div>
+									) : (
+										<div className={`me-2 ${style.green}`}></div>
+									)}
+								</div>
+							</div>
+						</div>
 						<div className="d-flex flex-row">
-							<div onClick={() => setActive(1)}>
-								{active === 1 ? (
-									<div className={`me-2 ${style.colorActive}`}>
-										<div className={`mx-auto ${style.blackActive}`}></div>
-									</div>
-								) : (
-									<div className={`me-2 ${style.black}`}></div>
-								)}
+							<div className="col-6 col-md-4">
+								<p className="fontBold">Size</p>
+								<div className="d-flex flex-row col-11">
+									<select
+										className="form-select"
+										aria-label="Default select example"
+										onChange={(e) =>
+											setProduct({ ...product, size: parseInt(e.target.value) })
+										}>
+										<option defaultValue={1} value={parseInt(1)}>
+											SX
+										</option>
+										<option value={2}>S</option>
+										<option value={3}>M</option>
+										<option value={4}>L</option>
+										<option value={5}>XL</option>
+									</select>
+								</div>
 							</div>
-							<div onClick={() => setActive(2)}>
-								{active === 2 ? (
-									<div className={`me-2 ${style.colorActive}`}>
-										<div className={`mx-auto ${style.redActive}`}></div>
-									</div>
-								) : (
-									<div className={`me-2 ${style.red}`}></div>
-								)}
-							</div>
-							<div onClick={() => setActive(3)}>
-								{active === 3 ? (
-									<div className={`me-2 ${style.colorActive}`}>
-										<div className={`mx-auto ${style.blueActive}`}></div>
-									</div>
-								) : (
-									<div className={`me-2 ${style.blue}`}></div>
-								)}
-							</div>
-							<div onClick={() => setActive(4)}>
-								{active === 4 ? (
-									<div className={`me-2 ${style.colorActive}`}>
-										<div className={`mx-auto ${style.greenActive}`}></div>
-									</div>
-								) : (
-									<div className={`me-2 ${style.green}`}></div>
-								)}
-							</div>
-						</div>
-					</div>
-					<div className="d-flex flex-row">
-						<div className="col-6 col-md-4">
-							<p className="fontBold">Size</p>
-							<div className="d-flex flex-row">
-								<button
-									className={`fontBold btn btn-secondary ${style.button} ${style.buttonSize}`}>
-									-
-								</button>
-								<p className="fontBold my-auto mx-3">28</p>
-								<button
-									className={`fontBold btn btn-light ${style.button} ${style.buttonSize}`}>
-									+
-								</button>
-							</div>
-						</div>
-						<div className="col-6 col-md-4">
-							<p className="fontBold">Jumlah</p>
-							<div className="d-flex flex-row">
-								<button
-									className={`fontBold btn btn-secondary ${style.button} ${style.buttonSize}`}>
-									-
-								</button>
-								<p className="fontBold my-auto mx-3">1</p>
-								<button
-									className={`fontBold btn btn-light ${style.button} ${style.buttonSize}`}>
-									+
-								</button>
+							<div className="col-6 col-md-4">
+								<p className="fontBold">Jumlah</p>
+								<div className="d-flex flex-row">
+									{jumlah == 1 ? (
+										<button
+											className={`fontBold btn btn-secondary ${style.button} ${style.buttonSize}`}
+											onClick={() => setJumlah((value) => value - 1)}
+											disabled>
+											-
+										</button>
+									) : (
+										<button
+											type="button"
+											className={`fontBold btn btn-secondary ${style.button} ${style.buttonSize}`}
+											onClick={() => setJumlah((value) => value - 1)}>
+											-
+										</button>
+									)}
+
+									<p
+										className="fontBold my-auto mx-3"
+										defaultValue={jumlah}
+										onChange={(e) =>
+											setProduct({
+												...product,
+												quantity: parseInt(e.target.value),
+											})
+										}>
+										{jumlah}
+									</p>
+									<button
+										type="button"
+										className={`fontBold btn btn-light ${style.button} ${style.buttonSize}`}
+										onClick={() => setJumlah((value) => value + 1)}>
+										+
+									</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div className="col-md-7 col-12">
-						<div className="flex-row d-flex my-3">
+						<div className="col-md-7 col-12">
+							<div className="flex-row d-flex my-3">
+								<Link
+									className={`col-6 me-2 btn btn-light border fontMedium ${style.buttonProductDetail}`}>
+									Chat
+								</Link>
+								<Link
+									className={`col-6 me-2 btn btn-light border fontMedium ${style.buttonProductDetail}`}>
+									Add bag
+								</Link>
+							</div>
 							<button
-								className={`col-6 me-2 btn btn-light border fontMedium ${style.buttonProductDetail}`}>
-								Chat
-							</button>
-							<button
-								className={`col-6 me-2 btn btn-light border fontMedium ${style.buttonProductDetail}`}>
-								Add bag
+								type="submit"
+								className={`btn btn-danger col-12 ${style.buttonProductDetail}`}>
+								Buy now
 							</button>
 						</div>
-						<button
-							className={`btn btn-danger col-12 ${style.buttonProductDetail}`}>
-							Buy now
-						</button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</Fragment>
 	);
