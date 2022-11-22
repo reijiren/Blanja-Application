@@ -51,8 +51,8 @@ const Navbar = () => {
                 </div>
               </form>
             </ul>
-            <div className={`row col-md-5 col-12`}>
-              <div className="col-md-6 col-12 mb-2">
+            <div className={`row col-md-5 col-12 d-flex flex-row-reverse`}>
+              <div className="col-md-6 col-12 mb-2 ">
                 <img style={{ marginTop: '13px', marginLeft: '5px' }} src={card} alt="" />
                 <Link>
                   <img style={{ marginTop: '13px', marginLeft: '20px' }} src={notif} alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" />
