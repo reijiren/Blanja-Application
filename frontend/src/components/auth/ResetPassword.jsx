@@ -1,27 +1,30 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from "../../assets/style/style.module.css";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { checkEmail } from "../../redux/action/user";
 
 const ResetPassword = () => {
-    const [form, setForm] = useState({
-        email: ""
-      });
-      const onSubmit = (e) => {
-        e.preventDefault();
-        console.log(form);
-        
-        axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/user/email/${form.email}`, form)
-          .then((response) => {
-            // console.log(response.data)
-            // console.log(response.data.data[0].email)
-            localStorage.setItem("data1",JSON.stringify(response.data.data[0].id_user));  
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
+  const dispatch = useDispatch();
+
+  const [form, setForm] = useState({
+      email: ""
+  });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const handleSuccess = (data) => {
+      if(data.data.data.length === 0){
+        alert("Email is not registered");
+      }else{
+        localStorage.setItem("data1",JSON.stringify(data.data.data));
+        window.location.reload();
+      }
+    }
+    dispatch(checkEmail(form.email, handleSuccess))
+  };
+
   return (
     <Fragment>
       <form className="col-12 col-md-8" onSubmit={(e) => onSubmit(e)} >
@@ -33,11 +36,6 @@ const ResetPassword = () => {
             placeholder="Email"
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
-        </div>
-        <div className="d-flex flex-row-reverse mb-3">
-          <Link className={`${style.links}`}>
-            <p className="text-danger">Forget Password?</p>
-          </Link>
         </div>
         <button type="submit" className={`col-12 mb-3 ${style.buttonsActive}`}>
           Reset Password
