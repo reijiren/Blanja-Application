@@ -1,0 +1,38 @@
+.btnLogin {
+  margin-top: 20px;
+  width: 400px;
+  height: 48px;
+  align-items: center;
+  background-color: #db3022;
+  color: #ffffff;
+  border: 0;
+  border-radius: 25px;
+}
+.btnproduct {
+  width: 70px;
+  height: 50px;
+  border-radius: 10px;
+}
+.pagination {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  margin: 3px 5px;
+}
+.counter {
+  width: 30px;
+  border-radius: 5px;
+}
+.deletebag {
+  background-color: #ffffff;
+  color: #db3022;
+  width: 80px;
+  height: 30px;
+  z-index: 2;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .btnLogin {
+    width: 350px;
+  }
+}

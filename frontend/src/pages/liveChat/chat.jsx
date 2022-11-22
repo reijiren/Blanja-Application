@@ -25,8 +25,8 @@ const Chat = () => {
               <img className={`${style.image} ms-5 `} src={cristian} alt="" />
               <span className={`${style.name} ms-3`}>Jonas adam</span>
               <hr />
-              <div className={style.inpur}>
-                <input type="text" placeholder="     Masukkan pesan" />
+              <div className={style.inputRow}>
+                <input className={style.inputLive} type="text" placeholder="     Masukkan pesan" />
               </div>
             </div>
           </div>

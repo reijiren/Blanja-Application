@@ -29,11 +29,11 @@
   border-radius: 50%;
 }
 
-.inpur {
+.inputRow {
   margin-top: 23rem;
   margin-left: 2rem;
 }
-input {
+.inputLive {
   width: 94%;
   height: 40px;
   border-radius: 20px;

@@ -8,7 +8,7 @@ const MyBag = () => {
   return (
     <>
       <Navbar />
-      <div style={{ marginTop: '150px' }} className="container ">
+      <div style={{ marginTop: '60px' }} className="container ">
         <div className="row ">
           <h1 style={{ fontWeight: '900' }}>My Bag</h1>
           <div className="col-sm-7 mb-4">

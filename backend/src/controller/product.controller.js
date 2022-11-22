@@ -33,7 +33,7 @@ const productController = {
       success(res, result, 'success', 'get detail product success')
     })
     .catch((err) => {
-      failed(res, err.message, 'failed', 'failed to get product failed')
+      failed(res, err.message, 'failed', 'failed to get product detail')
     })
   },
   searchName: (req, res) => {
@@ -49,9 +49,7 @@ const productController = {
   },
   insert: (req, res) => {
     try {
-      //image
       const photo = req.file.filename
-      //tangkap data dari body
       const { seller,product_name,price ,stock,condition,color,size,category,description } = req.body;
 
       const data = {
@@ -80,16 +78,30 @@ const productController = {
   update: (req, res) => {
     try{
       const id = req.params.id
-      const photo = req.file.filename;
       
       const { product_name, price ,stock,condition,color,size,category,description} = req.body
-      const data = {product_name,price ,stock,condition,photo,color,size,category,description,id}
-      
+      const data = {
+        product_name,
+        price,
+        stock,
+        condition,
+        color,
+        size,
+        category,
+        description,
+        id
+      }
       
       productModel
       .updateProduct(data)
       .then((result) => {
-        success(res, result, 'success', 'update product success')
+        productModel.selectJoin(id)
+        .then((result) => {
+          success(res, result.rows, 'success', 'update product success')
+        })
+        .catch((err) => {
+          failed(res, err.message, 'failed', 'failed to get product detail')
+        })
       })
       .catch((err) => {
         failed(res, err.message, 'failed', 'update product failed')
@@ -98,6 +110,37 @@ const productController = {
       failed(res, err.message, 'failed', 'internal server error');
     }
   },
+
+  updatePhoto: (req, res) => {
+    try{
+      const id = req.params.id;
+      const photo = req.file.filename
+
+      productModel.selectJoin(id)
+      .then(async (result) => {
+        const img = result.rows[0].photo + "||" + photo;
+
+        const data = {
+          id,
+          photo: img,
+        }
+
+        await productModel.updateProduct(data)
+        .then((result) => {
+          success(res, result.rowCount, 'success', 'update product photo success')
+        })
+        .catch((err) => {
+          failed(res, err.message, 'failed', 'failed to update product photo')
+        })
+      })
+      .catch((err) => {
+        failed(res, err.message, 'failed', 'failed to get product detail')
+      })
+    }catch(err){
+      failed(res, err.message, 'failed', 'internal server error');
+    }
+  },
+
   destroy: (req, res) => {
     productModel
       .delete(req.params.id)
