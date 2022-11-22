@@ -1,0 +1,40 @@
+.caraousell {
+  position: relative;
+  margin-bottom: 100px;
+  top: 76px;
+  gap: 10px;
+  /* background-color: aqua; */
+}
+.main {
+  /* background-color: rgb(252, 67, 67); */
+  /* margin-top: 50px; */
+  min-height: 120vh;
+  width: 100vw;
+  padding: 0 85px;
+}
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* background-color: #db3022; */
+  width: 1200px;
+  height: 550px;
+  padding: 30px 0;
+}
+.maincontent {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.maincontent .sub {
+  padding: 0;
+  margin: 0;
+}
+.category {
+  display: flex;
+  gap: 30px;
+}
+
+.sub {
+  font-size: 12px;
+  color: #9b9b9b;
+}
