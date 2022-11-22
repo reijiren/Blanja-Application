@@ -151,6 +151,36 @@ const productController = {
         failed(res, err.message, 'failed', 'delete product failed')
       })
   },
+
+  userProduct: (req, res) => {
+    const id = req.params.id;
+
+    productModel.selectUserProduct(id)
+    .then((result) => {
+      success(res, result.rows, 'success', 'get user products success')
+    })
+    .catch((err) => {
+      failed(res, err.message, 'failed', 'failed to get user products')
+    })
+  },
+
+  filter: (req, res) => {
+    const body = req.body;
+
+    const data = {
+      color: body.color && `'%${body.color}%'`,
+      size: body.size || null,
+      category: body.category && `'%${body.category}%'`,
+    }
+
+    productModel.searchProduct(data)
+    .then((result) => {
+      success(res, result.rows, 'success', 'search products success')
+    })
+    .catch((err) => {
+      failed(res, err.message, 'failed', 'failed to search products')
+    })
+  }
 }
 
 module.exports = productController

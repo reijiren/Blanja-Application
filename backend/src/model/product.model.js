@@ -95,6 +95,36 @@ const productModel = {
       })
     })
   },
+
+  selectUserProduct: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`SELECT * FROM product join seller on seller.id_seller = product.seller where seller = ${id}`, (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  },
+
+  searchProduct: (data) => {
+    return new Promise((resolve, reject) => {
+      db.query(`
+        SELECT * FROM product join seller on seller.id_seller = product.seller
+        where
+        color ilike coalesce (${data.color}, '') or
+        size = coalesce (${data.size}, -1) or
+        category ilike coalesce (${data.category}, '')
+        `, (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  },
 }
 
 module.exports = productModel
