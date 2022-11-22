@@ -80,7 +80,7 @@ const CustomerRegister = () => {
 				<p>
 					Already have a Blanja account?{" "}
 					<span>
-						<Link className={`${style.links} text-danger`}> Log In</Link>
+						<Link className={`${style.links} text-danger`} to="/login"> Log In</Link>
 					</span>
 				</p>
 			</div>

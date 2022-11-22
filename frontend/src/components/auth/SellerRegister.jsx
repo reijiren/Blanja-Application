@@ -88,7 +88,7 @@ const SellerRegister = () => {
 				<p>
 					Already have a Blanja account?{" "}
 					<span>
-						<Link className={`${style.links} text-danger`}> Log in</Link>
+						<Link className={`${style.links} text-danger`} to="/login"> Log in</Link>
 					</span>
 				</p>
 			</div>

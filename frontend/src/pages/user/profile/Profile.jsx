@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 // import image
 import johanesMikael from '../../../assets/images/johanes mikael.png';
@@ -15,6 +15,10 @@ const Profile = () => {
    * 2 = seller
    */
   const [userLevel, setUserLevel] = useState('1');
+  
+  const [dataLogin, setDataLogin] = useState([]);
+  
+  
   return (
     <div className="vw-100 vh-100">
       {/* navbar */}

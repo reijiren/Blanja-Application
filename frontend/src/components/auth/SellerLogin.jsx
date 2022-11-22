@@ -29,7 +29,7 @@ const SellerLogin = () => {
             localStorage.setItem("data", JSON.stringify(response.data));
             localStorage.setItem("data1", JSON.stringify(response.data.data.email));
             alert("Berhasil Login");
-            // return navigate('/LandingPage')
+            return navigate('/')
           } else {
             alert("anda terdaftar sebagai costumer");
           }
@@ -73,7 +73,7 @@ const SellerLogin = () => {
         <p>
           Don't have a Blanja account?{" "}
           <span>
-            <Link className={`${style.links} text-danger`}> Register</Link>
+            <Link to="/register" className={`${style.links} text-danger`}> Register</Link>
           </span>
         </p>
       </div>
