@@ -1,74 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
 import logo from '../assets/images/blanja_icon.png';
-import christian from '../assets/images/christian.png';
-import mail from '../assets/images/mail.png';
-import sort from '../assets/images/sort.png';
+import filter from '../assets/images/filter.png';
 import notif from '../assets/images/notif.png';
-import mybag from '../assets/images/mybag.png';
-
-import styles from '../assets/style/style.module.css';
+import mail from '../assets/images/mail.png';
+import card from '../assets/images/cart.png';
+import cristian from '../assets/images/christian.png';
+import style from '../assets/style/style.module.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <>
-      <nav style={{ height: '70px' }} className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div className="container">
-          <div className={styles.logo}>
-            <img src={logo} alt="" />
-            <span className={`${styles.textLogo} mt-5 ms-2 `}>Belanja</span>
+    <Fragment>
+      <nav className="navbar navbar-expand-lg bg-light row">
+        <div className="container-fluid col-md-10 col-11">
+          <div className="d-flex col-md-2">
+            <img src={logo} alt="" className="me-2" />
+            <h3 className={`fontBold text-danger my-auto`}>Blanja</h3>
           </div>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" ariacontrols="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <form className="d-flex">
-              <input className={styles.search} type="search" placeholder="Search " aria-label="Search" />
-              <button className={styles.btn_sort} type="submit">
-                <img src={sort} alt="sort" />
-              </button>
-            </form>
-            <ul className="navbar-nav ms-auto menu">
-              <div className={styles.menu}>
-                <li>
-                  <Link className="nav-link active" aria-current="page" to="/mybag">
-                    <img src={mybag} alt="MyBag" />
-                  </Link>
-                </li>
-
-                <li>
-                  <Link className="nav-link active" aria-current="page" to="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <img src={notif} className="d-inline-block align-text-center" alt="" />
-                  </Link>
-                </li>
-
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {/* <ul className="mb-2 mb-lg-0 mt-md-0 mt-2 col-md-8 col-12 navbar-nav "> */}
+            <ul className={`me-auto mb-2 mb-lg-0 mt-md-0 mt-2 col-md-6 col-12`}>
+              <form className={`d-flex`} role="search">
+                <input className={`me-2 form-control col-md-10 ${style.navSearch}`} type="search" placeholder="Search" aria-label="Search" />
+                <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <img src={filter} alt="" />
+                </button>
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">
+                          Modal title
+                        </h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div className="modal-body">No notification yet</div>
+                      <div className="modal-body">...</div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                          Close
+                        </button>
+                        <button type="button" className="btn btn-primary">
+                          Save changes
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <li>
-                  <Link className="nav-link active" aria-current="page" to="">
-                    <img src={mail} className="d-inline-block align-text-center" alt="" />
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link active" aria-current="page" to="">
-                    <img src={christian} className={`${styles.profile} d-inline-block align-text-center`} alt="cris" />
-                  </Link>
-                </li>
-              </div>
+              </form>
             </ul>
+            <div className={`row col-md-5 col-12 d-flex flex-row-reverse`}>
+              <div className="col-md-6 col-12 mb-2 ">
+                <img style={{ marginTop: '13px', marginLeft: '5px' }} src={card} alt="" />
+                <Link>
+                  <img style={{ marginTop: '13px', marginLeft: '20px' }} src={notif} alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" />
+                </Link>
+                <img style={{ marginTop: '13px', marginLeft: '20px' }} src={mail} alt="" />
+                <img style={{ borderRadius: '50%', width: '30px', height: '30px', marginTop: '13px', marginLeft: '20px' }} src={cristian} alt="" />
+              </div>
+            </div>
           </div>
         </div>
       </nav>
-    </>
+    </Fragment>
   );
 };
 

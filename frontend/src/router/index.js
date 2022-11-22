@@ -13,6 +13,7 @@ import Chat from "../pages/liveChat/chat";
 import Landing from "../pages/landing/landing";
 import HomeAdmin from "../pages/admin/home/adminHome";
 import LoginAdmin from "../pages/admin/login/adminLogin";
+import ResetPass from "../pages/ResetPassword/index.js";
 
 export default function Router() {
 	return (
@@ -29,10 +30,6 @@ export default function Router() {
 					<Route path="category" element={<Category />} />
 					<Route path="chat" element={<Chat />} />
 					<Route path="landing" element={<Landing />} />
-				</Route>
-				<Route path="/admin/">
-					<Route path="home" element={<HomeAdmin />} />
-					<Route path="login" element={<LoginAdmin />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
