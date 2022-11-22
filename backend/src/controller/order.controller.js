@@ -87,7 +87,7 @@ const orderController = {
   },
   insertTransaction: (req, res) => {
     try {
-      const {userid, id_order, payment_method,quantity,price,id,stockProduk,StockOrder} = req.body;
+      const {userid, id_order, payment_method,quantity,price,id,stockProduk} = req.body;
       const total_price=quantity*price
       const data = {
         userid,
@@ -97,7 +97,7 @@ const orderController = {
       }
       orderModel.storeTransaksi(data)
       .then((result) => {
-          const stock = stockProduk-StockOrder
+          const stock = stockProduk-quantity
           const data1= {stock,id}
           productModel.updateProduct(data1)
           success(res, result, 'success', 'Update stock success')
