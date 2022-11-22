@@ -40,18 +40,18 @@ const CheckOut = () => {
                   </button>
                 </div>
                 {/*  Modal */}
-                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <ChoseAnotherAddress />
                 </div>
                 {/*  end of Modal */}
                 {/* modal 2 */}
-                <div className="modal fade" id="addNewAddress" tabindex="-1" aria-labelledby="addNewAddressLabel" aria-hidden="true">
+                <div className="modal fade" id="addNewAddress" tabIndex="-1" aria-labelledby="addNewAddressLabel" aria-hidden="true">
                   <AddNewAddress />
                 </div>
                 {/* end of modal 2 */}
 
                 {/* modal 3 */}
-                <div className="modal fade" id="changeAddress" tabindex="-1" aria-labelledby="changeAddressLabel" aria-hidden="true">
+                <div className="modal fade" id="changeAddress" tabIndex="-1" aria-labelledby="changeAddressLabel" aria-hidden="true">
                   <ChangeAddress />
                 </div>
                 {/* end of modal 3 */}
@@ -170,7 +170,7 @@ const CheckOut = () => {
                   </button>
                 </div>
                 {/* modal 4 */}
-                <div className="modal fade" id="selectPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal fade" id="selectPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <SelectPayment />
                 </div>
                 {/* end of modal 4 */}
