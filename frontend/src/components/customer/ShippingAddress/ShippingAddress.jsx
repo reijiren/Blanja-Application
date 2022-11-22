@@ -31,7 +31,7 @@ const ShippingAddress = () => {
           <div
             className="modal fade"
             id="addNewAddress"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="addNewAddressLabel"
             aria-hidden="true"
           >
@@ -74,7 +74,7 @@ const ShippingAddress = () => {
                 <div
                   className="modal fade"
                   id="changeAddress"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-labelledby="changeAddressLabel"
                   aria-hidden="true"
                 >
