@@ -1,5 +1,5 @@
 const express = require('express')
-const { list, destroy, detail, update,insert,detailProduct,searchName } = require('../controller/product.controller')
+const { list, destroy, update,insert,detailProduct,searchName, updatePhoto } = require('../controller/product.controller')
 const {uploadPhoto} = require('../middleware/uploadImg')
 const {removePhoto}= require('../middleware/deleteImg')
 
@@ -10,7 +10,8 @@ router
   .get('/product', list)
   .get('/product/:id', detailProduct)
   .get('/product/search/:search', searchName)
-  .put('/product/:id', removePhoto, uploadPhoto, update)
+  .put('/product/:id', update)
+  .put('/product/photo/:id', uploadPhoto, updatePhoto)
   .delete('/product/:id', removePhoto, destroy)
   .post('/product', uploadPhoto, insert)
   
