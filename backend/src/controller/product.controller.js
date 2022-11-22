@@ -168,6 +168,7 @@ const productController = {
     const body = req.body;
 
     const data = {
+      product_name: body.product_name && `'%${body.product_name}%'`,
       color: body.color && `'%${body.color}%'`,
       size: body.size || null,
       category: body.category && `'%${body.category}%'`,

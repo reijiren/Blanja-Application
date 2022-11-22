@@ -110,12 +110,47 @@ const productModel = {
 
   searchProduct: (data) => {
     return new Promise((resolve, reject) => {
+      let counter = 1;
+      let max = 0;
+
+      for(var key in data){
+        if(data[key] !== null)
+          max = max + 1
+      }
+
+      const addCount = () => {
+        counter = counter + 1;
+        return "or ";
+      };
+
       db.query(`
         SELECT * FROM product join seller on seller.id_seller = product.seller
         where
-        color ilike coalesce (${data.color}, '') or
-        size = coalesce (${data.size}, -1) or
-        category ilike coalesce (${data.category}, '')
+        ${
+          data.product_name ?
+          `product_name ilike ${data.product_name} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${
+          data.color ?
+          `color ilike ${data.color} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${
+          data.size ?
+          `size = ${data.size} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${
+          data.category ?
+          `category ilike ${data.category} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${max < 1 ? `product_name ilike '%%'` : ""}
         `, (err, result) => {
         if (err) {
           reject(err)

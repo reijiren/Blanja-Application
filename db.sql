@@ -30,7 +30,7 @@ create table product(
     condition integer, -- 0 baru, 1 bekas
     photo text,
     color text,
-    size integer, -- 0 XS, 1 S, 2 M, 3 L, 4 XL
+    size integer, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
     category text,
     description text
 );

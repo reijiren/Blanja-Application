@@ -644,7 +644,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"color\": null,\r\n    \"size\": null,\r\n    \"category\": null\r\n}",
+							"raw": "{\r\n    \"product_name\": null,\r\n    \"color\": null,\r\n    \"size\": null,\r\n    \"category\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
