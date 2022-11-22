@@ -11,6 +11,7 @@ import Product from "../pages/product/product";
 import CheckOut from '../pages/user/checkout/CheckOut';
 import Chat from '../pages/liveChat/chat';
 import Landing from '../pages/landing/landing';
+import ResetPass from '../pages/ResetPassword/index.js';
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
           <Route path="category" element={<Category />} />
           <Route path="chat" element={<Chat />} />
           <Route path="landing" element={<Landing />} />
+          <Route path="resetpass" element={<ResetPass />} />
         </Route>
       </Routes>
     </BrowserRouter>
