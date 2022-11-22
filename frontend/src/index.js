@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "bootstrap/dist/js/bootstrap.min.js";
+// import "bootstrap/dist/js/bootstrap.min.js";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 

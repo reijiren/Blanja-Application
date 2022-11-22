@@ -6,7 +6,7 @@ import style from '../assets/style/style.module.css';
 const Navbar = () => {
   return (
     <Fragment>
-      <nav className="navbar navbar-expand-lg bg-light row">
+      <nav className="position-fixed navbar navbar-expand-lg bg-light row">
         <div className="container-fluid col-md-10 col-11">
           <div className="d-flex col-md-2">
             <img src={logo} alt="" className="me-2" />
@@ -21,7 +21,7 @@ const Navbar = () => {
               <form className={`d-flex`} role="search">
                 <input className={`me-2 form-control col-md-10 ${style.navSearch}`} type="search" placeholder="Search" aria-label="Search" />
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <img src={filter} alt="" />
+                  <img src={filter} alt="" />                                                                                                                                                                                              
                 </button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">

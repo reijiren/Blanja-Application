@@ -37,7 +37,8 @@ const Navbar = () => {
                   </Link>
                 </li>
 
-                <li>
+                {/* !! ubah notif ke dropdown, cukup gunakan button udah cukup */}
+                {/* <li>
                   <Link className="nav-link active" aria-current="page" to="" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src={notif} className="d-inline-block align-text-center" alt="" />
                   </Link>
@@ -52,7 +53,7 @@ const Navbar = () => {
                       <div className="modal-body">No notification yet</div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <li>
                   <Link className="nav-link active" aria-current="page" to="">
                     <img src={mail} className="d-inline-block align-text-center" alt="" />

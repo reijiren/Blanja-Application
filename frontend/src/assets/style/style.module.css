@@ -1,9 +1,4 @@
-@media only screen and (min-width: 576px) {
-}
-
-body {
-  background-size: 100vw 100vh;
-  background: #ffffff;
+/* @media only screen and (min-width: 576px) {
 }
 .buttons {
   height: 45px;
@@ -187,7 +182,6 @@ nav {
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 /* Links inside the dropdown */
@@ -367,4 +361,4 @@ nav {
   .thumbnails {
     height: 270px;
   }
-}
+} 
