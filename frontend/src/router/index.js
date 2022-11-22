@@ -11,6 +11,7 @@ import Product from '../pages/product/product';
 import CheckOut from '../pages/user/checkout/CheckOut';
 import Chat from '../pages/liveChat/chat';
 import Landing from '../pages/landing/landing';
+import ResetPass from '../pages/ResetPassword/index.js';
 
 export default function Router() {
   return (
@@ -18,6 +19,7 @@ export default function Router() {
       <ScrollToTop />
       <Routes>
         <Route path="/">
+          <Route index element={<Landing />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="product" element={<Product />} />
@@ -26,7 +28,7 @@ export default function Router() {
           <Route path="mybag" element={<MyBag />} />
           <Route path="category" element={<Category />} />
           <Route path="chat" element={<Chat />} />
-          <Route index element={<Landing />} />
+          <Route path="resetpass" element={<ResetPass />} />
         </Route>
       </Routes>
     </BrowserRouter>
