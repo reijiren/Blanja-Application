@@ -1,5 +1,11 @@
-import React from "react";
-import "./style.css";
+
+import React,{useState, useEffect} from 'react';
+import './style.css';
+import { Link} from "react-router-dom";
+import axios from "axios";
+import {useSelector} from "react-redux"
+
+
 // image
 import menFormalSuit from "../../../assets/images/men jacket jeans.png";
 
@@ -11,69 +17,98 @@ import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
 import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
-	return (
-		<div className={`vw-100 vh-100`}>
+  const [data2, setData2] = useState([]);
+  const [data, setData] = useState()
+  const id = useSelector((state) => state.user.user.id_user)
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/orderproduct/${id}`)
+      .then((response) => {
+        // console.log(response.data.token.data)
+        console.log(response.data.data);
+        setData2(response.data.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },[]);
+    // console.log(data2[0].id_user)
+    
+      // const handlePost = (e) => {
+      //   // e.preventDefault();
+      //   console.log(data2[0].stock)
+       
+      //   // console.log(data2[0].id_user)
+      //   const body = {
+      //     userid:data2[0].id_user,
+      //     id_order: data2[0].id_order,
+      //     payment_method: "belum bayar",
+      //     quantity:data2[0].quantity,
+      //     price:data2[0].price,
+      //     id:data2[0].id_product,
+      //     stockProduk:data2[0].stock
+      //     };
+      //     console.log(body)
+      //     if(data2[0].stock >= 1){
+      //       if(data2[0].stock >= data2[0].quantity){
+      //         setData(data2[0].quantity*data2[0].price)
+      //       // console.log(data2[0].quantity*data2[0].price)
+      //   axios
+      //     .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body,)
+      //     .then((res) => {
+      //       // console.log(res.data);
+      //       // alert("Recipe added successfully");
+            
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //       alert("Failed to add Transaction");
+      //     });
+      //   }else{
+      //   alert("Maaf Stock tidak mencukupi")
+      //   }
+      //   }else{
+      //   alert("maaf stock sudah habis")
+      //   }
+      // };
+  return (
+    <div className={`vw-100 vh-100`}>
 			<Navs />
-			<div className={`content-wrapper row`}>
-				<div className="content-aside-left col-8 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 d-flex justify-content-center align-items-center ">
-					<div className="wrapper d-flex flex-column w-75">
-						<div className="title mt-5 mb-3">
-							<p className={`fontBold h1`}>Checkout</p>
-						</div>
-						<div className="title-desc mb-3">
-							<p className={`fontRegular fw-bold h5`}>Shipping Address</p>
-						</div>
-						<div className={`address-desc mb-3`}>
-							<div className="wrapper m-4">
-								<div className="name-user ">
-									<p className={`fontRegular fw-bold h5`}>Andreas Jane</p>
-								</div>
-								<div className="address-user">
-									<p className={`fontRegular h5`}>
-										<span className="address">
-											Perumahan Sapphire Mediterania, wradadi. Kec. Sokaraja
-										</span>{" "}
-										<span className="city-or-subdistric">
-											Kabupaten Banyumas, Jawa Tengah.
-										</span>{" "}
-										<span className="postal-code">53181</span>{" "}
-										<span className="tokopaedi-note">
-											[Tokopaedi Note: blok c 16] Sokaraja. Kab. Banyumas,
-										</span>{" "}
-										<span className="postal-code">53181</span>
-									</p>
-								</div>
-								<div className="button-change-address">
-									<button
-										type="button"
-										className="btn button-custom-address text-muted"
-										data-bs-toggle="modal"
-										data-bs-target="#staticBackdrop">
-										Choose another address
-									</button>
-								</div>
-								{/*  Modal */}
-								<div
-									className="modal fade"
-									id="staticBackdrop"
-									data-bs-backdrop="static"
-									data-bs-keyboard="false"
-									tabIndex="-1"
-									aria-labelledby="staticBackdropLabel"
-									aria-hidden="true">
-									<ChoseAnotherAddress />
-								</div>
-								{/*  end of Modal */}
-								{/* modal 2 */}
-								<div
-									className="modal fade"
-									id="addNewAddress"
-									tabIndex="-1"
-									aria-labelledby="addNewAddressLabel"
-									aria-hidden="true">
-									<AddNewAddress />
-								</div>
-								{/* end of modal 2 */}
+      <div className={`content-wrapper row`}>
+        <div className="content-aside-left col-8 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 d-flex justify-content-center align-items-center ">
+          <div className="wrapper d-flex flex-column w-75">
+            <div className="title mt-5 mb-3">
+              <p className={`fontBold h1`}>Checkout</p>
+            </div>
+            <div className="title-desc mb-3">
+              <p className={`fontRegular fw-bold h5`}>Shipping Address</p>
+            </div>
+            <div className={`address-desc mb-3`}>
+              <div className="wrapper m-4">
+                <div className="name-user ">
+                  <p className={`fontRegular fw-bold h5`}>Andreas Jane</p>
+                </div>
+                <div className="address-user">
+                  <p className={`fontRegular h5`}>
+                    <span className="address">Perumahan Sapphire Mediterania, wradadi. Kec. Sokaraja</span> <span className="city-or-subdistric">Kabupaten Banyumas, Jawa Tengah.</span> <span className="postal-code">53181</span>{' '}
+                    <span className="tokopaedi-note">[Tokopaedi Note: blok c 16] Sokaraja. Kab. Banyumas,</span> <span className="postal-code">53181</span>
+                  </p>
+                </div>
+                <div className="button-change-address">
+                  <button type="button" className="btn button-custom-address text-muted" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Choose another address
+                  </button>
+                </div>
+                {/*  Modal */}
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <ChoseAnotherAddress />
+                </div>
+                {/*  end of Modal */}
+                {/* modal 2 */}
+                <div className="modal fade" id="addNewAddress" tabIndex="-1" aria-labelledby="addNewAddressLabel" aria-hidden="true">
+                  <AddNewAddress />
+                </div>
+                {/* end of modal 2 */}
 
 								{/* modal 3 */}
 								<div
