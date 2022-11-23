@@ -31,7 +31,7 @@ module.exports = {
     userChat: (user) => {
         return new Promise((resolve, reject) => {
             db.query(`
-            select distinct on (involved) involved as userid, s.id, s.sender, u.fullname as name, content, date_time, u.image
+            select distinct on (involved) involved as userid, s.id, s.sender, u.name as name, message, date_time, u.image
             from (select c.*,
             case sender when ${user} then receiver else sender end as involved
             from chat c where c.sender = ${user} or c.receiver = ${user}) s

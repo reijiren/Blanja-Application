@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import style from "../../assets/style/style.module.css";
 import axios from "axios";
 import { login } from "../../redux/action/user";
+import { reset } from "../../redux/action/chat";
 
 const CustomerLogin = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const CustomerLogin = () => {
         if (user === 1) {
           localStorage.setItem("token", data.data.token);
           alert("Login Success");
+          dispatch(reset());
           return navigate('/')
         } else {
           alert("This user is not registered as a customer");

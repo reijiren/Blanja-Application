@@ -18,7 +18,7 @@ export default function chatReducer(state = initialState, action){
         case "SELECT_RECEIVER_REJECTED":
             return { ...state, isLoading: false, isError: true };
         case "SELECT_RECEIVER_FULFILLED":
-            return { ...state, isLoading: false, isError: false, receiver: action.payload.data.data };
+            return { ...state, isLoading: false, isError: false, receiver: action.payload.data.data.rows[0] };
         default:
             return state;
     }
