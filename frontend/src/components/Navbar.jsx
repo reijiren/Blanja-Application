@@ -1,10 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/blanja_icon.png";
 import filter from "../assets/images/filter.png";
 import style from "../assets/style/style.module.css";
 
 const Navbar = () => {
+	const [color, setColor] = useState("black");
+	const [size, setSize] = useState(true);
 	return (
 		<Fragment>
 			<nav className="navbar navbar-expand-lg bg-light row">
@@ -58,7 +60,93 @@ const Navbar = () => {
 													data-bs-dismiss="modal"
 													aria-label="Close"></button>
 											</div>
-											<div className="modal-body">...</div>
+											<div className="modal-body">
+												<div className="my-3">
+													<p className="fontBold">Color</p>
+													<div className="d-flex flex-row">
+														<div
+															onClick={() => {
+																setColor("black");
+															}}>
+															{color === "black" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.blackActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.black}`}></div>
+															)}
+														</div>
+														<div onClick={() => setColor("red")}>
+															{color === "red" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.redActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.red}`}></div>
+															)}
+														</div>
+														<div onClick={() => setColor("blue")}>
+															{color === "blue" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.blueActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.blue}`}></div>
+															)}
+														</div>
+														<div onClick={() => setColor("green")}>
+															{color === "green" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.greenActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.green}`}></div>
+															)}
+														</div>
+													</div>
+												</div>
+												<div className="my-3">
+													<p className="fontBold">Size</p>
+													<div className="d-flex flex-row">
+														<div className="btn btn-light btn-outline-dark me-2">
+															XS
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															S
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															M
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															L
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															XL
+														</div>
+													</div>
+												</div>
+												<div className="my-3">
+													<p className="fontBold">Category</p>
+													<div className="d-flex flex-row">
+														<div className="btn btn-light btn-outline-dark me-2">
+															All
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															Women
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															Men
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															Boys
+														</div>
+													</div>
+												</div>
+											</div>
 											<div className="modal-footer">
 												<button
 													type="button"
