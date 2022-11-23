@@ -7,10 +7,8 @@ import style from "../../assets/style/style.module.css";
 
 const ProductOptions = () => {
 	const [active, setActive] = useState("black");
-	const [color, setColor] = useState("");
-	const { id_product } = useParams();
-	// const userData = localStorage.getItem("persist:root");
 	const [jumlah, setJumlah] = useState(1);
+	const { id_product } = useParams();
 
 	const user = useSelector((state) => state.user.user);
 
