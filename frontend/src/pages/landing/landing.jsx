@@ -30,40 +30,9 @@ const Landing = () => {
 			});
 	}, []);
 
-  // get state user
-  const dispatch = useDispatch();
-  const { user, isLoading, isError } = useSelector((state) => {
-    return state.user;
-  });
-
-  const address = useSelector((state) => {
-    return state.address;
-  });
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("data"));
-
-    const handleSuccess = (data) => {
-      // console.log(data);
-    };
-    if (data.id_customer) {
-      const id = data.id_customer;
-      dispatch(detailById(id, handleSuccess));
-    } else if (data.id_seller) {
-      const id = data.id_seller;
-      dispatch(detailByIdSeller(id, handleSuccess));
-    }
-
-    if (data.main_address) {
-      const id = data.main_address;
-      dispatch(getByMainAddress(id));
-    }
-  }, []);
-
-  // console.log(address)
   return (
     <>
-      <Navbar />
+      <Navs />
       <section>
         <div className="container">
           <div className="d-flex justify-content-center mt-5">

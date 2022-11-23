@@ -23,20 +23,6 @@ const CustomerLogin = () => {
         alert(data.data.message);
       } else {
         const user = data.data.data.user_type;
-        
-        if (user === 1) {
-          localStorage.setItem("token", data.data.token);
-          alert("Login Success");
-          dispatch(reset());
-          return navigate('/')
-        } else {
-          alert("This user is not registered as a customer");
-        }
-      }
-    }
-    dispatch(login(form, handleSuccess));
-  };
-
 				if (user === 1) {
 					localStorage.setItem("token", data.data.token);
 					alert("Login Success");
