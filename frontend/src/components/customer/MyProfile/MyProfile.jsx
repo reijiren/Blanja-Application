@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import johanesMikael from "../../../assets/images/johanes mikael.png";
 // react redux
 import { useSelector, useDispatch } from "react-redux";
-import { updateById } from "../../../redux/action/user";
+import { updateCustomer } from "../../../redux/action/user";
 import { useNavigate } from "react-router-dom";
 import strtotime from "locutus/php/datetime/strtotime"
 import date from "locutus/php/datetime/date"
@@ -66,7 +66,7 @@ const MyProfile = () => {
     };
     // console.log(form.birth_date)
     // return console.log(body);
-    dispatch(updateById(id, body, handleSuccess));
+    dispatch(updateCustomer(id, body, handleSuccess));
   };
 
   return (

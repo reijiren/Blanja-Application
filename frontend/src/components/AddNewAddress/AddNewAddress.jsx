@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { insertAddress } from "../../redux/action/address";
 // react redux
 import { useSelector, useDispatch } from "react-redux";
-import { updateById } from "../../redux/action/user";
+import { updateCustomer } from "../../redux/action/user";
 
 const AddNewAddress = () => {
   const { user, isLoading, isError } = useSelector((state) => {
@@ -61,7 +61,7 @@ const AddNewAddress = () => {
         console.log(res)
       }
       if(main_address_bool === true) {
-        dispatch(updateById(user[0].id_user, bodyUser, updateSuccess))
+        dispatch(updateCustomer(user[0].id_user, bodyUser, updateSuccess))
       }
       alert("Insert Success");
       return window.location.reload();
