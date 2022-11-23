@@ -25,7 +25,7 @@ const orderModel = {
   selectJoin: (id) => {
     return new Promise((resolve, reject) => {
       db.query(`select * from orders left join users on users.id_user = orders.userid
-      left join product on product.id_product = orders.item where id_order = ${id}
+      left join product on product.id_product = orders.item where userid = ${id}
       `, 
       (err, result) => {
         if (err) {
@@ -35,7 +35,7 @@ const orderModel = {
       })
     })
   },
-  selectUserOrder: (id) => {
+  selectUserOrder : (id) => {
     return new Promise((resolve, reject) => {
       db.query(`select * from orders join users on users.id_user = orders.userid where userid = ${id}
       `, 
