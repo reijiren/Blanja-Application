@@ -6,7 +6,7 @@ import star from "../../assets/images/Star.png";
 import style from "../../assets/style/style.module.css";
 
 const ProductOptions = () => {
-	const [active, setActive] = useState(1);
+	const [active, setActive] = useState("black");
 	const [color, setColor] = useState("");
 	const { id_product } = useParams();
 	// const userData = localStorage.getItem("persist:root");
@@ -30,14 +30,20 @@ const ProductOptions = () => {
 		userid: user.id_user,
 		item: parseInt(id_product),
 		size: 1,
-		color: color,
-		quantity: jumlah,
-		status: "",
+		status: 0,
 	});
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log(product);
+		const body = {
+			userid: product.userid,
+			item: product.item,
+			size: product.size,
+			color: active,
+			quantity: jumlah,
+			status: product.status,
+		};
+		console.log(body);
 	};
 	return (
 		<Fragment>
@@ -63,9 +69,9 @@ const ProductOptions = () => {
 							<div className="d-flex flex-row">
 								<div
 									onClick={() => {
-										setActive(1);
+										setActive("black");
 									}}>
-									{active === 1 ? (
+									{active === "black" ? (
 										<div className={`me-2 ${style.colorActive}`}>
 											<div className={`mx-auto ${style.blackActive}`}></div>
 										</div>
@@ -73,8 +79,8 @@ const ProductOptions = () => {
 										<div className={`me-2 ${style.black}`}></div>
 									)}
 								</div>
-								<div onClick={() => setActive(2)}>
-									{active === 2 ? (
+								<div onClick={() => setActive("red")}>
+									{active === "red" ? (
 										<div className={`me-2 ${style.colorActive}`}>
 											<div className={`mx-auto ${style.redActive}`}></div>
 										</div>
@@ -82,8 +88,8 @@ const ProductOptions = () => {
 										<div className={`me-2 ${style.red}`}></div>
 									)}
 								</div>
-								<div onClick={() => setActive(3)}>
-									{active === 3 ? (
+								<div onClick={() => setActive("blue")}>
+									{active === "blue" ? (
 										<div className={`me-2 ${style.colorActive}`}>
 											<div className={`mx-auto ${style.blueActive}`}></div>
 										</div>
@@ -91,8 +97,8 @@ const ProductOptions = () => {
 										<div className={`me-2 ${style.blue}`}></div>
 									)}
 								</div>
-								<div onClick={() => setActive(4)}>
-									{active === 4 ? (
+								<div onClick={() => setActive("green")}>
+									{active === "green" ? (
 										<div className={`me-2 ${style.colorActive}`}>
 											<div className={`mx-auto ${style.greenActive}`}></div>
 										</div>
