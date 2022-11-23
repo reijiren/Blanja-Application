@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import logo from "../assets/images/blanja_icon.png";
 import filter from "../assets/images/filter.png";
 import notif from "../assets/images/notif.png";
@@ -9,6 +9,8 @@ import style from "../assets/style/style.module.css";
 import { Link } from "react-router-dom";
 
 const NavbarLogin = () => {
+	const [active, setActive] = useState("black");
+
 	return (
 		<Fragment>
 			<nav className="navbar navbar-expand-lg bg-light row">
@@ -54,7 +56,7 @@ const NavbarLogin = () => {
 										<div className="modal-content">
 											<div className="modal-header">
 												<h1 className="modal-title fs-5" id="exampleModalLabel">
-													Modal title
+													Filter
 												</h1>
 												<button
 													type="button"
@@ -62,7 +64,57 @@ const NavbarLogin = () => {
 													data-bs-dismiss="modal"
 													aria-label="Close"></button>
 											</div>
-											<div className="modal-body">...</div>
+											<div className="modal-body">
+												<div className="my-3">
+													<p className="fontBold">Color</p>
+													<div className="d-flex flex-row">
+														<div
+															onClick={() => {
+																setActive("black");
+															}}>
+															{active === "black" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.blackActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.black}`}></div>
+															)}
+														</div>
+														<div onClick={() => setActive("red")}>
+															{active === "red" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.redActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.red}`}></div>
+															)}
+														</div>
+														<div onClick={() => setActive("blue")}>
+															{active === "blue" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.blueActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.blue}`}></div>
+															)}
+														</div>
+														<div onClick={() => setActive("green")}>
+															{active === "green" ? (
+																<div className={`me-2 ${style.colorActive}`}>
+																	<div
+																		className={`mx-auto ${style.greenActive}`}></div>
+																</div>
+															) : (
+																<div className={`me-2 ${style.green}`}></div>
+															)}
+														</div>
+													</div>
+												</div>
+												<div className="my-3"></div>
+											</div>
 											<div className="modal-footer">
 												<button
 													type="button"

@@ -9,6 +9,8 @@ const ProductOptions = () => {
 	const [active, setActive] = useState("black");
 	const [jumlah, setJumlah] = useState(1);
 	const { id_product } = useParams();
+	const [details, setDetails] = useState({});
+	console.log(details);
 
 	const user = useSelector((state) => state.user.user);
 
@@ -17,7 +19,7 @@ const ProductOptions = () => {
 		axios
 			.get(`${process.env.REACT_APP_BACKEND_URL}/product/${id_product}`)
 			.then((response) => {
-				console.log(response);
+				setDetails(response.data.data.rows[0]);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -33,6 +35,7 @@ const ProductOptions = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+
 		const body = {
 			userid: product.userid,
 			item: product.item,
@@ -41,6 +44,16 @@ const ProductOptions = () => {
 			quantity: jumlah,
 			status: product.status,
 		};
+
+		axios
+			.post(`${process.env.REACT_APP_BACKEND_URL}/order`, body)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
 		console.log(body);
 	};
 	return (
@@ -48,8 +61,10 @@ const ProductOptions = () => {
 			<div className="container-fluid row">
 				<form onSubmit={(e) => onSubmit(e)}>
 					<div className="col-12">
-						<h4 className="fontBold">Baju muslim pria</h4>
-						<p className={`text-secondary ${style.ups}`}>Zalora Cloth</p>
+						<h4 className="fontBold">{details.product_name}</h4>
+						<p className={`text-secondary ${style.ups}`}>
+							{details.store_desc}
+						</p>
 						<div className="d-flex">
 							<div className="me-2">
 								<img src={star} alt="tydac ramah" />
@@ -60,7 +75,7 @@ const ProductOptions = () => {
 						</div>
 						<div className="my-3">
 							<p className="text-secondary">Price</p>
-							<h4 className={`fontBold ${style.ups}`}>Rp. 20.000</h4>
+							<h4 className={`fontBold ${style.ups}`}>Rp. {details.price}</h4>
 						</div>
 						<div className="my-3">
 							<p className="fontBold">Color</p>
