@@ -25,9 +25,7 @@ const SellerLogin = () => {
         const user = data.data.data.user_type;
 
         if (user === 2) {
-          
           localStorage.setItem("token", data.data.token);
-          localStorage.setItem("data", JSON.stringify(data.data.data));
           alert("Login Success");
           dispatch(reset());
           return navigate('/')
