@@ -55,7 +55,7 @@ const Product = () => {
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/order`, body)
 			.then((response) => {
-				console.log(response);
+				alert("barang berhasil ditambahkan");
 			})
 			.catch((error) => {
 				console.log(error);

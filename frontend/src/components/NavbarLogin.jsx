@@ -9,7 +9,8 @@ import style from "../assets/style/style.module.css";
 import { Link } from "react-router-dom";
 
 const NavbarLogin = () => {
-	const [active, setActive] = useState("black");
+	const [color, setColor] = useState("black");
+	const [size, setSize] = useState(true);
 
 	return (
 		<Fragment>
@@ -70,9 +71,9 @@ const NavbarLogin = () => {
 													<div className="d-flex flex-row">
 														<div
 															onClick={() => {
-																setActive("black");
+																setColor("black");
 															}}>
-															{active === "black" ? (
+															{color === "black" ? (
 																<div className={`me-2 ${style.colorActive}`}>
 																	<div
 																		className={`mx-auto ${style.blackActive}`}></div>
@@ -81,8 +82,8 @@ const NavbarLogin = () => {
 																<div className={`me-2 ${style.black}`}></div>
 															)}
 														</div>
-														<div onClick={() => setActive("red")}>
-															{active === "red" ? (
+														<div onClick={() => setColor("red")}>
+															{color === "red" ? (
 																<div className={`me-2 ${style.colorActive}`}>
 																	<div
 																		className={`mx-auto ${style.redActive}`}></div>
@@ -91,8 +92,8 @@ const NavbarLogin = () => {
 																<div className={`me-2 ${style.red}`}></div>
 															)}
 														</div>
-														<div onClick={() => setActive("blue")}>
-															{active === "blue" ? (
+														<div onClick={() => setColor("blue")}>
+															{color === "blue" ? (
 																<div className={`me-2 ${style.colorActive}`}>
 																	<div
 																		className={`mx-auto ${style.blueActive}`}></div>
@@ -101,8 +102,8 @@ const NavbarLogin = () => {
 																<div className={`me-2 ${style.blue}`}></div>
 															)}
 														</div>
-														<div onClick={() => setActive("green")}>
-															{active === "green" ? (
+														<div onClick={() => setColor("green")}>
+															{color === "green" ? (
 																<div className={`me-2 ${style.colorActive}`}>
 																	<div
 																		className={`mx-auto ${style.greenActive}`}></div>
@@ -115,7 +116,40 @@ const NavbarLogin = () => {
 												</div>
 												<div className="my-3">
 													<p className="fontBold">Size</p>
-													<div className="d-flex flex-row"></div>
+													<div className="d-flex flex-row">
+														<div className="btn btn-light btn-outline-dark me-2">
+															XS
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															S
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															M
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															L
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															XL
+														</div>
+													</div>
+												</div>
+												<div className="my-3">
+													<p className="fontBold">Category</p>
+													<div className="d-flex flex-row">
+														<div className="btn btn-light btn-outline-dark me-2">
+															All
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															Women
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															Men
+														</div>
+														<div className="btn btn-light btn-outline-dark me-2">
+															Boys
+														</div>
+													</div>
 												</div>
 											</div>
 											<div className="modal-footer">
@@ -146,8 +180,6 @@ const NavbarLogin = () => {
 										style={{ marginTop: "13px", marginLeft: "20px" }}
 										src={notif}
 										alt=""
-										data-bs-toggle="modal"
-										data-bs-target="#exampleModal"
 									/>
 								</Link>
 								<img
