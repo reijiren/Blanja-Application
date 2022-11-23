@@ -34,7 +34,7 @@ const addressController = {
 
         addressModel.insertAddress(body)
         .then((result) => {
-            success(res, result.rowCount, 'success', 'insert new address success')
+            success(res, result.rows, 'success', 'insert new address success')
         })
         .catch((err) => {
             failed(res, err.message, 'failed', 'failed to insert new address')
