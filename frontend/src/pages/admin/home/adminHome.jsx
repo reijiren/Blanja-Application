@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import NavAdmin from "../../../components/navAdmin";
+import NavAdmin from "../../../components/NavAdmin";
 import style from "./style.module.css";
 
 const HomeAdmin = () => {

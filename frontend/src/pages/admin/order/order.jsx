@@ -1,20 +1,24 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import NavAdmin from "../../../components/navAdmin";
+import NavAdmin from "../../../components/NavAdmin";
+import photo from "../../../assets/images/bajuMuslim1.png";
+import style from "./style.module.css";
 
 const Order = () => {
+	const [order, setOrder] = useState({});
+	console.log(order);
+
+	// get order
 	useEffect(() => {
 		axios
 			.get(`${process.env.REACT_APP_BACKEND_URL}/order`)
 			.then((response) => {
-				console.log(response);
+				setOrder(response.data.data.rows);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-	});
+	}, []);
 
 	return (
 		<Fragment>
@@ -23,6 +27,43 @@ const Order = () => {
 				<div className="d-flex justify-content-center align-items-center mt-5">
 					<div className="col-8">
 						<h1 className="text-center">Order list</h1>
+						{order.length == undefined ? (
+							<h1>No order found!</h1>
+						) : (
+							order.map((item, index) => (
+								<div key={index}>
+									<div className="border p-3 d-flex flex-row rounded">
+										<div className="me-3">
+											<img
+												src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
+												alt=""
+												className={`rounded ${style.productImage}`}
+											/>
+										</div>
+										<div className="col-5">
+											<h4 className="fontMedium">{item.product_name}</h4>
+											<p className="text-secondary">
+												Price: ${item.price} ||
+												<span>
+													{" "}
+													Size:{" "}
+													{item.size == 0
+														? "XS"
+														: item.size == 1
+														? "S"
+														: item.size == 2
+														? "M"
+														: item.size == 3
+														? "L"
+														: "XL"}
+												</span>
+											</p>
+											<p className="text-secondary">Color: {item.color}</p>
+										</div>
+									</div>
+								</div>
+							))
+						)}
 					</div>
 				</div>
 			</div>
