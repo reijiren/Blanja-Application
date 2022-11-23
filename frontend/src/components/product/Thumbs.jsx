@@ -20,12 +20,13 @@ const Thumbs = () => {
 				console.log(error);
 			});
 	}, [id_product]);
+
 	return (
 		<Fragment>
 			<div className="container-fluid row">
 				<div className={`flex-row d-flex col-12 ${style.margins}`}>
 					<div className={`${style.mobiles}`}>
-						{/* {details[0].map((item, index) => (
+						{details[0].map((item, index) => (
 							<div key={index}>
 								<img
 									src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
@@ -33,7 +34,7 @@ const Thumbs = () => {
 									className={`col-md-6 col-10 pe-1 mb-2 ${style.thumbs} ${style.thumbnails}`}
 								/>
 							</div>
-						))} */}
+						))}
 						<img
 							src={thumbs1}
 							alt=""

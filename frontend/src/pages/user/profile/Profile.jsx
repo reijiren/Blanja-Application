@@ -18,7 +18,7 @@ const Profile = () => {
 	return (
 		<div className="vw-100 vh-100">
 			{/* navbar */}
-			<Navbar />
+			<Navs />
 			{/* end of navbar */}
 			<div className="container-profile h-100 w-100">
 				{userLevel == 1 ? <MainContentCust /> : <></>}

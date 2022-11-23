@@ -113,7 +113,10 @@ const NavbarLogin = () => {
 														</div>
 													</div>
 												</div>
-												<div className="my-3"></div>
+												<div className="my-3">
+													<p className="fontBold">Size</p>
+													<div className="d-flex flex-row"></div>
+												</div>
 											</div>
 											<div className="modal-footer">
 												<button
