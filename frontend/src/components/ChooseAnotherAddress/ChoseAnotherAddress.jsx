@@ -1,7 +1,12 @@
 import React from "react";
 import "./style.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getByMainAddress } from "../../redux/action/address";
 
 const ChoseAnotherAddress = () => {
+
+  
   return (
     <div className="modal-dialog" style={{ maxWidth: "80%" }}>
       <div className="modal-content">

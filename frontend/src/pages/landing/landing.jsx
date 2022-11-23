@@ -30,32 +30,63 @@ const Landing = () => {
 			});
 	}, []);
 
-	return (
-		<>
-			<Navs />
-			<section>
-				<div className="container">
-					<div className="d-flex justify-content-center mt-5">
-						<img
-							style={{ marginRight: "15px" }}
-							className={styles.benjamin}
-							src={left}
-							alt=""
-						/>
-						<img className={styles.benjamin} src={benjamin} alt="" />
-						<img
-							style={{ marginLeft: "15px" }}
-							className={styles.benjamin}
-							src={benjanin}
-							alt=""
-						/>
-						<img
-							style={{ marginLeft: "15px" }}
-							className={styles.benjamin}
-							src={right}
-							alt=""
-						/>
-					</div>
+  // get state user
+  const dispatch = useDispatch();
+  const { user, isLoading, isError } = useSelector((state) => {
+    return state.user;
+  });
+
+  const address = useSelector((state) => {
+    return state.address;
+  });
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("data"));
+
+    const handleSuccess = (data) => {
+      // console.log(data);
+    };
+    if (data.id_customer) {
+      const id = data.id_customer;
+      dispatch(detailById(id, handleSuccess));
+    } else if (data.id_seller) {
+      const id = data.id_seller;
+      dispatch(detailByIdSeller(id, handleSuccess));
+    }
+
+    if (data.main_address) {
+      const id = data.main_address;
+      dispatch(getByMainAddress(id));
+    }
+  }, []);
+
+  // console.log(address)
+  return (
+    <>
+      <Navbar />
+      <section>
+        <div className="container">
+          <div className="d-flex justify-content-center mt-5">
+            <img
+              style={{ marginRight: "15px" }}
+              className={styles.benjamin}
+              src={left}
+              alt=""
+            />
+            <img className={styles.benjamin} src={benjamin} alt="" />
+            <img
+              style={{ marginLeft: "15px" }}
+              className={styles.benjamin}
+              src={benjanin}
+              alt=""
+            />
+            <img
+              style={{ marginLeft: "15px" }}
+              className={styles.benjamin}
+              src={right}
+              alt=""
+            />
+          </div>
 
 					<div className="row col-md-12">
 						<div className="ms-5 mt-4">
