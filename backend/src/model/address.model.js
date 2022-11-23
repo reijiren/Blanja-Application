@@ -29,8 +29,13 @@ const addressModel = {
     insertAddress: (data) => {
         return new Promise((resolve, reject) => {
             db.query(`
-            insert into address (userid, address_name, recipient_name, recipient_phone, address, post_code, city)
-            values (${data.userid}, '${data.address_name}', '${data.recipient_name}', '${data.recipient_phone}', '${data.address}', '${data.post_code}', '${data.city}');
+            with ins1 as (
+                insert into address (userid, address_name, recipient_name, recipient_phone, address, post_code, city)
+                values
+                (${data.userid}, '${data.address_name}', '${data.recipient_name}', '${data.recipient_phone}', '${data.address}', '${data.post_code}', '${data.city}')
+                returning id_address as addressid
+            )
+            select addressid from ins1;
             `, (err, res) => {
                 if(err) return reject(err);
                 resolve(res);
