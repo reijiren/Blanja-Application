@@ -1,22 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
-import ProductOptions from "../../components/product/ProductOption";
-import Thumbs from "../../components/product/Thumbs";
 import ProductReview from "../../components/product/ProductReview";
 import OtherProduct from "../../components/product/OtherProduct";
 import { Helmet } from "react-helmet";
 import Navs from "../../components/Navs";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { selectReceiver } from "../../redux/action/chat";
 import style from "../../assets/style/style.module.css";
-import thumbs1 from "../../assets/images/bajuMuslim1.png";
 import star from "../../assets/images/Star.png";
 
 const Product = () => {
-	const [active, setActive] = useState("black");
+	const [active, setActive] = useState();
 	const [jumlah, setJumlah] = useState(1);
 	const { id_product } = useParams();
 	const [details, setDetails] = useState({});
+	const dispatch = useDispatch();
 	console.log(details);
 
 	const user = useSelector((state) => state.user.user);
@@ -62,6 +61,10 @@ const Product = () => {
 			});
 
 		console.log(body);
+	};
+
+	const chatSeller = () => {
+		dispatch(selectReceiver(details.id_seller));
 	};
 
 	return (
@@ -120,49 +123,28 @@ const Product = () => {
 											<div className="my-3">
 												<p className="fontBold">Color</p>
 												<div className="d-flex flex-row">
-													<div
-														onClick={() => {
-															setActive("black");
-														}}>
-														{active === "black" ? (
-															<div className={`me-2 ${style.colorActive}`}>
+													{details.id_product &&
+														details.color.split(",").map((item, index) => (
+															<div key={index}>
 																<div
-																	className={`mx-auto ${style.blackActive}`}></div>
+																	onClick={() => {
+																		setActive(item);
+																	}}>
+																	{active === item ? (
+																		<div
+																			className={`me-2 ${style.colorActive}`}>
+																			<div
+																				className={`mx-auto ${style.colors}`}
+																				style={{ backgroundColor: item }}></div>
+																		</div>
+																	) : (
+																		<div
+																			className={`me-2 ${style.colors}`}
+																			style={{ backgroundColor: item }}></div>
+																	)}
+																</div>
 															</div>
-														) : (
-															<div className={`me-2 ${style.black}`}></div>
-														)}
-													</div>
-													<div onClick={() => setActive("red")}>
-														{active === "red" ? (
-															<div className={`me-2 ${style.colorActive}`}>
-																<div
-																	className={`mx-auto ${style.redActive}`}></div>
-															</div>
-														) : (
-															<div className={`me-2 ${style.red}`}></div>
-														)}
-													</div>
-													<div onClick={() => setActive("blue")}>
-														{active === "blue" ? (
-															<div className={`me-2 ${style.colorActive}`}>
-																<div
-																	className={`mx-auto ${style.blueActive}`}></div>
-															</div>
-														) : (
-															<div className={`me-2 ${style.blue}`}></div>
-														)}
-													</div>
-													<div onClick={() => setActive("green")}>
-														{active === "green" ? (
-															<div className={`me-2 ${style.colorActive}`}>
-																<div
-																	className={`mx-auto ${style.greenActive}`}></div>
-															</div>
-														) : (
-															<div className={`me-2 ${style.green}`}></div>
-														)}
-													</div>
+														))}
 												</div>
 											</div>
 											<div className="d-flex flex-row">
@@ -220,7 +202,9 @@ const Product = () => {
 											<div className="col-md-7 col-12">
 												<div className="flex-row d-flex my-3">
 													<Link
-														className={`col-6 me-2 btn btn-light border fontMedium ${style.buttonProductDetail}`}>
+														onClick={chatSeller}
+														className={`col-6 me-2 btn btn-light border fontMedium ${style.buttonProductDetail}`}
+														to="/chat">
 														Chat
 													</Link>
 													<button
