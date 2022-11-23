@@ -2,43 +2,41 @@ import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from "../../assets/style/style.module.css";
 import axios from "axios";
+import { login } from "../../redux/action/user";
+import { useDispatch } from "react-redux";
 
 const SellerLogin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
+  
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
 
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, form)
-      .then((response) => {
-        // console.log(response.data.token.data)
-        // console.log(response.data)
+    const handleSuccess = (data) => {
+      if(data.data.status !== "success"){
+        alert(data.data.message);
+      } else {
+        const user = data.data.data.user_type;
 
-        if (response.data.status !== "success") {
-          alert(response.data.message);
+        if (user === 2) {
+          
+          localStorage.setItem("token", data.data.token);
+          localStorage.setItem("data", JSON.stringify(data.data.data));
+          alert("Login Success");
+          return navigate('/')
         } else {
-          const user = response.data.data.user_type;
-          console.log(user);
-          if (user === 2) {
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("data", JSON.stringify(response.data));
-            localStorage.setItem("data1", JSON.stringify(response.data.data.email));
-            alert("Berhasil Login");
-            return navigate('/')
-          } else {
-            alert("anda terdaftar sebagai costumer");
-          }
+          alert("This user is not registered as a seller");
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      }
+    }
+    dispatch(login(form, handleSuccess));
   };
+
   return (
     <Fragment>
       <form className="col-12 col-md-8" onSubmit={(e) => onSubmit(e)}>
@@ -61,7 +59,7 @@ const SellerLogin = () => {
           />
         </div>
         <div className="d-flex flex-row-reverse mb-3">
-          <Link className={`${style.links}`}>
+          <Link className={`${style.links}`} to="/resetpass">
             <p className="text-danger">Forget Password?</p>
           </Link>
         </div>
@@ -73,7 +71,7 @@ const SellerLogin = () => {
         <p>
           Don't have a Blanja account?{" "}
           <span>
-            <Link to="/register" className={`${style.links} text-danger`}> Register</Link>
+            <Link className={`${style.links} text-danger`} to="/register"> Register</Link>
           </span>
         </p>
       </div>

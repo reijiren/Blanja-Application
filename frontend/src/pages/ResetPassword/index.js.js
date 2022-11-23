@@ -6,13 +6,13 @@ import ResetPassword from "../../components/auth/ResetPassword";
 import ConfirmResetPass from "../../components/auth/KonfirmasiResetPass";
 
 const ResetPass = () => {
-	const [active, setActive] = useState(1);
-    // const data1 = JSON.parse(localStorage.getItem("data1"));
-    // console.log(data1)
-    useEffect(()=>{
+	const [active, setActive] = useState(false);
+	
+    useEffect(() => {
         const data1 = JSON.parse(localStorage.getItem("data1"));
         setActive(data1)
-    })
+    }, [])
+
 	return (
 		<Fragment>
 			<div className="container-fluid row">
@@ -28,8 +28,8 @@ const ResetPass = () => {
 						</div>
 						{active ? (
                             <div className="d-flex justify-content-center row my-4">
-                            <ConfirmResetPass />
-                        </div>
+								<ConfirmResetPass />
+							</div>
 						) : (
 							<div className="d-flex justify-content-center row my-4">
 								<ResetPassword />

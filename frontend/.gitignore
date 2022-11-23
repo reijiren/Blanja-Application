@@ -13,6 +13,8 @@
 
 # env
 .env
+.env
+.gitignore
 
 # misc
 .DS_Store
