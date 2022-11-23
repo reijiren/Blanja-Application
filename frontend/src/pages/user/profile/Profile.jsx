@@ -14,7 +14,7 @@ const Profile = () => {
    * 1 = customer
    * 2 = seller
    */
-  const [userLevel, setUserLevel] = useState('1');
+  const [userLevel, setUserLevel] = useState("2");
   return (
     <div className="vw-100 vh-100">
       {/* navbar */}
