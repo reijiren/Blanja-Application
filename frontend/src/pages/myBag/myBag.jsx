@@ -89,7 +89,7 @@ const MyBag = () => {
                 <div className={style.productone}>
                   <div className="d-flex align-items-center">
                     <input className={style.check} type="checkbox" />
-                    <img src={jas} alt="suite" />
+                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}  alt="suite" />
                     <div className={style.brand}>
                       <h5>{item.product_name} - {item.color}</h5>
                       <p>{item.seller}</p>
