@@ -45,7 +45,7 @@ const ResetPassword = () => {
         <p>
           Don't have a Blanja account?{" "}
           <span>
-            <Link className={`${style.links} text-danger`}> Register</Link>
+            <Link className={`${style.links} text-danger`} to="/register"> Register</Link>
           </span>
         </p>
       </div>

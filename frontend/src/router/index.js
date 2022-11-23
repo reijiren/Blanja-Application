@@ -11,7 +11,7 @@ import Product from '../pages/product/product';
 import CheckOut from '../pages/user/checkout/CheckOut';
 import Chat from '../pages/liveChat/chat';
 import Landing from '../pages/landing/landing';
-import ResetPass from '../pages/ResetPassword/index.js';
+import ResetPass from '../pages/ResetPassword/index';
 
 export default function Router() {
   return (

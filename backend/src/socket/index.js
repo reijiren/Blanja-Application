@@ -24,6 +24,17 @@ module.exports = (io, socket) => {
         })
     });
 
+    // contact
+    socket.on("contact-history", async(data) => {
+        try{
+            const contactList = await userChat(data);
+            console.log(contactList);
+            io.to(data).emit("send-message-response", contactList.rows);
+        }catch(err){
+            console.log('Error fetching contact history')
+        }
+    });
+
     // history
     socket.on("chat-history", async(data) => {
         try{
