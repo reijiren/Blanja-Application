@@ -545,6 +545,26 @@
 					"response": []
 				},
 				{
+					"name": "GET USER'S PRODUCTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/product/user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "INSERT PRODUCT",
 					"request": {
 						"method": "POST",
@@ -600,7 +620,7 @@
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/Peworld icon.png"
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/banner skill talent.png"
 								}
 							]
 						},
@@ -612,6 +632,34 @@
 							"port": "3001",
 							"path": [
 								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FILTER SEARCH PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_name\": null,\r\n    \"color\": null,\r\n    \"size\": null,\r\n    \"category\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/product/filter",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"product",
+								"filter"
 							]
 						}
 					},
@@ -691,6 +739,57 @@
 								"3"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "insertTransaksi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\":14,\r\n    \"id_order\":8,\r\n    \"payment_method\":\"gopay\",\r\n    \"quantity\":20,\r\n    \"price\":20,\r\n    \"id\":9,\r\n    \"stockProduk\":6,\r\n    \"StockOrder\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/transaction",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTransaksi",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaksi By id",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

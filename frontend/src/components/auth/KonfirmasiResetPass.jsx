@@ -1,41 +1,44 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from "../../assets/style/style.module.css";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateEmail } from "../../redux/action/user";
 
 const ConfirmResetPass = () => {
-  const navigate=useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [update, setUpdate] = useState({
     password:"",
     newPassword:""
   });
+
   const handlePost = (e) => {
     e.preventDefault();
+
     if(update.password.length >= 6 || update.newPassword >= 6){
-    if(update.password===update.newPassword){
-    const data1 = JSON.parse(localStorage.getItem("data1"));
-    console.log(data1)
-    const form = {
-      password: update.password
-    };
-    axios
-      .put(`${process.env.REACT_APP_BACKEND_URL}/customer/${data1}`, form)
-      .then((res) => {
-        console.log(res);
-        alert("Update Success");
-        return navigate('/login');
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Update Failed");
-      });
+      if(update.password===update.newPassword){
+        const user = JSON.parse(localStorage.getItem("data1"));
+        const id = user[0].id_user;
+        const type = user[0].user_type === 1 ? "customer" : "seller";
+
+        const form = {
+          password: update.password
+        };
+
+        const handleSuccess = (data) => {
+          alert("Change Password Success");
+          return navigate("/login");
+        }
+        dispatch(updateEmail(id, type, form, handleSuccess))
+      }else{
+        alert("password is not match")
+      }
     }else{
-      alert("password tidak sama")
+			alert("Password must be more than 6 characters")
     }
-  }else{
-    alert ("Jumlah karakter untuk password minimal 7")
-  }
   };
+  
   return (
     <Fragment>
       <form className="col-12 col-md-8" onSubmit={(e) => handlePost(e)} >
@@ -46,6 +49,7 @@ const ConfirmResetPass = () => {
             id="passwordInput"
             placeholder="Password"
             onChange={(e) =>setUpdate({ ...update, password: e.target.value })}
+            required
           />
           
         </div>
@@ -56,25 +60,13 @@ const ConfirmResetPass = () => {
             id="confirmpasswordInput"
             placeholder="Confirmation New Password"
             onChange={(e) =>setUpdate({ ...update, newPassword: e.target.value })}
+            required
           />
-          </div>
-        <div className="d-flex flex-row-reverse mb-3">
-          <Link className={`${style.links}`}>
-            <p className="text-danger">Forget Password?</p>
-          </Link>
         </div>
         <button type="submit" className={`col-12 mb-3 ${style.buttonsActive}`}>
           Reset Password
         </button>
       </form>
-      <div className="text-center">
-        <p>
-          Don't have a Blanja account?{" "}
-          <span>
-            <Link className={`${style.links} text-danger`}> Register</Link>
-          </span>
-        </p>
-      </div>
     </Fragment>
   );
 };

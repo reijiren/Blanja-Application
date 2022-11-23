@@ -1,45 +1,42 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
 import style from "../../assets/style/style.module.css";
 import axios from "axios";
+import { login } from "../../redux/action/user";
+import { reset } from "../../redux/action/chat";
 
 const CustomerLogin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
 
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, form)
-      .then((response) => {
-        // console.log(response.data.token.data)
-        // console.log(response.data.data.user_type)
-        // localStorage.setItem("data",JSON.stringify(response.data));
-
-        if (response.data.status !== "success") {
-          alert(response.data.message);
+    const handleSuccess = (data) => {
+      if(data.data.status !== "success"){
+        alert(data.data.message);
+      } else {
+        const user = data.data.data.user_type;
+        
+        if (user === 1) {
+          localStorage.setItem("token", data.data.token);
+          alert("Login Success");
+          dispatch(reset());
+          return navigate('/')
         } else {
-          const user = response.data.data.user_type;
-          console.log(user);
-          if (user === 1) {
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("data", JSON.stringify(response.data));
-			localStorage.setItem("data1", JSON.stringify(response.data.data.email));
-            alert("Berhasil Login");
-            return navigate('/LandingPage')
-          } else {
-            alert("maaf anda terdaftar sebagai seller");
-          }
+          alert("This user is not registered as a customer");
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      }
+    }
+    dispatch(login(form, handleSuccess));
   };
+
   return (
     <Fragment>
       <form className="col-12 col-md-8" onSubmit={(e) => onSubmit(e)}>
@@ -50,6 +47,7 @@ const CustomerLogin = () => {
             id="emailInput"
             placeholder="Email"
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
           />
         </div>
         <div className="mb-3">
@@ -59,10 +57,11 @@ const CustomerLogin = () => {
             id="passwordInput"
             placeholder="Password"
             onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
           />
         </div>
         <div className="d-flex flex-row-reverse mb-3">
-          <Link className={`${style.links}`}>
+          <Link className={`${style.links}`} to="/resetpass">
             <p className="text-danger">Forget Password?</p>
           </Link>
         </div>
@@ -74,7 +73,7 @@ const CustomerLogin = () => {
         <p>
           Don't have a Blanja account?{" "}
           <span>
-            <Link className={`${style.links} text-danger`}> Register</Link>
+            <Link className={`${style.links} text-danger`} to="/register"> Register</Link>
           </span>
         </p>
       </div>
