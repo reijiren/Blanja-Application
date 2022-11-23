@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "../liveChat/chat.module.css";
 import cristian from "../../assets/images/christian.png";
+import Navbar from "../../components/NavbarLogin";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -97,7 +98,7 @@ const Chat = () => {
 
 	return (
 		<>
-			<Navbar />
+			<Navs />
 			<div className="container">
 				<div className="row ">
 					<div className="col-md-4 mt-5 ">
