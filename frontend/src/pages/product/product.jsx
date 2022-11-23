@@ -79,14 +79,15 @@ const Product = () => {
 							<div className="col-12 col-md-6">
 								<div className="container-fluid row">
 									<div className={`flex-row d-flex col-12 ${style.margins}`}>
-										<div className={`${style.mobiles}`}>
+										<div
+											className={`${style.mobiles} d-flex col-12 flex-row overflow-scroll`}>
 											{details.id_product &&
 												details.photo.split("||").map((item, index) => (
 													<div key={index}>
 														<img
 															src={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
 															alt=""
-															className={`col-md-6 col-10 pe-1 mb-2 ${style.thumbs} ${style.thumbnails}`}
+															className={`col-md-10 col-10 pe-1 mb-2 ${style.thumbs} ${style.thumbnails}`}
 														/>
 													</div>
 												))}
@@ -113,7 +114,7 @@ const Product = () => {
 											<div className="my-3">
 												<p className="text-secondary">Price</p>
 												<h4 className={`fontBold ${style.ups}`}>
-													Rp. {details.price}
+													$ {details.price}
 												</h4>
 											</div>
 											<div className="my-3">
