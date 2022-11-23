@@ -207,18 +207,37 @@ const userController = {
 
     userModel.checkUEmail(email).then((result) => {
       const user = result.rows[0];
+      let data = {};
 
       if(result.rowCount > 0) {
         bcrypt.compare(password, user.password)
         .then(async (result) => {
           if(result) {
+            if(user.user_type === 1){
+              await userModel.selectCustomerId(user.id_user)
+              .then((result) => {
+                data = result.rows[0];
+              })
+              .catch((err) => {
+                console.error(err);
+              })
+            }else{
+              await userModel.selectSellerId(user.id_user)
+              .then((result) => {
+                data = result.rows[0];
+              })
+              .catch((err) => {
+                console.error(err);
+              })
+            }
+            
             const token = await jwtToken({
-              email: user.email,
-              level: user.user_type
+              email: data.email,
+              level: data.user_type
             })
-            delete user.password;
+            delete data.password;
 
-            successWithToken(res, user, token, "success", "login success");
+            successWithToken(res, data, token, "success", "login success");
           } else {
             failed(res, null, 'failed', 'name or password is incorrect');
           }
