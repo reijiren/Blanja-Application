@@ -33,6 +33,12 @@ export default function userReducer(state = initialState, action) {
             return { ...state, isLoading: false, user: action.payload.data.data, isError: false }
         case "UPDATE_CUST_BYID_REJECTED":
             return { ...state, isLoading: false, isError: true }
+        case "DETAIL_BY_IDSELLER_PENDING":
+            return { ...state, isLoading: true }
+        case "DETAIL_BY_IDSELLER_FULFILLED":
+            return { ...state, isLoading: false, user: action.payload.data.data, isError: false }
+        case "DETAIL_BY_IDSELLER_REJECTED":
+            return { ...state, isLoading: false, isError: true }
         case "RESET_USER":
             return {
                 ...state,

@@ -6,12 +6,14 @@ import mail from "../assets/images/mail.png";
 import card from "../assets/images/cart.png";
 import cristian from "../assets/images/christian.png";
 import style from "../assets/style/style.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { detailById } from "../redux/action/user";
+import { detailByIdSeller } from "../redux/action/user";
 import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [dataLogin, setDataLogin] = useState([]);
   // get data user with redux
   const [dataUser, setDataUser] = useState([]);
@@ -22,23 +24,11 @@ const Navbar = () => {
     return state.user;
   });
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("data"));
-    console.log(data)
-    // detail with data id user
-    const loadDataUser = async () => {
-      await dispatch(detailById(data.id_user));
-      console.log(user);
-      console.log(isLoading);
-      console.log(isError);
-    };
-    loadDataUser();
-  }, []);
-
   
+
   return (
     <Fragment>
-      <>
+       <>
         {isLoading ? (
           <div className="middle">
           <div className="bar bar1"></div>

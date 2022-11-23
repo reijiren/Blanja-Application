@@ -13,3 +13,16 @@ export const insertAddress = (body, handleSuccess) => ({
         });
     }),
 })
+
+export const getByMainAddress = (id) => ({
+    type: "GET_BY_MAIN_ADDRESS",
+    payload: new Promise((resolve, reject) => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/address/${id}`)
+        .then((res) => {
+            resolve(res);
+        })
+        .catch((err) => {
+            reject(err);
+        });
+    }),
+})

@@ -1,15 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 // style
 import "./style.css";
 // images
 import sampleImage from "../../../assets/images/sample-image.png";
 import dummyTools from "../../../assets/images/dummy-tools.png";
+// react-redux
+import { useSelector, useDispatch } from "react-redux";
+import { insertProduct } from "../../../redux/action/product";
 
 const SellingProduct = () => {
+  // page logic
+  const dispatch = useDispatch();
+  const [newCon, setNewCon] = useState(false);
+  const [secCon, setSecCon] = useState(false);
+  const [photo, setPhoto] = useState();
+  const [form, setForm] = useState({
+    product_name: "",
+    price: "",
+    stock: "",
+    condition: "",
+    color: "",
+    size: "",
+    category: "",
+    description: "",
+  });
+  const user = useSelector((state) => state.user);
+  console.log(user.user[0].id_seller);
+
+  const toggleCheckedNew = () => {
+    setNewCon((prevstate) => !prevstate);
+    if (newCon) {
+      setForm({ ...form, condition: 0 });
+    }
+  };
+
+  const toggleCheckedSecond = () => {
+    setSecCon((prevstate) => !prevstate);
+    if (secCon) {
+      setForm({ ...form, condition: 1 });
+    }
+  };
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const handleSuccess = (data) => {
+      console.log(data);
+      window.location.reload();
+    };
+
+    const body = {
+      seller: user.user[0].id_seller,
+      product_name: form.product_name,
+      price: form.price,
+      stock: form.stock,
+      condition: form.condition,
+      color: form.color,
+      size: parseInt(form.size),
+      category: form.category,
+      description: form.description,
+      photo: photo,
+    };
+    // return console.log(body);
+    dispatch(insertProduct(body, handleSuccess));
+  };
+  // useEffect(() => {
+  //   const id_seller
+  // })
   return (
     <div className="w-90 m-3 mt-5">
       <div className="wrapper m-4">
-        <form className="selling-product d-flex flex-column gap-5">
+        <form
+          className="selling-product d-flex flex-column gap-5"
+          onSubmit={(e) => onSubmitHandler(e)}
+        >
           <div className="wrapper-invent">
             <div className="space-empty mb-3" style={{ height: "30px" }}></div>
             <div className="title m-3">
@@ -17,19 +85,21 @@ const SellingProduct = () => {
             </div>
             <div className="break-line mb-3"></div>
             <div className="label ms-3 mb-3">
-              <label htmlFor="name_product" className="text-muted">
+              <label htmlFor="product_name" className="text-muted">
                 Name of goods
               </label>
             </div>
             <div className="input-invent ms-3 ">
               <input
                 type="text"
-                id="inputPassword5"
+                id="product_name"
                 className="form-control w-50"
                 style={{
                   height: "50px",
                   width: "100%",
                 }}
+                name="product_name"
+                onChange={handleChange}
               />
             </div>
             <div className="space-empty mb-3" style={{ height: "30px" }}></div>
@@ -54,6 +124,9 @@ const SellingProduct = () => {
                   height: "50px",
                   width: "100%",
                 }}
+                placeholder="ex : 50"
+                name="price"
+                onChange={handleChange}
               />
             </div>
 
@@ -72,11 +145,73 @@ const SellingProduct = () => {
                   width: "100%",
                 }}
                 placeholder="ex : 5"
+                name="stock"
+                onChange={handleChange}
               />
             </div>
 
             <div className="label ms-3 mb-3">
-              <label htmlFor="kondisi" className="text-muted">
+              <label htmlFor="color" className="text-muted">
+                Color
+              </label>
+            </div>
+            <div className="input-condition ms-3 mb-3">
+              <input
+                type="text"
+                id="color"
+                className="form-control w-50"
+                style={{
+                  height: "50px",
+                  width: "100%",
+                }}
+                placeholder="ex : white, green, yellow"
+                name="color"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="label ms-3 mb-3">
+              <label htmlFor="size" className="text-muted">
+                Size
+              </label>
+            </div>
+            <div className="input-condition ms-3 mb-3">
+              <input
+                type="text"
+                id="size"
+                className="form-control w-50"
+                style={{
+                  height: "50px",
+                  width: "100%",
+                }}
+                placeholder="1 - 5, ex : 3"
+                name="size"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="label ms-3 mb-3">
+              <label htmlFor="category" className="text-muted">
+                Category
+              </label>
+            </div>
+            <div className="input-condition ms-3 mb-3">
+              <input
+                type="text"
+                id="category"
+                className="form-control w-50"
+                style={{
+                  height: "50px",
+                  width: "100%",
+                }}
+                placeholder="ex : t-shirt"
+                name="category"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="label ms-3 mb-3">
+              <label htmlFor="condition" className="text-muted">
                 Kondisi
               </label>
             </div>
@@ -87,7 +222,7 @@ const SellingProduct = () => {
                   type="radio"
                   name="condition"
                   id="flexRadioDefault1"
-                  value="baru"
+                  onClick={toggleCheckedNew}
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Baru
@@ -99,7 +234,7 @@ const SellingProduct = () => {
                   type="radio"
                   name="condition"
                   id="flexRadioDefault2"
-                  value="bekas"
+                  onClick={toggleCheckedSecond}
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Bekas
@@ -125,7 +260,13 @@ const SellingProduct = () => {
                   />
                 </div>
                 <div className="input-photo-1 mx-3 mb-3">
-                  <input type="file" name="photo_product_1" value="" />
+                  <input
+                    type="file"
+                    name="photo_product_1"
+                    onChange={(e) => {
+                      setPhoto(e.target.files[0]);
+                    }}
+                  />
                 </div>
                 <div className="text-center">
                   <p className="text-muted">Foto utama</p>
@@ -217,6 +358,8 @@ const SellingProduct = () => {
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="5"
+                  name="description"
+                  onChange={handleChange}
                 ></textarea>
               </div>
             </div>
@@ -225,7 +368,13 @@ const SellingProduct = () => {
             <button
               type="submit"
               className="bgRedPucat fontBold text-white"
-              style={{ height: "50px", width: "150px", outline:"none",border:"none",borderRadius:"25px" }}
+              style={{
+                height: "50px",
+                width: "150px",
+                outline: "none",
+                border: "none",
+                borderRadius: "25px",
+              }}
             >
               Jual
             </button>

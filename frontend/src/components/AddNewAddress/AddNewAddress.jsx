@@ -18,10 +18,9 @@ const AddNewAddress = () => {
     address: "",
     post_code: "",
     city: "",
-    main_address: "",
   });
 
-  const [main_address, setMainAddress] = useState(false);
+  const [main_address_bool, setMainAddress] = useState(false);
 
   const handleChange = (e) => {
     setForm({
@@ -33,13 +32,13 @@ const AddNewAddress = () => {
   const toggleChecked = () => {
     setMainAddress((prevstate) => !prevstate);
     
-    if(main_address === true){
-      setForm({ ...form, main_address: 0 });
-    } else {
-      setForm({ ...form, main_address: 1 });
-    }
-    console.log(main_address);
-    console.log(form.main_address)
+    // if(main_address === true){
+    //   setForm({ ...form, main_address: 0 });
+    // } else {
+    //   setForm({ ...form, main_address: 1 });
+    // }
+    // console.log(main_address);
+    // console.log(form.main_address)
   };
 
   const onSubmitHandler = (e) => {
@@ -53,9 +52,19 @@ const AddNewAddress = () => {
     // }
 
     const handleSuccess = (data) => {
-      console.log(data);
+      // console.log(data.data.data[0]);
+      // console.log(main_address);
+      const bodyUser = {
+        main_address : data.data.data[0].addressid
+      }
+      const updateSuccess = (res) => {
+        console.log(res)
+      }
+      if(main_address_bool === true) {
+        dispatch(updateById(user[0].id_user, bodyUser, updateSuccess))
+      }
       alert("Insert Success");
-      // return window.location.reload();
+      return window.location.reload();
     };
 
     const body = {
@@ -66,7 +75,6 @@ const AddNewAddress = () => {
       address: form.address,
       post_code: form.post_code,
       city: form.city,
-      main_address: form.main_address,
     };
     // return console.log(body);
     dispatch(insertAddress(body, handleSuccess));
