@@ -3,21 +3,42 @@ import React, { Fragment, useEffect, useState } from "react";
 import NavAdmin from "../../../components/NavAdmin";
 import style from "./style.module.css";
 
-const Order = () => {
-	const [order, setOrder] = useState({});
-	console.log(order);
+const AdminProduct = () => {
+	const [product, setProduct] = useState({});
+	const [delProduct, setDelProduct] = useState([]);
+	console.log(product);
 
-	// get order
+	// get product
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_BACKEND_URL}/order`)
+			.get(`${process.env.REACT_APP_BACKEND_URL}/product`)
 			.then((response) => {
-				setOrder(response.data.data.rows);
+				setProduct(response.data.data.rows);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, []);
+
+	// delete product
+	const deleteProduct = (id_product, e) => {
+		e.preventDefault();
+		axios
+			.delete(`${process.env.REACT_APP_BACKEND_URL}/product/${id_product}`)
+			.then((result) => {
+				console.log(result);
+
+				const posts = delProduct.filter(
+					(item) => item.id_product !== id_product
+				);
+
+				setDelProduct({ data: posts });
+				alert("Product berhasil dihapus");
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 
 	return (
 		<Fragment>
@@ -25,11 +46,11 @@ const Order = () => {
 			<div className={`container-fluid row`}>
 				<div className="d-flex justify-content-center align-items-center mt-5">
 					<div className="col-8">
-						<h1 className="text-center">Order list</h1>
-						{order.length == undefined ? (
+						<h1 className="text-center">Product list</h1>
+						{product.length == undefined ? (
 							<h1>No order found!</h1>
 						) : (
-							order.map((item, index) => (
+							product.map((item, index) => (
 								<div key={index}>
 									<div className="border p-3 d-flex flex-row rounded mb-3">
 										<div className="me-3">
@@ -60,17 +81,19 @@ const Order = () => {
 											<p className="text-secondary">Color: {item.color}</p>
 										</div>
 										<div className="col-4">
-											<h4 className="fontMedium">Order by:</h4>
+											<h4 className="fontMedium">Shope name:</h4>
 											<p className="text-secondary">{item.name}</p>
 											<p className="text-secondary">
-												Quantity: {item.quantity}
+												Condition: {item.condition == 0 ? "New" : "Used"}
 											</p>
 										</div>
-										<div className="col-4">
-											<h4 className="fontMedium">Total Price:</h4>
-											<p className="text-secondary">
-												$ {item.price * item.quantity}
-											</p>
+										<div className="col-4 d-flex my-auto">
+											<button
+												type="button"
+												className="btn btn-danger"
+												onClick={(e) => deleteProduct(item.id_product, e)}>
+												Delete Product
+											</button>
 										</div>
 									</div>
 								</div>
@@ -83,4 +106,4 @@ const Order = () => {
 	);
 };
 
-export default Order;
+export default AdminProduct;

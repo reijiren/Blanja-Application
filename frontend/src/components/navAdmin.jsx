@@ -46,27 +46,42 @@ const NavAdmin = () => {
 									aria-label="Close"></button>
 							</div>
 							<div className="offcanvas-body">
-								<div>
+								<div className="mb-3">
 									<button
 										className={`btn btn-secondary ${style.butts}`}
 										type="button"
 										data-bs-toggle="collapse"
-										data-bs-target="#airlines"
+										data-bs-target="#order"
 										aria-expanded="false"
-										aria-controls="airlines">
+										aria-controls="order">
 										Order
 									</button>
-									<div className="collapse" id="airlines">
+									<div className="collapse" id="order">
 										<div className="card card-body">
 											<Link
 												className={`${style.sideLink} ${style.mid}`}
 												to="/admin/order">
 												Order List
 											</Link>
+										</div>
+									</div>
+								</div>
+								<div className="mb-3">
+									<button
+										className={`btn btn-secondary ${style.butts}`}
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#product"
+										aria-expanded="false"
+										aria-controls="product">
+										Product
+									</button>
+									<div className="collapse" id="product">
+										<div className="card card-body">
 											<Link
 												className={`${style.sideLink} ${style.mid}`}
-												to="/admin/search-order">
-												Search Order
+												to="/admin/product">
+												Product List
 											</Link>
 										</div>
 									</div>
