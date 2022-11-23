@@ -1,11 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NavAdmin from "../../../components/navAdmin";
 import style from "./style.module.css";
 
 const HomeAdmin = () => {
-	const name = JSON.parse(localStorage.getItem("name"));
+	const user = useSelector((state) => state.user.user);
 
+	console.log(user);
 	return (
 		<div>
 			<NavAdmin />
@@ -17,11 +19,11 @@ const HomeAdmin = () => {
 					className={`${style.welcome} col-11 position-relative translate-middle-x start-50`}>
 					<div className={`position-relative top-50 translate-middle-y`}>
 						<h1>
-							Hello, <span>{name}</span>!
+							Hello, <span>{user.name}</span>!
 						</h1>
-						<p>Welcome to Blaja Admin Page</p>
+						<p>Welcome to Blanja Admin Page</p>
 						<Link className="btn btn-primary" to="/" role="button">
-							Blaja Home
+							Blanja Home
 						</Link>
 					</div>
 				</div>

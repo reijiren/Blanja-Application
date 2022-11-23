@@ -101,6 +101,10 @@
   top: 440px;
 }
 
+.links {
+  text-decoration: none;
+}
+
 @media (max-width: 720px) {
   .kategori,
   .kategori1,

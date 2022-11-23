@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import "./style.css";
-import { Link } from "react-router-dom";
+
+import React,{useState, useEffect} from 'react';
+import './style.css';
+import { Link} from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -12,7 +13,7 @@ import ChoseAnotherAddress from "../../../components/ChooseAnotherAddress/ChoseA
 import AddNewAddress from "../../../components/AddNewAddress/AddNewAddress";
 import SelectPayment from "../../../components/SelectPayment/SelectPayment";
 import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
-import Navbar from "../../../components/NavbarLogin";
+import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
   const [data2, setData2] = useState([]);
@@ -22,8 +23,8 @@ const CheckOut = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/orderproduct/${id}`)
       .then((response) => {
-        // if(response.data.data)
-        // console.log(response.data);
+        // console.log(response.data.token.data)
+        console.log(response.data.data);
         setData2(response.data.data);
       })
       .catch((err) => {
@@ -32,46 +33,46 @@ const CheckOut = () => {
   }, []);
   // console.log(data2[0].id_user)
 
-  const handlePost = (e) => {
-    // e.preventDefault();
-    console.log(data2[0].stock)
+  // const handlePost = (e) => {
+  //   // e.preventDefault();
+  //   console.log(data2[0].stock)
 
-    // console.log(data2[0].id_user)
-    const body = {
-      userid:data2[0].id_user,
-      id_order: data2[0].id_order,
-      payment_method: "belum bayar",
-      quantity:data2[0].quantity,
-      price:data2[0].price,
-      id:data2[0].id_product,
-      stockProduk:data2[0].stock
-      };
-      console.log(body)
-      if(data2[0].stock >= 1){
-        if(data2[0].stock >= data2[0].quantity){
-          setData(data2[0].quantity*data2[0].price)
-        // console.log(data2[0].quantity*data2[0].price)
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body,)
-      .then((res) => {
-        // console.log(res.data);
-        // alert("Recipe added successfully");
+  //   // console.log(data2[0].id_user)
+  //   const body = {
+  //     userid:data2[0].id_user,
+  //     id_order: data2[0].id_order,
+  //     payment_method: "belum bayar",
+  //     quantity:data2[0].quantity,
+  //     price:data2[0].price,
+  //     id:data2[0].id_product,
+  //     stockProduk:data2[0].stock
+  //     };
+  //     console.log(body)
+  //     if(data2[0].stock >= 1){
+  //       if(data2[0].stock >= data2[0].quantity){
+  //         setData(data2[0].quantity*data2[0].price)
+  //       // console.log(data2[0].quantity*data2[0].price)
+  //   axios
+  //     .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body,)
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       // alert("Recipe added successfully");
 
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Failed to add Transaction");
-      });
-    }else{
-    alert("Maaf Stock tidak mencukupi")
-    }
-    }else{
-    alert("maaf stock sudah habis")
-    }
-  };
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert("Failed to add Transaction");
+  //     });
+  //   }else{
+  //   alert("Maaf Stock tidak mencukupi")
+  //   }
+  //   }else{
+  //   alert("maaf stock sudah habis")
+  //   }
+  // };
   return (
     <div className={`vw-100 vh-100`}>
-      <Navbar />
+			<Navs />
       <div className={`content-wrapper row`}>
         <div className="content-aside-left col-8 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 d-flex justify-content-center align-items-center ">
           <div className="wrapper d-flex flex-column w-75">
@@ -153,14 +154,13 @@ const CheckOut = () => {
             {data2 &&
               data2.map((item, index) => (
                 <div key={index}>
-                  <form>
                   {/* dari sini */}
                   <div className="item-co-user mb-3">
                     <div className="wrapper m-4">
                       <div className="wrapper-item-co row">
                         <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
                           <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`} 
+                            src={menFormalSuit}
                             alt="item co"
                             style={{
                               height: "100px",
@@ -184,16 +184,50 @@ const CheckOut = () => {
                         </div>
                         <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
                           <p className={`fontBold h5`}>
-                            <span>$ </span>{item.quantity*item.price}.0{" "}
+                            <span>$ </span>{item.quantity*item.price}{" "}
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  </form>
                   {/* sampe sini */}
                 </div>
               ))}
+
+            <div className="item-co-user mb-3">
+              <div className="wrapper m-4">
+                <div className="wrapper-item-co row">
+                  <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
+                    <img
+                      src={menFormalSuit}
+                      alt="item co"
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        borderRadius: "15px",
+                      }}
+                    />
+                  </div>
+                  <div className="content-desc-item col-8 d-flex flex-column justify-content-center">
+                    <div className="name-item">
+                      <p className={`fontBold h5`}>
+                        Mens formal suit - <span className="color">Black</span>
+                      </p>
+                    </div>
+                    <div className="brand-item">
+                      <p className={`fontRegular text-muted h6`}>
+                        Zalora Cloth
+                      </p>
+                    </div>
+                  </div>
+                  <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
+                    <p className={`fontBold h5`}>
+                      <span>$</span> 20.0{" "}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
             {/* end of item check out user session */}
           </div>
         </div>

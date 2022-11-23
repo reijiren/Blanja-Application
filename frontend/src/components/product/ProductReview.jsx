@@ -1,9 +1,25 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import style from "../../assets/style/style.module.css";
 import star from "../../assets/images/Star.png";
 import bar from "../../assets/images/bar.png";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const ProductReview = () => {
+	const [details, setDetails] = useState({});
+	const { id_product } = useParams();
+
+	useEffect(() => {
+		axios
+			.get(`${process.env.REACT_APP_BACKEND_URL}/product/${id_product}`)
+			.then((response) => {
+				setDetails(response.data.data.rows[0]);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [id_product]);
+
 	return (
 		<Fragment>
 			<div className={`container-fluid row ${style.borderBottom}`}>
@@ -11,24 +27,15 @@ const ProductReview = () => {
 					<h3 className="fontBold my-4">Informasi Produk</h3>
 					<div>
 						<h5 className="fontMedium">Condition</h5>
-						<p className={`fontMedium text-danger ${style.ups}`}>New</p>
+						{details.condition == 1 ? (
+							<p className={`fontMedium text-danger ${style.ups}`}>Used</p>
+						) : (
+							<p className={`fontMedium text-danger ${style.ups}`}>New</p>
+						)}
 					</div>
 					<div>
 						<h5 className="fontMedium">Description</h5>
-						<p className="text-secondary">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ex
-							odit sapiente molestias. Tempore doloribus voluptates obcaecati
-							dolorem nesciunt quo. Repellat eos voluptatibus minima placeat,
-							consectetur ad reprehenderit culpa nihil cumque est deleniti
-							totam, nostrum natus? Odio nam, totam dolor tempora, alias cumque
-							tempore autem nisi quibusdam, libero cum maiores! Tenetur
-							molestias similique rem qui officiis non fuga a aliquam
-							voluptatum. Fugiat dolores sunt est ipsa quisquam quasi at quia ut
-							quaerat, sit numquam exercitationem velit accusantium explicabo
-							commodi, vitae ipsam ex corrupti maiores sapiente veritatis! Rerum
-							nisi omnis odit accusamus commodi ipsum possimus similique
-							temporibus? Dolorum inventore facilis impedit.
-						</p>
+						<p className="text-secondary">{details.description}</p>
 					</div>
 					<div className="row">
 						<h3 className="fontBold my-4">Review</h3>
