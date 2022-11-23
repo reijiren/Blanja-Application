@@ -16,7 +16,7 @@ import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
 import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
-	
+
   const [data2, setData2] = useState([]);
   const [data, setData] = useState();
   const id = useSelector((state) => state.user.user.id_user);
@@ -32,45 +32,6 @@ const CheckOut = () => {
         console.log(err);
       });
   }, []);
-  // console.log(data2[0].id_user)
-
-  // const handlePost = (e) => {
-  //   // e.preventDefault();
-  //   console.log(data2[0].stock)
-
-  //   // console.log(data2[0].id_user)
-  //   const body = {
-  //     userid:data2[0].id_user,
-  //     id_order: data2[0].id_order,
-  //     payment_method: "belum bayar",
-  //     quantity:data2[0].quantity,
-  //     price:data2[0].price,
-  //     id:data2[0].id_product,
-  //     stockProduk:data2[0].stock
-  //     };
-  //     console.log(body)
-  //     if(data2[0].stock >= 1){
-  //       if(data2[0].stock >= data2[0].quantity){
-  //         setData(data2[0].quantity*data2[0].price)
-  //       // console.log(data2[0].quantity*data2[0].price)
-  //   axios
-  //     .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body,)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       // alert("Recipe added successfully");
-
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert("Failed to add Transaction");
-  //     });
-  //   }else{
-  //   alert("Maaf Stock tidak mencukupi")
-  //   }
-  //   }else{
-  //   alert("maaf stock sudah habis")
-  //   }
-  // };
   return (
     <div className={`vw-100 vh-100`}>
 			<Navs />

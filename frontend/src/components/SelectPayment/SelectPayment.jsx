@@ -2,8 +2,51 @@ import React from 'react'
 import goPay from "../../assets/images/go pay.png";
 import posIndo from "../../assets/images/pos indonesia.png";
 import masterCard from "../../assets/images/master card.png";
+import ovo from "../../assets/images/ovo.jpg"
 import "./style.css"
+import axios from "axios";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 const SelectPayment = () => {
+  const data = JSON.parse(localStorage.getItem("data5"))
+  console.log(data)
+  const [method, setMethod]=useState(null);
+  const user = useSelector((state)=>state.user.user);
+  // console.log(user)
+
+  const handlePost = (e) => {
+      // e.preventDefault();
+      // console.log(data[0].stock)
+      console.log(data)
+      alert(method)
+      // console.log(data2[0].id_user)
+      for(let item in data){
+        const body = {
+          userid:user.id_user,
+          id_order: item.id_order,
+          payment_method:method ,
+          quantity:item.quantity,
+          price:item.price,
+          id:item.id_product,
+          stockProduk:item.stock
+          };
+          // console.log
+      }
+      
+      // axios
+      //   .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body,)
+      //   .then((res) => {
+      //     // console.log(res.data);
+      //     // alert("Recipe added successfully");
+  
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     alert("Failed to add Transaction");
+      //   });
+      alert("hai")
+    };
   return (
     <div className="modal-dialog responsive-select-payment" style={{ maxWidth: "50%" }}>
                     <div className="modal-content">
@@ -29,7 +72,7 @@ const SelectPayment = () => {
                             <p className="fontBold h5">Payment method</p>
                           </div>
                           <div className="form-wrapper">
-                            <form>
+                            <form onSubmit={handlePost}>
                               <div className="payment-wrapper">
                                 <div className="payment-method-1 row mb-5">
                                   <div className="col-4 d-flex justify-content-center align-items-center">
@@ -53,20 +96,21 @@ const SelectPayment = () => {
                                         value="gopay"
                                         name="flexRadioDefault"
                                         id="flexCheckIndeterminate"
+                                        onChange={(e)=>setMethod(e.target.value)}
                                       />
                                     </div>
                                   </div>
                                 </div>
                                 <div className="payment-method-2 row mb-5">
                                   <div className="col-4 d-flex justify-content-center align-items-center">
-                                    <img src={posIndo} alt="gopay icon" />
+                                    <img src={ovo} style={{width:'70px'}} alt="gopay icon" />
                                   </div>
                                   <div
                                     className="col-6 d-flex align-items-center"
                                     style={{ height: "50px" }}
                                   >
                                     <p className="fontBold h5 pt-3">
-                                      Pos Indonesia
+                                      OVO
                                     </p>
                                   </div>
                                   <div className="col-2 d-flex justify-content-center align-items-center">
@@ -74,9 +118,10 @@ const SelectPayment = () => {
                                       <input
                                         className="form-check-input"
                                         type="radio"
-                                        value="pos-indo"
+                                        value="OVO"
                                         name="flexRadioDefault"
                                         id="flexCheckIndeterminate"
+                                        onChange={(e)=>setMethod(e.target.value)}
                                       />
                                     </div>
                                   </div>
@@ -101,6 +146,7 @@ const SelectPayment = () => {
                                         value="master card"
                                         name="flexRadioDefault"
                                         id="flexCheckIndeterminate"
+                                        onChange={(e)=>setMethod(e.target.value)}
                                       />
                                     </div>
                                   </div>
