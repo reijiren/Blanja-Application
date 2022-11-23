@@ -68,3 +68,52 @@
 .menus {
   margin-top: 5rem;
 }
+
+.kategori {
+  position: absolute;
+  display: flex;
+  left: 185px;
+  top: 420px;
+}
+.kategori1 {
+  position: absolute;
+  display: flex;
+  left: 375px;
+  top: 420px;
+}
+
+.kategori2 {
+  position: absolute;
+  display: flex;
+  left: 610px;
+  top: 420px;
+}
+.kategori3 {
+  position: absolute;
+  display: flex;
+  left: 860px;
+  top: 420px;
+}
+.kategori4 {
+  position: absolute;
+  display: flex;
+  left: 1030px;
+  top: 440px;
+}
+
+@media (max-width: 720px) {
+  .kategori,
+  .kategori1,
+  .kategori2,
+  .kategori3,
+  .kategori4 {
+    display: none;
+  }
+  .bg,
+  .bg1,
+  .bg2,
+  .bg3,
+  .bg4 {
+    display: none;
+  }
+}
