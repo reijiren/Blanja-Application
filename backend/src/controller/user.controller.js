@@ -1,4 +1,5 @@
 const userModel = require('../model/user.model');
+const chatModel = require('../model/chat.model');
 const {successWithToken ,failed, success}= require('../helper/response');
 const bcrypt= require('bcrypt');
 const jwtToken = require('../helper/generateJWT');
@@ -158,6 +159,18 @@ const userController = {
     .catch((err) => {
       failed(res, err.message, "failed", "failed to delete user");
     })
+  },
+
+  chat: (req, res) => {
+    const id = req.params.id;
+
+    chatModel.userChat(id)
+    .then((result) => {
+      success(res, result.rows, "success", "get user's chat success");
+    })
+    .catch((err) => {
+      failed(res, err.message, "failed", "failed to get user's chat");
+    });
   },
 
   register:(req, res)=>{
