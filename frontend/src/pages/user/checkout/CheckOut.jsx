@@ -1,3 +1,4 @@
+
 import React,{useState, useEffect} from 'react';
 import './style.css';
 import { Link} from "react-router-dom";
@@ -6,14 +7,14 @@ import {useSelector} from "react-redux"
 
 
 // image
-import menFormalSuit from '../../../assets/images/men jacket jeans.png';
+import menFormalSuit from "../../../assets/images/men jacket jeans.png";
 
 // end of import image
-import ChoseAnotherAddress from '../../../components/ChooseAnotherAddress/ChoseAnotherAddress';
-import AddNewAddress from '../../../components/AddNewAddress/AddNewAddress';
-import SelectPayment from '../../../components/SelectPayment/SelectPayment';
-import ChangeAddress from '../../../components/ChangeAddress/ChangeAddress';
-import Navbar from '../../../components/NavbarLogin';
+import ChoseAnotherAddress from "../../../components/ChooseAnotherAddress/ChoseAnotherAddress";
+import AddNewAddress from "../../../components/AddNewAddress/AddNewAddress";
+import SelectPayment from "../../../components/SelectPayment/SelectPayment";
+import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
+import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
   const [data2, setData2] = useState([]);
@@ -72,7 +73,7 @@ const CheckOut = () => {
       // };
   return (
     <div className={`vw-100 vh-100`}>
-      <Navbar />
+			<Navs />
       <div className={`content-wrapper row`}>
         <div className="content-aside-left col-8 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 d-flex justify-content-center align-items-center ">
           <div className="wrapper d-flex flex-column w-75">
@@ -109,137 +110,160 @@ const CheckOut = () => {
                 </div>
                 {/* end of modal 2 */}
 
-                {/* modal 3 */}
-                <div className="modal fade" id="changeAddress" tabIndex="-1" aria-labelledby="changeAddressLabel" aria-hidden="true">
-                  <ChangeAddress />
-                </div>
-                {/* end of modal 3 */}
-              </div>
-            </div>
-            {/* item check out user session */}
-            <div className="item-co-user mb-3">
-              <div className="wrapper m-4">
-                <div className="wrapper-item-co row">
-                  <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
-                    <img
-                      src={menFormalSuit}
-                      alt="item co"
-                      style={{
-                        height: '100px',
-                        width: '100px',
-                        borderRadius: '15px',
-                      }}
-                    />
-                  </div>
-                  <div className="content-desc-item col-8 d-flex flex-column justify-content-center">
-                    <div className="name-item">
-                      <p className={`fontBold h5`}>
-                        Mens formal suit - <span className="color">Black</span>
-                      </p>
-                    </div>
-                    <div className="brand-item">
-                      <p className={`fontRegular text-muted h6`}>Zalora Cloth</p>
-                    </div>
-                  </div>
-                  <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
-                    <p className={`fontBold h5`}>
-                      <span>$</span> 20.0{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="item-co-user mb-3">
-              <div className="wrapper m-4">
-                <div className="wrapper-item-co row">
-                  <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
-                    <img
-                      src={menFormalSuit}
-                      alt="item co"
-                      style={{
-                        height: '100px',
-                        width: '100px',
-                        borderRadius: '15px',
-                      }}
-                    />
-                  </div>
-                  <div className="content-desc-item col-8 d-flex flex-column justify-content-center">
-                    <div className="name-item">
-                      <p className={`fontBold h5`}>
-                        Mens formal suit - <span className="color">Black</span>
-                      </p>
-                    </div>
-                    <div className="brand-item">
-                      <p className={`fontRegular text-muted h6`}>Zalora Cloth</p>
-                    </div>
-                  </div>
-                  <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
-                    <p className={`fontBold h5`}>
-                      <span>$</span> 20.0{' '}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* end of item check out user session */}
-          </div>
-        </div>
-        <div className="content-aside-right col-4 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 col-xxl-4">
-          <div className="wrapper m-5">
-            <div className="space-empty mt-5 mb-5" style={{ height: '30px' }}></div>
-            <div className="summary-wrapper">
-              <div className="summary-wrapper-inside m-3">
-                <div className="title mb-5">
-                  <p className={`fontBold h5`}>Shooping summary</p>
-                </div>
-                <div className="order row mb-3">
-                  <div className="col-8">
-                    <p className={`fontRegular text-muted h5`}>Order</p>
-                  </div>
-                  <div className="col-4 d-flex justify-content-center align-items-center">
-                    <p className={`fontBold h5`}>
-                      <span>$ </span>40.0
-                    </p>
-                  </div>
-                </div>
-                <div className="delivery row mb-3">
-                  <div className="col-8">
-                    <p className={`fontRegular text-muted h5`}>Delivery</p>
-                  </div>
-                  <div className="col-4 d-flex justify-content-center align-items-center">
-                    <p className={`fontBold h5`}>
-                      <span>$ </span>5.0
-                    </p>
-                  </div>
-                </div>
-                <div className="break-line mb-3"></div>
-                <div className="shopping-sum mb-3 row">
-                  <div className="col-8">
-                    <p className={`fontBold h5`}>Shopping summary</p>
-                  </div>
-                  <div className="col-4 d-flex justify-content-center align-items-center">
-                    <p className={`fontBold textRedPucat h5`}>
-                      <span>$ </span>45.0
-                    </p>
-                  </div>
-                </div>
-                <div className="select-payment-button">
-                  <button type="button" className={`w-100 bgRedPucat button-custom-payment d-flex justify-content-center align-items-center fontBold h5`} style={{ height: '50px' }} data-bs-toggle="modal" data-bs-target="#selectPayment">
-                    Select payment
-                  </button>
-                </div>
-                {/* modal 4 */}
-                <div className="modal fade" id="selectPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                  <SelectPayment />
-                </div>
-                {/* end of modal 4 */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+								{/* modal 3 */}
+								<div
+									className="modal fade"
+									id="changeAddress"
+									tabIndex="-1"
+									aria-labelledby="changeAddressLabel"
+									aria-hidden="true">
+									<ChangeAddress />
+								</div>
+								{/* end of modal 3 */}
+							</div>
+						</div>
+						{/* item check out user session */}
+						<div className="item-co-user mb-3">
+							<div className="wrapper m-4">
+								<div className="wrapper-item-co row">
+									<div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
+										<img
+											src={menFormalSuit}
+											alt="item co"
+											style={{
+												height: "100px",
+												width: "100px",
+												borderRadius: "15px",
+											}}
+										/>
+									</div>
+									<div className="content-desc-item col-8 d-flex flex-column justify-content-center">
+										<div className="name-item">
+											<p className={`fontBold h5`}>
+												Mens formal suit - <span className="color">Black</span>
+											</p>
+										</div>
+										<div className="brand-item">
+											<p className={`fontRegular text-muted h6`}>
+												Zalora Cloth
+											</p>
+										</div>
+									</div>
+									<div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
+										<p className={`fontBold h5`}>
+											<span>$</span> 20.0{" "}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="item-co-user mb-3">
+							<div className="wrapper m-4">
+								<div className="wrapper-item-co row">
+									<div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
+										<img
+											src={menFormalSuit}
+											alt="item co"
+											style={{
+												height: "100px",
+												width: "100px",
+												borderRadius: "15px",
+											}}
+										/>
+									</div>
+									<div className="content-desc-item col-8 d-flex flex-column justify-content-center">
+										<div className="name-item">
+											<p className={`fontBold h5`}>
+												Mens formal suit - <span className="color">Black</span>
+											</p>
+										</div>
+										<div className="brand-item">
+											<p className={`fontRegular text-muted h6`}>
+												Zalora Cloth
+											</p>
+										</div>
+									</div>
+									<div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
+										<p className={`fontBold h5`}>
+											<span>$</span> 20.0{" "}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{/* end of item check out user session */}
+					</div>
+				</div>
+				<div className="content-aside-right col-4 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 col-xxl-4">
+					<div className="wrapper m-5">
+						<div
+							className="space-empty mt-5 mb-5"
+							style={{ height: "30px" }}></div>
+						<div className="summary-wrapper">
+							<div className="summary-wrapper-inside m-3">
+								<div className="title mb-5">
+									<p className={`fontBold h5`}>Shooping summary</p>
+								</div>
+								<div className="order row mb-3">
+									<div className="col-8">
+										<p className={`fontRegular text-muted h5`}>Order</p>
+									</div>
+									<div className="col-4 d-flex justify-content-center align-items-center">
+										<p className={`fontBold h5`}>
+											<span>$ </span>40.0
+										</p>
+									</div>
+								</div>
+								<div className="delivery row mb-3">
+									<div className="col-8">
+										<p className={`fontRegular text-muted h5`}>Delivery</p>
+									</div>
+									<div className="col-4 d-flex justify-content-center align-items-center">
+										<p className={`fontBold h5`}>
+											<span>$ </span>5.0
+										</p>
+									</div>
+								</div>
+								<div className="break-line mb-3"></div>
+								<div className="shopping-sum mb-3 row">
+									<div className="col-8">
+										<p className={`fontBold h5`}>Shopping summary</p>
+									</div>
+									<div className="col-4 d-flex justify-content-center align-items-center">
+										<p className={`fontBold textRedPucat h5`}>
+											<span>$ </span>45.0
+										</p>
+									</div>
+								</div>
+								<div className="select-payment-button">
+									<button
+										type="button"
+										className={`w-100 bgRedPucat button-custom-payment d-flex justify-content-center align-items-center fontBold h5`}
+										style={{ height: "50px" }}
+										data-bs-toggle="modal"
+										data-bs-target="#selectPayment">
+										Select payment
+									</button>
+								</div>
+								{/* modal 4 */}
+								<div
+									className="modal fade"
+									id="selectPayment"
+									data-bs-backdrop="static"
+									data-bs-keyboard="false"
+									tabIndex="-1"
+									aria-labelledby="staticBackdropLabel"
+									aria-hidden="true">
+									<SelectPayment />
+								</div>
+								{/* end of modal 4 */}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default CheckOut;

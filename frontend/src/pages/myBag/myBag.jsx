@@ -2,7 +2,7 @@ import React, {useState, useEffect } from "react";
 import { Link} from "react-router-dom";
 import style from '../myBag/style.module.css';
 import jas from '../../assets/images/jas.png';
-import Navbar from '../../components/NavbarLogin';
+import Navs from "../../components/Navs";
 import axios from "axios";
 import {useSelector} from "react-redux"
 
@@ -64,7 +64,7 @@ const MyBag = () => {
  
   return (
     <>
-      <Navbar />
+			<Navs />
       {/* {JSON.stringify(data)} */}
       <div style={{ marginTop: '60px' }} className="container ">
       
