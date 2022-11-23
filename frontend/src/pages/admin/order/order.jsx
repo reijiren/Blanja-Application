@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import NavAdmin from "../../../components/navAdmin";
+import NavAdmin from "../../../components/NavAdmin";
 
 const Order = () => {
 	useEffect(() => {

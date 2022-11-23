@@ -88,7 +88,7 @@ const orderController = {
   insertTransaction: (req, res) => {
     try {
       const {userid, id_order, payment_method,quantity,price,id,stockProduk} = req.body;
-      const total_price=quantity*price+(50/100*quantity*price)
+      const total_price=quantity*price+(5/100*quantity*price)
       const data = {
         userid,
         id_order,
