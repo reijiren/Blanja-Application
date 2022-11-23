@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import style from "../../assets/style/style.module.css";
 import axios from "axios";
 import { login } from "../../redux/action/user";
+import { reset } from "../../redux/action/chat";
 
 const CustomerLogin = () => {
 	const dispatch = useDispatch();

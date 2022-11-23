@@ -4,6 +4,7 @@ import style from "../../assets/style/style.module.css";
 import axios from "axios";
 import { login } from "../../redux/action/user";
 import { useDispatch } from "react-redux";
+import { reset } from "../../redux/action/chat";
 
 const SellerLogin = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const SellerLogin = () => {
         if (user === 2) {
           localStorage.setItem("token", data.data.token);
           alert("Login Success");
+          dispatch(reset());
           return navigate('/')
         } else {
           alert("This user is not registered as a seller");

@@ -5,10 +5,7 @@ const AddNewAddress = () => {
     <div className="modal-dialog" style={{ maxWidth: "80%" }}>
       <div className="modal-content">
         <div className="modal-header" style={{ height: "150px" }}>
-          <h5
-            className="modal-title w-100 text-center"
-            id="exampleModalLabel"
-          >
+          <h5 className="modal-title w-100 text-center" id="exampleModalLabel">
             <p className={`fontBold h2`}>Add new address</p>
           </h5>
           <button
@@ -166,6 +163,7 @@ const AddNewAddress = () => {
                       type="button"
                       className="button-cancel-custom fontBold text-muted h5"
                       data-bs-dismiss="modal"
+                      aria-label="Close"
                     >
                       Cancel
                     </button>
