@@ -56,8 +56,7 @@
   background-color: #fff;
 }
 
-.black {
-  background-color: black;
+.colors {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -65,7 +64,6 @@
 }
 
 .blackActive {
-  background-color: black;
   width: 30px;
   height: 30px;
   border-radius: 50%;

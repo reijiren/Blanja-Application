@@ -16,10 +16,12 @@ const NavbarLogin = () => {
 		<Fragment>
 			<nav className="navbar navbar-expand-lg bg-light row">
 				<div className="container-fluid col-md-10 col-11">
-					<div className="d-flex col-md-2">
-						<img src={logo} alt="" className="me-2" />
-						<h3 className={`fontBold text-danger my-auto`}>Blanja</h3>
-					</div>
+					<Link to="/" className={`${style.links}`}>
+						<div className="d-flex col-md-2">
+							<img src={logo} alt="" className="me-2" />
+							<h3 className={`fontBold text-danger my-auto`}>Blanja</h3>
+						</div>
+					</Link>
 					<button
 						className="navbar-toggler"
 						type="button"
