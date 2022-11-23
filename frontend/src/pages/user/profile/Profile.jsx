@@ -14,12 +14,6 @@ import { getByMainAddress } from "../../../redux/action/address";
 import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
-  /**
-   * dummy level
-   * 1 = customer
-   * 2 = seller
-   */
-
   const navigate = useNavigate();
   const [userType, setUserType] = useState(null);
   const [id, setId] = useState(null);
