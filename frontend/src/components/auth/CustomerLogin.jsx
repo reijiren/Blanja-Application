@@ -26,6 +26,7 @@ const CustomerLogin = () => {
         
         if (user === 1) {
           localStorage.setItem("token", data.data.token);
+          localStorage.setItem("data", JSON.stringify(data.data.data));
           alert("Login Success");
           dispatch(reset());
           return navigate('/')
