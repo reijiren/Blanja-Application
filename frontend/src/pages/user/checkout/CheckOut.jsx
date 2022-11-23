@@ -16,6 +16,7 @@ import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
 import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
+	
   const [data2, setData2] = useState([]);
   const [data, setData] = useState();
   const id = useSelector((state) => state.user.user.id_user);
