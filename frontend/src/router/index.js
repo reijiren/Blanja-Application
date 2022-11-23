@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
 
+<<<<<<< HEAD
 import Login from "../pages/login/login";
 import Profile from "../pages/user/profile/Profile";
 import Register from "../pages/register/register";
@@ -33,6 +34,18 @@ const AdminRoute = () => {
 		return <Navigate to="/admin" />;
 	}
 };
+=======
+import Login from '../pages/login/login';
+import Profile from '../pages/user/profile/Profile';
+import Register from '../pages/register/register';
+import MyBag from '../pages/myBag/myBag';
+import Category from '../pages/category/category';
+import Product from '../pages/product/product';
+import CheckOut from '../pages/user/checkout/CheckOut';
+import Chat from '../pages/liveChat/chat';
+import Landing from '../pages/landing/landing';
+import ResetPass from '../pages/ResetPassword/index';
+>>>>>>> efeceaa50cd266eec0bbb921935a8b56531d298f
 
 export default function Router() {
 	return (

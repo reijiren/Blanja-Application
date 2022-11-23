@@ -16,7 +16,7 @@ const address = require('./src/routes/address.routes');
 const app = express();
 
 try {
-	app.use(express.static("assets"));
+	app.use(express.static("public"));
 	app.use(helmet());
 	app.use(bodyParser.json());
 	app.use(xss());
