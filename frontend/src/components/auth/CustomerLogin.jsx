@@ -18,14 +18,15 @@ const CustomerLogin = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 
-    const handleSuccess = (data) => {
-      if(data.data.status !== "success"){
-        alert(data.data.message);
-      } else {
-        const user = data.data.data.user_type;
+		const handleSuccess = (data) => {
+		if(data.data.status !== "success"){
+			alert(data.data.message);
+		} else {
+			const user = data.data.data.user_type;
 				if (user === 1) {
 					localStorage.setItem("token", data.data.token);
 					alert("Login Success");
+					dispatch(reset());
 					return navigate("/");
 				} else {
 					alert("This user is not registered as a customer");

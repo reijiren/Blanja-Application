@@ -11,6 +11,7 @@ import bg2 from "../../assets/images/hiclipart 34.png";
 import bg3 from "../../assets/images/hiclipart 21.png";
 import bg4 from "../../assets/images/hiclipart 22.png";
 import bg5 from "../../assets/images/hiclipart 26.png";
+import { useSelector,useDispatch } from "react-redux";
 
 import axios from "axios";
 import Navs from "../../components/Navs";
@@ -30,6 +31,18 @@ const Landing = () => {
 			});
 	}, []);
 
+  // get state user
+  const dispatch = useDispatch();
+  const { user, isLoading, isError } = useSelector((state) => {
+    return state.user;
+  });
+
+  const address = useSelector((state) => {
+    return state.address;
+  });
+
+
+  // console.log(address)
   return (
     <>
       <Navs />
