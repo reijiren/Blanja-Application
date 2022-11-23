@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import style from "../liveChat/chat.module.css";
-import cristian from "../../assets/images/christian.png";
-import Navbar from "../../components/NavbarLogin";
+import Navs from "../../components/Navs";
 import io from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,6 @@ import {
 	selectReceiver,
 	setChat,
 } from "../../redux/action/chat";
-import Navs from "../../components/Navs";
 
 const Chat = () => {
 	const dispatch = useDispatch();
