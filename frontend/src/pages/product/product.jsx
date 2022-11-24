@@ -104,7 +104,7 @@ const Product = () => {
 										<div className="col-12">
 											<h4 className="fontBold">{details.product_name}</h4>
 											<p className={`text-secondary ${style.ups}`}>
-												{details.store_desc}
+												{details.name}
 											</p>
 											<div className="d-flex">
 												<div className="me-2">
