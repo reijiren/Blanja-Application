@@ -17,14 +17,13 @@ export default function userReducer(state = initialState, action) {
         case "UPDATE_CUST_BYID_REJECTED":
             return { ...state, isLoading: false, isError: true };
         case "LOGIN_FULFILLED":
+        case "UPDATE_CUST_BYID_FULFILLED":
             return {
                 ...state,
                 isLoading: false,
                 isError: false,
                 user: action.payload.data.data,
             };
-        case "UPDATE_CUST_BYID_FULFILLED":
-            return { ...state, isLoading: false, user: action.payload.data.data, isError: false }
         case "RESET_USER":
             return {
                 ...state,

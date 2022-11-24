@@ -1,143 +1,253 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // images
 import johanesMikael from "../../../assets/images/johanes mikael.png";
+// react-redux
+import { useDispatch, useSelector } from "react-redux";
+import { updateImageUser, updateSeller } from "../../../redux/action/user";
 
 const MyProfileStore = () => {
-  return (
-    <div className="w-90 m-3 mt-5">
-      <div className="wrapper m-4">
-        <div className="title mb-3">
-          <p className="fontBold h4">My Profile</p>
-        </div>
-        <div className="desc mb-3">
-          <p className="fontMedium h6 text-muted">
-            Manage your profile information
-          </p>
-        </div>
-        <div className="break-line mb-5"></div>
+  const dispatch = useDispatch();
+  const [image, setImage] = useState();
+  const [dataUser, setDataUser] = useState();
+  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState({
+    name: null,
+    email: null,
+    phone: null,
+    store_desc: null,
+    image: null,
+  });
 
-        <div className="form-wrapper mx-5">
-          <form>
-            <div className="wrapper-form-image row">
-              {/* form aside left */}
-              <div className="wrapper-side-form-input col-8 col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
-                <div className="mb-3 row">
-                  <label
-                    htmlFor="store_name"
-                    className="col-4 col-form-label d-flex "
-                  >
-                    <p className="fontMedium h6 text-muted">Store Name</p>
-                  </label>
-                  <div className="col-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="store_name"
-                    />
+  const { user } = useSelector((state) => state.user);
+  useEffect(() => {
+    const onLoadData = async () => {
+      await setDataUser(user);
+    };
+    onLoadData();
+  }, []);
+
+  useEffect(() => {
+    // console.log(dataUser);
+    if(dataUser === undefined) {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+  });
+  // console.log(dataUser)
+  const changeHandle = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (image) {
+      setForm({ ...form, image: image });
+      const id = dataUser.id_seller;
+      const body = {
+        image: image
+      };
+      const handleSuccess = (data) => {
+        console.log(data);
+      };
+      dispatch(updateImageUser(id, body, handleSuccess));
+    }
+
+    const body = {
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      store_desc: form.store_desc,
+      photo: form.photo,
+    };
+    const handleSuccess = (data) => {
+      console.log(data);
+      alert("update success");
+      // window.location.reload();
+    };
+    const id = dataUser.id_seller;
+    dispatch(updateSeller(id, body, handleSuccess));
+  };
+
+  return (
+    <>
+      {loading ? (
+        <div className="middle">
+          <div className="bar bar1"></div>
+          <div className="bar bar2"></div>
+          <div className="bar bar3"></div>
+          <div className="bar bar4"></div>
+          <div className="bar bar5"></div>
+          <div className="bar bar6"></div>
+          <div className="bar bar7"></div>
+          <div className="bar bar8"></div>
+        </div>
+      )  : (
+        <div className="w-90 m-3 mt-5">
+          <div className="wrapper m-4">
+            <div className="title mb-3">
+              <p className="fontBold h4">My Profile</p>
+            </div>
+            <div className="desc mb-3">
+              <p className="fontMedium h6 text-muted">
+                Manage your profile information
+              </p>
+            </div>
+            <div className="break-line mb-5"></div>
+
+            <div className="form-wrapper mx-5">
+              <form onSubmit={(e) => onSubmitHandler(e)}>
+                <div className="wrapper-form-image row">
+                  {/* form aside left */}
+                  <div className="wrapper-side-form-input col-8 col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+                    <div className="mb-3 row">
+                      <label
+                        htmlFor="store_name"
+                        className="col-4 col-form-label d-flex "
+                      >
+                        <p className="fontMedium h6 text-muted">Store Name</p>
+                      </label>
+                      <div className="col-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="store_name"
+                          defaultValue={dataUser.name}
+                          name="name"
+                          onChange={changeHandle}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-3 row">
+                      <label
+                        htmlFor="email"
+                        className="col-4 col-form-label d-flex "
+                      >
+                        <p className="fontMedium h6 text-muted">Email</p>
+                      </label>
+                      <div className="col-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="email"
+                          defaultValue={dataUser.email}
+                          name="email"
+                          onChange={changeHandle}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-3 row">
+                      <label
+                        htmlFor="phone"
+                        className="col-4 col-form-label d-flex "
+                      >
+                        <p className="fontMedium h6 text-muted">Phone number</p>
+                      </label>
+                      <div className="col-8">
+                        <input
+                          type="phone"
+                          className="form-control"
+                          id="phone"
+                          defaultValue={dataUser.phone}
+                          name="phone"
+                          onChange={changeHandle}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-3 row">
+                      <label
+                        htmlFor="store_description"
+                        className="col-4 col-form-label d-flex "
+                      >
+                        <p className="fontMedium h6 text-muted">
+                          Store Description
+                        </p>
+                      </label>
+                      <div className="col-8 d-flex gap-3">
+                        <textarea
+                          className="form-control w-100"
+                          id="store_description"
+                          rows="3"
+                          defaultValue={dataUser.store_desc}
+                          name="store_desc"
+                          onChange={changeHandle}
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="mb-3 row">
+                      <label
+                        htmlFor="-"
+                        className="col-4 col-form-label d-flex "
+                      ></label>
+                      <div className="col-8 d-flex gap-3">
+                        <button
+                          type="submit"
+                          className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="mb-3 row">
-                  <label
-                    htmlFor="email"
-                    className="col-4 col-form-label d-flex "
-                  >
-                    <p className="fontMedium h6 text-muted">Email</p>
-                  </label>
-                  <div className="col-8">
-                    <input type="text" className="form-control" id="email" />
+                  {/* end of form aside left */}
+
+                  {/* form aside right */}
+                  <div className="wrapper-side-form-image col-4 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4 d-flex flex-column">
+                    <div className="img-form  d-flex justify-content-center align-items-center mb-3">
+                      <img
+                        src={johanesMikael}
+                        alt="photo-user"
+                        style={{
+                          width: "100px",
+                          heith: "100px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </div>
+                    <div className="desc-form-img mb-3">
+                      <label
+                        className="fontMedium text-muted text-center"
+                        style={{
+                          border: "2px solid #9B9B9B",
+                          borderRadius: "25px",
+                          width: "100%",
+                        }}
+                        htmlFor="photo"
+                      >
+                        select Image
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        onChange={(e) => {
+                          setImage(e.target.files[0]);
+                        }}
+                      />
+                    </div>
                   </div>
+                  {/* end of form aside right */}
                 </div>
-                <div className="mb-3 row">
-                  <label
-                    htmlFor="phone"
-                    className="col-4 col-form-label d-flex "
-                  >
-                    <p className="fontMedium h6 text-muted">Phone number</p>
-                  </label>
-                  <div className="col-8">
-                    <input type="phone" className="form-control" id="phone" />
-                  </div>
-                </div>
-                <div className="mb-3 row">
-                  <label
-                    htmlFor="store_description"
-                    className="col-4 col-form-label d-flex "
-                  >
-                    <p className="fontMedium h6 text-muted">
-                      Store Description
-                    </p>
-                  </label>
-                  <div className="col-8 d-flex gap-3">
-                    <textarea
-                      className="form-control w-100"
-                      id="store_description"
-                      rows="3"
-                    ></textarea>
-                  </div>
-                </div>
-                <div className="mb-3 row">
-                  <label
-                    htmlFor="-"
-                    className="col-4 col-form-label d-flex "
-                  ></label>
-                  <div className="col-8 d-flex gap-3">
+                <div className="mb-3 mt-3 row">
+                  <div className="col-12 d-flex justify-content-center gap-3">
                     <button
                       type="submit"
-                      className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive"
+                      className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive-2"
                     >
                       Save
                     </button>
                   </div>
                 </div>
-              </div>
-              {/* end of form aside left */}
-
-              {/* form aside right */}
-              <div className="wrapper-side-form-image col-4 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4 d-flex flex-column">
-                <div className="img-form  d-flex justify-content-center align-items-center mb-3">
-                  <img
-                    src={johanesMikael}
-                    alt="photo-user"
-                    style={{
-                      width: "100px",
-                      heith: "100px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                </div>
-                <div className="desc-form-img mb-3">
-                  <label
-                    className="fontMedium text-muted text-center"
-                    style={{
-                      border: "2px solid #9B9B9B",
-                      borderRadius: "25px",
-                      width: "100%",
-                    }}
-                    htmlFor="photo"
-                  >
-                    select Image
-                  </label>
-                </div>
-                <div>
-                  <input type="file" name="photo" id="photo" />
-                </div>
-              </div>
-              {/* end of form aside right */}
+              </form>
             </div>
-            <div className="mb-3 mt-3 row">
-              <div className="col-12 d-flex justify-content-center gap-3">
-                <button
-                  type="submit"
-                  className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive-2"
-                >
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

@@ -24,7 +24,7 @@ const Navbar = () => {
     return state.user;
   });
 
-
+// console.log(user)
   
 
   return (
@@ -44,8 +44,8 @@ const Navbar = () => {
         ) : isError ? (
           <>Error</>
         ) : (
-          user.map((item, index) => (
-            <nav key={index} className="navbar navbar-expand-lg bg-light row">
+          
+            <nav className="navbar navbar-expand-lg bg-light row">
               <div className="container-fluid col-md-10 col-11">
                 <div className="d-flex col-md-2">
                   <img src={logo} alt="" className="me-2" />
@@ -157,7 +157,7 @@ const Navbar = () => {
                           marginTop: "13px",
                           marginLeft: "20px",
                         }}
-                        src={`${process.env.REACT_APP_BACKEND_URL}/${item.image}`}
+                        src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
                         alt=""
                       />
                     </div>
@@ -165,7 +165,7 @@ const Navbar = () => {
                 </div>
               </div>
             </nav>
-          ))
+          
         )}
       </>
     </Fragment>

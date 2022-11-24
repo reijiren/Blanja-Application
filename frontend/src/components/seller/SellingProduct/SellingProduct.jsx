@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // style
 import "./style.css";
 // images
@@ -11,6 +11,7 @@ import { insertProduct } from "../../../redux/action/product";
 const SellingProduct = () => {
   // page logic
   const dispatch = useDispatch();
+  const [dataUser, setDataUser] = useState([]);
   const [newCon, setNewCon] = useState(false);
   const [secCon, setSecCon] = useState(false);
   const [photo, setPhoto] = useState();
@@ -24,9 +25,12 @@ const SellingProduct = () => {
     category: "",
     description: "",
   });
+  
   const user = useSelector((state) => state.user);
-  console.log(user.user[0].id_seller);
-
+  // console.log(user.user.id_seller)
+  useEffect(() => {
+    setDataUser(user.user)
+  })
   const toggleCheckedNew = () => {
     setNewCon((prevstate) => !prevstate);
     if (newCon) {
@@ -54,7 +58,7 @@ const SellingProduct = () => {
     };
 
     const body = {
-      seller: user.user[0].id_seller,
+      seller: user.user.id_seller,
       product_name: form.product_name,
       price: form.price,
       stock: form.stock,

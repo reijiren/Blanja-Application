@@ -14,12 +14,6 @@ import { getByMainAddress } from "../../../redux/action/address";
 import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
-  /**
-   * dummy level
-   * 1 = customer
-   * 2 = seller
-   */
-
   const navigate = useNavigate();
   const [userType, setUserType] = useState(null);
   const [id, setId] = useState(null);
@@ -34,10 +28,11 @@ const Profile = () => {
       alert("please login first")
       return navigate('/login')
     }
-    setDataLogin(data);
-    setUserType(user.user[0].user_type)
     console.log(user)
-    const main_address = user.user[0].main_address;
+    setDataLogin(data);
+    setUserType(user.user.user_type)
+    console.log(user.user.user_type)
+    const main_address = user.user.main_address;
     dispatch(getByMainAddress(main_address))
 
   }, []);

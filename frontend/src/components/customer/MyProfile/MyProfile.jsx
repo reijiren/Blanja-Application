@@ -26,18 +26,23 @@ const MyProfile = () => {
   const [dateNow, setDateNow] = useState(today);
 
   // logic page
+  const [dataUser, setDataUser] = useState([])
   const dispatch = useDispatch();
-  const { user, isLoading, isError } = useSelector((state) => {
-    return state.user;
-  });
+    const { user, isLoading, isError } = useSelector((state) => {
+      return state.user;
+    });
+  useEffect(() => {
+    setDataUser(user);
+    console.log(user)
+  }, [])
 
   // form handle update
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: user[0].name || "",
-    email: user[0].email || "",
-    phone: user[0].phone || "",
-    gender: user[0].gender || "",
+    name: user.name || "",
+    email: user.email || "",
+    phone: user.phone || "",
+    gender: user.gender || "",
     birth_date: "",
   });
 
@@ -55,7 +60,7 @@ const MyProfile = () => {
       alert("Update Success");
       return window.location.reload();
     };
-    const id = user[0].id_user;
+    const id = user.id_user;
     // console.log(id);
     const body = {
       name: form.name,
@@ -68,7 +73,7 @@ const MyProfile = () => {
     // return console.log(body);
     dispatch(updateCustomer(id, body, handleSuccess));
   };
-
+  console.log(user)
   return (
     <>
       {isLoading ? (
@@ -76,8 +81,7 @@ const MyProfile = () => {
       ) : isError ? (
         <>Error</>
       ) : (
-        user.map((item, index) => (
-          <div key={index} className="w-90 m-3 mt-5">
+          <div className="w-90 m-3 mt-5">
             <div className="wrapper m-4">
               <div className="title mb-3">
                 <p className="fontBold h4">My Profile</p>
@@ -108,7 +112,7 @@ const MyProfile = () => {
                             id="name"
                             name="name"
                             onChange={handleChange}
-                            defaultValue={item.name}
+                            defaultValue={user.name}
                           />
                         </div>
                       </div>
@@ -126,7 +130,7 @@ const MyProfile = () => {
                             id="email"
                             name="email"
                             onChange={handleChange}
-                            defaultValue={item.email}
+                            defaultValue={user.email}
                           />
                         </div>
                       </div>
@@ -146,7 +150,7 @@ const MyProfile = () => {
                             id="phone"
                             name="phone"
                             onChange={handleChange}
-                            defaultValue={item.phone}
+                            defaultValue={user.phone}
                           />
                         </div>
                       </div>
@@ -160,7 +164,7 @@ const MyProfile = () => {
                         <div className="col-8 d-flex gap-3">
                           <div className="radio-1 d-flex flex-row gap-2">
                             <div className="input-radio">
-                              {item.gender === 0 ? (
+                              {user.gender === 0 ? (
                                 <input
                                   className="form-check-input"
                                   type="radio"
@@ -190,7 +194,7 @@ const MyProfile = () => {
                           </div>
                           <div className="radio-2 d-flex flex-row gap-2">
                             <div className="input-radio">
-                              {item.gender == 1 ? (
+                              {user.gender == 1 ? (
                                 <input
                                   className="form-check-input"
                                   type="radio"
@@ -229,11 +233,11 @@ const MyProfile = () => {
                             Date of birth 
                           </p><br/>
                           <p className="fontMedium h6 text-bold">
-                            {date('Y-m-d', strtotime(user[0].birth_date))} 
+                            {date('Y-m-d', strtotime(user.birth_date))} 
                           </p>
                         </label>
                         <div className="col-8 d-flex gap-3">
-                          {item.birth_date ? (
+                          {user.birth_date ? (
                             <>
                               <input
                                 type="date"
@@ -277,9 +281,9 @@ const MyProfile = () => {
 
                     {/* form aside right */}
                     <div className="wrapper-side-form-image col-4 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4 d-flex flex-column">
-                      <div className="img-form  d-flex justify-content-center align-items-center mb-3">
+                      <div className="img-form  d-flex justify-content-center align-users-center mb-3">
                         <img
-                          src={`${process.env.REACT_APP_BACKEND_URL}/${item.image}`}
+                          src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
                           alt="photo-user"
                           style={{
                             width: "100px",
@@ -321,7 +325,6 @@ const MyProfile = () => {
               </div>
             </div>
           </div>
-        ))
       )}
     </>
   );

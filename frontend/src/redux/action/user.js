@@ -60,6 +60,25 @@ export const detailById = (id, handleSuccess) => ({
     })
 })
 
+export const updateImageUser = (id, body, handleSuccess) => ({
+    type: "UPDATE_IMAGE_USER",
+    payload: new Promise((resolve, reject) => {
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/user/image/${id}`, body,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+        .then((res) => {
+            handleSuccess(res);
+            resolve(res);
+        })
+        .catch((err) => {
+            reject(err);
+        })
+    })
+})
+
 export const updateCustomer = (id, form, handleSuccess) => ({
     type: "UPDATE_CUST_BYID",
     payload: new Promise((resolve, reject) => {
@@ -67,8 +86,8 @@ export const updateCustomer = (id, form, handleSuccess) => ({
         .then((res) => {
             // console.log(res)
             // console.log("cek",res)
-            resolve(res);
             handleSuccess(res);
+            resolve(res);
             // handleSuccess(res.data.data.rows);
         })
         .catch((err) => {
