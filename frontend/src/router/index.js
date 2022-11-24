@@ -23,6 +23,7 @@ import HomeAdmin from "../pages/admin/home/adminHome";
 import Order from "../pages/admin/order/order";
 import SearchOrder from "../pages/admin/searchOrder/searchOrder";
 import AdminProduct from "../pages/admin/product/product";
+import ProductEdit from "../pages/productEdit/ProductEdit";
 
 const AdminRoute = () => {
 	const level = localStorage.getItem("level");
@@ -51,7 +52,7 @@ export default function Router() {
 					<Route path="category" element={<Category />} />
 					<Route path="chat" element={<Chat />} />
 					<Route path="resetpass" element={<ResetPass />} />
-          	<Route path="edit-product/:id" element={<ProductEdit />}/>
+          			<Route path="edit-product/:id" element={<ProductEdit />}/>
 				</Route>
 				<Route path="/admin/">
 					<Route index element={<LoginAdmin />} />
