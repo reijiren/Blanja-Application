@@ -102,3 +102,26 @@
   border: 2px solid black;
   border-radius: 20px;
 }
+
+.chatName{
+  font-size: 14px;
+}
+
+.chatSender{
+  margin: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px 25px 25px 5px;
+  max-width: 500px;
+}
+
+.chatReceiver{
+  margin: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  border-radius: 25px 25px 5px 25px;
+  max-width: 500px;
+}
+
+#chatTime{
+  font-size: 12px;
+}

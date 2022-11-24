@@ -257,6 +257,7 @@ const AddNewAddress = () => {
                       type="button"
                       className="button-cancel-custom fontBold text-muted h5"
                       data-bs-dismiss="modal"
+                      aria-label="Close"
                     >
                       Cancel
                     </button>
