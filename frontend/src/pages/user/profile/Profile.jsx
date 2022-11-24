@@ -6,8 +6,7 @@ import johanesMikael from "../../../assets/images/johanes mikael.png";
 import MainContentCust from "../../../components/customer/MainContent/MainContentCust";
 // component seller
 import MainContentSeller from "../../../components/seller/MainContent/MainContentSeller";
-import NavbarLogin from "../../../components/NavbarLogin";
-import Navbar from "../../../components/Navbar";
+import Navs from "../../../components/Navs";
 import { useNavigate } from "react-router-dom";
 import { detailById } from "../../../redux/action/user";
 import { getByMainAddress } from "../../../redux/action/address";
@@ -36,7 +35,7 @@ const Profile = () => {
   return (
     <div className="vw-100 vh-100">
       {/* navbar */}
-      { userType !== null ? <NavbarLogin/> : <></> }
+			<Navs />
       {/* end of navbar */}
       <div className="container-profile h-100 w-100">
         {userType == 1 ? <MainContentCust /> : <></>}
