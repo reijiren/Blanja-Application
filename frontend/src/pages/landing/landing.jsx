@@ -129,7 +129,7 @@ const Landing = () => {
 							<p>You’ve never seen it before!</p>
 						</div>
 					</div>
-					<div className="col-md-12">
+					<div className="col-md-12 d-flex flex-row gap-4 flex-wrap">
 						{getProduct && getProduct.length === 0 ? (
 							<div>product is empty</div>
 						) : (
@@ -212,7 +212,7 @@ const Landing = () => {
 						</div>
 					</div>
 
-					<div className="col-md-12">
+					<div className="col-md-12 d-flex flex-row flex-wrap gap-4">
 						{getProduct && getProduct.length === 0 ? (
 							<div>product is empty</div>
 						) : (
