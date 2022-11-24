@@ -41,7 +41,7 @@ const LoginAdmin = () => {
 				<h1>
 					Welcome to admin page
 					<br />
-					Ankasa Ticketing
+					Blanja Application
 				</h1>
 				<p>Please Log In to continue</p>
 			</div>
