@@ -24,10 +24,6 @@ const Profile = () => {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
-    if(!data) {
-      alert("please login first")
-      return navigate('/login')
-    }
     console.log(user)
     setDataLogin(data);
     setUserType(user.user.user_type)
