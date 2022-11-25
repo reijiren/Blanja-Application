@@ -1,9 +1,24 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import logo from '../assets/images/blanja_icon.png';
 import filter from '../assets/images/filter.png';
 import style from '../assets/style/style.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Navbar = () => {
+  const [getProduct, setProduct] = useState([]);
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (search != '') {
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`).then((res) => {
+        setProduct(res.data);
+        return navigate(`?search=${search}`);
+      });
+    }
+  };
+
   return (
     <Fragment>
       <nav className="navbar navbar-expand-lg bg-light row">
@@ -18,8 +33,8 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {/* <ul className="mb-2 mb-lg-0 mt-md-0 mt-2 col-md-8 col-12 navbar-nav "> */}
             <ul className={`me-auto mb-2 mb-lg-0 mt-md-0 mt-2 col-md-6 col-12`}>
-              <form className={`d-flex`} role="search">
-                <input className={`me-2 form-control col-md-10 ${style.navSearch}`} type="search" placeholder="Search" aria-label="Search" />
+              <form onSubmit={(e) => onSubmitHandler(e)} action="" className={`d-flex`} role="search">
+                <input onChange={(e) => setSearch(e.target.value)} className={`me-2 form-control col-md-10 ${style.navSearch}`} type="search" placeholder="Search" aria-label="Search" />
                 <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <img src={filter} alt="" />
                 </button>

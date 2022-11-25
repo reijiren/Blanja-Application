@@ -7,9 +7,7 @@ import Navbar from '../../components/NavbarLogin';
 const Category = () => {
   return (
     <>
-      <div className="container">
-        <Navbar />
-      </div>
+      <Navbar />
 
       <div className="container">
         <div className="row">
