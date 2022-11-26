@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // images
 import mensFormalSuit from "../../../../assets/images/men jacket jeans.png";
 // react redux
 import { useDispatch, useSelector } from "react-redux";
 // components
-import { getUserProduct, deleteProduct } from "../../../../redux/action/product";
+import {
+  getUserProduct,
+  deleteProduct,
+} from "../../../../redux/action/product";
 import { useEffect } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const AllitemsStore = () => {
   const { product, isLoading, isError } = useSelector((state) => state.product);
@@ -16,7 +19,7 @@ const AllitemsStore = () => {
   useEffect(() => {
     const id = user.id_seller;
     dispatch(getUserProduct(id));
-    console.log(id)
+    console.log(id);
   }, []);
   useEffect(() => {
     console.log(product);
@@ -28,10 +31,10 @@ const AllitemsStore = () => {
   const deleteData = (id) => {
     const handleSuccess = (data) => {
       alert("data deleted");
-      console.log(data)
-    }
-    dispatch(deleteProduct(id, handleSuccess))
-  }
+      console.log(data);
+    };
+    dispatch(deleteProduct(id, handleSuccess));
+  };
   return (
     <>
       {isLoading ? (
@@ -102,17 +105,30 @@ const AllitemsStore = () => {
                   <td className="col-8 text-muted row">
                     <div className="col-6">
                       <div className="product-name">{item.product_name}</div>
-                      <div className="img-review">
-                        <img
-                          src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
-                          alt="mens formal suit"
-                          style={{ width: "100px", height: "100px" }}
-                        />
+                      <div className="w-100 row">
+                      {item.photo ? (
+                        item.photo.split("||").map(
+                          (e, i, arr) => (
+                            <div className="img-review col-4 mb-5">
+                              <img
+                                src={`${process.env.REACT_APP_BACKEND_URL}/${e}`}
+                                alt="mens formal suit"
+                                style={{ width: "100px", height: "100px" }}
+                              />
+                            </div>
+                          )
+                        )
+                      ) : (
+                        <></>
+                      )}
                       </div>
                     </div>
                     <div className="col-6 d-flex flex-column">
                       <div>
-                        <Link to={`/edit-product/${item.id_product}`} className="btn">
+                        <Link
+                          to={`/edit-product/${item.id_product}`}
+                          className="btn"
+                        >
                           <i
                             className="bgBiruMyAccount bi bi-pencil-square"
                             style={{ width: "100px" }}

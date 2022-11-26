@@ -46,6 +46,20 @@ export const deleteProduct = (id, handleSuccess) => ({
     }),
 })
 
+export const updateProduct = (id, body, handleSuccess) => ({
+    type: "UPDATE_PRODUCT",
+    payload: new Promise((resolve, reject) => {
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/product/${id}`, body)
+        .then((res) => {
+            handleSuccess(res)
+            resolve(res);
+        })
+        .catch((err) => {
+            reject(err);
+        });
+    }),
+})
+
 
 export const getByIdProduct = (id, handleSuccess) => ({
     type: "GET_BYID_PRODUCT",
@@ -61,10 +75,10 @@ export const getByIdProduct = (id, handleSuccess) => ({
     }),
 })
 
-export const updateProductImage = (id, body, handleSuccess) => ({
+export const addProductImage = (id, body, handleSuccess) => ({
     type: "ADD_PRODUCT_IMAGE",
     payload: new Promise((resolve, reject) => {
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/product/photo/${id}`, body, 
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/product/photo/${id}`, body, 
         {
             headers: {
                 'Content-Type': 'multipart/form-data',

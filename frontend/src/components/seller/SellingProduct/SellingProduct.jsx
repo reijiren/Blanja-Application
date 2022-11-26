@@ -26,10 +26,9 @@ const SellingProduct = () => {
     description: "",
   });
   
-  const user = useSelector((state) => state.user);
-  // console.log(user.user.id_seller)
+  const {user} = useSelector((state) => state.user);
   useEffect(() => {
-    setDataUser(user.user)
+    setDataUser(user)
   })
   const toggleCheckedNew = () => {
     setNewCon((prevstate) => !prevstate);
@@ -51,17 +50,19 @@ const SellingProduct = () => {
     });
   };
   const onSubmitHandler = (e) => {
+    // console.log(user);
     e.preventDefault();
     const handleSuccess = (data) => {
-      console.log(data);
-      window.location.reload();
+      console.log("insert", data);
+      alert("success insert product")
+      // window.location.reload();
     };
 
     const body = {
-      seller: user.user.id_seller,
+      seller: dataUser.id_seller,
       product_name: form.product_name,
-      price: form.price,
-      stock: form.stock,
+      price: parseInt(form.price),
+      stock: parseInt(form.stock),
       condition: form.condition,
       color: form.color,
       size: parseInt(form.size),
@@ -69,7 +70,7 @@ const SellingProduct = () => {
       description: form.description,
       photo: photo,
     };
-    // return console.log(body);
+    console.log(body);
     dispatch(insertProduct(body, handleSuccess));
   };
   // useEffect(() => {
@@ -245,6 +246,7 @@ const SellingProduct = () => {
                 </label>
               </div>
             </div>
+            <div className="make-sure-condition ms-3"><p className="font-weight-bold fs-italic" style={{color:"#F01F0E"}}>Please double click to make sure the data inserted</p></div>
 
             <div className="space-empty mb-3" style={{ height: "30px" }}></div>
           </div>

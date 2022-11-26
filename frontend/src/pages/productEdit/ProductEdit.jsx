@@ -4,8 +4,12 @@ import sampleImage from "../../assets/images/sample-image.png";
 import dummyTools from "../../assets/images/dummy-tools.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-// action
-import { getByIdProduct, updateProductImage } from "../../redux/action/product";
+// action 
+import {
+  getByIdProduct,
+  addProductImage,
+  updateProduct,
+} from "../../redux/action/product";
 const ProductEdit = () => {
   const [photo, setPhoto] = useState();
   const [dataProduct, setDataProduct] = useState([]);
@@ -19,7 +23,7 @@ const ProductEdit = () => {
     condition: null,
     store_desc: null,
     photo: null,
-  })
+  });
   const [loading, setLoading] = useState(true);
   const [conNew, setConNew] = useState(false);
   const [secNew, setsecNew] = useState(false);
@@ -39,8 +43,6 @@ const ProductEdit = () => {
     onLoadData();
   }, []);
 
-  
-
   useEffect(() => {
     if (dataProduct !== undefined) {
       setLoading(false);
@@ -49,16 +51,15 @@ const ProductEdit = () => {
 
   const toggleCheckedNew = () => {
     setConNew((prevstate) => !prevstate);
-    if(conNew) {
-        setForm({ ...form, condition: 0 });
+    if (conNew) {
+      setForm({ ...form, condition: 0 });
     }
-
   };
 
   const toggleCheckedSecond = () => {
     setsecNew((prevstate) => !prevstate);
-    if(secNew) {
-        setForm({ ...form, condition: 1 });
+    if (secNew) {
+      setForm({ ...form, condition: 1 });
     }
   };
 
@@ -70,39 +71,38 @@ const ProductEdit = () => {
   };
 
   const onSubmitHandler = (e) => {
-    const handleSuccess = (data) => {
-      console.log(data);
-      window.location.reload();
-    };
-
     e.preventDefault();
     if (photo) {
       setForm({ ...form, photo: photo });
       const id = dataProduct.id_product;
       const body = {
-        photo: photo
+        photo: photo,
       };
       const handleSuccess = (data) => {
-        console.log(data);
+        console.log("product-photo", data);
       };
-      // dispatch(updateImageUser(id, body, handleSuccess));
+      dispatch(addProductImage(id, body, handleSuccess));
     }
 
     const body = {
       seller: dataProduct.id_product,
       product_name: form.product_name,
-      price: form.price,
-      stock: form.stock,
+      price: parseInt(form.price),
+      stock: parseInt(form.stock),
       condition: form.condition,
       color: form.color,
       size: parseInt(form.size),
       category: form.category,
       description: form.description,
-      photo: photo,
     };
 
-
-  }; 
+    const id = dataProduct.id_product;
+    const handleSuccessForm = (data) => {
+      console.log("product", data);
+      window.location.reload();
+    };
+    dispatch(updateProduct(id, body, handleSuccessForm));
+  };
   return (
     <>
       {loading ? (
@@ -279,30 +279,24 @@ const ProductEdit = () => {
 
                     <div className="label ms-3 mb-3">
                       <label htmlFor="condition" className="text-muted">
-                        Kondisi
+                        Kondisi{" "}
+                        {dataProduct.condition === 0 ? (
+                          <span className="fontBold fst-italic">Baru</span>
+                        ) : (
+                          <span className="fontBold fst-italic">Bekas</span>
+                        )}
                       </label>
                     </div>
                     <div className="radio-menu d-flex flex-row ms-3 gap-5">
                       <div className="form-check">
-                        { dataProduct.condition === 0 ?
-                          <input
-                          className="form-check-input"
-                          type="radio"
-                          name="condition"
-                          id="flexRadioDefault1"
-                          onClick={toggleCheckedNew}
-                          checked
-                        /> :
                         <input
                           className="form-check-input"
                           type="radio"
                           name="condition"
                           id="flexRadioDefault1"
                           onClick={toggleCheckedNew}
-                          
                         />
-                      }
-                        
+
                         <label
                           className="form-check-label"
                           htmlFor="flexRadioDefault1"
@@ -311,25 +305,14 @@ const ProductEdit = () => {
                         </label>
                       </div>
                       <div className="form-check">
-                      { dataProduct.condition === 1 ?
-                          <input
-                          className="form-check-input"
-                          type="radio"
-                          name="condition"
-                          id="flexRadioDefault1"
-                          onClick={toggleCheckedNew}
-                          checked
-                        /> :
                         <input
                           className="form-check-input"
                           type="radio"
                           name="condition"
                           id="flexRadioDefault1"
-                          onClick={toggleCheckedNew}
-                          
+                          onClick={toggleCheckedSecond}
                         />
-                      }
-                        
+
                         <label
                           className="form-check-label"
                           htmlFor="flexRadioDefault2"
@@ -355,13 +338,30 @@ const ProductEdit = () => {
                     <div className="break-line mb-3"></div>
                     <div className="input-photo row bg-warning mx-3">
                       <div className="col-4 bg-light d-flex flex-column">
-                        <div className="img-review-1 d-flex justify-content-center mb-3">
-                          <img
-                            src={sampleImage}
-                            alt="sample image"
-                            style={{ height: "200px", width: "200px" }}
-                          />
-                        </div>
+                          {
+                            dataProduct.photo ? dataProduct.photo.split("||").map((item, index,  arr) => (
+                              arr.length-1 === index ? (
+                              <>
+                              <div className="img-review-1 d-flex justify-content-center mb-3">
+                                
+                                <img
+                                  src={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
+                                  alt="sample image"
+                                  style={{ height: "200px", width: "200px" }}
+                                />
+                                </div>
+                              </>) : (<></>)
+                                
+                            )) : 
+                            (
+                              <img
+                                src={sampleImage}
+                                alt="sample image"
+                                style={{ height: "200px", width: "200px" }}
+                              />
+                            )
+                          } 
+                          
                         <div className="input-photo-1 mx-3 mb-3">
                           <input
                             type="file"
@@ -372,7 +372,7 @@ const ProductEdit = () => {
                           />
                         </div>
                         <div className="text-center">
-                          <p className="text-muted">Foto utama</p>
+                          <p className="text-muted">Foto terbaru</p>
                         </div>
                       </div>
                       <div className="col-2 bg-light d-flex justify-content-center align-items-center flex-column">
@@ -469,7 +469,7 @@ const ProductEdit = () => {
                           rows="5"
                           name="description"
                           onChange={handleChange}
-                          defaultValue={dataProduct.store_desc}
+                          defaultValue={dataProduct.description}
                         ></textarea>
                       </div>
                     </div>
@@ -486,7 +486,7 @@ const ProductEdit = () => {
                         borderRadius: "25px",
                       }}
                     >
-                      Jual
+                      Perbaharui
                     </button>
                   </div>
                 </form>
