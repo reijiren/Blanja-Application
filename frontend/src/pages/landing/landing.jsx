@@ -103,11 +103,9 @@ const Landing = () => {
           </div>
 
           <div className={`${styles.categories} mt-1`}>
-            {/* <button className={styles.left}>&#60;</button> */}
             <div className={styles.container}>
               <CategoryCard />
             </div>
-            {/* <button className={styles.right}>&#62;</button> */}
           </div>
 
           <div className="row col-md-12">
