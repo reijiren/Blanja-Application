@@ -2,12 +2,12 @@ import React from 'react';
 import style from '../category/category.module.css';
 import { Link } from 'react-router-dom';
 import product from '../../assets/images/gez-xavier-mansfield-b34E1vh1tYU-unsplash 1.jpg';
-import Navbar from '../../components/NavbarLogin';
+import Navs from '../../components/Navs';
 
 const Category = () => {
   return (
     <>
-      <Navbar />
+      <Navs />
 
       <div className="container">
         <div className="row">

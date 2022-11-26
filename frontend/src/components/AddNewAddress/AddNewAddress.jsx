@@ -1,14 +1,90 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+// redux action
+import { insertAddress } from "../../redux/action/address";
+// react redux
+import { useSelector, useDispatch } from "react-redux";
+import { updateCustomer } from "../../redux/action/user";
 
 const AddNewAddress = () => {
+  const { user, isLoading, isError } = useSelector((state) => {
+    return state.user;
+  });
+  // const [main_address, setMainAddress] = useState(false)
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    address_name: "",
+    recipient_name: "",
+    recipient_phone: "",
+    address: "",
+    post_code: "",
+    city: "",
+  });
+
+  const [main_address_bool, setMainAddress] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const toggleChecked = () => {
+    setMainAddress((prevstate) => !prevstate);
+    
+    // if(main_address === true){
+    //   setForm({ ...form, main_address: 0 });
+    // } else {
+    //   setForm({ ...form, main_address: 1 });
+    // }
+    // console.log(main_address);
+    // console.log(form.main_address)
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    // const checkBox = document.getElementById("main_address");
+    // if (checkBox.checked) {
+    //   setForm({ ...form, main_address: 1 });
+    // } else {
+    //   setForm({ ...form, main_address: 0 });
+    // }
+
+    const handleSuccess = (data) => {
+      // console.log(data.data.data[0]);
+      // console.log(main_address);
+      const bodyUser = {
+        main_address : data.data.data[0].addressid
+      }
+      const updateSuccess = (res) => {
+        console.log(res)
+      }
+      if(main_address_bool === true) {
+        dispatch(updateCustomer(user[0].id_user, bodyUser, updateSuccess))
+      }
+      alert("Insert Success");
+      return window.location.reload();
+    };
+
+    const body = {
+      userid: user[0].id_user,
+      address_name: form.address_name,
+      recipient_name: form.recipient_name,
+      recipient_phone: form.recipient_phone,
+      address: form.address,
+      post_code: form.post_code,
+      city: form.city,
+    };
+    // return console.log(body);
+    dispatch(insertAddress(body, handleSuccess));
+    
+  };
   return (
     <div className="modal-dialog" style={{ maxWidth: "80%" }}>
       <div className="modal-content">
         <div className="modal-header" style={{ height: "150px" }}>
-          <h5
-            className="modal-title w-100 text-center"
-            id="exampleModalLabel"
-          >
+          <h5 className="modal-title w-100 text-center" id="exampleModalLabel">
             <p className={`fontBold h2`}>Add new address</p>
           </h5>
           <button
@@ -20,10 +96,10 @@ const AddNewAddress = () => {
         </div>
         <div className="modal-body">
           <div className="form-wrapper mx-5">
-            <form>
+            <form onSubmit={(e) => onSubmitHandler(e)}>
               <div className="mb-3">
                 <label
-                  htmlFor="exampleInputEmail1"
+                  htmlFor="address_name"
                   className={`form-label fontRegular text-muted`}
                 >
                   Save address as (ex: home address, office address){" "}
@@ -31,9 +107,11 @@ const AddNewAddress = () => {
                 <input
                   type="text"
                   className="form-control"
-                  id="address"
+                  id="address_name"
                   placeholder="Rumah"
                   style={{ height: "50px" }}
+                  name="address_name"
+                  onChange={handleChange}
                 />
               </div>
               <div className="duo-input-row row">
@@ -41,7 +119,7 @@ const AddNewAddress = () => {
                   <div className="col-6">
                     <div className="mb-3">
                       <label
-                        htmlFor="name"
+                        htmlFor="recipient_name"
                         className={`form-label fontRegular text-muted d-flex align-items-center`}
                         style={{ height: "70px" }}
                       >
@@ -50,16 +128,18 @@ const AddNewAddress = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="name"
+                        id="recipient_name"
                         placeholder=""
                         style={{ height: "50px" }}
+                        name="recipient_name"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
                   <div className="col-6">
                     <div className="mb-3">
                       <label
-                        htmlFor="phone"
+                        htmlFor="recipient_phone"
                         className={`form-label fontRegular text-muted text-muted d-flex align-items-center`}
                         style={{ height: "70px" }}
                       >
@@ -68,9 +148,11 @@ const AddNewAddress = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="phone"
+                        id="recipient_phone"
                         placeholder=""
                         style={{ height: "50px" }}
+                        name="recipient_phone"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -93,13 +175,15 @@ const AddNewAddress = () => {
                         id="address"
                         placeholder=""
                         style={{ height: "50px" }}
+                        name="address"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
                   <div className="col-6">
                     <div className="mb-3">
                       <label
-                        htmlFor="postal_code"
+                        htmlFor="post_code"
                         className={`form-label fontRegular text-muted text-muted d-flex align-items-center`}
                         style={{ height: "70px" }}
                       >
@@ -108,9 +192,11 @@ const AddNewAddress = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="postal_code"
+                        id="post_code"
                         placeholder=""
                         style={{ height: "50px" }}
+                        name="post_code"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -121,7 +207,7 @@ const AddNewAddress = () => {
                   <div className="col-6">
                     <div className="mb-3">
                       <label
-                        htmlFor="address"
+                        htmlFor="city"
                         className={`form-label fontRegular text-muted d-flex align-items-center`}
                         style={{ height: "70px" }}
                       >
@@ -130,9 +216,11 @@ const AddNewAddress = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="address"
+                        id="city"
                         placeholder=""
                         style={{ height: "50px" }}
+                        name="city"
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -142,11 +230,13 @@ const AddNewAddress = () => {
                 <input
                   type="checkbox"
                   className="form-check-input"
-                  id="exampleCheck1"
+                  name="main_address"
+                  id="main_address"
+                  onClick={toggleChecked}
                 />
                 <label
                   className={`form-check-label fontRegular text-muted`}
-                  htmlFor="exampleCheck1"
+                  htmlFor="main_address"
                 >
                   Make it the primary address
                 </label>
@@ -156,6 +246,7 @@ const AddNewAddress = () => {
                   <div className="button-submit">
                     <button
                       type="submit"
+                      id="checkbox"
                       className="bgRedPucat button-submit-custom fontBold text-white h5"
                     >
                       Save
@@ -166,6 +257,7 @@ const AddNewAddress = () => {
                       type="button"
                       className="button-cancel-custom fontBold text-muted h5"
                       data-bs-dismiss="modal"
+                      aria-label="Close"
                     >
                       Cancel
                     </button>

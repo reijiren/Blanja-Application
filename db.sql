@@ -40,8 +40,8 @@ create table orders(
     userid integer references users(id_user) on delete cascade,
     item integer references product(id_product) on delete cascade,
     quantity integer,
-    color varchar(20),
-    size integer, -- 0 XS, 1 S, 2 M, 3 L, 4 XL
+    item_color varchar(20),
+    item_size integer, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
     status integer -- 0 unpaid, 1 paid, 2 packed, 3 sent, 4 complete, 5 canceled
 );
 

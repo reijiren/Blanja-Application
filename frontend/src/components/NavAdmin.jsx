@@ -1,15 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../assets/style/style.module.css";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import style from "../assets/style/style.module.css";
 
 const NavAdmin = () => {
-	const name = JSON.parse(localStorage.getItem("name"));
+	const user = useSelector((state) => state.user.user);
+	const navigate = useNavigate();
+
+	const logout = (e) => {
+		e.preventDefault();
+		localStorage.clear();
+		return navigate("/admin");
+	};
 
 	return (
 		<>
 			<nav className="navbar bg-light">
 				<div className="container-fluid">
-					{/* <Link className="navbar-brand">Navbar</Link> */}
 					<div>
 						<button
 							className="btn btn-light"
@@ -39,66 +46,42 @@ const NavAdmin = () => {
 									aria-label="Close"></button>
 							</div>
 							<div className="offcanvas-body">
-								<div>
+								<div className="mb-3">
 									<button
-										className="btn btn-secondary butts"
+										className={`btn btn-secondary ${style.butts}`}
 										type="button"
 										data-bs-toggle="collapse"
-										data-bs-target="#airlines"
+										data-bs-target="#order"
 										aria-expanded="false"
-										aria-controls="airlines">
-										Airlines
+										aria-controls="order">
+										Order
 									</button>
-									<div className="collapse" id="airlines">
+									<div className="collapse" id="order">
 										<div className="card card-body">
 											<Link
-												className="side-link mid"
-												to="/admin/search-airlines/1">
-												Search Airlines
-											</Link>
-											<Link className="side-link" to="/admin/insert-airlines">
-												Insert Airlines
+												className={`${style.sideLink} ${style.mid}`}
+												to="/admin/order">
+												Order List
 											</Link>
 										</div>
 									</div>
 								</div>
-								<div className="mid">
+								<div className="mb-3">
 									<button
-										className="btn btn-secondary butts"
+										className={`btn btn-secondary ${style.butts}`}
 										type="button"
 										data-bs-toggle="collapse"
-										data-bs-target="#flight"
+										data-bs-target="#product"
 										aria-expanded="false"
-										aria-controls="flight">
-										Flights
+										aria-controls="product">
+										Product
 									</button>
-									<div className="collapse" id="flight">
+									<div className="collapse" id="product">
 										<div className="card card-body">
 											<Link
-												className="side-link mid"
-												to="/admin/search-flights">
-												Search Flight
-											</Link>
-											<Link className="side-link" to="/admin/insert-flights">
-												Insert Flights
-											</Link>
-										</div>
-									</div>
-								</div>
-								<div>
-									<button
-										className="btn btn-secondary butts"
-										type="button"
-										data-bs-toggle="collapse"
-										data-bs-target="#user"
-										aria-expanded="false"
-										aria-controls="user">
-										User
-									</button>
-									<div className="collapse" id="user">
-										<div className="card card-body">
-											<Link className="side-link mid" to="/admin/search-user">
-												Search User
+												className={`${style.sideLink} ${style.mid}`}
+												to="/admin/product">
+												Product List
 											</Link>
 										</div>
 									</div>
@@ -121,7 +104,7 @@ const NavAdmin = () => {
 								className="btn btn-secondary dropdown-toggle mx-3"
 								data-bs-toggle="dropdown"
 								aria-expanded="false">
-								{name}
+								{user.name}
 							</button>
 							<ul className="dropdown-menu">
 								<li>
@@ -130,7 +113,7 @@ const NavAdmin = () => {
 									</Link>
 								</li>
 								<li>
-									<Link className="dropdown-item" to="/login">
+									<Link className="dropdown-item" onClick={(e) => logout(e)}>
 										Logout
 									</Link>
 								</li>

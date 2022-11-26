@@ -1,5 +1,5 @@
 const express = require('express')
-const { list, destroy, detail, register,login,listSeller,detailSeller,updatePhoto, listCustomer, detailCustomer, updateCustomer, updateSeller, checkEmail } = require('../controller/user.controller')
+const { list, destroy, detail, register,login,listSeller,detailSeller,updatePhoto, listCustomer, detailCustomer, updateCustomer, updateSeller, checkEmail, chat } = require('../controller/user.controller')
 const {uploadPhotouser} = require ('../middleware/uploadImg');
 const {removePhotoUser} = require('../middleware/deleteImg');
 
@@ -13,6 +13,7 @@ router
   .get('/customer/:id', detailCustomer)
   .get('/seller', listSeller)
   .get('/seller/:id', detailSeller)
+  .get('/user/chat/:id', chat)
   .put('/customer/:id', updateCustomer)
   .put('/seller/:id', updateSeller)
   .put('/user/image/:id', removePhotoUser, uploadPhotouser, updatePhoto)

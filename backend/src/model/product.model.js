@@ -3,7 +3,7 @@ const productModel = {
   // router 
   selectAll: () => {
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM product join seller on seller.id_seller = product.seller', (err, result) => {
+      db.query('SELECT * FROM product join seller on seller.id_seller = product.seller join users on seller.id_seller = users.id_user', (err, result) => {
         if (err) {
           reject(err)
         } else {
@@ -24,7 +24,7 @@ const productModel = {
   },
   selectJoin: (id) => {
     return new Promise((resolve, reject) => {
-      db.query(`select * from product left join seller on seller.id_seller = product.seller where id_product=${id}`
+      db.query(`select * from product left join seller on seller.id_seller = product.seller left join users on seller.id_seller = users.id_user where id_product=${id}`
       , (err, result) => {
         if (err) {
           reject(err)
