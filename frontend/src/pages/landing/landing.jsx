@@ -121,9 +121,9 @@ const Landing = () => {
               <div>product is empty</div>
             ) : (
               getProduct.map((item, index) => (
-                <Link to={`/product/${item.id_product}`} className={`${styles.links}`}>
-                  <div key={index} className="card" style={{ width: '18rem', top: '20px' }}>
-                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`} className="card-img-top" alt="..." />
+                <Link key={index} to={`/product/${item.id_product}`} className={`${styles.links}`}>
+                  <div className="card ms-4" style={{ width: '14rem', top: '10px' }}>
+                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`} height="200px" className="card-img-top" alt="..." />
                     <div className="card-body">
                       <h4 className="card-text">{item.product_name}</h4>
                       <h4 className="card-text text-danger">$ {item.price}.0</h4>
@@ -164,8 +164,8 @@ const Landing = () => {
             ) : (
               getProduct.map((item, index) => (
                 <Link to={`/product/${item.id_product}`} className={`${styles.links}`}>
-                  <div key={index} className="card" style={{ width: '18rem', top: '20px' }}>
-                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`} className="card-img-top" alt="..." />
+                  <div key={index} className="card ms-4" style={{ width: '14rem', top: '10px' }}>
+                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`} height="200px" className="card-img-top" alt="..." />
                     <div className="card-body">
                       <h4 className="card-text">
                         {item.product_name} - {item.color}

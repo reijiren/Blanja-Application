@@ -12,7 +12,7 @@ const CategoryCard = () => {
     <>
       <div className={`${style.card} ms-3`} style={{ backgroundColor: '#CC0B04' }}>
         <img alt="category" src={tshirt} />
-        <p>Tshirt</p>
+        <p>T-Shirt</p>
       </div>
       <div className={style.card} style={{ backgroundColor: '#1C3391' }}>
         <img alt="category" src={short} />
@@ -24,7 +24,7 @@ const CategoryCard = () => {
       </div>
       <div className={style.card} style={{ backgroundColor: '#E31F51' }}>
         <img alt="category" src={pants} />
-        <p>Pans</p>
+        <p>Pants</p>
       </div>
       <div className={style.card} style={{ backgroundColor: '#57CD9E' }}>
         <img alt="category" src={shoes} />

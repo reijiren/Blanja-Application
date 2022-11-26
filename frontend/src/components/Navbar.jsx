@@ -12,15 +12,20 @@ const Navbar = () => {
   const [size, setSize] = useState(true);
   const [search, setSearch] = useState('');
   const [getProduct, setProduct] = useState([]);
+  // const nameA = JSON.parse(localStorage.setItem(''));
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (search != '') {
-      axios.get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`).then((res) => {
-        setProduct(res.data);
-        return navigate(`?search=${search}`);
-      });
-    }
+    // if (search != '') {
+    //   axios.get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`).then((res) => {
+    //     setProduct(res.data);
+    //     return navigate(`?search=${search}`);
+    //   });
+    // }
+
+    localStorage.setItem('name', JSON.stringify(search));
+
+    return navigate('/category');
   };
 
   return (
@@ -38,7 +43,7 @@ const Navbar = () => {
             {/* <ul className="mb-2 mb-lg-0 mt-md-0 mt-2 col-md-8 col-12 navbar-nav "> */}
             <ul className={`me-auto mb-2 mb-lg-0 mt-md-0 mt-2 col-md-6 col-12`}>
               <form onSubmit={(e) => onSubmitHandler(e)} action="" className={`d-flex`} role="search">
-                <input onChange={(e) => setProduct(e.target.value)} className={`me-2 form-control col-md-10 ${style.navSearch}`} type="search" placeholder="Search" aria-label="Search" />
+                <input onChange={(e) => setSearch(e.target.value)} className={`me-2 form-control col-md-10 ${style.navSearch}`} type="search" placeholder="Search" aria-label="Search" />
                 <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <img src={filter} alt="" />
                 </button>
