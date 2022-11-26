@@ -22,14 +22,14 @@ const Profile = () => {
   const address = useSelector((state) => state.address);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("data"));
-    console.log(user)
-    setDataLogin(data);
+    // console.log(user)
+    setDataLogin(user);
     setUserType(user.user.user_type)
-    console.log(user.user.user_type)
+    // console.log(user.user.user_type)
     const main_address = user.user.main_address;
-    dispatch(getByMainAddress(main_address))
-
+    if(main_address) {
+      dispatch(getByMainAddress(main_address))
+    }
   }, []);
 
   return (

@@ -8,12 +8,14 @@ import MyProducts from "../MyProducts/MyProducts";
 import SellingProduct from "../SellingProduct/SellingProduct";
 import MyOrderStore from "../MyOrder/MyOrderStore";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const MainContentSeller = () => {
   const [showMyProfileStore, setShowMyProfileStore] = useState(false);
   const [showMyProducts, setShowMyProducts] = useState(false);
   const [showSellingProduct, setShowSellingProduct] = useState(false);
   const [showMyOrder, setShowMyOrder] = useState(false);
+  const [dataUser, setDataUser] = useState([]);
 
   const editProfileStore = () => {
     setShowMyProfileStore(true);
@@ -44,6 +46,14 @@ const MainContentSeller = () => {
   };
 
   const { user, isLoading, isError } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    const onLoaddata = async () => {
+      await setDataUser(user);
+    }
+    onLoaddata();
+  }, [])
+
   return (
     <>
       { isLoading ? (
@@ -67,7 +77,7 @@ const MainContentSeller = () => {
               <div className="d-flex flex-row">
                 <div className="image-content">
                   <img
-                    src={johanesMikael}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${dataUser.image}`}
                     alt="avatar_user"
                     style={{
                       borderRadius: "50%",
@@ -78,7 +88,7 @@ const MainContentSeller = () => {
                 </div>
                 <div className="name-info-edit d-flex flex-column justify-content-center align-items-center ms-3">
                   <div className="name">
-                    <p className="fontBold h5">Johanes Mikael</p>
+                    <p className="fontBold h5">{dataUser.name}</p>
                   </div>
                   <div className="edit-profile-button">
                     <button

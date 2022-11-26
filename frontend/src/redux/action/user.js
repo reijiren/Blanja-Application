@@ -84,8 +84,8 @@ export const updateCustomer = (id, form, handleSuccess) => ({
     payload: new Promise((resolve, reject) => {
         axios.put(`${process.env.REACT_APP_BACKEND_URL}/customer/${id}`, form)
         .then((res) => {
-            // console.log(res)
-            // console.log("cek",res)
+            console.log(res)
+            console.log("cek",res)
             handleSuccess(res);
             resolve(res);
             // handleSuccess(res.data.data.rows);
