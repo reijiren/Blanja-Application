@@ -1,13 +1,14 @@
-import "./style.css";
-import React, { useState, useEffect } from "react";
+import './style.css';
+import React, { useState, useEffect } from 'react';
 // image
-import johanesMikael from "../../../assets/images/johanes mikael.png";
+import johanesMikael from '../../../assets/images/johanes mikael.png';
 // react redux
-import { useSelector, useDispatch } from "react-redux";
-import { updateCustomer } from "../../../redux/action/user";
-import { useNavigate } from "react-router-dom";
-import strtotime from "locutus/php/datetime/strtotime"
-import date from "locutus/php/datetime/date"
+import { useSelector, useDispatch } from 'react-redux';
+import { updateCustomer } from '../../../redux/action/user';
+import { useNavigate } from 'react-router-dom';
+import strtotime from 'locutus/php/datetime/strtotime';
+import date from 'locutus/php/datetime/date';
+import Swal from 'sweetalert2';
 
 const MyProfile = () => {
   // get date picker
@@ -16,13 +17,13 @@ const MyProfile = () => {
   var mm = today.getMonth() + 1; //January is 0!
   var yyyy = today.getFullYear();
   if (dd < 10) {
-    dd = "0" + dd;
+    dd = '0' + dd;
   }
 
   if (mm < 10) {
-    mm = "0" + mm;
+    mm = '0' + mm;
   }
-  today = yyyy + "-" + mm + "-" + dd;
+  today = yyyy + '-' + mm + '-' + dd;
   const [dateNow, setDateNow] = useState(today);
 
   // logic page
@@ -34,11 +35,11 @@ const MyProfile = () => {
   // form handle update
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: user[0].name || "",
-    email: user[0].email || "",
-    phone: user[0].phone || "",
-    gender: user[0].gender || "",
-    birth_date: "",
+    name: user[0].name || '',
+    email: user[0].email || '',
+    phone: user[0].phone || '',
+    gender: user[0].gender || '',
+    birth_date: '',
   });
 
   const handleChange = (e) => {
@@ -52,7 +53,13 @@ const MyProfile = () => {
     e.preventDefault();
 
     const handleSuccess = (data) => {
-      alert("Update Success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Update Success',
+        showConfirmButton: false,
+        timer: 1800,
+      });
+
       return window.location.reload();
     };
     const id = user[0].id_user;
@@ -83,9 +90,7 @@ const MyProfile = () => {
                 <p className="fontBold h4">My Profile</p>
               </div>
               <div className="desc mb-3">
-                <p className="fontMedium h6 text-muted">
-                  Manage your profile information
-                </p>
+                <p className="fontMedium h6 text-muted">Manage your profile information</p>
               </div>
               <div className="break-line mb-5"></div>
 
@@ -95,66 +100,31 @@ const MyProfile = () => {
                     {/* form aside left */}
                     <div className="wrapper-side-form-input col-8 col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
                       <div className="mb-3 row">
-                        <label
-                          htmlFor="name"
-                          className="col-4 col-form-label d-flex "
-                        >
+                        <label htmlFor="name" className="col-4 col-form-label d-flex ">
                           <p className="fontMedium h6 text-muted">Name</p>
                         </label>
                         <div className="col-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="name"
-                            name="name"
-                            onChange={handleChange}
-                            defaultValue={item.name}
-                          />
+                          <input type="text" className="form-control" id="name" name="name" onChange={handleChange} defaultValue={item.name} />
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          htmlFor="email"
-                          className="col-4 col-form-label d-flex "
-                        >
+                        <label htmlFor="email" className="col-4 col-form-label d-flex ">
                           <p className="fontMedium h6 text-muted">Email</p>
                         </label>
                         <div className="col-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="email"
-                            name="email"
-                            onChange={handleChange}
-                            defaultValue={item.email}
-                          />
+                          <input type="text" className="form-control" id="email" name="email" onChange={handleChange} defaultValue={item.email} />
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          htmlFor="phone"
-                          className="col-4 col-form-label d-flex "
-                        >
-                          <p className="fontMedium h6 text-muted">
-                            Phone number
-                          </p>
+                        <label htmlFor="phone" className="col-4 col-form-label d-flex ">
+                          <p className="fontMedium h6 text-muted">Phone number</p>
                         </label>
                         <div className="col-8">
-                          <input
-                            type="phone"
-                            className="form-control"
-                            id="phone"
-                            name="phone"
-                            onChange={handleChange}
-                            defaultValue={item.phone}
-                          />
+                          <input type="phone" className="form-control" id="phone" name="phone" onChange={handleChange} defaultValue={item.phone} />
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          htmlFor="phone"
-                          className="col-4 col-form-label d-flex "
-                        >
+                        <label htmlFor="phone" className="col-4 col-form-label d-flex ">
                           <p className="fontMedium h6 text-muted">Gender</p>
                         </label>
                         <div className="col-8 d-flex gap-3">
@@ -167,7 +137,9 @@ const MyProfile = () => {
                                   name="gender"
                                   id="laki-laki"
                                   checked
-                                  onChange={(e) => {setForm({...form, gender: 0})}}
+                                  onChange={(e) => {
+                                    setForm({ ...form, gender: 0 });
+                                  }}
                                 />
                               ) : (
                                 <input
@@ -175,15 +147,14 @@ const MyProfile = () => {
                                   type="radio"
                                   name="gender"
                                   id="laki-laki"
-                                  onChange={(e) => {setForm({...form, gender: 0})}}
+                                  onChange={(e) => {
+                                    setForm({ ...form, gender: 0 });
+                                  }}
                                 />
                               )}
                             </div>
                             <div className="label-radio">
-                              <label
-                                className="form-check-label"
-                                htmlFor="laki-laki"
-                              >
+                              <label className="form-check-label" htmlFor="laki-laki">
                                 Laki-laki
                               </label>
                             </div>
@@ -197,7 +168,9 @@ const MyProfile = () => {
                                   name="gender"
                                   id="perempuan"
                                   checked
-                                  onChange={(e) => {setForm({...form, gender: 1})}}
+                                  onChange={(e) => {
+                                    setForm({ ...form, gender: 1 });
+                                  }}
                                 />
                               ) : (
                                 <input
@@ -205,15 +178,14 @@ const MyProfile = () => {
                                   type="radio"
                                   name="gender"
                                   id="perempuan"
-                                  onChange={(e) => {setForm({...form, gender: 1})}}
+                                  onChange={(e) => {
+                                    setForm({ ...form, gender: 1 });
+                                  }}
                                 />
                               )}
                             </div>
                             <div className="label-radio">
-                              <label
-                                className="form-check-label"
-                                htmlFor="perempuan"
-                              >
+                              <label className="form-check-label" htmlFor="perempuan">
                                 Perempuan
                               </label>
                             </div>
@@ -221,53 +193,27 @@ const MyProfile = () => {
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          htmlFor="phone"
-                          className="col-4 col-form-label d-flex "
-                        >
-                          <p className="fontMedium h6 text-muted">
-                            Date of birth 
-                          </p><br/>
-                          <p className="fontMedium h6 text-bold">
-                            {date('Y-m-d', strtotime(user[0].birth_date))} 
-                          </p>
+                        <label htmlFor="phone" className="col-4 col-form-label d-flex ">
+                          <p className="fontMedium h6 text-muted">Date of birth</p>
+                          <br />
+                          <p className="fontMedium h6 text-bold">{date('Y-m-d', strtotime(user[0].birth_date))}</p>
                         </label>
                         <div className="col-8 d-flex gap-3">
                           {item.birth_date ? (
                             <>
-                              <input
-                                type="date"
-                                name="birth_date"
-                                className="form-control"
-                                id="birth_date"
-                                max={dateNow}
-                                onChange={handleChange}
-                              />
+                              <input type="date" name="birth_date" className="form-control" id="birth_date" max={dateNow} onChange={handleChange} />
                             </>
                           ) : (
                             <>
-                              <input
-                                type="date"
-                                name="birth_date"
-                                className="form-control"
-                                id="birth_date"
-                                max={dateNow}
-                                onChange={handleChange}
-                              />
+                              <input type="date" name="birth_date" className="form-control" id="birth_date" max={dateNow} onChange={handleChange} />
                             </>
                           )}
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          htmlFor="-"
-                          className="col-4 col-form-label d-flex "
-                        ></label>
+                        <label htmlFor="-" className="col-4 col-form-label d-flex "></label>
                         <div className="col-8 d-flex gap-3">
-                          <button
-                            type="submit"
-                            className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive"
-                          >
+                          <button type="submit" className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive">
                             Save
                           </button>
                         </div>
@@ -282,9 +228,9 @@ const MyProfile = () => {
                           src={`${process.env.REACT_APP_BACKEND_URL}/${item.image}`}
                           alt="photo-user"
                           style={{
-                            width: "100px",
-                            heith: "100px",
-                            borderRadius: "50%",
+                            width: '100px',
+                            heith: '100px',
+                            borderRadius: '50%',
                           }}
                         />
                       </div>
@@ -292,9 +238,9 @@ const MyProfile = () => {
                         <label
                           className="fontMedium text-muted text-center"
                           style={{
-                            border: "2px solid #9B9B9B",
-                            borderRadius: "25px",
-                            width: "100%",
+                            border: '2px solid #9B9B9B',
+                            borderRadius: '25px',
+                            width: '100%',
                           }}
                           htmlFor="photo"
                         >
@@ -309,10 +255,7 @@ const MyProfile = () => {
                   </div>
                   <div className="mb-3 mt-3 row">
                     <div className="col-12 d-flex justify-content-center gap-3">
-                      <button
-                        type="submit"
-                        className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive-2"
-                      >
+                      <button type="submit" className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive-2">
                         Save
                       </button>
                     </div>

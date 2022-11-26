@@ -90,8 +90,8 @@ const Landing = () => {
   return (
     <>
       <Navs />
-      <section>
-        <div className="container">
+      <section className="bg-light">
+        <div className="container bg-light">
           <div className={styles.carousel + ' position-relative pt-5'}>
             <Carousel />
           </div>
