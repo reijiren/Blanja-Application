@@ -15,20 +15,6 @@ const orderModel = {
 			);
 		});
 	},
-	selectAllnih: () => {
-		return new Promise((resolve, reject) => {
-			db.query(
-				"SELECT * FROM orders",
-				(err, result) => {
-					if (err) {
-						reject(err);
-					} else {
-						resolve(result);
-					}
-				}
-			);
-		});
-	},
 	selectDetail: (id) => {
 		return new Promise((resolve, reject) => {
 			db.query(`SELECT * FROM orders where id_order =${id}`, (err, result) => {
