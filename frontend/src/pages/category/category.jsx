@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Category = () => {
   const [getProduct, setProduct] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // const navigate = useNavigate();
   useEffect(() => {
@@ -16,7 +17,7 @@ const Category = () => {
       .get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`)
 
       .then((res) => {
-        // console.log(res.data.data.rows);
+        console.log(res.data);
         setProduct(res.data.data.rows);
       })
       .catch((err) => {
@@ -26,6 +27,56 @@ const Category = () => {
 
     // console.log(search);
   }, []);
+
+  // const [sort, setSort] = useState('id');
+  // const [asc, setAsc] = useState('asc');
+  // const [data, setData] = useState([]);
+
+  //  useEffect(() => {
+  //   getData(sort, asc, 3, currentPage);
+  // }, [sort, asc, currentPage]);
+
+  // const getData = (sort, asc, limit, page) => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_BACKEND_URL}/product?sort=${sort}&asc=${asc}&limit=${limit}${page ? `&page=${page}` : ''}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // const handleNext = () => {
+  //   setCurrentPage(currentPage + 1);
+  //   getData(sort, asc, 3, currentPage + 1);
+  // };
+
+  // const handlePrevious = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage(currentPage - 1);
+  //     getData(sort, asc, 3, currentPage - 1);
+  //   }
+  // };
+
+  // const handleSorting = () => {
+  //   if (sort == 'id') {
+  //     setSort('title');
+  //   } else {
+  //     setSort('id');
+  //   }
+  //   getData(sort, asc, 3, currentPage);
+  // };
+
+  // const handleAsc = () => {
+  //   if (asc == 'asc') {
+  //     setAsc('desc');
+  //   } else {
+  //     setAsc('asc');
+  //   }
+  //   getData(sort, asc, 3, currentPage);
+  // };
 
   return (
     <>
@@ -77,6 +128,36 @@ const Category = () => {
               ))
             )}
           </div>
+
+          {/* <div className="d-flex justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              <li className="page-item">
+                <button className="page-link" onClick={() => handlePrevious()}>
+                  Previous
+                </button>
+              </li>
+              <li className="page-item">
+                <button className="page-link">{currentPage}</button>
+              </li>
+              <li className="page-item">
+                <button className="page-link" disabled={data.data <= 0} onClick={() => handleNext()}>
+                  Next
+                </button>
+              </li>
+              <li className="page-item">
+                <button className="page-link" aria-label="Next" onClick={() => handleSorting()}>
+                  <span aria-hidden="true">{sort}</span>
+                </button>
+              </li>
+              <li className="page-item">
+                <button className="page-link" aria-label="Next" onClick={() => handleAsc()}>
+                  <span aria-hidden="true">{asc}</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div> */}
         </div>
       </div>
     </>
