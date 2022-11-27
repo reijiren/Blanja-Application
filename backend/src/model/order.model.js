@@ -80,7 +80,7 @@ const orderModel = {
 				`
           INSERT INTO orders (userid, item, quantity, item_color, item_size, status)
           VALUES
-          (${data.userid}, ${data.item}, ${data.quantity}, '${data.color}', ${data.size}, ${data.status})
+          (${data.userid}, ${data.item}, ${data.quantity}, '${data.color}', '${data.size}', ${data.status})
           `,
 				(err, res) => {
 					if (err) {

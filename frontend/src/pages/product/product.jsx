@@ -35,6 +35,7 @@ const Product = () => {
 	const [product, setProduct] = useState({
 		userid: user.id_user,
 		item: parseInt(id_product),
+		status: 0,
 	});
 
 	const onSubmit = (e) => {
@@ -48,10 +49,12 @@ const Product = () => {
 			quantity: jumlah,
 			status: product.status,
 		};
+		console.log(body);
 
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/order`, body)
 			.then((response) => {
+				console.log(response);
 				alert("barang berhasil ditambahkan");
 			})
 			.catch((error) => {
@@ -188,7 +191,7 @@ const Product = () => {
 													<div className="d-flex flex-row">
 														{jumlah == 1 ? (
 															<button
-																className={`fontBold btn btn-secondary ${style.button} ${style.buttonSize}`}
+																className={`fontBold btn btn-secondary rounded-circle ${style.button} ${style.buttonSize}`}
 																onClick={() => setJumlah((value) => value - 1)}
 																disabled>
 																-
@@ -196,19 +199,29 @@ const Product = () => {
 														) : (
 															<button
 																type="button"
-																className={`fontBold btn btn-secondary ${style.button} ${style.buttonSize}`}
+																className={`fontBold btn btn-secondary rounded-circle ${style.button} ${style.buttonSize}`}
 																onClick={() => setJumlah((value) => value - 1)}>
 																-
 															</button>
 														)}
 
 														<p className="fontBold my-auto mx-3">{jumlah}</p>
-														<button
-															type="button"
-															className={`fontBold btn btn-light ${style.button} ${style.buttonSize}`}
-															onClick={() => setJumlah((value) => value + 1)}>
-															+
-														</button>
+														{jumlah == details.stock ? (
+															<button
+																type="button"
+																className={`fontBold btn btn-light rounded-circle ${style.button} ${style.buttonSize}`}
+																onClick={() => setJumlah((value) => value + 1)}
+																disabled>
+																+
+															</button>
+														) : (
+															<button
+																type="button"
+																className={`fontBold btn btn-light rounded-circle ${style.button} ${style.buttonSize}`}
+																onClick={() => setJumlah((value) => value + 1)}>
+																+
+															</button>
+														)}
 													</div>
 												</div>
 											</div>
