@@ -115,11 +115,18 @@ const productModel = {
 
       const offset = (data.page - 1) * data.limit;
 
-      for(var key in data){
-        if(data[key] !== null)
-          max = max + 1
+      const body = {
+        product_name: data.product_name,
+        color: data.color,
+        size: data.size,
+        category: data.category
       }
-
+      
+      for(var key in body){
+        if(body[key] !== null)
+        max = max + 1
+      }
+      
       const addCount = () => {
         counter = counter + 1;
         return "or ";
@@ -153,7 +160,7 @@ const productModel = {
           }` : ""
         }
         ${max < 1 ? `product_name ilike '%%'` : ""}
-        order by ${data.sortBy} ${data.sortOrder} limit ${data.limit} offset ${offset}
+        order by ${data.sortBy} ${data.sortOrd} limit ${data.limit} offset ${offset}
         `, (err, result) => {
         if (err) {
           reject(err)
