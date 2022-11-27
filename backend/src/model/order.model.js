@@ -31,19 +31,39 @@ const orderModel = {
         `select * from orders left join users on users.id_user = orders.userid
       left join product on product.id_product = orders.item where id_order = ${id}
       `,
-        (err, result) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(result);
-        }
-      );
-    });
-  },
-  selectUserOrder: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query(
-        `select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name, customer.image as buyer_image, seller.image as seller_image from orders join users as customer on customer.id_user = orders.userid join product on item = product.id_product join users as seller on seller.id_user = product.seller where userid = ${id}
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectUserOrder: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where userid = ${id};
+      `,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectAllOrderedProduct: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where orders.seller = ${id};
       `,
         (err, result) => {
           if (err) {
