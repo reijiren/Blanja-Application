@@ -2,6 +2,10 @@ import React from 'react'
 // images
 import menFormalSuit from "../../../../assets/images/men jacket jeans.png";
 import jacketJeans from "../../../../assets/images/men formal suit.png";
+// react redux
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { resetOrder } from '../../../../redux/action/order';
 
 const OrderCancel = () => {
   return (

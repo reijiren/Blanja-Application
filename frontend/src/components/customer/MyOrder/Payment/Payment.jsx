@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
-// images
+import React, { useEffect } from "react";
 import menFormalSuit from "../../../../assets/images/men jacket jeans.png";
-// action
-import { getOrderUser } from "../../../../redux/action/order";
+import jacketJeans from "../../../../assets/images/men formal suit.png";
+import { Link } from "react-router-dom";
 // react-redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+// action
+import { useState } from "react";
 
-const Allitems = () => {
-  const dispatch = useDispatch();
+const Payment = () => {
   const [orderUser, setOrderUser] = useState([]);
-  const { user } = useSelector((state) => {
-    return state.user;
-  });
-  const { order, isLoading, isError } = useSelector((state) => state.order);
-  useEffect(() => {
-    const id = user.id_customer;
-    dispatch(getOrderUser(id));
-  }, []);
-
+  const { order, isLoading } = useSelector((state) => state.order);
   useEffect(() => {
     setOrderUser(order);
   }, []);
-
   return (
     <>
       {/* head */}
@@ -40,8 +31,6 @@ const Allitems = () => {
         </div>
       </div>
       {/* head */}
-
-      {/* sect1 */}
       {isLoading ? (
         <div className="middle">
           <div className="bar bar1"></div>
@@ -54,10 +43,11 @@ const Allitems = () => {
           <div className="bar bar8"></div>
         </div>
       ) : (
-        <>
-          {orderUser.map((item, index) => (
-            <div key={index} className="wrapper-item-co row">
-              <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
+        orderUser.map((item, index) =>
+          item.status === 0 || item.status === 1 ? (
+            <>
+              <div key={index} className="wrapper-item-co row">
+                <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
                 {item.photo ? (
                   item.photo.split("||").map((e, i, arr) =>
                     // ambil data akhir
@@ -84,51 +74,56 @@ const Allitems = () => {
                 ) : (
                   <></>
                 )}
-              </div>
-              <div className="content-desc-item col-6 d-flex flex-column justify-content-center">
-                <div className="name-item">
+                </div>
+                <div className="content-desc-item col-6 d-flex flex-column justify-content-center">
+                  <div className="name-item">
+                    <p className={`fontBold h5`}>
+                      {item.product_name} - <span className="color">{item.item_color}</span>
+                    </p>
+                  </div>
+                  <div className="brand-item">
+                    <p className={`fontRegular text-muted h6`}>{item.seller_name}</p>
+                  </div>
+                </div>
+                <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
                   <p className={`fontBold h5`}>
-                    {item.product_name} -{" "}
-                    <span className="color">{item.item_color}</span>
+                    <span>$</span> {item.price}
                   </p>
                 </div>
-                <div className="brand-item seller-name">
-                  <p className={`fontRegular text-muted h6`}>
-                    {item.seller_name}
-                  </p>
+                <div className="col-2 d-flex align-items-center">
+                  <div className="status-wrapper d-flex flex-column align-items-center">
+                    {item.status === 0 ? (
+                      <>
+                        <p className="fontBold h5">unpaid</p>
+                        <Link
+                          to="/checkout"
+                          type="button"
+                          className="fontBold text-white text-center text-decoration-none"
+                          style={{
+                            border: "none",
+                            outline: "none",
+                            borderRadius: "25px",
+                            background: "#F01F0E",
+                            width: "100px",
+                          }}
+                        >
+                          pay now
+                        </Link>
+                      </>
+                    ) : (
+                      <p className="fontBold h5">paid</p>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
-                <p className={`fontBold h5`}>
-                  <span>$</span> {item.price}
-                </p>
-              </div>
-              <div className="col-2 d-flex align-items-center">
-                <p className="fontBold h">
-                  {item.status === 0 ? (
-                    <>unpaid</>
-                  ) : item.status === 1 ? (
-                    <>paid</>
-                  ) : item.status === 2 ? (
-                    <>packed</>
-                  ) : item.status === 3 ? (
-                    <>sent</>
-                  ) : item.status === 4 ? (
-                    <>complete</>
-                  ) : item.status === 5 ? (
-                    <>canceled</>
-                  ) : (
-                    <></>
-                  )}
-                </p>
-              </div>
-            </div>
-          ))}
-        </>
+            </>
+          ) : (
+            <></>
+          )
+        )
       )}
-      {/* sect1 */}
     </>
   );
 };
 
-export default Allitems;
+export default Payment;

@@ -341,6 +341,8 @@ const ProductEdit = () => {
                           {
                             dataProduct.photo ? dataProduct.photo.split("||").map((item, index,  arr) => (
                               arr.length-1 === index ? (
+                                // ambil data awal
+                                // index === 0 ? (
                               <>
                               <div className="img-review-1 d-flex justify-content-center mb-3">
                                 

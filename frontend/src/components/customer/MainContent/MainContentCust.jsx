@@ -11,9 +11,11 @@ import { useSelector, useDispatch } from "react-redux";
 // redux action
 import { detailById } from "../../../redux/action/user";
 import { getByMainAddress } from "../../../redux/action/address";
+import { getOrderUser } from "../../../redux/action/order";
 
 // conditional page
 const MainContentCust = () => {
+  const dispatch = useDispatch();
   const [showMyProfile, setShowMyProfile] = useState(false);
   const [showShippingAddress, setShowShippingAddress] = useState(false);
   const [showMyOrder, setShowMyOrder] = useState(false);
@@ -47,6 +49,7 @@ const MainContentCust = () => {
 
   useEffect(() => {
     setProfilePicture(user.image);
+    dispatch(getOrderUser(user.id_user))
   });
 
   return (

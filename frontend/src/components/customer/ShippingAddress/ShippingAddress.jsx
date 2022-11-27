@@ -15,11 +15,11 @@ const ShippingAddress = () => {
   const { address, isLoading, isError } = useSelector((state) => {
     return state.address;
   });
-  // useEffect(() => {
-  //   console.log(address);
-  //   console.log(isLoading);
-  //   console.log(isError);
-  // }, []);
+  useEffect(() => {
+    console.log("shipping", address);
+    // console.log(isLoading);
+    // console.log(isError);
+  }, []);
   return (
     <>
       {isLoading ? (
@@ -160,7 +160,7 @@ const ShippingAddress = () => {
                           </span>{" "}
                           <br />
                           <span className="tokopaedi-note">
-                            [Tokopaedi Note: {item.address}] {item.city},
+                            [Tokopaedi Note: {item.address_name}] {item.city},
                           </span>{" "}
                           <br />
                           {/* <span className="postal-code">{item.post_code}</span> */}
