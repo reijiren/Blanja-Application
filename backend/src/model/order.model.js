@@ -109,6 +109,7 @@ const orderModel = {
 						reject(err);
 					}
 					resolve(res);
+					console.log(data)
 				}
 			);
 		});
@@ -128,9 +129,9 @@ const orderModel = {
 		return new Promise((resolve, reject) => {
 			db.query(
 				`
-          INSERT INTO transactions (userid, id_order, payment_method, total_price,transaction_date)
+          INSERT INTO transactions (userid, id_order,id_address, payment_method, total_price,transaction_date)
           VALUES
-          (${data.userid}, ${data.id_order}, '${data.payment_method}', ${data.total_price}, now())
+          (${data.userid}, ${data.id_order},${data.id_address}, '${data.payment_method}', ${data.total_price}, now())
           `,
 				(err, res) => {
 					if (err) {
