@@ -17,7 +17,7 @@ module.exports = (io, socket) => {
         store(data)
         .then(async() => {
             const listChat = await list(data.sender, data.receiver)
-            io.to(data.receiver).emit('send-message-response', listChat.rows)
+            io.to(data.receiver).emit('send-message-response', listChat.rows);
         })
         .catch((err) => {
             console.log(err)
@@ -28,7 +28,6 @@ module.exports = (io, socket) => {
     socket.on("contact-history", async(data) => {
         try{
             const contactList = await userChat(data);
-            console.log(contactList);
             io.to(data).emit("send-message-response", contactList.rows);
         }catch(err){
             console.log('Error fetching contact history')
