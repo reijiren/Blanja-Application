@@ -30,7 +30,7 @@ create table product(
     condition integer, -- 0 baru, 1 bekas
     photo text,
     color text,
-    size integer, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
+    size text, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
     category text,
     description text
 );
@@ -41,7 +41,7 @@ create table orders(
     item integer references product(id_product) on delete cascade,
     quantity integer,
     item_color varchar(20),
-    item_size integer, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
+    item_size text, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
     status integer -- 0 unpaid, 1 paid, 2 packed, 3 sent, 4 complete, 5 canceled
 );
 

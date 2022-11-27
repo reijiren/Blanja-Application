@@ -1,67 +1,68 @@
-const db = require('../config/db')
+const db = require('../config/db');
 const productModel = {
-  // router 
+  // router
   selectAll: () => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM product join seller on seller.id_seller = product.seller join users on seller.id_seller = users.id_user', (err, result) => {
         if (err) {
-          reject(err)
+          reject(err);
         } else {
-          resolve(result)
+          resolve(result);
         }
-      })
-    })
+      });
+    });
   },
   selectDetail: (id) => {
     return new Promise((resolve, reject) => {
       db.query(`SELECT * FROM product where id_product =${id}`, (err, result) => {
         if (err) {
-          reject(err)
+          reject(err);
         }
-        resolve(result)
-      })
-    })
+        resolve(result);
+      });
+    });
   },
   selectJoin: (id) => {
     return new Promise((resolve, reject) => {
-      db.query(`select * from product left join seller on seller.id_seller = product.seller left join users on seller.id_seller = users.id_user where id_product=${id}`
-      , (err, result) => {
+      db.query(`select * from product left join seller on seller.id_seller = product.seller left join users on seller.id_seller = users.id_user where id_product=${id}`, (err, result) => {
         if (err) {
-          reject(err)
-        }
-        resolve(result)
-      })
-    })
-  },
-  checkProduct:(data)=>{
-    return new Promise((resolve, reject)=>{
-      db.query(`select * from product where product_name ilike '%${data}%'`
-      , (err, result)=>{
-        if (err) {
-          reject(err)
+          reject(err);
         }
         resolve(result);
-      })
-    })
-  },  
-  store: ( data) => {
+      });
+    });
+  },
+  checkProduct: (data) => {
     return new Promise((resolve, reject) => {
-      db.query(`
+      db.query(`select * from product where product_name ilike '%${data}%'`, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  },
+  store: (data) => {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `
             INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
             VALUES
-            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}',${data.size},'${data.category}','${data.description}')
-            `, (err, res) => {
-        if (err) {
-          reject(err)
+            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}','${data.size}','${data.category}','${data.description}')
+            `,
+        (err, res) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
         }
-        resolve(res)
-      }
-      )
-    })
+      );
+    });
   },
   updateProduct: (data) => {
     return new Promise((resolve, reject) => {
-      db.query(`
+      db.query(
+        `
         UPDATE product SET
         product_name = COALESCE ($1, product_name),
         price = COALESCE ($2, price),
@@ -74,38 +75,38 @@ const productModel = {
         description = COALESCE ($9, description)
         WHERE id_product = $10
         `,
-        [data.product_name, data.price , data.stock, data.condition, data.photo, data.color, data.size, data.category, data.description, data.id],
+        [data.product_name, data.price, data.stock, data.condition, data.photo, data.color, data.size, data.category, data.description, data.id],
         (err, res) => {
           if (err) {
-            reject(err)
+            reject(err);
           }
-          resolve(res)
+          resolve(res);
         }
-      )
-    })
+      );
+    });
   },
-  
+
   delete: (id) => {
     return new Promise((resolve, reject) => {
       db.query(`DELETE FROM product WHERE id_product = ${id};`, (err, res) => {
         if (err) {
-          reject(err)
+          reject(err);
         }
-        resolve(res)
-      })
-    })
+        resolve(res);
+      });
+    });
   },
 
   selectUserProduct: (id) => {
     return new Promise((resolve, reject) => {
       db.query(`SELECT * FROM product join seller on seller.id_seller = product.seller where seller = ${id}`, (err, result) => {
         if (err) {
-          reject(err)
+          reject(err);
         } else {
-          resolve(result)
+          resolve(result);
         }
-      })
-    })
+      });
+    });
   },
 
   searchProduct: (data) => {
@@ -113,53 +114,38 @@ const productModel = {
       let counter = 1;
       let max = 0;
 
-      for(var key in data){
-        if(data[key] !== null)
-          max = max + 1
+      const offset = (data.page - 1) * data.limit;
+
+      for (var key in data) {
+        if (data[key] !== null) max = max + 1;
       }
 
       const addCount = () => {
         counter = counter + 1;
-        return "or ";
+        return 'or ';
       };
 
-      db.query(`
+      db.query(
+        `
         SELECT * FROM product join seller on seller.id_seller = product.seller
         where
-        ${
-          data.product_name ?
-          `product_name ilike ${data.product_name} ${
-            counter < max ? addCount() : " "
-          }` : ""
+        ${data.product_name ? `product_name ilike ${data.product_name} ${counter < max ? addCount() : ' '}` : ''}
+        ${data.color ? `color ilike ${data.color} ${counter < max ? addCount() : ' '}` : ''}
+        ${data.size ? `size = ${data.size} ${counter < max ? addCount() : ' '}` : ''}
+        ${data.category ? `category ilike ${data.category} ${counter < max ? addCount() : ' '}` : ''}
+        ${max < 1 ? `product_name ilike '%%'` : ''}
+        order by ${data.sortBy} ${data.sortOrder} limit ${data.limit} offset ${offset}
+        `,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
         }
-        ${
-          data.color ?
-          `color ilike ${data.color} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
-        ${
-          data.size ?
-          `size = ${data.size} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
-        ${
-          data.category ?
-          `category ilike ${data.category} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
-        ${max < 1 ? `product_name ilike '%%'` : ""}
-        `, (err, result) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(result)
-        }
-      })
-    })
+      );
+    });
   },
-}
+};
 
-module.exports = productModel
+module.exports = productModel;
