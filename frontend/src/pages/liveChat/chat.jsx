@@ -32,24 +32,31 @@ const Chat = () => {
 
 	useEffect(() => {
 		if (user) {
-			const handleSuccess = (data) => {
-				setListContact(data.data);
+			const handleSuccess = async(data) => {
+				await setListContact(data.data);
 			};
 			dispatch(allChat(user.id_user, handleSuccess));
 		}
-	}, []);
+	}, [listChat]);
 
 	useEffect(() => {
 		const socket = io(process.env.REACT_APP_BACKEND_URL);
+		if(receiver.id_user){
+			socket.emit("join-room", user.id_user);
+		}
+
 		socket.on("send-message-response", (res) => {
 			dispatch(setChat(res));
 		});
+
+		socket.emit("contact-history", user.id_user);
+		
 		setSocketIO(socket);
 	}, []);
 
 	useEffect(() => {
 		if (socketIO && receiver) {
-			socketIO.emit("join-room", user.id_user);
+			// socketIO.emit("join-room", user.id_user);
 
 			const data = {
 				sender: user.id_user,
@@ -70,28 +77,30 @@ const Chat = () => {
 	const submitText = (e) => {
 		e.preventDefault();
 
-		const payload = {
-			sender: user.name,
-			senderid: user.id_user,
-			senderimg: user.image,
-			receiver: receiver.name,
-			receiverid: receiver.id_user,
-			receiverimg: receiver.image,
-			message: msg,
-			date_time: time,
-		};
-
-		dispatch(setChat([payload, ...listChat]));
-
-		const data = {
-			sender: user.id_user,
-			receiver: receiver.id_user,
-			message: msg,
-		};
-
-		socketIO.emit("send-message", data);
-
-		setMsg("");
+		if(msg !== ""){
+			const payload = {
+				sender: user.name,
+				senderid: user.id_user,
+				senderimg: user.image,
+				receiver: receiver.name,
+				receiverid: receiver.id_user,
+				receiverimg: receiver.image,
+				message: msg,
+				date_time: time,
+			};
+	
+			dispatch(setChat([payload, ...listChat]));
+	
+			const data = {
+				sender: user.id_user,
+				receiver: receiver.id_user,
+				message: msg,
+			};
+	
+			socketIO.emit("send-message", data);
+	
+			setMsg("");
+		}
 	};
 
 	return (
@@ -139,10 +148,11 @@ const Chat = () => {
 													<div className="mb-2">
 														{e.date_time.slice(11, 16)}
 													</div>
-													<div
+													{/* <div
 														className={`${style.bgRed} ${style.chatIn} text-center text-white text-truncate`}>
 														99
-													</div>
+													</div> */}
+													<div></div>
 												</div>
 											</div>
 										))
@@ -182,7 +192,7 @@ const Chat = () => {
 															alt=""
 														/>
 														<div
-															className={`${style.chatSender} bg-danger text-white`}>
+															className={`${style.chatSender} bg-danger text-white text-break`}>
 															{e.message}
 														</div>
 														<div className="pb-1" id={style.chatTime}>
@@ -194,7 +204,7 @@ const Chat = () => {
 														<div className="pb-1" id={style.chatTime}>
 															{e.date_time.slice(11, 16)}
 														</div>
-														<div className={`${style.chatReceiver}`}>
+														<div className={`${style.chatReceiver} text-break`}>
 															{e.message}
 														</div>
 														<img
