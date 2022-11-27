@@ -56,7 +56,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		if (socketIO && receiver) {
-			// socketIO.emit("join-room", user.id_user);
+			socketIO.emit("join-room", user.id_user);
 
 			const data = {
 				sender: user.id_user,
