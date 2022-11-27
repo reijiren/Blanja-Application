@@ -27,8 +27,7 @@ const MyProfile = () => {
 
   // logic page
   const [dataUser, setDataUser] = useState([]);
-  const [male, setMale] = useState(false);
-  const [female, setFemale] = useState(false);
+  const [genderBool, setBool] = useState();
   const [image, setImage] = useState();
   const dispatch = useDispatch();
 
@@ -54,16 +53,24 @@ const MyProfile = () => {
 
   // toggle check gender
   const toggleCheckedMale = () => {
-    setMale((prevstate) => !prevstate);
-    if (male) {
-      setForm({ ...form, gender: 0 });
+    setBool(true)
+    if (genderBool == true) {
+      setForm({...form, gender: 0})
+    } else if (genderBool == false) {
+      setForm({...form, gender: 1})
+    } else {
+      setForm({...form, gender: null})
     }
   };
 
   const toggleCheckedFemale = () => {
-    setFemale((prevstate) => !prevstate);
-    if (female) {
-      setForm({ ...form, gender: 1 });
+    setBool(false)
+    if (genderBool == true) {
+      setForm({...form, gender: 0})
+    } else if (genderBool == false) {
+      setForm({...form, gender: 1})
+    } else {
+      setForm({...form, gender: null})
     }
   };
 
@@ -88,6 +95,8 @@ const MyProfile = () => {
       };
       dispatch(updateImageUser(id, body, handleSuccess));
     }
+    console.log(genderBool)
+    
 
 
     const handleSuccess = (data) => {
@@ -216,23 +225,13 @@ const MyProfile = () => {
                       <div className="col-8 d-flex gap-3">
                         <div className="radio-1 d-flex flex-row gap-2">
                           <div className="input-radio">
-                            {dataUser.gender === 0 ? (
                               <input
                                 className="form-check-input"
                                 type="radio"
                                 name="gender"
                                 id="laki-laki"
-                                onChange={toggleCheckedMale}
+                                onClick={toggleCheckedMale}
                               />
-                            ) : (
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="gender"
-                                id="laki-laki"
-                                onChange={toggleCheckedMale}
-                              />
-                            )}
                           </div>
                           <div className="label-radio">
                             <label
@@ -245,7 +244,7 @@ const MyProfile = () => {
                         </div>
                         <div className="radio-2 d-flex flex-row gap-2">
                           <div className="input-radio">
-                            {dataUser.gender == 1 ? (
+                           
                               <input
                                 className="form-check-input"
                                 type="radio"
@@ -253,15 +252,7 @@ const MyProfile = () => {
                                 id="perempuan"
                                 onClick={toggleCheckedFemale}
                               />
-                            ) : (
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="gender"
-                                id="perempuan"
-                                onClick={toggleCheckedFemale}
-                              />
-                            )}
+                             
                           </div>
                           <div className="label-radio">
                             <label
@@ -273,6 +264,9 @@ const MyProfile = () => {
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="mb-3 row additional-desc">
+                      <p className="fontBold fst-italic" style={{color:"#F01F0E "}}>double click to make sure changes</p>
                     </div>
                     <div className="mb-3 row">
                       <label
