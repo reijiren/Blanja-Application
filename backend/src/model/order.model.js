@@ -15,6 +15,20 @@ const orderModel = {
 			);
 		});
 	},
+	selectAllnih: () => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				"SELECT * FROM orders",
+				(err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				}
+			);
+		});
+	},
 	selectDetail: (id) => {
 		return new Promise((resolve, reject) => {
 			db.query(`SELECT * FROM orders where id_order =${id}`, (err, result) => {
@@ -43,7 +57,11 @@ const orderModel = {
 	selectUserOrder: (id) => {
 		return new Promise((resolve, reject) => {
 			db.query(
-				`select * from orders join users on users.id_user = orders.userid join product on item = product.id_product where userid = ${id}
+			`select orders.*, product.*, customer.name as buyer_name, 
+			seller.name as seller_name, customer.image as buyer_image, 
+			seller.image as seller_image from orders join users as customer 
+			on customer.id_user = orders.userid join product on item = product.id_product 
+			join users as seller on seller.id_user = product.seller where userid = ${id};
       `,
 				(err, result) => {
 					if (err) {
@@ -89,6 +107,7 @@ const orderModel = {
 						reject(err);
 					}
 					resolve(res);
+					console.log(data)
 				}
 			);
 		});
@@ -108,9 +127,9 @@ const orderModel = {
 		return new Promise((resolve, reject) => {
 			db.query(
 				`
-          INSERT INTO transactions (userid, id_order, payment_method, total_price,transaction_date)
+          INSERT INTO transactions (userid, id_order,id_address, payment_method, total_price,transaction_date)
           VALUES
-          (${data.userid}, ${data.id_order}, '${data.payment_method}', ${data.total_price}, now())
+          (${data.userid}, ${data.id_order},${data.id_address}, '${data.payment_method}', ${data.total_price}, now())
           `,
 				(err, res) => {
 					if (err) {
