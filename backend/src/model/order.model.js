@@ -43,11 +43,27 @@ const orderModel = {
 	selectUserOrder: (id) => {
 		return new Promise((resolve, reject) => {
 			db.query(
-			`select orders.*, product.*, customer.name as buyer_name, 
-			seller.name as seller_name, customer.image as buyer_image, 
-			seller.image as seller_image from orders join users as customer 
-			on customer.id_user = orders.userid join product on item = product.id_product 
-			join users as seller on seller.id_user = product.seller where userid = ${id};
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where userid = ${id};
+      `,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectAllOrderedProduct: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where product.seller = ${id};
       `,
 				(err, result) => {
 					if (err) {
@@ -64,7 +80,7 @@ const orderModel = {
 				`
           INSERT INTO orders (userid, item, quantity, item_color, item_size, status)
           VALUES
-          (${data.userid}, ${data.item}, ${data.quantity}, '${data.color}', ${data.size}, ${data.status})
+          (${data.userid}, ${data.item}, ${data.quantity}, '${data.color}', '${data.size}', ${data.status})
           `,
 				(err, res) => {
 					if (err) {

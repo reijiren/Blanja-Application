@@ -24,7 +24,7 @@ const productModel = {
   },
   selectJoin: (id) => {
     return new Promise((resolve, reject) => {
-      db.query(`select * from product left join seller on seller.id_seller = product.seller where id_product=${id}`
+      db.query(`select * from product left join seller on seller.id_seller = product.seller left join users on seller.id_seller = users.id_user where id_product=${id}`
       , (err, result) => {
         if (err) {
           reject(err)
@@ -49,7 +49,7 @@ const productModel = {
       db.query(`
             INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
             VALUES
-            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}',${data.size},'${data.category}','${data.description}')
+            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}','${data.size}','${data.category}','${data.description}')
             `, (err, res) => {
         if (err) {
           reject(err)
@@ -113,11 +113,20 @@ const productModel = {
       let counter = 1;
       let max = 0;
 
-      for(var key in data){
-        if(data[key] !== null)
-          max = max + 1
-      }
+      const offset = (data.page - 1) * data.limit;
 
+      const body = {
+        product_name: data.product_name,
+        color: data.color,
+        size: data.size,
+        category: data.category
+      }
+      
+      for(var key in body){
+        if(body[key] !== null)
+        max = max + 1
+      }
+      
       const addCount = () => {
         counter = counter + 1;
         return "or ";
@@ -151,6 +160,7 @@ const productModel = {
           }` : ""
         }
         ${max < 1 ? `product_name ilike '%%'` : ""}
+        order by ${data.sortBy} ${data.sortOrd} limit ${data.limit} offset ${offset}
         `, (err, result) => {
         if (err) {
           reject(err)

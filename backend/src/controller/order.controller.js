@@ -48,6 +48,17 @@ const orderController = {
         failed(res, err.message, 'failed', `failed to get order detail`);
     })
   },
+  allOrderedProduct: (req, res) => {
+    const id = req.params.id;
+
+    orderModel.selectAllOrderedProduct(id)
+    .then((result) => {
+        success(res, result.rows, 'success', `get seller's ordered product success`);
+    })
+    .catch((err) => {
+        failed(res, err.message, 'failed', `failed to get seller's ordered product`);
+    })
+  },
   insert: (req, res) => {
     try {
       const {userid, item, quantity, color, size, status} = req.body;
