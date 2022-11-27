@@ -151,7 +151,7 @@ const Landing = () => {
 											<h4 className="card-text text-danger">
 												$ {item.price}.0
 											</h4>
-											<p className={styles.p}>Zalora Cloth</p>
+											<p className={styles.p}>{item.name}</p>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												width="16"
