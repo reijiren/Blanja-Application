@@ -155,7 +155,7 @@ const CheckOut = () => {
               dataOrder.map((item, index) => (
                 <div key={index}>
                     {/* dari sini */}
-                  {item.status === 1 && (
+                  {item.status === 0 && (
                     <div className="item-co-user mb-3">
                     <div className="wrapper m-4">
                       <div className="wrapper-item-co row">
