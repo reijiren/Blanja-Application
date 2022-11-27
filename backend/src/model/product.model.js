@@ -49,7 +49,7 @@ const productModel = {
       db.query(`
             INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
             VALUES
-            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}',${data.size},'${data.category}','${data.description}')
+            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}','${data.size}','${data.category}','${data.description}')
             `, (err, res) => {
         if (err) {
           reject(err)
@@ -113,6 +113,8 @@ const productModel = {
       let counter = 1;
       let max = 0;
 
+      const offset = (data.page - 1) * data.limit;
+
       for(var key in data){
         if(data[key] !== null)
           max = max + 1
@@ -151,6 +153,7 @@ const productModel = {
           }` : ""
         }
         ${max < 1 ? `product_name ilike '%%'` : ""}
+        order by ${data.sortBy} ${data.sortOrder} limit ${data.limit} offset ${offset}
         `, (err, result) => {
         if (err) {
           reject(err)
