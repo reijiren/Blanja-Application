@@ -17,20 +17,27 @@ import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
   const [data2, setData2] = useState([]);
-  const [data, setData] = useState()
+  let total = 0;
   const id = useSelector((state) => state.user.user.id_user)
+  
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/orderproduct/${id}`)
+    if(id){
+      axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${id}`)
       .then((response) => {
-        // console.log(response.data.token.data)
-        console.log(response.data.data);
         setData2(response.data.data);
+        localStorage.setItem('data5', JSON.stringify(response.data.data));
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   }, []);
+
+  const add = (num) => {
+    total += num;
+  }
+
   return (
     <div className={`vw-100 vh-100`}>
 			<Navs />
@@ -113,6 +120,9 @@ const CheckOut = () => {
             </div>
             {/* item check out user session */}
             {data2 &&
+              data2.length === 0 ? (
+                <div>Orders not found</div>
+              ) :
               data2.map((item, index) => (
                 <div key={index}>
                   {/* dari sini */}
@@ -121,7 +131,7 @@ const CheckOut = () => {
                       <div className="wrapper-item-co row">
                         <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
                           <img
-                            src={menFormalSuit}
+                            src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
                             alt="item co"
                             style={{
                               height: "100px",
@@ -134,7 +144,7 @@ const CheckOut = () => {
                           <div className="name-item">
                             <p className={`fontBold h5`}>
                               {item.product_name} -{" "}
-                              <span className="color">{item.color}</span>
+                              <span className="color">{item.item_color}</span>
                             </p>
                           </div>
                           <div className="brand-item">
@@ -145,7 +155,7 @@ const CheckOut = () => {
                         </div>
                         <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
                           <p className={`fontBold h5`}>
-                            <span>$ </span>{item.quantity*item.price}{" "}
+                            <span>$ </span>{item.quantity*item.price}{" "}{add(item.quantity * item.price)}
                           </p>
                         </div>
                       </div>
@@ -154,41 +164,6 @@ const CheckOut = () => {
                   {/* sampe sini */}
                 </div>
               ))}
-
-            <div className="item-co-user mb-3">
-              <div className="wrapper m-4">
-                <div className="wrapper-item-co row">
-                  <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
-                    <img
-                      src={menFormalSuit}
-                      alt="item co"
-                      style={{
-                        height: "100px",
-                        width: "100px",
-                        borderRadius: "15px",
-                      }}
-                    />
-                  </div>
-                  <div className="content-desc-item col-8 d-flex flex-column justify-content-center">
-                    <div className="name-item">
-                      <p className={`fontBold h5`}>
-                        Mens formal suit - <span className="color">Black</span>
-                      </p>
-                    </div>
-                    <div className="brand-item">
-                      <p className={`fontRegular text-muted h6`}>
-                        Zalora Cloth
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-2 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center">
-                    <p className={`fontBold h5`}>
-                      <span>$</span> 20.0{" "}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
             {/* end of item check out user session */}
           </div>
         </div>
@@ -209,7 +184,7 @@ const CheckOut = () => {
                   </div>
                   <div className="col-4 d-flex justify-content-center align-items-center">
                     <p className={`fontBold h5`}>
-                      <span>$ </span>40.0
+                      <span>$ </span>{total}.0
                     </p>
                   </div>
                 </div>
@@ -219,7 +194,7 @@ const CheckOut = () => {
                   </div>
                   <div className="col-4 d-flex justify-content-center align-items-center">
                     <p className={`fontBold h5`}>
-                      <span>$ </span>5.0
+                      <span>$ </span>{total * 5/100}
                     </p>
                   </div>
                 </div>
@@ -230,7 +205,7 @@ const CheckOut = () => {
                   </div>
                   <div className="col-4 d-flex justify-content-center align-items-center">
                     <p className={`fontBold textRedPucat h5`}>
-                      <span>$ </span>45.0
+                      <span>$ </span>{total + (total * 5/100)}
                     </p>
                   </div>
                 </div>
@@ -241,6 +216,7 @@ const CheckOut = () => {
                     style={{ height: "50px" }}
                     data-bs-toggle="modal"
                     data-bs-target="#selectPayment"
+                    disabled={total === 0 ? true : false}
                   >
                     Select payment
                   </button>

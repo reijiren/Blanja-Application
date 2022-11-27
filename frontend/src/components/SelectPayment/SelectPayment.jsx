@@ -10,42 +10,34 @@ import { useSelector } from 'react-redux';
 
 const SelectPayment = () => {
   const data = JSON.parse(localStorage.getItem("data5"))
-  console.log(data)
   const [method, setMethod]=useState(null);
   const user = useSelector((state)=>state.user.user);
-  // console.log(user)
 
-  const handlePost = (e) => {
-      // e.preventDefault();
-      // console.log(data[0].stock)
+  const handlePost = async() => {
       console.log(data)
       alert(method)
-      // console.log(data2[0].id_user)
-      for(let item in data){
+
+      await data.map((e, i) => {
         const body = {
-          userid:user.id_user,
-          id_order: item.id_order,
-          payment_method:method ,
-          quantity:item.quantity,
-          price:item.price,
-          id:item.id_product,
-          stockProduk:item.stock
-          };
-          // console.log
-      }
-      
-      // axios
-      //   .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body,)
-      //   .then((res) => {
-      //     // console.log(res.data);
-      //     // alert("Recipe added successfully");
-  
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     alert("Failed to add Transaction");
-      //   });
-      alert("hai")
+          userid: user.id_user,
+          id_order: e.id_order,
+          payment_method: method,
+          quantity: e.quantity,
+          price: e.price,
+          id: e.id_product,
+          stockProduk: e.stock
+        };
+
+        axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body)
+        .then((res) => {
+          alert("Transaction " + i + " added successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Failed to add Transaction");
+        });
+      })
     };
   return (
     <div className="modal-dialog responsive-select-payment" style={{ maxWidth: "50%" }}>

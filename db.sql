@@ -67,7 +67,7 @@ create table chat(
 create table transactions(
     id serial primary key,
     userid integer references users(id_user) on delete cascade,
-    id_order text,
+    id_order integer references orders(id_order) on delete cascade,
     payment_method varchar(30),
     total_price integer,
     transaction_date date

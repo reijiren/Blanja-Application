@@ -43,7 +43,27 @@ const orderModel = {
 	selectUserOrder: (id) => {
 		return new Promise((resolve, reject) => {
 			db.query(
-				`select * from orders join users on users.id_user = orders.userid where userid = ${id}
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where userid = ${id};
+      `,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectAllOrderedProduct: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where orders.seller = ${id};
       `,
 				(err, result) => {
 					if (err) {
@@ -58,7 +78,7 @@ const orderModel = {
 		return new Promise((resolve, reject) => {
 			db.query(
 				`
-          INSERT INTO orders (userid, item, quantity, color, size, status)
+          INSERT INTO orders (userid, item, quantity, item_color, item_size, status)
           VALUES
           (${data.userid}, ${data.item}, ${data.quantity}, '${data.color}', ${data.size}, ${data.status})
           `,
@@ -78,8 +98,8 @@ const orderModel = {
 				`
         UPDATE orders SET
         quantity = COALESCE ($1, quantity),
-        color = COALESCE ($2, color),
-        size = COALESCE ($3, size),
+        item_color = COALESCE ($2, item_color),
+        item_size = COALESCE ($3, item_size),
         status = COALESCE ($4, status)
         WHERE id_order = $5
         `,

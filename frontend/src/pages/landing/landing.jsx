@@ -129,7 +129,7 @@ const Landing = () => {
 							<p>You’ve never seen it before!</p>
 						</div>
 					</div>
-					<div className="col-md-12">
+					<div className="col-md-12 d-flex flex-row gap-4 flex-wrap">
 						{getProduct && getProduct.length === 0 ? (
 							<div>product is empty</div>
 						) : (
@@ -151,7 +151,7 @@ const Landing = () => {
 											<h4 className="card-text text-danger">
 												$ {item.price}.0
 											</h4>
-											<p className={styles.p}>Zalora Cloth</p>
+											<p className={styles.p}>{item.name}</p>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												width="16"
@@ -212,7 +212,7 @@ const Landing = () => {
 						</div>
 					</div>
 
-					<div className="col-md-12">
+					<div className="col-md-12 d-flex flex-row flex-wrap gap-4">
 						{getProduct && getProduct.length === 0 ? (
 							<div>product is empty</div>
 						) : (

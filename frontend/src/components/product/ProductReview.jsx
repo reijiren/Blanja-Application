@@ -28,7 +28,7 @@ const ProductReview = () => {
 					<div>
 						<h5 className="fontMedium">Condition</h5>
 						{details.condition == 1 ? (
-							<p className={`fontMedium text-danger ${style.ups}`}>Used</p>
+							<p className={`fontMedium text-danger ${style.ups}`}>Old</p>
 						) : (
 							<p className={`fontMedium text-danger ${style.ups}`}>New</p>
 						)}
