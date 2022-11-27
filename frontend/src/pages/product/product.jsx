@@ -15,8 +15,8 @@ const Product = () => {
 	const [jumlah, setJumlah] = useState(1);
 	const { id_product } = useParams();
 	const [details, setDetails] = useState({});
+	const [size, setSize] = useState();
 	const dispatch = useDispatch();
-	console.log(details);
 
 	const user = useSelector((state) => state.user.user);
 
@@ -35,8 +35,6 @@ const Product = () => {
 	const [product, setProduct] = useState({
 		userid: user.id_user,
 		item: parseInt(id_product),
-		size: 1,
-		status: 0,
 	});
 
 	const onSubmit = (e) => {
@@ -45,7 +43,7 @@ const Product = () => {
 		const body = {
 			userid: product.userid,
 			item: product.item,
-			size: product.size,
+			size: size,
 			color: active,
 			quantity: jumlah,
 			status: product.status,
@@ -59,8 +57,6 @@ const Product = () => {
 			.catch((error) => {
 				console.log(error);
 			});
-
-		console.log(body);
 	};
 
 	const chatSeller = () => {
@@ -151,23 +147,40 @@ const Product = () => {
 												<div className="col-6 col-md-4">
 													<p className="fontBold">Size</p>
 													<div className="d-flex flex-row col-11">
-														<select
-															className="form-select"
-															aria-label="Default select example"
-															onChange={(e) =>
-																setProduct({
-																	...product,
-																	size: parseInt(e.target.value),
-																})
-															}>
-															<option defaultValue={1} value={parseInt(1)}>
-																SX
-															</option>
-															<option value={2}>S</option>
-															<option value={3}>M</option>
-															<option value={4}>L</option>
-															<option value={5}>XL</option>
-														</select>
+														{details.id_product &&
+															details.size.split(",").map((item, index) => (
+																<div key={index}>
+																	<div
+																		onClick={() => setSize(item)}
+																		className="me-2">
+																		{item == size ? (
+																			<div className="btn btn-danger">
+																				{item == 1
+																					? "XS"
+																					: item == 2
+																					? "S"
+																					: item == 3
+																					? "M"
+																					: item == 4
+																					? "L"
+																					: "XL"}
+																			</div>
+																		) : (
+																			<div className="btn btn-secondary">
+																				{item == 1
+																					? "XS"
+																					: item == 2
+																					? "S"
+																					: item == 3
+																					? "M"
+																					: item == 4
+																					? "L"
+																					: "XL"}
+																			</div>
+																		)}
+																	</div>
+																</div>
+															))}
 													</div>
 												</div>
 												<div className="col-6 col-md-4">

@@ -1,67 +1,80 @@
-const db = require('../config/db')
+const db = require("../config/db");
 const productModel = {
-  // router 
-  selectAll: () => {
-    return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM product join seller on seller.id_seller = product.seller join users on seller.id_seller = users.id_user', (err, result) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(result)
-        }
-      })
-    })
-  },
-  selectDetail: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query(`SELECT * FROM product where id_product =${id}`, (err, result) => {
-        if (err) {
-          reject(err)
-        }
-        resolve(result)
-      })
-    })
-  },
-  selectJoin: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query(`select * from product left join seller on seller.id_seller = product.seller where id_product=${id}`
-      , (err, result) => {
-        if (err) {
-          reject(err)
-        }
-        resolve(result)
-      })
-    })
-  },
-  checkProduct:(data)=>{
-    return new Promise((resolve, reject)=>{
-      db.query(`select * from product where product_name ilike '%${data}%'`
-      , (err, result)=>{
-        if (err) {
-          reject(err)
-        }
-        resolve(result);
-      })
-    })
-  },  
-  store: ( data) => {
-    return new Promise((resolve, reject) => {
-      db.query(`
+	// router
+	selectAll: () => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				"SELECT * FROM product join seller on seller.id_seller = product.seller join users on seller.id_seller = users.id_user",
+				(err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				}
+			);
+		});
+	},
+	selectDetail: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`SELECT * FROM product where id_product =${id}`,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectJoin: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select * from product left join seller on seller.id_seller = product.seller where id_product=${id}`,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	checkProduct: (data) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select * from product where product_name ilike '%${data}%'`,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	store: (data) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
             INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
             VALUES
-            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}',${data.size},'${data.category}','${data.description}')
-            `, (err, res) => {
-        if (err) {
-          reject(err)
-        }
-        resolve(res)
-      }
-      )
-    })
-  },
-  updateProduct: (data) => {
-    return new Promise((resolve, reject) => {
-      db.query(`
+            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}','${data.size}','${data.category}','${data.description}')
+            `,
+				(err, res) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(res);
+				}
+			);
+		});
+	},
+	updateProduct: (data) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
         UPDATE product SET
         product_name = COALESCE ($1, product_name),
         price = COALESCE ($2, price),
@@ -74,92 +87,108 @@ const productModel = {
         description = COALESCE ($9, description)
         WHERE id_product = $10
         `,
-        [data.product_name, data.price , data.stock, data.condition, data.photo, data.color, data.size, data.category, data.description, data.id],
-        (err, res) => {
-          if (err) {
-            reject(err)
-          }
-          resolve(res)
-        }
-      )
-    })
-  },
-  
-  delete: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query(`DELETE FROM product WHERE id_product = ${id};`, (err, res) => {
-        if (err) {
-          reject(err)
-        }
-        resolve(res)
-      })
-    })
-  },
+				[
+					data.product_name,
+					data.price,
+					data.stock,
+					data.condition,
+					data.photo,
+					data.color,
+					data.size,
+					data.category,
+					data.description,
+					data.id,
+				],
+				(err, res) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(res);
+				}
+			);
+		});
+	},
 
-  selectUserProduct: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query(`SELECT * FROM product join seller on seller.id_seller = product.seller where seller = ${id}`, (err, result) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(result)
-        }
-      })
-    })
-  },
+	delete: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(`DELETE FROM product WHERE id_product = ${id};`, (err, res) => {
+				if (err) {
+					reject(err);
+				}
+				resolve(res);
+			});
+		});
+	},
 
-  searchProduct: (data) => {
-    return new Promise((resolve, reject) => {
-      let counter = 1;
-      let max = 0;
+	selectUserProduct: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`SELECT * FROM product join seller on seller.id_seller = product.seller where seller = ${id}`,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				}
+			);
+		});
+	},
 
-      for(var key in data){
-        if(data[key] !== null)
-          max = max + 1
-      }
+	searchProduct: (data) => {
+		return new Promise((resolve, reject) => {
+			let counter = 1;
+			let max = 0;
 
-      const addCount = () => {
-        counter = counter + 1;
-        return "or ";
-      };
+			for (var key in data) {
+				if (data[key] !== null) max = max + 1;
+			}
 
-      db.query(`
+			const addCount = () => {
+				counter = counter + 1;
+				return "or ";
+			};
+
+			db.query(
+				`
         SELECT * FROM product join seller on seller.id_seller = product.seller
         where
         ${
-          data.product_name ?
-          `product_name ilike ${data.product_name} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
+					data.product_name
+						? `product_name ilike ${data.product_name} ${
+								counter < max ? addCount() : " "
+						  }`
+						: ""
+				}
         ${
-          data.color ?
-          `color ilike ${data.color} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
+					data.color
+						? `color ilike ${data.color} ${counter < max ? addCount() : " "}`
+						: ""
+				}
         ${
-          data.size ?
-          `size = ${data.size} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
+					data.size
+						? `size = ${data.size} ${counter < max ? addCount() : " "}`
+						: ""
+				}
         ${
-          data.category ?
-          `category ilike ${data.category} ${
-            counter < max ? addCount() : " "
-          }` : ""
-        }
+					data.category
+						? `category ilike ${data.category} ${
+								counter < max ? addCount() : " "
+						  }`
+						: ""
+				}
         ${max < 1 ? `product_name ilike '%%'` : ""}
-        `, (err, result) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(result)
-        }
-      })
-    })
-  },
-}
+        `,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(result);
+					}
+				}
+			);
+		});
+	},
+};
 
-module.exports = productModel
+module.exports = productModel;
