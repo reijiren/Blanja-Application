@@ -9,9 +9,9 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const SelectPayment = () => {
-  const data = JSON.parse(localStorage.getItem("data5"))
-  const data2 = JSON.parse(localStorage.getItem("data4"))
-  const data3 = JSON.parse(localStorage.getItem("data6"))
+  const dataOrder = JSON.parse(localStorage.getItem("order"))
+  const Total_Bayar = JSON.parse(localStorage.getItem("Pembayaran"))
+  const addres = JSON.parse(localStorage.getItem("address"))
   const [method, setMethod]=useState(null);
   const user = useSelector((state)=>state.user.user);
   // alert(data2)
@@ -21,11 +21,11 @@ const SelectPayment = () => {
       
       // alert(method)
 
-      await data.map((e, i) => {
+      await dataOrder.map((e, i) => {
         const body = {
           userid: user.id_user,
           id_order: e.id_order,
-          id_address:data3.id_address,
+          id_address:addres.id_address,
           payment_method: method,
           quantity: e.quantity,
           price: e.price,
@@ -165,7 +165,7 @@ const SelectPayment = () => {
                                   </div>
                                   <div className="col-6 text-end">
                                     <p className="fontBold h5">
-                                      $ <span>{data2}</span>
+                                      $ <span>{Total_Bayar}</span>
                                     </p>
                                   </div>
                                 </div>
@@ -190,7 +190,7 @@ const SelectPayment = () => {
                                       <p className="fontBold h5">Shopping summary</p>  
                                     </div>
                                     <div className="total-shopping">
-                                      <p className="textRedPucat fontBold h5">$ <span>{data2+(5/100*data2)}</span></p>
+                                      <p className="textRedPucat fontBold h5">$ <span>{Total_Bayar+(5/100*Total_Bayar)}</span></p>
                                     </div>
                                   </div>
                                   <div className="col-6 d-flex flex-row-reverse align-items-center">

@@ -16,67 +16,64 @@ import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
 import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
-  const [data2, setData2] = useState([]);
-  const [data, setData] = useState([]);
+  const [dataOrder, setDataOrder] = useState([]);
+  const [dataAddres, setDataAddres] = useState([]);
   let total = 0;
-  const id = useSelector((state) => state.user.user.id_user)
-  const id2 = useSelector((state) => state.user.user.main_address)
-  console.log(id2)
+  const idUser = useSelector((state) => state.user.user.id_user)
+  const idAddres = useSelector((state) => state.user.user.main_address)
   
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${id}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${idUser}`)
       .then((response) => {
         // console.log(response.data.token.data)
         // console.log(response.data.data);
-        setData2(response.data.data)
-        localStorage.setItem('data5', JSON.stringify(response.data.data));
+        setDataOrder(response.data.data)
+        localStorage.setItem('order', JSON.stringify(response.data.data));
       })
       .catch((err) => {
         console.log(err); 
       });
-    },[]);
+    },[idUser]);
     useEffect(() => {
       // console.log(id2)
       axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/address/${id2}`)
+        .get(`${process.env.REACT_APP_BACKEND_URL}/address/${idAddres}`)
         .then((response) => {
           // console.log(response.data.token.data)
           console.log(response.data);
-          setData(response.data.data)
-          localStorage.setItem('data6', JSON.stringify(response.data.data[0]));
+          setDataAddres(response.data.data)
+          localStorage.setItem('address', JSON.stringify(response.data.data[0]));
         })
         .catch((err) => {
           console.log(err);
         });
-      },[]);
+      },[idAddres]);
   
 
   const add = (num) => {
     total += num;
     // console.log(total)
-    localStorage.setItem('data4', JSON.stringify(total));
+    localStorage.setItem('Pembayaran', JSON.stringify(total));
   }
   // console.log(total)
   return (
     <div className={`vw-100 vh-100`}>
-      {JSON.stringify(data)}
-			<Navs />s
+			<Navs />
       <div className={`content-wrapper row`}>
         <div className="content-aside-left col-8 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-8 d-flex justify-content-center align-items-center ">
           <div className="wrapper d-flex flex-column w-75">
             <div className="title mt-5 mb-3">
-
               <p className={`fontBold h1`}>Checkout</p>
             </div>
             <div className="title-desc mb-3">
               <p className={`fontRegular fw-bold h5`}>Shipping Address</p>
             </div>
-            {data &&
-              data.length === 0 ? (
+            {dataAddres &&
+              dataAddres.length === 0 ? (
                 <div>Orders not found</div>
               ) :
-              data.map((item, index) => (
+              dataAddres.map((item, index) => (
                 <div key={index}>
                   <div className={`address-desc mb-3`}>
               <div className="wrapper m-4">
@@ -151,11 +148,11 @@ const CheckOut = () => {
               }
             
             {/* item check out user session */}
-            {data2 &&
-              data2.length === 0 ? (
+            {dataOrder &&
+              dataOrder.length === 0 ? (
                 <div>Orders not found</div>
               ) :
-              data2.map((item, index) => (
+              dataOrder.map((item, index) => (
                 <div key={index}>
                     {/* dari sini */}
                   {item.status === 1 && (
