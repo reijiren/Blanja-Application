@@ -51,7 +51,7 @@ const orderController = {
   allOrderedProduct: (req, res) => {
     const id = req.params.id;
 
-    orderModel.selectUserOrder(id)
+    orderModel.selectAllOrderedProduct(id)
     .then((result) => {
         success(res, result.rows, 'success', `get seller's ordered product success`);
     })

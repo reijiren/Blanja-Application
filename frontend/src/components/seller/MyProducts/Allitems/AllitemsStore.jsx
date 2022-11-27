@@ -109,7 +109,7 @@ const AllitemsStore = () => {
                       {item.photo ? (
                         item.photo.split("||").map(
                           (e, i, arr) => (
-                            <div className="img-review col-4 mb-5">
+                            <div className="img-review col-12 mb-5">
                               <img
                                 src={`${process.env.REACT_APP_BACKEND_URL}/${e}`}
                                 alt="mens formal suit"

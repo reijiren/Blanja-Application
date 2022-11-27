@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // images
 import johanesMikael from "../../../assets/images/johanes mikael.png";
@@ -7,8 +7,11 @@ import MyProfileStore from "../MyProfileStore/MyProfileStore";
 import MyProducts from "../MyProducts/MyProducts";
 import SellingProduct from "../SellingProduct/SellingProduct";
 import MyOrderStore from "../MyOrder/MyOrderStore";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+// react redux
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProduct } from "../../../redux/action/product";
+import { getOrderUser } from "../../../redux/action/order";
+
 
 const MainContentSeller = () => {
   const [showMyProfileStore, setShowMyProfileStore] = useState(false);
@@ -46,12 +49,15 @@ const MainContentSeller = () => {
   };
 
   const { user, isLoading, isError } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const onLoaddata = async () => {
       await setDataUser(user);
     }
     onLoaddata();
+    dispatch(getUserProduct(user.id_user))
+    dispatch(getOrderUser(user.id_user))
   }, [])
 
   return (
