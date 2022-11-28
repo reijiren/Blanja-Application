@@ -64,12 +64,12 @@ create table chat(
     date_time date
 );
 
-    create table transactions(
-        id serial primary key,
-        userid integer references users(id_user) on delete cascade,
-        id_order integer references orders(id_order) on delete cascade,
-        id_address integer references address(id_address) ,
-        payment_method varchar(30),
-        total_price integer,
-        transaction_date date
-    );
+create table transactions(
+    id serial primary key,
+    userid integer references users(id_user) on delete cascade,
+    id_order integer references orders(id_order) on delete cascade,
+    id_address integer references address(id_address),
+    payment_method varchar(30),
+    total_price integer,
+    transaction_date date
+);
