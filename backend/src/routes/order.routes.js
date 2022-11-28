@@ -5,6 +5,7 @@ const router = express.Router()
 
 router
   .get('/order', list)
+  // .get('/order/lagi', list2)
   .get('/order/user/:id', detailUserOrder)
   .get('/order/userstatus/:id', detailUserOrderWithStatus)
   .get('/order/seller/:id', allOrderedProduct)

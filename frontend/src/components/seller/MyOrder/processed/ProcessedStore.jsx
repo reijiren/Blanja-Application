@@ -16,11 +16,11 @@ const ProcessedStore = () => {
   const packageOrder = (id, index) => {
     const handleSuccess = (data) => {
       // console.log(data);
-      alert(`order product: ${orderUser[index].product_name}, with ID: BLANJA-00${orderUser[index].id_order} accepted`)
+      alert(`order product: ${orderUser[index].product_name}, with ID: BLANJA-00${orderUser[index].id_order} sent`)
       return window.location.reload();
     }
     const body = {
-      status: 2
+      status: 3
     }
     updateOrderUser(id, body, handleSuccess);
   }
@@ -105,7 +105,7 @@ const ProcessedStore = () => {
                   }}
                   onClick={() => {
                     const confirmBox = window.confirm(
-                      `accept order from id: BLANJA-00${item.userid} ${item.buyer_name}?`
+                      `sent order from id: BLANJA-00${item.userid} ${item.buyer_name}?`
                     );
 
                     if (confirmBox === true) {

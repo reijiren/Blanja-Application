@@ -9,7 +9,7 @@ import { updateAddress } from "../../redux/action/address";
 const ChangeAddress = () => {
   const dispatch = useDispatch();
   const { address, isLoading, isError } = useSelector((state) => state.address);
-  const [mainAddressData, setData] = useState([]);
+  const [mainAddressData, setDataAddress] = useState([]);
 
   const [form, setForm] = useState({
     address_name: null,
@@ -32,12 +32,14 @@ const ChangeAddress = () => {
       alert("your address  data has not been set, please add your address");
     }
     if (address.length > 0) {
-      setData(address[0]);
+      setDataAddress(address[0]);
     }
-    console.log(mainAddressData.length);
   }, []);
 
+  
+
   const onSubmitHandler = (e) => {
+    console.log(mainAddressData)
     e.preventDefault();
     const id = mainAddressData.id_address;
     const body = {
@@ -61,180 +63,7 @@ const ChangeAddress = () => {
   };
   return (
     <div className="modal-dialog" style={{ maxWidth: "80%" }}>
-      {isLoading ? (
-        <div className="modal-content">
-          <div className="modal-header" style={{ height: "150px" }}>
-            <div className="middle">
-              <div className="bar bar1"></div>
-              <div className="bar bar2"></div>
-              <div className="bar bar3"></div>
-              <div className="bar bar4"></div>
-              <div className="bar bar5"></div>
-              <div className="bar bar6"></div>
-              <div className="bar bar7"></div>
-              <div className="bar bar8"></div>
-            </div>
-          </div>
-          <div className="modal-body">
-            <div className="form-wrapper mx-5">
-              <form>
-                <div className="mb-3">
-                  <label
-                    htmlFor="exampleInputEmail1"
-                    className={`form-label fontRegular text-muted`}
-                  >
-                    Save address as (ex: home address, office address){" "}
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    placeholder="Rumah"
-                    style={{ height: "50px" }}
-                  />
-                </div>
-                <div className="duo-input-row row">
-                  <div className="wrapper-duo-input col-12 row">
-                    <div className="col-6">
-                      <div className="mb-3">
-                        <label
-                          htmlFor="name"
-                          className={`form-label fontRegular text-muted d-flex align-items-center`}
-                          style={{ height: "70px" }}
-                        >
-                          Recipient's name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="name"
-                          placeholder=""
-                          style={{ height: "50px" }}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="mb-3">
-                        <label
-                          htmlFor="phone"
-                          className={`form-label fontRegular text-muted text-muted d-flex align-items-center`}
-                          style={{ height: "70px" }}
-                        >
-                          Recipient's telephone number
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="phone"
-                          placeholder=""
-                          style={{ height: "50px" }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="duo-input-row-sect-2 row">
-                  <div className="wrapper-duo-input col-12 row">
-                    <div className="col-6">
-                      <div className="mb-3">
-                        <label
-                          htmlFor="address"
-                          className={`form-label fontRegular text-muted d-flex align-items-center`}
-                          style={{ height: "70px" }}
-                        >
-                          Address
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="address"
-                          placeholder=""
-                          style={{ height: "50px" }}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="mb-3">
-                        <label
-                          htmlFor="postal_code"
-                          className={`form-label fontRegular text-muted text-muted d-flex align-items-center`}
-                          style={{ height: "70px" }}
-                        >
-                          Postal code
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="postal_code"
-                          placeholder=""
-                          style={{ height: "50px" }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="duo-input-row-sect-2 row">
-                  <div className="wrapper-duo-input col-12 row">
-                    <div className="col-6">
-                      <div className="mb-3">
-                        <label
-                          htmlFor="address"
-                          className={`form-label fontRegular text-muted d-flex align-items-center`}
-                          style={{ height: "70px" }}
-                        >
-                          City or Subdistrict
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="address"
-                          placeholder=""
-                          style={{ height: "50px" }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label
-                    className={`form-check-label fontRegular text-muted`}
-                    htmlFor="exampleCheck1"
-                  >
-                    Make it the primary address
-                  </label>
-                </div>
-                <div className="button-submit-section">
-                  <div className="wrapper d-flex flex-row-reverse gap-3">
-                    <div className="button-submit">
-                      <button
-                        type="submit"
-                        className="bgRedPucat button-submit-custom fontBold text-white h5"
-                      >
-                        Save
-                      </button>
-                    </div>
-                    <div className="button-submit">
-                      <button
-                        type="button"
-                        className="button-cancel-custom fontBold text-muted h5"
-                        data-bs-dismiss="modal"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="modal-footer"></div>
-        </div>
-      ) : (
+      
         <div className="modal-content">
           <div className="modal-header" style={{ height: "150px" }}>
             <h5
@@ -260,7 +89,7 @@ const ChangeAddress = () => {
                   >
                     Save address as (ex: home address, office address){" "}
                   </label>
-                  {mainAddressData.length > 0 ? (
+                  {mainAddressData.address_name ? (
                     <input
                       type="text"
                       className="form-control"
@@ -276,7 +105,7 @@ const ChangeAddress = () => {
                       type="text"
                       className="form-control"
                       id="address"
-                      placeholder="Rumah"
+                      placeholder="ex: Kantor"
                       style={{ height: "50px" }}
                       name="address_name"
                       onChange={handleChange}
@@ -294,7 +123,7 @@ const ChangeAddress = () => {
                         >
                           Recipient's name
                         </label>
-                        {mainAddressData.length > 0 ? (
+                        {mainAddressData.recipient_name ? (
                           <input
                             type="text"
                             className="form-control"
@@ -327,7 +156,7 @@ const ChangeAddress = () => {
                         >
                           Recipient's telephone number
                         </label>
-                        {mainAddressData.length > 0 ? (
+                        {mainAddressData.recipient_phone > 0 ? (
                           <input
                             type="text"
                             className="form-control"
@@ -364,7 +193,7 @@ const ChangeAddress = () => {
                         >
                           Address
                         </label>
-                        {mainAddressData > 0 ? (
+                        {mainAddressData.address ? (
                           <input
                             type="text"
                             className="form-control"
@@ -422,7 +251,7 @@ const ChangeAddress = () => {
                         >
                           City or Subdistrict
                         </label>
-                        {mainAddressData.length > 0 ? (
+                        {mainAddressData.city ? (
                           <input
                             type="text"
                             className="form-control"
@@ -474,7 +303,7 @@ const ChangeAddress = () => {
           </div>
           <div className="modal-footer"></div>
         </div>
-      )}
+      )
     </div>
   );
 };
