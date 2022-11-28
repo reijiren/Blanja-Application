@@ -177,7 +177,7 @@ const ShippingAddress = () => {
                       </div>
                       <div className="recipient-change-address mb-3">
                         {/* ca stand for change address */}
-                        { item.product_name ? (
+                        { item.city ? (
                           <button
                           type="button"
                           className={`textRedPucat button-ca fontBold h5`}
