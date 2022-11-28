@@ -137,12 +137,20 @@ const productModel = {
 
 	searchProduct: (data) => {
 		return new Promise((resolve, reject) => {
-			let counter = 1;
-			let max = 0;
+      const offset = (data.page - 1) * data.limit;
 
-			for (var key in data) {
-				if (data[key] !== null) max = max + 1;
-			}
+      const body = {
+        product_name: data.product_name,
+        color: data.color,
+        size: data.size,
+        category: data.category
+      }
+      
+      for(var key in body){
+        if(body[key] !== null)
+        max = max + 1
+      }
+     
 
 			const addCount = () => {
 				counter = counter + 1;
@@ -178,17 +186,16 @@ const productModel = {
 						: ""
 				}
         ${max < 1 ? `product_name ilike '%%'` : ""}
-        `,
-				(err, result) => {
-					if (err) {
-						reject(err);
-					} else {
-						resolve(result);
-					}
-				}
-			);
-		});
-	},
-};
+        order by ${data.sortBy} ${data.sortOrd} limit ${data.limit} offset ${offset}
+        `, (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  },
+}
 
 module.exports = productModel;

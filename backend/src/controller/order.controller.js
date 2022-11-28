@@ -22,7 +22,6 @@ const orderController = {
         success(res, result, 'success','by id orders success')
       })
       .catch((err) => {
-        // res.json(err)
         failed(res, err.message,'failed','by id orders failed')
       })
   },
@@ -48,10 +47,22 @@ const orderController = {
         failed(res, err.message, 'failed', `failed to get order detail`);
     })
   },
+  detailUserOrderWithStatus: (req, res) => {
+    const id = req.params.id;
+    const status = req.query.status || 0
+
+    orderModel.selectUserOrderWithStatus(id, status)
+    .then((result) => {
+        success(res, result.rows, 'success', `get detail order success`);
+    })
+    .catch((err) => {
+        failed(res, err.message, 'failed', `failed to get order detail`);
+    })
+  },
   allOrderedProduct: (req, res) => {
     const id = req.params.id;
 
-    orderModel.selectUserOrder(id)
+    orderModel.selectAllOrderedProduct(id)
     .then((result) => {
         success(res, result.rows, 'success', `get seller's ordered product success`);
     })
@@ -83,8 +94,6 @@ const orderController = {
   },
   update: (req, res) => {
     const id = req.params.id
-    // eslint-disable-next-line camelcase
-    console.log(id)
     const { quantity,color,size,status} = req.body
     const data = {quantity,color,size,status,id}
     orderModel
@@ -98,11 +107,12 @@ const orderController = {
   },
   insertTransaction: (req, res) => {
     try {
-      const {userid, id_order, payment_method,quantity,price,id,stockProduk} = req.body;
+      const {userid, id_order,id_address, payment_method,quantity,price,id,stockProduk} = req.body;
       const total_price=quantity*price+(5/100*quantity*price)
       const data = {
         userid,
         id_order,
+        id_address,
         payment_method,
         total_price
       }
@@ -111,6 +121,8 @@ const orderController = {
           const stock = stockProduk-quantity
           const data1= {stock,id}
           productModel.updateProduct(data1)
+          const data3={id:id_order,status:1 }
+          orderModel.updateOrder(data3)
           success(res, result, 'success', 'Update stock success')
       }).catch((err) => {
           failed(res, err.message, 'failed', 'insert transaksi failed')

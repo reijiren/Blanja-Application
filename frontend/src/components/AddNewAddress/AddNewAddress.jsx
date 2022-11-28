@@ -9,7 +9,6 @@ const AddNewAddress = () => {
   const { user, isLoading, isError } = useSelector((state) => {
     return state.user;
   });
-  // const [main_address, setMainAddress] = useState(false)
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     address_name: "",
@@ -19,6 +18,9 @@ const AddNewAddress = () => {
     post_code: "",
     city: "",
   });
+  useEffect(() => {
+    console.log(user)
+  }, [])
 
   const [main_address_bool, setMainAddress] = useState(false);
 
@@ -31,44 +33,34 @@ const AddNewAddress = () => {
 
   const toggleChecked = () => {
     setMainAddress((prevstate) => !prevstate);
-    
-    // if(main_address === true){
-    //   setForm({ ...form, main_address: 0 });
-    // } else {
-    //   setForm({ ...form, main_address: 1 });
-    // }
-    // console.log(main_address);
-    // console.log(form.main_address)
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    // const checkBox = document.getElementById("main_address");
-    // if (checkBox.checked) {
-    //   setForm({ ...form, main_address: 1 });
-    // } else {
-    //   setForm({ ...form, main_address: 0 });
-    // }
-
     const handleSuccess = (data) => {
-      // console.log(data.data.data[0]);
-      // console.log(main_address);
+
+      if(main_address_bool) {
+        const dataSuccess = data.data.data[0];
+
+      const main_address = dataSuccess.addressid;
       const bodyUser = {
-        main_address : data.data.data[0].addressid
+        main_address : main_address
       }
       const updateSuccess = (res) => {
         console.log(res)
       }
-      if(main_address_bool === true) {
-        dispatch(updateCustomer(user[0].id_user, bodyUser, updateSuccess))
+      
+        dispatch(updateCustomer(user.id_user, bodyUser, updateSuccess))
+      
       }
+      
       alert("Insert Success");
       return window.location.reload();
     };
 
     const body = {
-      userid: user[0].id_user,
+      userid: user.id_user,
       address_name: form.address_name,
       recipient_name: form.recipient_name,
       recipient_phone: form.recipient_phone,
@@ -112,6 +104,7 @@ const AddNewAddress = () => {
                   style={{ height: "50px" }}
                   name="address_name"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="duo-input-row row">
@@ -133,6 +126,7 @@ const AddNewAddress = () => {
                         style={{ height: "50px" }}
                         name="recipient_name"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -153,6 +147,7 @@ const AddNewAddress = () => {
                         style={{ height: "50px" }}
                         name="recipient_phone"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -177,6 +172,7 @@ const AddNewAddress = () => {
                         style={{ height: "50px" }}
                         name="address"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -197,6 +193,7 @@ const AddNewAddress = () => {
                         style={{ height: "50px" }}
                         name="post_code"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -221,6 +218,7 @@ const AddNewAddress = () => {
                         style={{ height: "50px" }}
                         name="city"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
