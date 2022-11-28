@@ -23,6 +23,7 @@ const ShippingAddress = () => {
     getUserAddresses(user.id_user, handleSuccess);
   }, []);
 
+  
   const setMainAddress = (id, index) => {   
     const handleSuccess = (data) => {
       alert("success change main address")
@@ -34,22 +35,14 @@ const ShippingAddress = () => {
     }
     updateCustomer(user.id_user, body, handleSuccess);
   }
+
+  useEffect(() => {
+    // console.log(listAddressUser[0].main_address === null)
+  })
   return (
     <>
-      {isLoading ? (
-        <div className="middle">
-          <div className="bar bar1"></div>
-          <div className="bar bar2"></div>
-          <div className="bar bar3"></div>
-          <div className="bar bar4"></div>
-          <div className="bar bar5"></div>
-          <div className="bar bar6"></div>
-          <div className="bar bar7"></div>
-          <div className="bar bar8"></div>
-        </div>
-      ) : isError ? (
-        <>Error</>
-      ) : address.length < 1 ? (
+      {
+      listAddressUser.length < 1 ? (
         <div className="w-90 m-3 mt-5">
           <div className="wrapper m-4">
             <div className="title mb-3">
@@ -184,14 +177,27 @@ const ShippingAddress = () => {
                       </div>
                       <div className="recipient-change-address mb-3">
                         {/* ca stand for change address */}
-                        <button
+                        { item.city ? (
+                          <button
                           type="button"
                           className={`textRedPucat button-ca fontBold h5`}
                           data-bs-toggle="modal"
                           data-bs-target="#changeAddress"
                         >
-                          Change main address data
+                          Change main address data 
                         </button>
+                        ) : (
+                        <button
+                          type="button"
+                          className={`textRedPucat button-ca fontBold h5`}
+                          data-bs-toggle="modal"
+                          data-bs-target="#changeAddress"
+                          disabled
+                        >
+                          Change main address data <span className="text-black fst-italic">(set main address before change this form)</span>
+                        </button>
+                        )}
+                        
                       </div>
                       {/* modal change Address */}
                       <div
