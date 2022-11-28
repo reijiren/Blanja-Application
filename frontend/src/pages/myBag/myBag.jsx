@@ -70,7 +70,7 @@ const MyBag = () => {
               {data2 &&
                 data2.map((item, index) => (
                   <div key={index}>
-                    {item.status === 0 && (
+                    {item.status === 0   && (
                       <div className={`${style.card} mt-3`}>
                         <div className="card-body p-0 p-4">
                           <div className={style.productone}>
