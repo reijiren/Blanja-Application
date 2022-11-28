@@ -16,28 +16,47 @@ import ChangeAddress from "../../../components/ChangeAddress/ChangeAddress";
 import Navs from "../../../components/Navs";
 
 const CheckOut = () => {
-  const [data2, setData2] = useState([]);
+  const [dataOrder, setDataOrder] = useState([]);
+  const [dataAddres, setDataAddres] = useState([]);
   let total = 0;
-  const id = useSelector((state) => state.user.user.id_user)
+  const idUser = useSelector((state) => state.user.user.id_user)
+  const idAddres = useSelector((state) => state.user.user.main_address)
   
   useEffect(() => {
-    if(id){
-      axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${id}`)
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${idUser}`)
       .then((response) => {
-        setData2(response.data.data);
-        localStorage.setItem('data5', JSON.stringify(response.data.data));
+        // console.log(response.data.token.data)
+        // console.log(response.data.data);
+        setDataOrder(response.data.data)
+        localStorage.setItem('order', JSON.stringify(response.data.data));
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); 
       });
-    }
-  }, []);
+    },[idUser]);
+    useEffect(() => {
+      // console.log(id2)
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/address/${idAddres}`)
+        .then((response) => {
+          // console.log(response.data.token.data)
+          console.log(response.data);
+          setDataAddres(response.data.data)
+          localStorage.setItem('address', JSON.stringify(response.data.data[0]));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      },[idAddres]);
+  
 
   const add = (num) => {
     total += num;
+    // console.log(total)
+    localStorage.setItem('Pembayaran', JSON.stringify(total));
   }
-
+  // console.log(total)
   return (
     <div className={`vw-100 vh-100`}>
 			<Navs />
@@ -50,24 +69,30 @@ const CheckOut = () => {
             <div className="title-desc mb-3">
               <p className={`fontRegular fw-bold h5`}>Shipping Address</p>
             </div>
-            <div className={`address-desc mb-3`}>
+            {dataAddres &&
+              dataAddres.length === 0 ? (
+                <div>Orders not found</div>
+              ) :
+              dataAddres.map((item, index) => (
+                <div key={index}>
+                  <div className={`address-desc mb-3`}>
               <div className="wrapper m-4">
                 <div className="name-user ">
-                  <p className={`fontRegular fw-bold h5`}>Andreas Jane</p>
+                  <p className={`fontRegular fw-bold h5`}>{item.address}</p>
                 </div>
                 <div className="address-user">
                   <p className={`fontRegular h5`}>
                     <span className="address">
-                      Perumahan Sapphire Mediterania, wradadi. Kec. Sokaraja
+                      {item.address},
                     </span>{" "}
                     <span className="city-or-subdistric">
-                      Kabupaten Banyumas, Jawa Tengah.
+                      {item.city}, Jawa Tengah.
                     </span>{" "}
-                    <span className="postal-code">53181</span>{" "}
+                    <span className="postal-code">{item.post_code}</span>{" "}
                     <span className="tokopaedi-note">
-                      [Tokopaedi Note: blok c 16] Sokaraja. Kab. Banyumas,
+                      [ Note: {item.address_name}] Kab/Kota. {item.city},
                     </span>{" "}
-                    <span className="postal-code">53181</span>
+                    <span className="postal-code">{item.post_code}</span>
                   </p>
                 </div>
                 <div className="button-change-address">
@@ -118,15 +143,20 @@ const CheckOut = () => {
                 {/* end of modal 3 */}
               </div>
             </div>
+                </div>
+              ))
+              }
+            
             {/* item check out user session */}
-            {data2 &&
-              data2.length === 0 ? (
+            {dataOrder &&
+              dataOrder.length === 0 ? (
                 <div>Orders not found</div>
               ) :
-              data2.map((item, index) => (
+              dataOrder.map((item, index) => (
                 <div key={index}>
-                  {/* dari sini */}
-                  <div className="item-co-user mb-3">
+                    {/* dari sini */}
+                  {item.status === 0 && (
+                    <div className="item-co-user mb-3">
                     <div className="wrapper m-4">
                       <div className="wrapper-item-co row">
                         <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
@@ -149,7 +179,7 @@ const CheckOut = () => {
                           </div>
                           <div className="brand-item">
                             <p className={`fontRegular text-muted h6`}>
-                            {item.seller}
+                            {item.seller_name}
                             </p>
                           </div>
                         </div>
@@ -160,7 +190,9 @@ const CheckOut = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                    </div>
+                  )}
+                  
                   {/* sampe sini */}
                 </div>
               ))}
