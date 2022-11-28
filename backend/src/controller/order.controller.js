@@ -22,7 +22,6 @@ const orderController = {
         success(res, result, 'success','by id orders success')
       })
       .catch((err) => {
-        // res.json(err)
         failed(res, err.message,'failed','by id orders failed')
       })
   },
@@ -112,10 +111,8 @@ const orderController = {
           const stock = stockProduk-quantity
           const data1= {stock,id}
           productModel.updateProduct(data1)
-          // console.log(data1)
           const data3={id:id_order,status:1 }
           orderModel.updateOrder(data3)
-          // console.log(data3)
           success(res, result, 'success', 'Update stock success')
       }).catch((err) => {
           failed(res, err.message, 'failed', 'insert transaksi failed')
