@@ -23,6 +23,7 @@ const ShippingAddress = () => {
     getUserAddresses(user.id_user, handleSuccess);
   }, []);
 
+  
   const setMainAddress = (id, index) => {   
     const handleSuccess = (data) => {
       alert("success change main address")
@@ -34,22 +35,14 @@ const ShippingAddress = () => {
     }
     updateCustomer(user.id_user, body, handleSuccess);
   }
+
+  useEffect(() => {
+    console.log(listAddressUser.length)
+  })
   return (
     <>
-      {isLoading ? (
-        <div className="middle">
-          <div className="bar bar1"></div>
-          <div className="bar bar2"></div>
-          <div className="bar bar3"></div>
-          <div className="bar bar4"></div>
-          <div className="bar bar5"></div>
-          <div className="bar bar6"></div>
-          <div className="bar bar7"></div>
-          <div className="bar bar8"></div>
-        </div>
-      ) : isError ? (
-        <>Error</>
-      ) : address.length < 1 ? (
+      {
+      listAddressUser.length < 1 ? (
         <div className="w-90 m-3 mt-5">
           <div className="wrapper m-4">
             <div className="title mb-3">
