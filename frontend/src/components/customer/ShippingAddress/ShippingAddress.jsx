@@ -37,7 +37,7 @@ const ShippingAddress = () => {
   }
 
   useEffect(() => {
-    console.log(listAddressUser.length)
+    // console.log(listAddressUser[0].main_address === null)
   })
   return (
     <>
@@ -177,14 +177,27 @@ const ShippingAddress = () => {
                       </div>
                       <div className="recipient-change-address mb-3">
                         {/* ca stand for change address */}
-                        <button
+                        { item.product_name ? (
+                          <button
                           type="button"
                           className={`textRedPucat button-ca fontBold h5`}
                           data-bs-toggle="modal"
                           data-bs-target="#changeAddress"
                         >
-                          Change main address data
+                          Change main address data 
                         </button>
+                        ) : (
+                        <button
+                          type="button"
+                          className={`textRedPucat button-ca fontBold h5`}
+                          data-bs-toggle="modal"
+                          data-bs-target="#changeAddress"
+                          disabled
+                        >
+                          Change main address data <span className="text-black fst-italic">(set main address before change this form)</span>
+                        </button>
+                        )}
+                        
                       </div>
                       {/* modal change Address */}
                       <div
