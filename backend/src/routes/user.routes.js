@@ -16,7 +16,7 @@ router
   .get('/user/chat/:id', chat)
   .put('/customer/:id', updateCustomer)
   .put('/seller/:id', updateSeller)
-  .put('/user/image/:id', uploadPhotouser, updatePhoto)
+  .put('/user/image/:id', removePhotoUser, uploadPhotouser, updatePhoto)
   .post('/register', register)
   .post('/login', login)
   .delete('/user/:id', destroy);
