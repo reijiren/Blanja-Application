@@ -233,8 +233,8 @@ const ShippingAddress = () => {
                       <div class="collapse" id="collapseListAddress">
                         {/* data list address*/}
                         {listAddressUser.map((item, index) => (
-                          <div class="card card-body bg-info d-flex flex-row">
-                            <div className="content-wrapper-card col-6 bg-warning">
+                          <div class="card card-body d-flex flex-row">
+                            <div className="content-wrapper-card col-6">
                               <p className="recipient_name">
                                 <span className="fontBold">No</span>:{" "}
                                 {index + 1}
@@ -266,7 +266,7 @@ const ShippingAddress = () => {
                                 {item.city}
                               </p>
                             </div>
-                            <div className="button-set-main col-6 bg-success d-flex justify-content-center align-items-center">
+                            <div className="button-set-main col-6 d-flex justify-content-center align-items-center">
                               <button
                                 className="btn bgRedPucat text-white fontBold"
                                 onClick={() => {
