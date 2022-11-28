@@ -47,6 +47,18 @@ const orderController = {
         failed(res, err.message, 'failed', `failed to get order detail`);
     })
   },
+  detailUserOrderWithStatus: (req, res) => {
+    const id = req.params.id;
+    const status = req.query.status || 0
+
+    orderModel.selectUserOrderWithStatus(id, status)
+    .then((result) => {
+        success(res, result.rows, 'success', `get detail order success`);
+    })
+    .catch((err) => {
+        failed(res, err.message, 'failed', `failed to get order detail`);
+    })
+  },
   allOrderedProduct: (req, res) => {
     const id = req.params.id;
 
@@ -82,8 +94,6 @@ const orderController = {
   },
   update: (req, res) => {
     const id = req.params.id
-    // eslint-disable-next-line camelcase
-    console.log(id)
     const { quantity,color,size,status} = req.body
     const data = {quantity,color,size,status,id}
     orderModel
