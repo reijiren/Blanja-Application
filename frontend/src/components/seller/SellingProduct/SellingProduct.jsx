@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // style
 import "./style.css";
 // images
@@ -11,6 +11,7 @@ import { insertProduct } from "../../../redux/action/product";
 const SellingProduct = () => {
   // page logic
   const dispatch = useDispatch();
+  const [dataUser, setDataUser] = useState([]);
   const [newCon, setNewCon] = useState(false);
   const [secCon, setSecCon] = useState(false);
   const [photo, setPhoto] = useState();
@@ -24,9 +25,11 @@ const SellingProduct = () => {
     category: "",
     description: "",
   });
-  const user = useSelector((state) => state.user);
-  console.log(user.user[0].id_seller);
-
+  
+  const {user} = useSelector((state) => state.user);
+  useEffect(() => {
+    setDataUser(user)
+  })
   const toggleCheckedNew = () => {
     setNewCon((prevstate) => !prevstate);
     if (newCon) {
@@ -47,25 +50,27 @@ const SellingProduct = () => {
     });
   };
   const onSubmitHandler = (e) => {
+    // console.log(user);
     e.preventDefault();
     const handleSuccess = (data) => {
-      console.log(data);
-      window.location.reload();
+      console.log("insert", data);
+      alert("success insert product")
+      return window.location.reload();
     };
 
     const body = {
-      seller: user.user[0].id_seller,
+      seller: dataUser.id_seller,
       product_name: form.product_name,
-      price: form.price,
-      stock: form.stock,
+      price: parseInt(form.price),
+      stock: parseInt(form.stock),
       condition: form.condition,
       color: form.color,
-      size: parseInt(form.size),
+      size: form.size,
       category: form.category,
       description: form.description,
       photo: photo,
     };
-    // return console.log(body);
+    console.log(body);
     dispatch(insertProduct(body, handleSuccess));
   };
   // useEffect(() => {
@@ -184,7 +189,7 @@ const SellingProduct = () => {
                   height: "50px",
                   width: "100%",
                 }}
-                placeholder="1 - 5, ex : 3"
+                placeholder="1 - 5, ex : 1,2,3,4,5"
                 name="size"
                 onChange={handleChange}
               />
@@ -241,6 +246,7 @@ const SellingProduct = () => {
                 </label>
               </div>
             </div>
+            <div className="make-sure-condition ms-3"><p className="font-weight-bold fs-italic" style={{color:"#F01F0E"}}>Please double click to make sure the data inserted</p></div>
 
             <div className="space-empty mb-3" style={{ height: "30px" }}></div>
           </div>

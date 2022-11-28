@@ -5,9 +5,11 @@ import Packed from "./Packed/Packed";
 import Sent from "./Sent/Sent";
 import Completed from "./Completed/Completed"
 import OrderCancel from "./OrderCancel/OrderCancel"
+import Payment from "./Payment/Payment";
 
 const MyOrder = () => {
   const [showAllItems, setShowAllItems] = useState(false);
+  const [showPaymentStatus, setShowPayment] = useState(false)
   const [showPacked, setShowPacked] = useState(false);
   const [showSent, setShowSent] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
@@ -15,14 +17,25 @@ const MyOrder = () => {
 
   const listAllItems = () => {
     setShowAllItems(true);
+    setShowPayment(false);
     setShowPacked(false);
     setShowSent(false);
     setShowCompleted(false);
     setShowOrderCancel(false);
   };
 
+  const listPaymentStatus = () => {
+    setShowAllItems(false);
+    setShowPayment(true);
+    setShowPacked(false);
+    setShowSent(false);
+    setShowCompleted(false);
+    setShowOrderCancel(false);
+  }
+
   const listPacked = () => {
     setShowAllItems(false);
+    setShowPayment(false)
     setShowPacked(true);
     setShowSent(false);
     setShowCompleted(false);
@@ -31,6 +44,7 @@ const MyOrder = () => {
 
   const listSent = () => {
     setShowAllItems(false);
+    setShowPayment(false)
     setShowPacked(false);
     setShowSent(true);
     setShowCompleted(false);
@@ -39,6 +53,7 @@ const MyOrder = () => {
 
   const listCompleted = () => {
     setShowAllItems(false);
+    setShowPayment(false)
     setShowPacked(false);
     setShowSent(false);
     setShowCompleted(true);
@@ -47,6 +62,7 @@ const MyOrder = () => {
 
   const listOrderCancel = () => {
     setShowAllItems(false);
+    setShowPayment(false)
     setShowPacked(false);
     setShowSent(false);
     setShowCompleted(false);
@@ -79,11 +95,25 @@ const MyOrder = () => {
                 All items
               </button>
             </li>
-            {/* <li className="col-2">
-              <button type="button" className="btn">
-                Not yet paid
+            <li className="col-2">
+              <button
+                type="button"
+                className="btn"
+                onClick={listPaymentStatus}
+                style={
+                  showPaymentStatus
+                    ? {
+                        color: "#F01F0E ",
+                        borderRadius: "0%",
+                        borderBottom: "5px solid #F01F0E",
+                        fontWeight: "bolder",
+                      }
+                    : {}
+                }
+              >
+                Payment Status
               </button>
-            </li> */}
+            </li>
             <li className="col-2">
               <button
                 type="button"
@@ -165,6 +195,7 @@ const MyOrder = () => {
         <div className="break-line mb-5"></div>
         <div className="mb-5">
             {showAllItems ? <Allitems/> : <></>}
+            {showPaymentStatus ? <Payment/> : <></>}
             {showPacked ? <Packed/> : <></>}
             {showSent ? <Sent/> : <></>}
             {showCompleted ? <Completed/> : <></>}

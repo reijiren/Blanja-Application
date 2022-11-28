@@ -1,8 +1,14 @@
-import React from "react";
-// images
-import mensFormalSuit from "../../../../assets/images/men jacket jeans.png"
+import React, { useEffect, useState } from "react";
+// react-redux
+import { useSelector } from "react-redux";
 
 const SoldOut = () => {
+  const [sProduct, setProduct] = useState([]);
+  const { product } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    setProduct(product);
+  }, []);
   return (
     <>
       <div className="form-search mb-3">
@@ -51,36 +57,48 @@ const SoldOut = () => {
           </tr>
 
           {/* data */}
-          <tr className="row mx-3 mt-3" style={{borderBottom:"2px solid #D4D4D4 "}}>
-            <td className="col-8 text-muted">
-              <div className="product-name">Mens formal Suit</div>
-              <div className="img-review">
-                <img src={mensFormalSuit} alt="mens formal suit" />
-              </div>
-            </td>
-            <td className="col-2 text-muted">
-              $ <span>50.0</span>
-            </td>
-            <td className="col-2 text-muted">0</td>
-          </tr>
-
-          <tr className="row mx-3 mt-3" style={{borderBottom:"2px solid #D4D4D4 "}}>
-            <td className="col-8 text-muted">
-              <div className="product-name">Mens formal Suit</div>
-              <div className="img-review">
-                <img src={mensFormalSuit} alt="mens formal suit" />
-              </div>
-            </td>
-            <td className="col-2 text-muted">
-              $ <span>50.0</span>
-            </td>
-            <td className="col-2 text-muted">0</td>
-          </tr>
+          {sProduct.map((item, index) =>
+            item.stock === 0 ? (
+              <>
+                <tr
+                  className="row mx-3 mt-3"
+                  style={{ borderBottom: "2px solid #D4D4D4 " }}
+                >
+                  <td className="col-8 text-muted">
+                    <div className="product-name">{item.product_name}</div>
+                    <div className="img-review">
+                    {item.photo ? (
+                        item.photo.split("||").map(
+                          (e, i, arr) => (
+                            <div className="img-review col-4 mb-5">
+                              <img
+                                src={`${process.env.REACT_APP_BACKEND_URL}/${e}`}
+                                alt="mens formal suit"
+                                style={{ width: "100px", height: "100px" }}
+                              />
+                            </div>
+                          )
+                        )
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </td>
+                  <td className="col-2 text-muted">
+                    $ <span>{item.price}</span>
+                  </td>
+                  <td className="col-2 text-muted">0</td>
+                </tr>
+              </>
+            ) : (
+              <></>
+            )
+          )}
           {/* data */}
         </table>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SoldOut
+export default SoldOut;
