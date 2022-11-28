@@ -14,8 +14,6 @@ const SelectPayment = () => {
   const addres = JSON.parse(localStorage.getItem("address"))
   const [method, setMethod]=useState(null);
   const user = useSelector((state)=>state.user.user);
-  // alert(data2)
-  // alert(data3.id_address)
 
   const handlePost = async() => {
       

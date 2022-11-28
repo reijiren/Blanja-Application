@@ -142,22 +142,22 @@ const orderModel = {
     });
   },
   storeTransaksi: (data) => {
-    return new Promise((resolve, reject) => {
-      db.query(
-        `
-          INSERT INTO transactions (userid, id_order, payment_method, total_price,transaction_date)
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+          INSERT INTO transactions (userid, id_order,id_address, payment_method, total_price,transaction_date)
           VALUES
           (${data.userid}, ${data.id_order},${data.id_address}, '${data.payment_method}', ${data.total_price}, now())
           `,
-        (err, res) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(res);
-        }
-      );
-    });
-  },
+				(err, res) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(res);
+				}
+			);
+		});
+	},
   selectAllTransaction: () => {
     return new Promise((resolve, reject) => {
       db.query("SELECT * FROM transactions", (err, result) => {

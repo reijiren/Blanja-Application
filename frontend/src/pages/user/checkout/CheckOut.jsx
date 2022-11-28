@@ -24,7 +24,7 @@ const CheckOut = () => {
   
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${idUser}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/order/userstatus/${idUser}?status=0`)
       .then((response) => {
         // console.log(response.data.token.data)
         // console.log(response.data.data);
