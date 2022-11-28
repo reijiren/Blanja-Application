@@ -55,7 +55,7 @@ const SellingProduct = () => {
     const handleSuccess = (data) => {
       console.log("insert", data);
       alert("success insert product")
-      // window.location.reload();
+      return window.location.reload();
     };
 
     const body = {
@@ -65,7 +65,7 @@ const SellingProduct = () => {
       stock: parseInt(form.stock),
       condition: form.condition,
       color: form.color,
-      size: parseInt(form.size),
+      size: form.size,
       category: form.category,
       description: form.description,
       photo: photo,
@@ -189,7 +189,7 @@ const SellingProduct = () => {
                   height: "50px",
                   width: "100%",
                 }}
-                placeholder="1 - 5, ex : 3"
+                placeholder="1 - 5, ex : 1,2,3,4,5"
                 name="size"
                 onChange={handleChange}
               />

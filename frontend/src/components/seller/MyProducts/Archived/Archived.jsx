@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Archived = () => {
+  // sProduct = seller product
   const [sProduct, setProduct] = useState([]);
   const { product } = useSelector((state) => state.product);
 
@@ -88,7 +89,7 @@ const Archived = () => {
                   <td className="col-2 text-muted">
                     $ <span>{item.price}</span>
                   </td>
-                  <td className="col-2 text-muted">0</td>
+                  <td className="col-2 text-muted">{item.stock}</td>
                 </tr>
               </>
             ) : (

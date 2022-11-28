@@ -10,7 +10,7 @@ import MyOrderStore from "../MyOrder/MyOrderStore";
 // react redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProduct } from "../../../redux/action/product";
-import { getOrderUser } from "../../../redux/action/order";
+import { getOrderSeller, getOrderUser } from "../../../redux/action/order";
 
 
 const MainContentSeller = () => {
@@ -57,7 +57,8 @@ const MainContentSeller = () => {
     }
     onLoaddata();
     dispatch(getUserProduct(user.id_user))
-    dispatch(getOrderUser(user.id_user))
+    dispatch(getOrderSeller(user.id_user))
+    dispatch(getUserProduct(user.id_user))
   }, [])
 
   return (

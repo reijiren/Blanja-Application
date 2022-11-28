@@ -12,6 +12,7 @@ const ShippingAddress = () => {
   // const [isError, setIsError] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const [addressData, setAddressData] = useState([])
   const { address, isLoading, isError } = useSelector((state) => {
     return state.address;
   });
@@ -85,6 +86,7 @@ const ShippingAddress = () => {
                         className={`textRedPucat button-ca fontBold h5`}
                         data-bs-toggle="modal"
                         data-bs-target="#changeAddress"
+                        disabled
                       >
                         Change address
                       </button>

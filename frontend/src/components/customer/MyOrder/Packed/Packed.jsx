@@ -18,10 +18,10 @@ const Packed = () => {
   });
 
 
-  const cancelOrder = (id) => {
+  const cancelOrder = (id, index) => {
     const handleSuccess = (data) => {
       // console.log(data);
-      alert(`order product: ${orderUser[id].product_name} canceled`)
+      alert(`order product: ${orderUser[index].product_name} canceled`)
       return window.location.reload();
     }
     const body = {
@@ -130,7 +130,7 @@ const Packed = () => {
                       );
 
                       if (confirmBox === true) {
-                        cancelOrder(item.id_order);
+                        cancelOrder(item.id_order, index);
                       }
                     }}
                   >

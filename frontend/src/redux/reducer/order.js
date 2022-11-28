@@ -17,6 +17,17 @@ export default function orderReducer(state = initialState, action) {
       };
     case "GET_ORDER_USER_REJECTED":
       return { ...state, isLoading: false, isError: true };
+    case "GET_ORDER_SELLER_PENDING":
+      return { ...state, isLoading: true };
+    case "GET_ORDER_SELLER_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        order: action.payload.data.data,
+        isError: false,
+      };
+    case "GET_ORDER_SELLER_REJECTED":
+      return { ...state, isLoading: false, isError: true };
     case "RESET_ORDER":
       return {
         ...state,

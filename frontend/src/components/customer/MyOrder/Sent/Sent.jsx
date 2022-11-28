@@ -13,10 +13,10 @@ const Sent = () => {
   });
 
 
-  const receiveOrder = (id) => {
+  const receiveOrder = (id, index) => {
     const handleSuccess = (data) => {
       // console.log(data);
-      alert(`order product: ${orderUser[id].product_name}, with ID: BLANJA-00${orderUser[id].id_order} received`)
+      alert(`order product: ${orderUser[index].product_name}, with ID: BLANJA-00${orderUser[index].id_order} received`)
       return window.location.reload();
     }
     const body = {
@@ -109,7 +109,7 @@ const Sent = () => {
                     );
 
                     if (confirmBox === true) {
-                      receiveOrder(item.id_order);
+                      receiveOrder(item.id_order, index);
                     }
                   }}
                 >
