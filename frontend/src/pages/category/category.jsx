@@ -8,75 +8,87 @@ import { useNavigate } from 'react-router-dom';
 
 const Category = () => {
   const [getProduct, setProduct] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([]);
 
   // const navigate = useNavigate();
-  useEffect(() => {
-    const search = JSON.parse(localStorage.getItem('name'));
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`)
-
-      .then((res) => {
-        console.log(res.data);
-        setProduct(res.data.data.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // return navigate(`?search=${search}`);
-
-    // console.log(search);
-  }, []);
-
-  // const [sort, setSort] = useState('id');
-  // const [asc, setAsc] = useState('asc');
-  // const [data, setData] = useState([]);
-
-  //  useEffect(() => {
-  //   getData(sort, asc, 3, currentPage);
-  // }, [sort, asc, currentPage]);
-
-  // const getData = (sort, asc, limit, page) => {
+  // useEffect(() => {
+  //   const search = JSON.parse(localStorage.getItem('name'));
   //   axios
-  //     .get(`${process.env.REACT_APP_BACKEND_URL}/product?sort=${sort}&asc=${asc}&limit=${limit}${page ? `&page=${page}` : ''}`)
+  //     .get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`)
+
   //     .then((res) => {
   //       console.log(res.data);
-  //       setData(res.data);
+  //       setProduct(res.data.data.rows);
   //     })
   //     .catch((err) => {
   //       console.log(err);
   //     });
-  // };
+  //   // return navigate(`?search=${search}`);
 
-  // const handleNext = () => {
-  //   setCurrentPage(currentPage + 1);
-  //   getData(sort, asc, 3, currentPage + 1);
-  // };
+  //   // console.log(search);
+  // }, []);
 
-  // const handlePrevious = () => {
-  //   if (currentPage > 1) {
-  //     setCurrentPage(currentPage - 1);
-  //     getData(sort, asc, 3, currentPage - 1);
-  //   }
-  // };
+  const [sort, setSort] = useState('id_product');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [asc, setAsc] = useState('asc');
 
-  // const handleSorting = () => {
-  //   if (sort == 'id') {
-  //     setSort('title');
-  //   } else {
-  //     setSort('id');
-  //   }
-  //   getData(sort, asc, 3, currentPage);
-  // };
+  useEffect(() => {
+    getData(sort, asc, 3, currentPage);
+  }, [sort, asc, currentPage]);
 
-  // const handleAsc = () => {
-  //   if (asc == 'asc') {
-  //     setAsc('desc');
-  //   } else {
-  //     setAsc('asc');
-  //   }
-  //   getData(sort, asc, 3, currentPage);
-  // };
+  const getData = (sort, asc, limit, page) => {
+    const search = JSON.parse(localStorage.getItem('name'));
+
+    const body = {
+      product_name: search,
+      color: null,
+      size: null,
+      category: null,
+      sortBy: sort,
+      sortOrd: asc,
+      page: page,
+      limit: limit,
+    };
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/product/filter`, body)
+      .then((res) => {
+        console.log(res.data.data);
+        setProduct(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleNext = () => {
+    setCurrentPage(currentPage + 1);
+    getData(sort, asc, 3, currentPage + 1);
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      getData(sort, asc, 3, currentPage - 1);
+    }
+  };
+
+  const handleSorting = () => {
+    if (sort == 'id_product') {
+      setSort('product_name');
+    } else {
+      setSort('id_product');
+    }
+    getData(sort, asc, 3, currentPage);
+  };
+
+  const handleAsc = () => {
+    if (asc == 'asc') {
+      setAsc('desc');
+    } else {
+      setAsc('asc');
+    }
+    getData(sort, asc, 3, currentPage);
+  };
 
   return (
     <>
@@ -94,7 +106,7 @@ const Category = () => {
             <h2 className={style.text}>T-Shirt</h2>
           </div>
 
-          <div className="col-md-12 d-flex flex-row gap-4 flex-wrap">
+          <div className="col-md-12 d-flex flex-row gap-4 flex-wrap justify-content-center">
             {getProduct && getProduct.length === 0 ? (
               <div>product not found</div>
             ) : (
@@ -129,35 +141,35 @@ const Category = () => {
             )}
           </div>
 
-          {/* <div className="d-flex justify-content-center">
-          <nav aria-label="Page navigation example">
-            <ul className="pagination">
-              <li className="page-item">
-                <button className="page-link" onClick={() => handlePrevious()}>
-                  Previous
-                </button>
-              </li>
-              <li className="page-item">
-                <button className="page-link">{currentPage}</button>
-              </li>
-              <li className="page-item">
-                <button className="page-link" disabled={data.data <= 0} onClick={() => handleNext()}>
-                  Next
-                </button>
-              </li>
-              <li className="page-item">
-                <button className="page-link" aria-label="Next" onClick={() => handleSorting()}>
-                  <span aria-hidden="true">{sort}</span>
-                </button>
-              </li>
-              <li className="page-item">
-                <button className="page-link" aria-label="Next" onClick={() => handleAsc()}>
-                  <span aria-hidden="true">{asc}</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div> */}
+          <div className="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                <li className="page-item">
+                  <button className="page-link" onClick={() => handlePrevious()}>
+                    Previous
+                  </button>
+                </li>
+                <li className="page-item">
+                  <button className="page-link">{currentPage}</button>
+                </li>
+                <li className="page-item">
+                  <button className="page-link" disabled={getProduct.data <= 0} onClick={() => handleNext()}>
+                    Next
+                  </button>
+                </li>
+                <li className="page-item">
+                  <button className="page-link" aria-label="Next" onClick={() => handleSorting()}>
+                    <span aria-hidden="true">{sort}</span>
+                  </button>
+                </li>
+                <li className="page-item">
+                  <button className="page-link" aria-label="Next" onClick={() => handleAsc()}>
+                    <span aria-hidden="true">{asc}</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </>

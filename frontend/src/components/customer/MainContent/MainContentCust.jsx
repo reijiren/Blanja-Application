@@ -11,12 +11,15 @@ import { useSelector, useDispatch } from "react-redux";
 // redux action
 import { detailById } from "../../../redux/action/user";
 import { getByMainAddress } from "../../../redux/action/address";
+import { getOrderUser } from "../../../redux/action/order";
 
 // conditional page
 const MainContentCust = () => {
+  const dispatch = useDispatch();
   const [showMyProfile, setShowMyProfile] = useState(false);
   const [showShippingAddress, setShowShippingAddress] = useState(false);
   const [showMyOrder, setShowMyOrder] = useState(false);
+  const [profilePicture, setProfilePicture] = useState("default.png");
 
   const editProfileShow = () => {
     setShowMyProfile(true);
@@ -44,8 +47,10 @@ const MainContentCust = () => {
     return state.address;
   });
 
-
-  // console.log(user.image);
+  useEffect(() => {
+    setProfilePicture(user.image);
+    dispatch(getOrderUser(user.id_user))
+  });
 
   return (
     <>
@@ -69,44 +74,19 @@ const MainContentCust = () => {
               <div className="space-empty" style={{ height: "50px" }}></div>
               <div className="d-flex flex-row">
                 <div className="image-content">
-                  {user.image ? (
-                      <img
-                        src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
-                        alt="avatar_user"
-                        style={{
-                          borderRadius: "50%",
-                          width: "75px",
-                          height: "75px",
-                        }}
-                      />
-                  ) : (
-                    <></>
-                  )}
-
-                  {user[0].image ? (
-                    <>
-                      <img
-                        src={`${process.env.REACT_APP_BACKEND_URL}/${user[0].image}`}
-                        alt="avatar_user"
-                        style={{
-                          borderRadius: "50%",
-                          width: "75px",
-                          height: "75px",
-                        }}
-                      />
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                  <img
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${profilePicture}`}
+                    alt="yayaya"
+                    style={{
+                      borderRadius: "50%",
+                      width: "75px",
+                      height: "75px",
+                    }}
+                  />
                 </div>
                 <div className="name-info-edit d-flex flex-column justify-content-center align-items-center ms-3">
                   <div className="name">
-                    {
-                      user.name ? <><p className="fontBold h5">{user.name}</p></> : <></>
-                    }
-                    {
-                      user[0].name ? <><p className="fontBold h5">{user[0].name}</p></> : <></>
-                    }
+                    <p className="fontBold h5">{user.name}</p>
                   </div>
                   <div className="edit-profile-button">
                     <button

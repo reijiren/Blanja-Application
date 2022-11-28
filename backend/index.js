@@ -17,7 +17,7 @@ const app = express();
 
 try {
 	app.use(express.static("public"));
-	app.use(helmet());
+	app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 	app.use(bodyParser.json());
 	app.use(xss());
 	app.use(cors());

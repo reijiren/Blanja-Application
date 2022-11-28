@@ -13,6 +13,16 @@ const productModel = {
     });
   },
 
+  // All: (sort, asc, limit, offset) =>
+  //   new Promise((resolve, reject) => {
+  //     db.query(`SELECT * FROM product join seller on seller.id_seller = product.seller join users on seller.id_seller = users.id_user order by ${sort} ${asc} LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
+  //       if (err) {
+  //         reject(err);
+  //       } else {
+  //         resolve(result);
+  //       }
+  //     });
+  //   }),
   selectDetail: (id) => {
     return new Promise((resolve, reject) => {
       db.query(`SELECT * FROM product where id_product =${id}`, (err, result) => {
@@ -126,6 +136,17 @@ const productModel = {
 
       for (var key in body) {
         if (body[key] !== null) max = max + 1;
+
+      const body = {
+        product_name: data.product_name,
+        color: data.color,
+        size: data.size,
+        category: data.category
+      }
+      
+      for(var key in body){
+        if(body[key] !== null)
+        max = max + 1
       }
 
       const addCount = () => {
@@ -150,6 +171,37 @@ const productModel = {
           } else {
             resolve(result);
           }
+        ${
+          data.product_name ?
+          `product_name ilike ${data.product_name} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${
+          data.color ?
+          `color ilike ${data.color} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${
+          data.size ?
+          `size = ${data.size} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${
+          data.category ?
+          `category ilike ${data.category} ${
+            counter < max ? addCount() : " "
+          }` : ""
+        }
+        ${max < 1 ? `product_name ilike '%%'` : ""}
+        order by ${data.sortBy} ${data.sortOrd} limit ${data.limit} offset ${offset}
+        `, (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
         }
       );
     });
