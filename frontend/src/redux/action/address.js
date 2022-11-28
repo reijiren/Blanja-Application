@@ -28,6 +28,19 @@ export const updateAddress = (id, body, handleSuccess) => ({
     }),
 })
 
+export const getUserAddresses = (id, handleSuccess) => ({
+    type: "GET_USER_LIST_ADDRESSESS",
+    payload: new Promise((resolve, reject) => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/address/user/${id}`)
+        .then((res) => {
+            handleSuccess(res)
+            resolve(res);
+        })
+        .catch((err) => {
+            reject(err);
+        });
+    }),
+})
 export const getByMainAddress = (id) => ({
     type: "GET_BY_MAIN_ADDRESS",
     payload: new Promise((resolve, reject) => {

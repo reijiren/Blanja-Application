@@ -172,7 +172,7 @@ const productController = {
       color: body.color && `'%${body.color}%'`,
       size: body.size || null,
       category: body.category && `'%${body.category}%'`,
-      sortBy: body.sortBy || 'name',
+      sortBy: body.sortBy || 'product_name',
       sortOrd: body.sortOrd || 'asc',
       page: body.page < 1 ? 1 : body.page,
       limit: body.limit || 5,
