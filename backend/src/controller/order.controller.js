@@ -114,7 +114,7 @@ const orderController = {
   insertTransaction: (req, res) => {
     try {
       const { userid, id_order, id_address, payment_method, quantity, price, id, stockProduk } = req.body;
-      const total_price = quantity * price + (5 / 100) * quantity * price;
+      const total_price = quantity * price + (5 / 100 * quantity * price);
       const data = {
         userid,
         id_order,
@@ -130,10 +130,10 @@ const orderController = {
           productModel.updateProduct(data1);
           const data3 = { id: id_order, status: 1 };
           orderModel.updateOrder(data3);
-          success(res, result, 'success', 'Update stock success');
+          success(res, result, 'success', 'insert transaction success');
         })
         .catch((err) => {
-          failed(res, err.message, 'failed', 'insert transaksi failed');
+          failed(res, err.message, 'failed', 'insert transaction failed');
         });
     } catch (err) {
       failed(res, err.message, 'failed', 'internal server error');

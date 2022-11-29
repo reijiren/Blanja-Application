@@ -27,7 +27,7 @@ create table product(
     product_name varchar(50),
     price integer,
     stock integer,
-    condition integer, -- 0 baru, 1 bekas
+    condition integer, -- 0 new, 1 old
     photo text,
     color text,
     size text, -- 1 XS, 2 S, 3 M, 4 L, 5 XL
@@ -48,7 +48,7 @@ create table orders(
 create table address(
     id_address serial primary key,
     userid integer references users(id_user) on delete cascade,
-    address_name varchar(40), -- ex: rumah, kantor, gudang
+    address_name varchar(40), -- ex: home, work, storage
     recipient_name varchar(40),
     recipient_phone varchar(20),
     address text,

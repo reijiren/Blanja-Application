@@ -7,7 +7,6 @@ const router = express.Router();
 
 router
   .get('/product', list)
-
   .get('/product/:id', detailProduct)
   .get('/product/search/:search', searchName)
   .get('/product/user/:id', userProduct)
