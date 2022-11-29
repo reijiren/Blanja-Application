@@ -13,7 +13,6 @@ const userController = {
       success(res, result, 'success', 'get all user success')
     })
     .catch((err) => {
-      // res.json(err)
       failed(res, err.message, 'failed', 'get all user failed')
     })
   },
@@ -28,7 +27,6 @@ const userController = {
       success(res, result, 'success','get user by id success')
     })
     .catch((err) => {
-      // res.json(err)
       failed(res, err.message,'failed','failed to get user by id')
     })
   },
@@ -42,7 +40,6 @@ const userController = {
       success(res, result.rows, 'success','get user by email success')
     })
     .catch((err) => {
-      // res.json(err)
       failed(res, err.message,'failed','failed to get user by email')
     })
   },

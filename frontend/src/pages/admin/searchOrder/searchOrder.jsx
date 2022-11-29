@@ -7,25 +7,11 @@ import NavAdmin from "../../../components/NavAdmin";
 const SearchOrder = () => {
 	const [name, setName] = useState("");
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`${process.env.REACT_APP_BACKEND_URL}/order`)
-	// 		.then((response) => {
-	// 			console.log(response);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// });
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 
 		return navigate(`/admin/search-order/?search=${name}`);
-
-		// dispatch(findAirline(page, body, handleSuccess));
 	};
 
 	return (

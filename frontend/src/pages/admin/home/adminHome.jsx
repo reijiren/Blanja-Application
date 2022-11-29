@@ -7,7 +7,6 @@ import style from "./style.module.css";
 const HomeAdmin = () => {
 	const user = useSelector((state) => state.user.user);
 
-	console.log(user);
 	return (
 		<div>
 			<NavAdmin />

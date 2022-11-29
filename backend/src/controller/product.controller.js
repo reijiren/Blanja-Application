@@ -22,7 +22,6 @@ const productController = {
         success(res, result, 'success', 'by id user success');
       })
       .catch((err) => {
-        // res.json(err)
         failed(res, err.message, 'failed', 'by id user failed');
       });
   },

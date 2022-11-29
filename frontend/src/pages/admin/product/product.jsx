@@ -4,7 +4,7 @@ import NavAdmin from "../../../components/NavAdmin";
 import style from "./style.module.css";
 
 const AdminProduct = () => {
-	const [product, setProduct] = useState({});
+	const [product, setProduct] = useState([]);
 	const [delProduct, setDelProduct] = useState([]);
 	console.log(product);
 
@@ -47,7 +47,7 @@ const AdminProduct = () => {
 				<div className="d-flex justify-content-center align-items-center mt-5">
 					<div className="col-8">
 						<h1 className="text-center">Product list</h1>
-						{product.length == undefined ? (
+						{product.length === 0 ? (
 							<h1>No order found!</h1>
 						) : (
 							product.map((item, index) => (
@@ -67,13 +67,13 @@ const AdminProduct = () => {
 												<span>
 													{" "}
 													Size:{" "}
-													{item.size == 0
+													{item.size === 0
 														? "XS"
-														: item.size == 1
+														: item.size === 1
 														? "S"
-														: item.size == 2
+														: item.size === 2
 														? "M"
-														: item.size == 3
+														: item.size === 3
 														? "L"
 														: "XL"}
 												</span>

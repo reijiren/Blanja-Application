@@ -20,11 +20,6 @@ const multerUpload = multer({
         }
     }),
     
-    // limits: {
-    //     // limit filesize up to 2mb
-    //     fileSize: 2 * 1024 * 1024,
-    // },
-
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname);
 
