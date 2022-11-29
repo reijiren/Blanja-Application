@@ -200,7 +200,6 @@ const userController = {
               success(res, result, 'success','register success')
             }).catch((err)=>{
               failed(res, err.message,'failed','register fail')
-              console.log(data)
             })
           }else{
             failed(res, null, 'failed', `email already taken`);
