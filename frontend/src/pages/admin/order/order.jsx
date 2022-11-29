@@ -4,8 +4,7 @@ import NavAdmin from "../../../components/NavAdmin";
 import style from "./style.module.css";
 
 const Order = () => {
-	const [order, setOrder] = useState({});
-	console.log(order);
+	const [order, setOrder] = useState([]);
 
 	// get order
 	useEffect(() => {
@@ -26,7 +25,7 @@ const Order = () => {
 				<div className="d-flex justify-content-center align-items-center mt-5">
 					<div className="col-8">
 						<h1 className="text-center">Order list</h1>
-						{order.length == undefined ? (
+						{order.length === 0 ? (
 							<h1>No order found!</h1>
 						) : (
 							order.map((item, index) => (
@@ -46,13 +45,13 @@ const Order = () => {
 												<span>
 													{" "}
 													Size:{" "}
-													{item.item_size == "1"
+													{item.item_size === "1"
 														? "XS"
-														: item.item_size == "2"
+														: item.item_size === "2"
 														? "S"
-														: item.item_size == "3"
+														: item.item_size === "3"
 														? "M"
-														: item.item_size == "4"
+														: item.item_size === "4"
 														? "L"
 														: "XL"}
 												</span>

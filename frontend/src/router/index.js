@@ -21,7 +21,6 @@ import ResetPass from "../pages/ResetPassword/index";
 import LoginAdmin from "../pages/admin/login/adminLogin";
 import HomeAdmin from "../pages/admin/home/adminHome";
 import Order from "../pages/admin/order/order";
-import SearchOrder from "../pages/admin/searchOrder/searchOrder";
 import AdminProduct from "../pages/admin/product/product";
 import ProductEdit from "../pages/productEdit/ProductEdit";
 
