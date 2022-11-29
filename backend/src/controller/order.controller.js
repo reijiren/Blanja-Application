@@ -8,7 +8,7 @@ const orderController = {
     orderModel
       .selectAll()
       .then((result) => {
-        success(res, result, 'success','get all orders succes')
+        success(res, result, 'success','get all orders success')
       })
       .catch((err) => {
         failed(res, err.message,'failed','get all orders failed')
@@ -135,10 +135,10 @@ const orderController = {
     orderModel
       .selectAllTransaction()
       .then((result) => {
-        success(res, result, 'success','get all orders succes')
+        success(res, result, 'success','get all transactions succes')
       })
       .catch((err) => {
-        failed(res, err.message,'failed','get all orders failed')
+        failed(res, err.message,'failed','get all transactions failed')
       })
   },
   listTransaksiID: (req, res) => {
@@ -146,10 +146,10 @@ const orderController = {
     orderModel
       .selectTransactionID(id)
       .then((result) => {
-        success(res, result, 'success','get all orders succes')
+        success(res, result, 'success','get transaction detail succes')
       })
       .catch((err) => {
-        failed(res, err.message,'failed','get all orders failed')
+        failed(res, err.message,'failed','get transaction detail failed')
       })
   },
 }
