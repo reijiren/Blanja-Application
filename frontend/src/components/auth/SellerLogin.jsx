@@ -1,38 +1,55 @@
-import React, { Fragment, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import style from "../../assets/style/style.module.css";
-import axios from "axios";
-import { login } from "../../redux/action/user";
-import { useDispatch } from "react-redux";
-import { reset } from "../../redux/action/chat";
+import React, { Fragment, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import style from '../../assets/style/style.module.css';
+import axios from 'axios';
+import { login } from '../../redux/action/user';
+import { useDispatch } from 'react-redux';
+import { reset } from '../../redux/action/chat';
+import Swal from 'sweetalert2';
 
 const SellerLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  
+
   const onSubmit = (e) => {
     e.preventDefault();
 
     const handleSuccess = (data) => {
-      if(data.data.status !== "success"){
-        alert(data.data.message);
+      if (data.data.status !== 'success') {
+        Swal.fire({
+          icon: 'error',
+          title: 'name or password is incorrect',
+          showConfirmButton: false,
+          timer: 1800,
+        });
       } else {
         const user = data.data.data.user_type;
         if (user === 2) {
-          localStorage.setItem("token", data.data.token);
-          alert("Login Success");
+          localStorage.setItem('token', data.data.token);
+          Swal.fire({
+            icon: 'success',
+            title: 'Sucess login!',
+            showConfirmButton: false,
+            timer: 1800,
+          });
+
           dispatch(reset());
-          return navigate('/')
+          return navigate('/');
         } else {
-          alert("This user is not registered as a seller");
+          Swal.fire({
+            icon: 'error',
+            title: 'This user is not registered as a seller',
+            showConfirmButton: false,
+            timer: 1800,
+          });
         }
       }
-    }
+    };
     dispatch(login(form, handleSuccess));
   };
 
@@ -40,22 +57,10 @@ const SellerLogin = () => {
     <Fragment>
       <form className="col-12 col-md-8" onSubmit={(e) => onSubmit(e)}>
         <div className="mb-3">
-          <input
-            type="email"
-            className={`form-control ${style.buttons}`}
-            id="emailInput"
-            placeholder="Email"
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-          />
+          <input type="email" className={`form-control ${style.buttons}`} id="emailInput" placeholder="Email" onChange={(e) => setForm({ ...form, email: e.target.value })} />
         </div>
         <div className="mb-3">
-          <input
-            type="password"
-            className={`form-control ${style.buttons}`}
-            id="passwordInput"
-            placeholder="Password"
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-          />
+          <input type="password" className={`form-control ${style.buttons}`} id="passwordInput" placeholder="Password" onChange={(e) => setForm({ ...form, password: e.target.value })} />
         </div>
         <div className="d-flex flex-row-reverse mb-3">
           <Link className={`${style.links}`} to="/resetpass">
@@ -68,9 +73,12 @@ const SellerLogin = () => {
       </form>
       <div className="text-center">
         <p>
-          Don't have a Blanja account?{" "}
+          Don't have a Blanja account?{' '}
           <span>
-            <Link className={`${style.links} text-danger`} to="/register"> Register</Link>
+            <Link className={`${style.links} text-danger`} to="/register">
+              {' '}
+              Register
+            </Link>
           </span>
         </p>
       </div>

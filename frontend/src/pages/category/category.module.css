@@ -18,6 +18,10 @@
   line-height: 34px;
   margin-top: 3rem;
 }
+.links {
+  text-decoration: none;
+}
+
 .p {
   color: #9b9b9b;
   font-style: normal;

@@ -1,13 +1,13 @@
-import "./style.css";
-import React, { useState, useEffect } from "react";
+import './style.css';
+import React, { useState, useEffect } from 'react';
 // image
-import johanesMikael from "../../../assets/images/johanes mikael.png";
+import johanesMikael from '../../../assets/images/johanes mikael.png';
 // react redux
-import { useSelector, useDispatch } from "react-redux";
-import { updateCustomer, updateImageUser } from "../../../redux/action/user";
-import { useNavigate } from "react-router-dom";
-import strtotime from "locutus/php/datetime/strtotime";
-import date from "locutus/php/datetime/date";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateCustomer, updateImageUser } from '../../../redux/action/user';
+import { useNavigate } from 'react-router-dom';
+import strtotime from 'locutus/php/datetime/strtotime';
+import date from 'locutus/php/datetime/date';
 
 const MyProfile = () => {
   // get date picker
@@ -16,13 +16,13 @@ const MyProfile = () => {
   var mm = today.getMonth() + 1; //January is 0!
   var yyyy = today.getFullYear();
   if (dd < 10) {
-    dd = "0" + dd;
+    dd = '0' + dd;
   }
 
   if (mm < 10) {
-    mm = "0" + mm;
+    mm = '0' + mm;
   }
-  today = yyyy + "-" + mm + "-" + dd;
+  today = yyyy + '-' + mm + '-' + dd;
   const [dateNow, setDateNow] = useState(today);
 
   // logic page
@@ -53,24 +53,24 @@ const MyProfile = () => {
 
   // toggle check gender
   const toggleCheckedMale = () => {
-    setBool(true)
+    setBool(true);
     if (genderBool == true) {
-      setForm({...form, gender: 0})
+      setForm({ ...form, gender: 0 });
     } else if (genderBool == false) {
-      setForm({...form, gender: 1})
+      setForm({ ...form, gender: 1 });
     } else {
-      setForm({...form, gender: null})
+      setForm({ ...form, gender: null });
     }
   };
 
   const toggleCheckedFemale = () => {
-    setBool(false)
+    setBool(false);
     if (genderBool == true) {
-      setForm({...form, gender: 0})
+      setForm({ ...form, gender: 0 });
     } else if (genderBool == false) {
-      setForm({...form, gender: 1})
+      setForm({ ...form, gender: 1 });
     } else {
-      setForm({...form, gender: null})
+      setForm({ ...form, gender: null });
     }
   };
 
@@ -87,17 +87,15 @@ const MyProfile = () => {
       setForm({ ...form, image: image });
       const id = dataUser.id_customer;
       const body = {
-        image: image
+        image: image,
       };
       const handleSuccess = (data) => {
-        console.log("image", data);
+        console.log('image', data);
         // alert("success image")
       };
       dispatch(updateImageUser(id, body, handleSuccess));
     }
-    console.log(genderBool)
-    
-
+    console.log(genderBool);
 
     const handleSuccess = (data) => {
       console.log(data);
@@ -131,9 +129,7 @@ const MyProfile = () => {
               <p className="fontBold h4">My Profile</p>
             </div>
             <div className="desc mb-3">
-              <p className="fontMedium h6 text-muted">
-                Manage your profile information
-              </p>
+              <p className="fontMedium h6 text-muted">Manage your profile information</p>
             </div>
             <div className="break-line mb-5"></div>
 
@@ -143,78 +139,39 @@ const MyProfile = () => {
                   {/* form aside left */}
                   <div className="wrapper-side-form-input col-8 col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
                     <div className="mb-3 row">
-                      <label
-                        htmlFor="name"
-                        className="col-4 col-form-label d-flex "
-                      >
+                      <label htmlFor="name" className="col-4 col-form-label d-flex ">
                         <p className="fontMedium h6 text-muted">Name</p>
                       </label>
                       <div className="col-8">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="name"
-                          name="name"
-                          defaultValue={dataUser.name}
-                          onChange={handleChange}
-                        />
+                        <input type="text" className="form-control" id="name" name="name" defaultValue={dataUser.name} onChange={handleChange} />
                       </div>
                     </div>
                     <div className="mb-3 row">
-                      <label
-                        htmlFor="email"
-                        className="col-4 col-form-label d-flex "
-                      >
+                      <label htmlFor="email" className="col-4 col-form-label d-flex ">
                         <p className="fontMedium h6 text-muted">Email</p>
                       </label>
                       <div className="col-8">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="email"
-                          name="email"
-                          defaultValue={dataUser.email}
-                          onChange={handleChange}
-                        />
+                        <input type="text" className="form-control" id="email" name="email" defaultValue={dataUser.email} onChange={handleChange} />
                       </div>
                     </div>
                     <div className="mb-3 row">
-                      <label
-                        htmlFor="phone"
-                        className="col-4 col-form-label d-flex "
-                      >
+                      <label htmlFor="phone" className="col-4 col-form-label d-flex ">
                         <p className="fontMedium h6 text-muted">Phone number</p>
                       </label>
                       <div className="col-8">
-                        <input
-                          type="phone"
-                          className="form-control"
-                          id="phone"
-                          name="phone"
-                          defaultValue={dataUser.phone}
-                          onChange={handleChange}
-                        />
+                        <input type="phone" className="form-control" id="phone" name="phone" defaultValue={dataUser.phone} onChange={handleChange} />
                       </div>
                     </div>
                     <div className="mb-3 row">
-                      <label
-                        htmlFor="phone"
-                        className="col-4 col-form-label d-flex "
-                      >
+                      <label htmlFor="phone" className="col-4 col-form-label d-flex ">
                         <p className="fontMedium h6 text-muted">
-                          Gender{" "}
+                          Gender{' '}
                           {dataUser.gender === 0 ? (
-                            <span
-                              className="font-weight-bold"
-                              style={{ borderBottom: "2px solid black" }}
-                            >
+                            <span className="font-weight-bold" style={{ borderBottom: '2px solid black' }}>
                               laki-laki
                             </span>
                           ) : (
-                            <span
-                              className="font-weight-bold"
-                              style={{ borderBottom: "2px solid black" }}
-                            >
+                            <span className="font-weight-bold" style={{ borderBottom: '2px solid black' }}>
                               perempuan
                             </span>
                           )}
@@ -225,40 +182,20 @@ const MyProfile = () => {
                       <div className="col-8 d-flex gap-3">
                         <div className="radio-1 d-flex flex-row gap-2">
                           <div className="input-radio">
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="gender"
-                                id="laki-laki"
-                                onClick={toggleCheckedMale}
-                              />
+                            <input className="form-check-input" type="radio" name="gender" id="laki-laki" onClick={toggleCheckedMale} />
                           </div>
                           <div className="label-radio">
-                            <label
-                              className="form-check-label"
-                              htmlFor="laki-laki"
-                            >
+                            <label className="form-check-label" htmlFor="laki-laki">
                               Laki-laki
                             </label>
                           </div>
                         </div>
                         <div className="radio-2 d-flex flex-row gap-2">
                           <div className="input-radio">
-                           
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="gender"
-                                id="perempuan"
-                                onClick={toggleCheckedFemale}
-                              />
-                             
+                            <input className="form-check-input" type="radio" name="gender" id="perempuan" onClick={toggleCheckedFemale} />
                           </div>
                           <div className="label-radio">
-                            <label
-                              className="form-check-label"
-                              htmlFor="perempuan"
-                            >
+                            <label className="form-check-label" htmlFor="perempuan">
                               Perempuan
                             </label>
                           </div>
@@ -266,47 +203,24 @@ const MyProfile = () => {
                       </div>
                     </div>
                     <div className="mb-3 row additional-desc">
-                      <p className="fontBold fst-italic" style={{color:"#F01F0E "}}>double click to make sure changes</p>
+                      <p className="fontBold fst-italic" style={{ color: '#F01F0E ' }}>
+                        double click to make sure changes
+                      </p>
                     </div>
                     <div className="mb-3 row">
-                      <label
-                        htmlFor="phone"
-                        className="col-4 col-form-label d-flex "
-                      >
-                        <p className="fontMedium h6 text-muted">
-                          Date of birth
-                        </p>
+                      <label htmlFor="phone" className="col-4 col-form-label d-flex ">
+                        <p className="fontMedium h6 text-muted">Date of birth</p>
                         <br />
-                        <p className="fontMedium h6 text-bold">
-                          {dataUser.birth_date ? (
-                            <>
-                              ({date("Y-m-d", strtotime(dataUser.birth_date))})
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </p>
+                        <p className="fontMedium h6 text-bold">{dataUser.birth_date ? <>({date('Y-m-d', strtotime(dataUser.birth_date))})</> : <></>}</p>
                       </label>
                       <div className="col-8 d-flex gap-3">
-                        <input
-                          type="date"
-                          name="birth_date"
-                          className="form-control"
-                          id="birth_date"
-                          onChange={handleChange}
-                        />
+                        <input type="date" name="birth_date" className="form-control" id="birth_date" onChange={handleChange} />
                       </div>
                     </div>
                     <div className="mb-3 row">
-                      <label
-                        htmlFor="-"
-                        className="col-4 col-form-label d-flex "
-                      ></label>
+                      <label htmlFor="-" className="col-4 col-form-label d-flex "></label>
                       <div className="col-8 d-flex gap-3">
-                        <button
-                          type="submit"
-                          className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive"
-                        >
+                        <button type="submit" className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive">
                           Save
                         </button>
                       </div>
@@ -321,9 +235,9 @@ const MyProfile = () => {
                         src={`${process.env.REACT_APP_BACKEND_URL}/${dataUser.image}`}
                         alt="photo-user"
                         style={{
-                          width: "100px",
-                          heith: "100px",
-                          borderRadius: "50%",
+                          width: '100px',
+                          heith: '100px',
+                          borderRadius: '50%',
                         }}
                       />
                     </div>
@@ -331,9 +245,9 @@ const MyProfile = () => {
                       <label
                         className="fontMedium text-muted text-center"
                         style={{
-                          border: "2px solid #9B9B9B",
-                          borderRadius: "25px",
-                          width: "100%",
+                          border: '2px solid #9B9B9B',
+                          borderRadius: '25px',
+                          width: '100%',
                         }}
                         htmlFor="photo"
                       >
@@ -355,10 +269,7 @@ const MyProfile = () => {
                 </div>
                 <div className="mb-3 mt-3 row">
                   <div className="col-12 d-flex justify-content-center gap-3">
-                    <button
-                      type="submit"
-                      className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive-2"
-                    >
+                    <button type="submit" className="button-submit-profile fontMedium bgRedPucat h6 textWhiteBening button-submit-responsive-2">
                       Save
                     </button>
                   </div>

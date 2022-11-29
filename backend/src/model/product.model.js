@@ -143,6 +143,16 @@ const productModel = {
         product_name: data.product_name,
         color: data.color,
         size: data.size,
+        category: data.category,
+      };
+
+      for (var key in body) {
+        if (body[key] !== null) max = max + 1;
+
+      const body = {
+        product_name: data.product_name,
+        color: data.color,
+        size: data.size,
         category: data.category
       }
       
@@ -151,7 +161,6 @@ const productModel = {
         max = max + 1
       }
      
-
 			const addCount = () => {
 				counter = counter + 1;
 				return "or ";
@@ -161,6 +170,19 @@ const productModel = {
 				`
         SELECT * FROM product join seller on seller.id_seller = product.seller
         where
+        ${data.product_name ? `product_name ilike ${data.product_name} ${counter < max ? addCount() : ' '}` : ''}
+        ${data.color ? `color ilike ${data.color} ${counter < max ? addCount() : ' '}` : ''}
+        ${data.size ? `size = ${data.size} ${counter < max ? addCount() : ' '}` : ''}
+        ${data.category ? `category ilike ${data.category} ${counter < max ? addCount() : ' '}` : ''}
+        ${max < 1 ? `product_name ilike '%%'` : ''}
+        order by ${data.sortBy} ${data.sortOrd} limit ${data.limit} offset ${offset}
+        `,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
         ${
 					data.product_name
 						? `product_name ilike ${data.product_name} ${
@@ -193,9 +215,9 @@ const productModel = {
         } else {
           resolve(result)
         }
-      })
-    })
+      );
+    });
   },
-}
+};
 
 module.exports = productModel;

@@ -1,70 +1,76 @@
-import React, { Fragment, useEffect, useState } from "react";
-import ProductReview from "../../components/product/ProductReview";
-import OtherProduct from "../../components/product/OtherProduct";
-import { Helmet } from "react-helmet";
-import Navs from "../../components/Navs";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { selectReceiver } from "../../redux/action/chat";
-import style from "../../assets/style/style.module.css";
-import star from "../../assets/images/Star.png";
+import React, { Fragment, useEffect, useState } from 'react';
+import ProductReview from '../../components/product/ProductReview';
+import OtherProduct from '../../components/product/OtherProduct';
+import { Helmet } from 'react-helmet';
+import Navs from '../../components/Navs';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { selectReceiver } from '../../redux/action/chat';
+import style from '../../assets/style/style.module.css';
+import star from '../../assets/images/Star.png';
+import Swal from 'sweetalert2';
 
 const Product = () => {
-	const [active, setActive] = useState();
-	const [jumlah, setJumlah] = useState(1);
-	const { id_product } = useParams();
-	const [details, setDetails] = useState({});
-	const [size, setSize] = useState();
-	const dispatch = useDispatch();
+  const [active, setActive] = useState();
+  const [jumlah, setJumlah] = useState(1);
+  const { id_product } = useParams();
+  const [details, setDetails] = useState({});
+  const dispatch = useDispatch();
 
-	const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
 
-	// Get product detail
-	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_BACKEND_URL}/product/${id_product}`)
-			.then((response) => {
-				setDetails(response.data.data.rows[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [id_product]);
+  // Get product detail
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/product/${id_product}`)
+      .then((response) => {
+        setDetails(response.data.data.rows[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id_product]);
 
-	const [product, setProduct] = useState({
-		userid: user.id_user,
-		item: parseInt(id_product),
-		status: 0,
-	});
+  const [product, setProduct] = useState({
+    userid: user.id_user,
+    item: parseInt(id_product),
+    size: 1,
+    status: 0,
+  });
 
-	const onSubmit = (e) => {
-		e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-		const body = {
-			userid: product.userid,
-			item: product.item,
-			size: size,
-			color: active,
-			quantity: jumlah,
-			status: product.status,
-		};
-		console.log(body);
+    const body = {
+      userid: product.userid,
+      item: product.item,
+      size: product.size,
+      color: active,
+      quantity: jumlah,
+      status: product.status,
+    };
 
-		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}/order`, body)
-			.then((response) => {
-				console.log(response);
-				alert("barang berhasil ditambahkan");
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/order`, body)
+      .then((response) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Barang berhasil ditambahkan',
+          showConfirmButton: false,
+          timer: 1800,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-	const chatSeller = () => {
-		dispatch(selectReceiver(details.id_seller));
-	};
+    console.log(body);
+  };
+
+  const chatSeller = () => {
+    dispatch(selectReceiver(details.id_seller));
+  };
 
 	return (
 		<>

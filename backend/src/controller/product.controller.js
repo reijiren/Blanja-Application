@@ -1,56 +1,57 @@
 const productModel = require('../model/product.model');
-const {failed, success}= require('../helper/response');
+const { failed, success } = require('../helper/response');
 
 const productController = {
   // method
+
   list: (req, res) => {
     productModel
       .selectAll()
       .then((result) => {
-        success(res, result, 'success','get all products success')
+        success(res, result, 'success', 'get all products success');
       })
       .catch((err) => {
-        failed(res, err.message,'failed','failed to get all products')
-      })
+        failed(res, err.message, 'failed', 'failed to get all products');
+      });
   },
   detail: (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
     productModel
       .selectDetail(id)
       .then((result) => {
-        success(res, result, 'success','by id user success')
+        success(res, result, 'success', 'by id user success');
       })
       .catch((err) => {
         // res.json(err)
-        failed(res, err.message,'failed','by id user failed')
-      })
+        failed(res, err.message, 'failed', 'by id user failed');
+      });
   },
   detailProduct: (req, res) => {
     const id = req.params.id;
     productModel
-    .selectJoin(id)
-    .then((result) => {
-      success(res, result, 'success', 'get detail product success')
-    })
-    .catch((err) => {
-      failed(res, err.message, 'failed', 'failed to get product detail')
-    })
+      .selectJoin(id)
+      .then((result) => {
+        success(res, result, 'success', 'get detail product success');
+      })
+      .catch((err) => {
+        failed(res, err.message, 'failed', 'failed to get product detail');
+      });
   },
   searchName: (req, res) => {
-    const search = req.params.search
+    const search = req.params.search;
     productModel
       .checkProduct(search)
       .then((result) => {
-        success(res, result, 'success', 'find product by name success')
+        success(res, result, 'success', 'find product by name success');
       })
       .catch((err) => {
-        failed(res, err.message, 'failed', 'failed to find product by name')
-      })
+        failed(res, err.message, 'failed', 'failed to find product by name');
+      });
   },
   insert: (req, res) => {
     try {
-      const photo = req.file.filename
-      const { seller,product_name,price ,stock,condition,color,size,category,description } = req.body;
+      const photo = req.file.filename;
+      const { seller, product_name, price, stock, condition, color, size, category, description } = req.body;
 
       const data = {
         seller,
@@ -62,24 +63,26 @@ const productController = {
         color,
         size,
         category,
-        description
-      }
+        description,
+      };
 
-      productModel.store(data).then((result) => {
-          success(res, result, 'success', 'insert product success')
-
-      }).catch((err) => {
-          failed(res, err.message, 'failed', 'insert product failed')
-      })
-    } catch(err) {
+      productModel
+        .store(data)
+        .then((result) => {
+          success(res, result, 'success', 'insert product success');
+        })
+        .catch((err) => {
+          failed(res, err.message, 'failed', 'insert product failed');
+        });
+    } catch (err) {
       failed(res, err.message, 'failed', 'internal server error');
     }
   },
   update: (req, res) => {
-    try{
-      const id = req.params.id
-      
-      const { product_name, price ,stock,condition,color,size,category,description} = req.body
+    try {
+      const id = req.params.id;
+
+      const { product_name, price, stock, condition, color, size, category, description } = req.body;
       const data = {
         product_name,
         price,
@@ -89,54 +92,57 @@ const productController = {
         size,
         category,
         description,
-        id
-      }
-      
+        id,
+      };
+
       productModel
-      .updateProduct(data)
-      .then((result) => {
-        productModel.selectJoin(id)
+        .updateProduct(data)
         .then((result) => {
-          success(res, result.rows, 'success', 'update product success')
+          productModel
+            .selectJoin(id)
+            .then((result) => {
+              success(res, result.rows, 'success', 'update product success');
+            })
+            .catch((err) => {
+              failed(res, err.message, 'failed', 'failed to get product detail');
+            });
         })
         .catch((err) => {
-          failed(res, err.message, 'failed', 'failed to get product detail')
-        })
-      })
-      .catch((err) => {
-        failed(res, err.message, 'failed', 'update product failed')
-      })
-    } catch(err){
+          failed(res, err.message, 'failed', 'update product failed');
+        });
+    } catch (err) {
       failed(res, err.message, 'failed', 'internal server error');
     }
   },
 
   updatePhoto: (req, res) => {
-    try{
+    try {
       const id = req.params.id;
-      const photo = req.file.filename
+      const photo = req.file.filename;
 
-      productModel.selectJoin(id)
-      .then(async (result) => {
-        const img = result.rows[0].photo + "||" + photo;
+      productModel
+        .selectJoin(id)
+        .then(async (result) => {
+          const img = result.rows[0].photo + '||' + photo;
 
-        const data = {
-          id,
-          photo: img,
-        }
+          const data = {
+            id,
+            photo: img,
+          };
 
-        await productModel.updateProduct(data)
-        .then((result) => {
-          success(res, result.rowCount, 'success', 'update product photo success')
+          await productModel
+            .updateProduct(data)
+            .then((result) => {
+              success(res, result.rowCount, 'success', 'update product photo success');
+            })
+            .catch((err) => {
+              failed(res, err.message, 'failed', 'failed to update product photo');
+            });
         })
         .catch((err) => {
-          failed(res, err.message, 'failed', 'failed to update product photo')
-        })
-      })
-      .catch((err) => {
-        failed(res, err.message, 'failed', 'failed to get product detail')
-      })
-    }catch(err){
+          failed(res, err.message, 'failed', 'failed to get product detail');
+        });
+    } catch (err) {
       failed(res, err.message, 'failed', 'internal server error');
     }
   },
@@ -145,23 +151,24 @@ const productController = {
     productModel
       .delete(req.params.id)
       .then((result) => {
-        success(res, result, 'success', 'delete product success')
+        success(res, result, 'success', 'delete product success');
       })
       .catch((err) => {
-        failed(res, err.message, 'failed', 'delete product failed')
-      })
+        failed(res, err.message, 'failed', 'delete product failed');
+      });
   },
 
   userProduct: (req, res) => {
     const id = req.params.id;
 
-    productModel.selectUserProduct(id)
-    .then((result) => {
-      success(res, result.rows, 'success', 'get user products success')
-    })
-    .catch((err) => {
-      failed(res, err.message, 'failed', 'failed to get user products')
-    })
+    productModel
+      .selectUserProduct(id)
+      .then((result) => {
+        success(res, result.rows, 'success', 'get user products success');
+      })
+      .catch((err) => {
+        failed(res, err.message, 'failed', 'failed to get user products');
+      });
   },
 
   filter: (req, res) => {
@@ -176,16 +183,17 @@ const productController = {
       sortOrd: body.sortOrd || 'asc',
       page: body.page < 1 ? 1 : body.page,
       limit: body.limit || 5,
-    }
+    };
 
-    productModel.searchProduct(data)
-    .then((result) => {
-      success(res, result.rows, 'success', 'search products success')
-    })
-    .catch((err) => {
-      failed(res, err.message, 'failed', 'failed to search products')
-    })
-  }
-}
+    productModel
+      .searchProduct(data)
+      .then((result) => {
+        success(res, result.rows, 'success', 'search products success');
+      })
+      .catch((err) => {
+        failed(res, err.message, 'failed', 'failed to search products');
+      });
+  },
+};
 
-module.exports = productController
+module.exports = productController;

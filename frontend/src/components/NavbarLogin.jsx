@@ -1,20 +1,35 @@
-import React, { Fragment, useState } from "react";
-import logo from "../assets/images/blanja_icon.png";
-import filter from "../assets/images/filter.png";
-import notif from "../assets/images/notif.png";
-import mail from "../assets/images/mail.png";
-import card from "../assets/images/cart.png";
-import cristian from "../assets/images/christian.png";
-import style from "../assets/style/style.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Fragment, useState } from 'react';
+import logo from '../assets/images/blanja_icon.png';
+import filter from '../assets/images/filter.png';
+import notif from '../assets/images/notif.png';
+import mail from '../assets/images/mail.png';
+import card from '../assets/images/cart.png';
+import cristian from '../assets/images/christian.png';
+import style from '../assets/style/style.module.css';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NavbarLogin = () => {
-  const [color, setColor] = useState("black");
+  const [color, setColor] = useState('black');
   const [size, setSize] = useState(true);
+
   const navigate = useNavigate();
-  const onLogout = () => {
-    localStorage.clear();
-    return navigate("/login");
+
+  const [search, setSearch] = useState('');
+  const [getProduct, setProduct] = useState([]);
+  // const nameA = JSON.parse(localStorage.setItem(''));
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    // if (search != '') {
+    //   axios.get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`).then((res) => {
+    //     setProduct(res.data);
+    //     return navigate(`?search=${search}`);
+    //   });
+    // }
+
+    localStorage.setItem('name', JSON.stringify(search));
+    return navigate('/category');
   };
 
   return (
@@ -133,38 +148,21 @@ const NavbarLogin = () => {
                         <div className="my-3">
                           <p className="fontBold">Size</p>
                           <div className="d-flex flex-row">
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              XS
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              S
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              M
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              L
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              XL
-                            </div>
+                            <div className="btn btn-light btn-outline-dark me-2">XS</div>
+                            <div className="btn btn-light btn-outline-dark me-2">S</div>
+                            <div className="btn btn-light btn-outline-dark me-2">M</div>
+                            <div className="btn btn-light btn-outline-dark me-2">L</div>
+                            <div className="btn btn-light btn-outline-dark me-2">XL</div>
                           </div>
                         </div>
                         <div className="my-3">
                           <p className="fontBold">Category</p>
                           <div className="d-flex flex-row">
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              All
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              Women
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              Men
-                            </div>
-                            <div className="btn btn-light btn-outline-dark me-2">
-                              Boys
-                            </div>
+                            <div className="btn btn-light btn-outline-dark me-2">T-Shirt</div>
+                            <div className="btn btn-light btn-outline-dark me-2">Short</div>
+                            <div className="btn btn-light btn-outline-dark me-2">Jacket</div>
+                            <div className="btn btn-light btn-outline-dark me-2">Pants</div>
+                            <div className="btn btn-light btn-outline-dark me-2">Shoes</div>
                           </div>
                         </div>
                       </div>

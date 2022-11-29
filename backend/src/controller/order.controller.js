@@ -1,6 +1,6 @@
 const orderModel = require('../model/order.model');
-const productModel = require ('../model/product.model')
-const {failed, success}= require('../helper/response');
+const productModel = require('../model/product.model');
+const { failed, success } = require('../helper/response');
 
 const orderController = {
   // method
@@ -8,44 +8,46 @@ const orderController = {
     orderModel
       .selectAll()
       .then((result) => {
-        success(res, result, 'success','get all orders success')
+        success(res, result, 'success', 'get all orders success');
       })
       .catch((err) => {
-        failed(res, err.message,'failed','get all orders failed')
-      })
+        failed(res, err.message, 'failed', 'get all orders failed');
+      });
   },
   detail: (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
     orderModel
       .selectDetail(id)
       .then((result) => {
-        success(res, result, 'success','by id orders success')
+        success(res, result, 'success', 'by id orders success');
       })
       .catch((err) => {
-        failed(res, err.message,'failed','by id orders failed')
-      })
+        failed(res, err.message, 'failed', 'by id orders failed');
+      });
   },
   detailOrder: (req, res) => {
     const id = req.params.id;
 
-    orderModel.selectJoin(id)
-    .then((result) => {
+    orderModel
+      .selectJoin(id)
+      .then((result) => {
         success(res, result.rows, 'success', `get detail order success`);
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         failed(res, err.message, 'failed', `failed to get order detail`);
-    })
+      });
   },
   detailUserOrder: (req, res) => {
     const id = req.params.id;
 
-    orderModel.selectUserOrder(id)
-    .then((result) => {
+    orderModel
+      .selectUserOrder(id)
+      .then((result) => {
         success(res, result.rows, 'success', `get detail order success`);
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         failed(res, err.message, 'failed', `failed to get order detail`);
-    })
+      });
   },
   detailUserOrderWithStatus: (req, res) => {
     const id = req.params.id;
@@ -62,17 +64,18 @@ const orderController = {
   allOrderedProduct: (req, res) => {
     const id = req.params.id;
 
-    orderModel.selectAllOrderedProduct(id)
-    .then((result) => {
+    orderModel
+      .selectAllOrderedProduct(id)
+      .then((result) => {
         success(res, result.rows, 'success', `get seller's ordered product success`);
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         failed(res, err.message, 'failed', `failed to get seller's ordered product`);
-    })
+      });
   },
   insert: (req, res) => {
     try {
-      const {userid, item, quantity, color, size, status} = req.body;
+      const { userid, item, quantity, color, size, status } = req.body;
 
       const data = {
         userid,
@@ -80,54 +83,59 @@ const orderController = {
         quantity,
         color,
         size,
-        status
-      }
+        status,
+      };
 
-      orderModel.store(data).then((result) => {
-          success(res, result, 'success', 'insert order success')
-      }).catch((err) => {
-          failed(res, err.message, 'failed', 'insert order failed')
-      })
-    } catch(err) {
+      orderModel
+        .store(data)
+        .then((result) => {
+          success(res, result, 'success', 'insert order success');
+        })
+        .catch((err) => {
+          failed(res, err.message, 'failed', 'insert order failed');
+        });
+    } catch (err) {
       failed(res, err.message, 'failed', 'internal server error');
     }
   },
   update: (req, res) => {
-    const id = req.params.id
-    const { quantity,color,size,status} = req.body
-    const data = {quantity,color,size,status,id}
+    const id = req.params.id;
+    const { quantity, color, size, status } = req.body;
+    const data = { quantity, color, size, status, id };
     orderModel
       .updateOrder(data)
       .then((result) => {
-        success(res, result,data, 'success', 'upload orders success')
+        success(res, result, data, 'success', 'upload orders success');
       })
       .catch((err) => {
         failed(res, err.message, 'failed', 'internal server error');
-      })
+      });
   },
   insertTransaction: (req, res) => {
     try {
-      const {userid, id_order,id_address, payment_method,quantity,price,id,stockProduk} = req.body;
-      const total_price=quantity*price+(5/100*quantity*price)
+      const { userid, id_order, id_address, payment_method, quantity, price, id, stockProduk } = req.body;
+      const total_price = quantity * price + (5 / 100) * quantity * price;
       const data = {
         userid,
         id_order,
         id_address,
         payment_method,
-        total_price
-      }
-      orderModel.storeTransaksi(data)
-      .then((result) => {
-          const stock = stockProduk-quantity
-          const data1= {stock,id}
-          productModel.updateProduct(data1)
-          const data3={id:id_order,status:1 }
-          orderModel.updateOrder(data3)
-          success(res, result, 'success', 'Update stock success')
-      }).catch((err) => {
-          failed(res, err.message, 'failed', 'insert transaksi failed')
-      })
-    } catch(err) {
+        total_price,
+      };
+      orderModel
+        .storeTransaksi(data)
+        .then((result) => {
+          const stock = stockProduk - quantity;
+          const data1 = { stock, id };
+          productModel.updateProduct(data1);
+          const data3 = { id: id_order, status: 1 };
+          orderModel.updateOrder(data3);
+          success(res, result, 'success', 'Update stock success');
+        })
+        .catch((err) => {
+          failed(res, err.message, 'failed', 'insert transaksi failed');
+        });
+    } catch (err) {
       failed(res, err.message, 'failed', 'internal server error');
     }
   },
@@ -135,23 +143,23 @@ const orderController = {
     orderModel
       .selectAllTransaction()
       .then((result) => {
-        success(res, result, 'success','get all transactions succes')
+        success(res, result, 'success', 'get all transactions success');
       })
       .catch((err) => {
-        failed(res, err.message,'failed','get all transactions failed')
-      })
+        failed(res, err.message, 'failed', 'get all transactions failed');
+      });
   },
   listTransaksiID: (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
     orderModel
       .selectTransactionID(id)
       .then((result) => {
-        success(res, result, 'success','get transaction detail succes')
+        success(res, result, 'success', 'get transaction detail success');
       })
       .catch((err) => {
-        failed(res, err.message,'failed','get transaction detail failed')
-      })
+        failed(res, err.message, 'failed', 'get transaction detail failed');
+      });
   },
-}
+};
 
-module.exports = orderController
+module.exports = orderController;
