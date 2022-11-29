@@ -23,6 +23,8 @@ import HomeAdmin from "../pages/admin/home/adminHome";
 import Order from "../pages/admin/order/order";
 import AdminProduct from "../pages/admin/product/product";
 import ProductEdit from "../pages/productEdit/ProductEdit";
+import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 
 const AdminRoute = () => {
 	const level = localStorage.getItem("level");
@@ -35,6 +37,22 @@ const AdminRoute = () => {
 	}
 };
 
+const PrivateRoute = () => {
+	const user = useSelector((state) => state.user.user)
+
+	if(user.user_type === 0 || user.user_type === 1){
+		return <Outlet />;
+	} else {
+		Swal.fire({
+			icon: 'error',
+			title: 'You need to login first!',
+			showConfirmButton: false,
+			timer: 1800,
+		  });
+		return <Navigate to="/login" />;
+	}
+}
+
 export default function Router() {
 	return (
 		<BrowserRouter>
@@ -44,14 +62,28 @@ export default function Router() {
 					<Route index element={<Landing />} />
 					<Route path="login" element={<Login />} />
 					<Route path="register" element={<Register />} />
-					<Route path="product/:id_product" element={<Product />} />
-					<Route path="checkout" element={<CheckOut />} />
-					<Route path="profile" element={<Profile />} />
-					<Route path="mybag" element={<MyBag />} />
-					<Route path="category" element={<Category />} />
-					<Route path="chat" element={<Chat />} />
 					<Route path="resetpass" element={<ResetPass />} />
-          			<Route path="edit-product/:id" element={<ProductEdit />}/>
+					<Route path="product/:id_product" element={<PrivateRoute />}>
+						<Route index element={<Product />} />
+					</Route>
+					<Route path="checkout" element={<PrivateRoute />}>
+						<Route index element={<CheckOut />} />
+					</Route>
+					<Route path="profile" element={<PrivateRoute />}>
+						<Route index element={<Profile />} />
+					</Route>
+					<Route path="mybag" element={<PrivateRoute />}>
+						<Route index element={<MyBag />} />
+					</Route>
+					<Route path="category" element={<PrivateRoute />}>
+						<Route index element={<Category />} />
+					</Route>
+					<Route path="chat" element={<PrivateRoute />}>
+						<Route index element={<Chat />} />
+					</Route>
+					<Route path="edit-product/:id" element={<PrivateRoute />}>
+						<Route index element={<ProductEdit />} />
+					</Route>
 				</Route>
 				<Route path="/admin/">
 					<Route index element={<LoginAdmin />} />

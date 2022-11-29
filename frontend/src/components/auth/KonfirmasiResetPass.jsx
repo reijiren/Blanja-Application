@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import style from "../../assets/style/style.module.css";
 import { useDispatch } from "react-redux";
 import { updateEmail } from "../../redux/action/user";
+import Swal from 'sweetalert2';
 
 const ConfirmResetPass = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ConfirmResetPass = () => {
 
     if(update.password.length >= 6 || update.newPassword >= 6){
       if(update.password===update.newPassword){
-        const user = JSON.parse(localStorage.getItem("data1"));
+        const user = JSON.parse(localStorage.getItem("em"));
         const id = user[0].id_user;
         const type = user[0].user_type === 1 ? "customer" : "seller";
 
@@ -27,15 +28,31 @@ const ConfirmResetPass = () => {
         };
 
         const handleSuccess = (data) => {
-          alert("Change Password Success");
+          Swal.fire({
+            icon: 'success',
+            title: 'Change Password Success',
+            showConfirmButton: false,
+            timer: 1800,
+          });
+          
           return navigate("/login");
         }
         dispatch(updateEmail(id, type, form, handleSuccess))
       }else{
-        alert("password is not match")
+        Swal.fire({
+          icon: 'error',
+          title: 'Password is not match',
+          showConfirmButton: false,
+          timer: 1800,
+        });
       }
     }else{
-			alert("Password must be more than 6 characters")
+      Swal.fire({
+        icon: 'error',
+        title: 'Password must be more than 6 characters',
+        showConfirmButton: false,
+        timer: 1800,
+      });
     }
   };
   

@@ -22,7 +22,7 @@ const CustomerLogin = () => {
       if (data.data.status !== 'success') {
         Swal.fire({
           icon: 'error',
-          title: 'name or password is incorrect',
+          title: 'Name or Password is incorrect',
           showConfirmButton: false,
           timer: 1800,
         });
@@ -32,7 +32,7 @@ const CustomerLogin = () => {
           localStorage.setItem('token', data.data.token);
           Swal.fire({
             icon: 'success',
-            title: 'Sucess login!',
+            title: 'Login Success!',
             showConfirmButton: false,
             timer: 1800,
           });

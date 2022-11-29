@@ -9,8 +9,8 @@ const ResetPass = () => {
 	const [active, setActive] = useState(false);
 	
     useEffect(() => {
-        const data1 = JSON.parse(localStorage.getItem("data1"));
-        setActive(data1)
+        const email = JSON.parse(localStorage.getItem("em"));
+        setActive(email)
     }, [])
 
 	return (

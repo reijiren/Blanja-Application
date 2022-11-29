@@ -4,29 +4,28 @@ import filter from '../assets/images/filter.png';
 import notif from '../assets/images/notif.png';
 import mail from '../assets/images/mail.png';
 import card from '../assets/images/cart.png';
-import cristian from '../assets/images/christian.png';
 import style from '../assets/style/style.module.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 const NavbarLogin = () => {
-  const [color, setColor] = useState('black');
+  const [color, setColor] = useState("black");
   const [size, setSize] = useState(true);
-
   const navigate = useNavigate();
 
+  const user = useSelector((state) => state.user.user);
+
   const [search, setSearch] = useState('');
-  const [getProduct, setProduct] = useState([]);
-  // const nameA = JSON.parse(localStorage.setItem(''));
+
+  const onLogout = () => {
+    localStorage.clear();
+    return navigate("/login");
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // if (search != '') {
-    //   axios.get(`${process.env.REACT_APP_BACKEND_URL}/product/search/${search}`).then((res) => {
-    //     setProduct(res.data);
-    //     return navigate(`?search=${search}`);
-    //   });
-    // }
 
     localStorage.setItem('name', JSON.stringify(search));
     return navigate('/category');
@@ -37,7 +36,7 @@ const NavbarLogin = () => {
       <nav className="navbar navbar-expand-lg bg-light row">
         <div className="container-fluid col-md-10 col-11">
           <Link to="/" className={`${style.links}`}>
-            <div className="d-flex col-md-2">
+            <div className="d-flex col-md-2 align-items-center">
               <img src={logo} alt="" className="me-2" />
               <h3 className={`fontBold text-danger my-auto`}>Blanja</h3>
             </div>
@@ -54,7 +53,6 @@ const NavbarLogin = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {/* <ul className="mb-2 mb-lg-0 mt-md-0 mt-2 col-md-8 col-12 navbar-nav "> */}
             <ul className={`me-auto mb-2 mb-lg-0 mt-md-0 mt-2 col-md-6 col-12`}>
               <form className={`d-flex`} role="search">
                 <input
@@ -218,7 +216,7 @@ const NavbarLogin = () => {
                         marginTop: "13px",
                         marginLeft: "20px",
                       }}
-                      src={cristian}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
                       alt=""
                     />
                   </Link>
@@ -230,19 +228,31 @@ const NavbarLogin = () => {
                       width: "max-content",
                       height: "max-content",
                       border: "2px solid #D4D4D4 ",
-					  borderRadius:"15px"
+                      borderRadius:"15px"
                     }}
-					onClick={() => {
-						const confirmBox = window.confirm(
-						  "are u sure to logout ?"
-						);
-
-						if (confirmBox === true) {
-						  onLogout();
-						}
-					  }}
+                    onClick={() => {
+                      Swal.fire({
+                        title: 'Are you sure to logout?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          Swal.fire({
+                            icon: 'success',
+                            title: 'Logged Out!',
+                            showConfirmButton: false,
+                            timer: 1800,
+                          });
+                          onLogout();
+                        }
+                      })
+                    }}
                   >
-					<p className="fontRegular">logout</p>
+                    <p className="fontRegular">logout</p>
                     <i className="bi bi-box-arrow-right"></i>
                   </button>
                 </div>

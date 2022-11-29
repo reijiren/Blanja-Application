@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import style from "../../assets/style/style.module.css";
 import { useDispatch } from "react-redux";
 import { checkEmail } from "../../redux/action/user";
+import Swal from 'sweetalert2';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,14 @@ const ResetPassword = () => {
 
     const handleSuccess = (data) => {
       if(data.data.data.length === 0){
-        alert("Email is not registered");
+        Swal.fire({
+          icon: 'error',
+          title: 'Email is not registered',
+          showConfirmButton: false,
+          timer: 1800,
+        });
       }else{
-        localStorage.setItem("data1",JSON.stringify(data.data.data));
+        localStorage.setItem("em",JSON.stringify(data.data.data));
         window.location.reload();
       }
     }
