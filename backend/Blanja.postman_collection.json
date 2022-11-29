@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"rhefa\",\r\n    \"email\": \"rhefa@gmail.com\",\r\n    \"password\": \"rhefa\",\r\n    \"phone\": \"08161\",\r\n    \"user_type\": 1\r\n}",
+									"raw": "{\r\n    \"name\": \"reyrey\",\r\n    \"email\": \"reyrey@gmail.com\",\r\n    \"password\": \"reyrey\",\r\n    \"phone\": \"08161\",\r\n    \"user_type\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -63,14 +63,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:3001/customer/1",
+									"raw": "localhost:3001/customer/2",
 									"host": [
 										"localhost"
 									],
 									"port": "3001",
 									"path": [
 										"customer",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -83,7 +83,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"rere\",\r\n    \"password\": \"ee\"\r\n}",
+									"raw": "{\r\n    \"name\": \"rere\",\r\n    \"email\": \"rere@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -91,14 +91,14 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3001/customer/1",
+									"raw": "localhost:3001/customer/2",
 									"host": [
 										"localhost"
 									],
 									"port": "3001",
 									"path": [
 										"customer",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -160,14 +160,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:3001/seller/2",
+									"raw": "localhost:3001/seller/3",
 									"host": [
 										"localhost"
 									],
 									"port": "3001",
 									"path": [
 										"seller",
-										"2"
+										"3"
 									]
 								}
 							},
@@ -180,7 +180,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"eleccc\",\r\n    \"password\": \"ecc\"\r\n}",
+									"raw": "{\r\n    \"store_desc\": \"all big boys unite\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -188,14 +188,14 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3001/seller/2",
+									"raw": "localhost:3001/seller/5",
 									"host": [
 										"localhost"
 									],
 									"port": "3001",
 									"path": [
 										"seller",
-										"2"
+										"5"
 									]
 								}
 							},
@@ -281,26 +281,26 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/user/2",
+							"raw": "localhost:3001/user/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"user",
-								"2"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Check Email",
+					"name": "CHECK EMAIL",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/user/email/rere@gmail.com",
+							"raw": "localhost:3001/user/email/admin@gmail.com",
 							"host": [
 								"localhost"
 							],
@@ -308,7 +308,7 @@
 							"path": [
 								"user",
 								"email",
-								"rere@gmail.com"
+								"admin@gmail.com"
 							]
 						}
 					},
@@ -325,12 +325,12 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/Niall Horan.png"
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/Harry Styles.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:3001/user/image/1",
+							"raw": "localhost:3001/user/image/2",
 							"host": [
 								"localhost"
 							],
@@ -338,7 +338,7 @@
 							"path": [
 								"user",
 								"image",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -374,7 +374,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/address/user/1",
+							"raw": "localhost:3001/address/user/2",
 							"host": [
 								"localhost"
 							],
@@ -382,7 +382,7 @@
 							"path": [
 								"address",
 								"user",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -414,7 +414,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userid\": 1,\r\n    \"address_name\": \"Home\",\r\n    \"recipient_name\": \"rere\",\r\n    \"recipient_phone\": \"08151\",\r\n    \"address\": \"Gang Jeruk\",\r\n    \"post_code\": \"16161\",\r\n    \"city\": \"Depok\"\r\n}",
+							"raw": "{\r\n    \"userid\": 2,\r\n    \"address_name\": \"Work\",\r\n    \"recipient_name\": \"rere\",\r\n    \"recipient_phone\": \"08151\",\r\n    \"address\": \"Gang Jingga\",\r\n    \"post_code\": \"16161\",\r\n    \"city\": \"Jakarta\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -511,14 +511,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/product/3",
+							"raw": "localhost:3001/product/2",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"product",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -530,7 +530,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/product/search/ ",
+							"raw": "localhost:3001/product/search/baju",
 							"host": [
 								"localhost"
 							],
@@ -538,7 +538,7 @@
 							"path": [
 								"product",
 								"search",
-								" "
+								"baju"
 							]
 						}
 					},
@@ -550,7 +550,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/product/user/1",
+							"raw": "localhost:3001/product/user/3",
 							"host": [
 								"localhost"
 							],
@@ -558,7 +558,7 @@
 							"path": [
 								"product",
 								"user",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -574,17 +574,17 @@
 							"formdata": [
 								{
 									"key": "seller",
-									"value": "1",
+									"value": "3",
 									"type": "text"
 								},
 								{
 									"key": "product_name",
-									"value": "Sepatu LED",
+									"value": "Baju Koko",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "50",
+									"value": "100",
 									"type": "text"
 								},
 								{
@@ -599,7 +599,7 @@
 								},
 								{
 									"key": "color",
-									"value": "black, white, blue",
+									"value": "black, blue, yellow",
 									"type": "text"
 								},
 								{
@@ -609,18 +609,18 @@
 								},
 								{
 									"key": "category",
-									"value": "Shoes",
+									"value": "T-shirt",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Sepatu LED cocok untuk kamu yang suka jedag jedug",
+									"value": "Baju Koko untuk kaum muslim",
 									"type": "text"
 								},
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/banner skill talent.png"
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/Blanja App/Blanja-Application/frontend/src/assets/images/bajuMuslim4.png"
 								}
 							]
 						},
@@ -644,7 +644,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_name\": null,\r\n    \"color\": null,\r\n    \"size\": null,\r\n    \"category\": null\r\n}",
+							"raw": "{\r\n    \"product_name\": null,\r\n    \"color\": null,\r\n    \"size\": null,\r\n    \"category\": \"t-shirt\",\r\n    \"sortBy\": \"product_name\",\r\n    \"sortOrd\": \"asc\",\r\n    \"page\": 1,\r\n    \"limit\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -704,12 +704,12 @@
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/C:/Users/rhefa/Documents/PijarCamp/hirejob/Frontend/public/banner 2.png"
+									"src": "/C:/Users/rhefa/Documents/PijarCamp/Blanja App/Blanja-Application/frontend/src/assets/images/bajuMuslim4.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:3001/product/photo/3",
+							"raw": "localhost:3001/product/photo/2",
 							"host": [
 								"localhost"
 							],
@@ -717,7 +717,7 @@
 							"path": [
 								"product",
 								"photo",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -729,13 +729,102 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/product/3",
+							"raw": "localhost:3001/product/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
 								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "GET ALL ORDER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/order",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USER'S ORDER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/order/user/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"order",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USER'S ORDER WITH STATUS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/order/userstatus/2?status=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"order",
+								"userstatus",
+								"2"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL SELLER'S ORDERED PRODUCT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/order/seller/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"order",
+								"seller",
 								"3"
 							]
 						}
@@ -743,21 +832,154 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "GET ORDER DETAIL",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/orderproduct/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"orderproduct",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "insertTransaksi",
+					"name": "INSERT NEW ORDER",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userid\":14,\r\n    \"id_order\":8,\r\n    \"payment_method\":\"gopay\",\r\n    \"quantity\":20,\r\n    \"price\":20,\r\n    \"id\":9,\r\n    \"stockProduk\":6,\r\n    \"StockOrder\":4\r\n}",
+							"raw": "{\r\n    \"userid\": 2,\r\n    \"item\": 2,\r\n    \"quantity\": 5,\r\n    \"color\": \"black\",\r\n    \"size\": 1,\r\n    \"status\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/order",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ORDER",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/order/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "USER'S LAST CHAT LIST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/user/chat/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"chat",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "GET ALL TRANSACTIONS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/transaction",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET TRANSACTION DETAIL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/transaction/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"transaction",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERT TRANSACTION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userid\": 2,\r\n    \"id_order\": 2,\r\n    \"id_address\": 1,\r\n    \"payment_method\": \"gojek\",\r\n    \"quantity\": 5,\r\n    \"price\": 500,\r\n    \"id\": 2,\r\n    \"stockProduk\": 50\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -774,22 +996,6 @@
 								"transaction"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "getTransaksi",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "Get Transaksi By id",
-					"request": {
-						"method": "GET",
-						"header": []
 					},
 					"response": []
 				}

@@ -174,10 +174,10 @@ const productController = {
     const body = req.body;
 
     const data = {
-      product_name: body.product_name && `'%${body.product_name}%'`,
-      color: body.color && `'%${body.color}%'`,
-      size: body.size && `'%${body.size}%'`,
-      category: body.category && `'%${body.category}%'`,
+      product_name: body.product_name !== null ? `'%${body.product_name}%'` : null,
+      color: body.color !== null ? `'%${body.color}%'` : null,
+      size: body.size !== null ? `'%${body.size}%'` : null,
+      category: body.category !== null ? `'%${body.category}%'` : null,
       sortBy: body.sortBy || 'product_name',
       sortOrd: body.sortOrd || 'asc',
       page: body.page < 1 ? 1 : body.page,

@@ -105,7 +105,7 @@ const orderController = {
     orderModel
       .updateOrder(data)
       .then((result) => {
-        success(res, result, data, 'success', 'upload orders success');
+        success(res, result, 'success', 'update orders success');
       })
       .catch((err) => {
         failed(res, err.message, 'failed', 'internal server error');
