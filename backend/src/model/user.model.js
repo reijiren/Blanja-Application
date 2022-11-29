@@ -110,7 +110,7 @@ const userModel = {
         image = coalesce ($6, image),
         main_address = coalesce ($7, main_address)
         from customer
-        where users.id_user  = customer.id_customer and users.id_user = $8
+        where users.id_user = customer.id_customer and users.id_user = $8
         returning *
       )
       update customer set
@@ -140,7 +140,7 @@ const userModel = {
         image = coalesce ($6, image),
         main_address = coalesce ($7, main_address)
         from seller
-        where users.id_user  = seller.id_seller and users.id_user = $8
+        where users.id_user = seller.id_seller and users.id_user = $8
         returning *
       )
       update seller set
