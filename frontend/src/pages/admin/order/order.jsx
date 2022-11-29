@@ -46,18 +46,18 @@ const Order = () => {
 												<span>
 													{" "}
 													Size:{" "}
-													{item.size == 0
+													{item.item_size == "1"
 														? "XS"
-														: item.size == 1
+														: item.item_size == "2"
 														? "S"
-														: item.size == 2
+														: item.item_size == "3"
 														? "M"
-														: item.size == 3
+														: item.item_size == "4"
 														? "L"
 														: "XL"}
 												</span>
 											</p>
-											<p className="text-secondary">Color: {item.color}</p>
+											<p className="text-secondary">Color: {item.item_color}</p>
 										</div>
 										<div className="col-4">
 											<h4 className="fontMedium">Order by:</h4>

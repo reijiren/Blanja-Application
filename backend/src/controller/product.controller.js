@@ -177,7 +177,7 @@ const productController = {
     const data = {
       product_name: body.product_name && `'%${body.product_name}%'`,
       color: body.color && `'%${body.color}%'`,
-      size: body.size || null,
+      size: body.size && `'%${body.size}%'`,
       category: body.category && `'%${body.category}%'`,
       sortBy: body.sortBy || 'product_name',
       sortOrd: body.sortOrd || 'asc',

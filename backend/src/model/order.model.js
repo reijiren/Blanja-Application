@@ -45,19 +45,36 @@ const orderModel = {
 				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
 				 join users as seller on seller.id_user = product.seller where userid = ${id};
       `,
-        (err, result) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(result);
-        }
-      );
-    });
-  },
-  selectAllOrderedProduct: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query(
-        `select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectUserOrderWithStatus: (id, status) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
+				 customer.image as buyer_image, seller.image as seller_image from orders join
+				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
+				 join users as seller on seller.id_user = product.seller where userid = ${id} and status = ${status};
+      `,
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(result);
+				}
+			);
+		});
+	},
+	selectAllOrderedProduct: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`select orders.*, product.*, customer.name as buyer_name, seller.name as seller_name,
 				 customer.image as buyer_image, seller.image as seller_image from orders join
 				 users as customer on customer.id_user = orders.userid join product on item = product.id_product
 				 join users as seller on seller.id_user = product.seller where product.seller = ${id};
@@ -122,22 +139,22 @@ const orderModel = {
     });
   },
   storeTransaksi: (data) => {
-    return new Promise((resolve, reject) => {
-      db.query(
-        `
-          INSERT INTO transactions (userid, id_order, payment_method, total_price,transaction_date)
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+          INSERT INTO transactions (userid, id_order,id_address, payment_method, total_price,transaction_date)
           VALUES
           (${data.userid}, ${data.id_order},${data.id_address}, '${data.payment_method}', ${data.total_price}, now())
           `,
-        (err, res) => {
-          if (err) {
-            reject(err);
-          }
-          resolve(res);
-        }
-      );
-    });
-  },
+				(err, res) => {
+					if (err) {
+						reject(err);
+					}
+					resolve(res);
+				}
+			);
+		});
+	},
   selectAllTransaction: () => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM transactions', (err, result) => {
