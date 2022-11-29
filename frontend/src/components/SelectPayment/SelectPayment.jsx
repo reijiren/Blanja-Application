@@ -29,9 +29,7 @@ const SelectPayment = () => {
         id: e.id_product,
         stockProduk: e.stock,
       };
-      // console.log(body.id)
-      // handleUpdate(e.id_order)
-
+      
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/transaction`, body)
         .then((res) => {
