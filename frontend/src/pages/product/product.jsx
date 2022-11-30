@@ -9,6 +9,7 @@ import axios from "axios";
 import { selectReceiver } from "../../redux/action/chat";
 import style from "../../assets/style/style.module.css";
 import star from "../../assets/images/Star.png";
+import Swal from 'sweetalert2';
 
 const Product = () => {
 	const [active, setActive] = useState();
@@ -49,13 +50,17 @@ const Product = () => {
 			quantity: jumlah,
 			status: product.status,
 		};
-		console.log(body);
 
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/order`, body)
 			.then((response) => {
-				console.log(response);
-				alert("barang berhasil ditambahkan");
+				Swal.fire({
+					icon: 'success',
+					title: 'Order success',
+					timer: 1800,
+					showConfirmButton: false,
+				})
+				window.location.reload();
 			})
 			.catch((error) => {
 				console.log(error);

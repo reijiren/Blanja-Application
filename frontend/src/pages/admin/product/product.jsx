@@ -55,7 +55,7 @@ const AdminProduct = () => {
 									<div className="border p-3 d-flex flex-row rounded mb-3">
 										<div className="me-3">
 											<img
-												src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
+												src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo.split('||')[0]}`}
 												alt=""
 												className={`rounded ${style.productImage}`}
 											/>
