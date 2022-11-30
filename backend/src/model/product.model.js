@@ -137,21 +137,21 @@ const productModel = {
 
 	searchProduct: (data) => {
 		return new Promise((resolve, reject) => {
-      let counter = 1;
-      let max = 0;
+			let counter = 1;
+			let max = 0;
 
-      const offset = (data.page - 1) * data.limit;
+			const offset = (data.page - 1) * data.limit;
 
-      const body = {
-        product_name: data.product_name,
-        color: data.color,
-        size: data.size,
-        category: data.category,
-      };
+			const body = {
+				product_name: data.product_name,
+				color: data.color,
+				size: data.size,
+				category: data.category,
+			};
 
-      for (var key in body) {
-        if (body[key] !== null) max = max + 1;
-      }
+			for (var key in body) {
+				if (body[key] !== null) max = max + 1;
+			}
      
 			const addCount = () => {
 				counter = counter + 1;
@@ -160,7 +160,7 @@ const productModel = {
 
 			db.query(
 				`
-        SELECT * FROM product join seller on seller.id_seller = product.seller
+        SELECT * FROM product join seller on seller.id_seller = product.seller join users on users.id_user = product.seller
         where
         ${data.product_name ? `product_name ilike ${data.product_name} ${counter < max ? addCount() : ' '}` : ''}
         ${data.color ? `color ilike ${data.color} ${counter < max ? addCount() : ' '}` : ''}

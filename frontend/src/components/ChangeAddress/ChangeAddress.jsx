@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 // react redux
 import { useSelector, useDispatch } from "react-redux";
-import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 // redux action
 import { updateAddress } from "../../redux/action/address";
 

@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import style from '../../assets/style/style.module.css';
-import axios from 'axios';
 import { login } from '../../redux/action/user';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../redux/action/chat';
@@ -23,7 +22,7 @@ const SellerLogin = () => {
       if (data.data.status !== 'success') {
         Swal.fire({
           icon: 'error',
-          title: 'name or password is incorrect',
+          title: 'Name or Password is incorrect',
           showConfirmButton: false,
           timer: 1800,
         });
@@ -33,7 +32,7 @@ const SellerLogin = () => {
           localStorage.setItem('token', data.data.token);
           Swal.fire({
             icon: 'success',
-            title: 'Sucess login!',
+            title: 'Login Success!',
             showConfirmButton: false,
             timer: 1800,
           });

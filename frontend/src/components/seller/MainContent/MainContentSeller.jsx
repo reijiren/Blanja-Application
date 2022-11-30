@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-// images
-import johanesMikael from "../../../assets/images/johanes mikael.png";
-// components
 import MyProfileStore from "../MyProfileStore/MyProfileStore";
 import MyProducts from "../MyProducts/MyProducts";
 import SellingProduct from "../SellingProduct/SellingProduct";
 import MyOrderStore from "../MyOrder/MyOrderStore";
-// react redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProduct } from "../../../redux/action/product";
-import { getOrderSeller, getOrderUser } from "../../../redux/action/order";
+import { getOrderSeller } from "../../../redux/action/order";
 
 
 const MainContentSeller = () => {
@@ -18,7 +14,6 @@ const MainContentSeller = () => {
   const [showMyProducts, setShowMyProducts] = useState(false);
   const [showSellingProduct, setShowSellingProduct] = useState(false);
   const [showMyOrder, setShowMyOrder] = useState(false);
-  const [dataUser, setDataUser] = useState([]);
 
   const editProfileStore = () => {
     setShowMyProfileStore(true);
@@ -52,10 +47,6 @@ const MainContentSeller = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const onLoaddata = async () => {
-      await setDataUser(user);
-    }
-    onLoaddata();
     dispatch(getUserProduct(user.id_user))
     dispatch(getOrderSeller(user.id_user))
     dispatch(getUserProduct(user.id_user))
@@ -84,7 +75,7 @@ const MainContentSeller = () => {
               <div className="d-flex flex-row">
                 <div className="image-content">
                   <img
-                    src={`${process.env.REACT_APP_BACKEND_URL}/${dataUser.image}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
                     alt="avatar_user"
                     style={{
                       borderRadius: "50%",
@@ -95,7 +86,7 @@ const MainContentSeller = () => {
                 </div>
                 <div className="name-info-edit d-flex flex-column justify-content-center align-items-center ms-3">
                   <div className="name">
-                    <p className="fontBold h5">{dataUser.name}</p>
+                    <p className="fontBold h5">{user.name}</p>
                   </div>
                   <div className="edit-profile-button">
                     <button

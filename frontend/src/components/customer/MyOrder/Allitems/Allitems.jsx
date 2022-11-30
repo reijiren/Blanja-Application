@@ -60,30 +60,22 @@ const Allitems = () => {
               <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
                 {item.photo ? (
                   item.photo.split("||").map((e, i, arr) =>
-                    // ambil data akhir
-                    // arr.length - 1 === index ? (
-                    // ambil data awal
                     i === 0 ? (
-                      <>
-                        <div key={i} className="img-review-1 d-flex justify-content-center mb-3">
-                          <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/${e}`}
-                            alt="item co"
-                            style={{
-                              height: "100px",
-                              width: "100px",
-                              borderRadius: "15px",
-                            }}
-                          />
-                        </div>
-                      </>
-                    ) : (
-                      <></>
-                    )
+                      <div key={i} className="img-review-1 d-flex justify-content-center mb-3">
+                        <img
+                          src={`${process.env.REACT_APP_BACKEND_URL}/${e}`}
+                          alt="item co"
+                          style={{
+                            height: "100px",
+                            width: "100px",
+                            borderRadius: "15px",
+                          }}
+                        />
+                      </div>
+                    ) : ''
                   )
-                ) : (
-                  <></>
-                )}
+                ) : ''
+                }
               </div>
               <div className="content-desc-item col-6 d-flex flex-column justify-content-center">
                 <div className="name-item">

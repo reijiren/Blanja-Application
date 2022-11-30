@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import style from '../../assets/style/style.module.css';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/action/user';
 import Swal from 'sweetalert2';
@@ -50,15 +49,14 @@ const SellerRegister = () => {
         if (data.data.status !== 'success') {
           Swal.fire({
             icon: 'error',
-            title: 'error Register',
+            title: 'Email is already taken!',
             showConfirmButton: false,
             timer: 1800,
           });
-          alert(data.data.message);
         } else {
           Swal.fire({
             icon: 'success',
-            title: 'succes Register',
+            title: 'Register Success!',
             showConfirmButton: false,
             timer: 1800,
           });

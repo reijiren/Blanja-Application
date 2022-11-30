@@ -6,12 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateCustomer } from "../../redux/action/user";
 
 const AddNewAddress = () => {
-  const { user } = useSelector((state) => {
+  const { user, isLoading, isError } = useSelector((state) => {
     return state.user;
   });
-
   const dispatch = useDispatch();
-
   const [form, setForm] = useState({
     address_name: "",
     recipient_name: "",
@@ -20,6 +18,9 @@ const AddNewAddress = () => {
     post_code: "",
     city: "",
   });
+  useEffect(() => {
+    console.log(user)
+  }, [])
 
   const [main_address_bool, setMainAddress] = useState(false);
 
@@ -42,18 +43,18 @@ const AddNewAddress = () => {
       if(main_address_bool) {
         const dataSuccess = data.data.data[0];
 
-        const main_address = dataSuccess.addressid;
-        const bodyUser = {
-            main_address : main_address
-        }
-        
-        const updateSuccess = (res) => {
-            console.log(res)
-        }
-
-        dispatch(updateCustomer(user.id_user, bodyUser, updateSuccess))
+      const main_address = dataSuccess.addressid;
+      const bodyUser = {
+        main_address : main_address
       }
-
+      const updateSuccess = (res) => {
+        console.log(res)
+      }
+      
+        dispatch(updateCustomer(user.id_user, bodyUser, updateSuccess))
+      
+      }
+      
       alert("Insert Success");
       return window.location.reload();
     };
@@ -67,10 +68,10 @@ const AddNewAddress = () => {
       post_code: form.post_code,
       city: form.city,
     };
-
+    // return console.log(body);
     dispatch(insertAddress(body, handleSuccess));
+    
   };
-
   return (
     <div className="modal-dialog" style={{ maxWidth: "80%" }}>
       <div className="modal-content">

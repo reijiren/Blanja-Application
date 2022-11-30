@@ -48,14 +48,14 @@ const CustomerRegister = () => {
         if (data.data.status !== 'success') {
           Swal.fire({
             icon: 'error',
-            title: 'This user is not registered as a customer!',
+            title: 'Email is already taken!',
             showConfirmButton: false,
             timer: 1800,
           });
         } else {
           Swal.fire({
             icon: 'success',
-            title: 'success register',
+            title: 'Register Success!',
             showConfirmButton: false,
             timer: 1800,
           });
