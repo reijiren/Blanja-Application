@@ -62,7 +62,7 @@ This is an example of things you will need to use the software and how to instal
 
 1. Clone the repo
 ```sh
-git clone https://github.com/reijiren
+git clone https://github.com/reijiren/Blanja-Application.git
 ```
 2. Install NPM packages
 ```sh
