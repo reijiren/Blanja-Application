@@ -1,12 +1,7 @@
-
 import React,{useState, useEffect} from 'react';
 import './style.css';
-import { Link} from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
-// image
-import menFormalSuit from "../../../assets/images/men jacket jeans.png";
 
 // end of import image
 import ChoseAnotherAddress from "../../../components/ChooseAnotherAddress/ChoseAnotherAddress";
@@ -26,8 +21,6 @@ const CheckOut = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/order/userstatus/${idUser}?status=0`)
       .then((response) => {
-        // console.log(response.data.token.data)
-        // console.log(response.data.data);
         setDataOrder(response.data.data)
         localStorage.setItem('order', JSON.stringify(response.data.data));
       })
@@ -35,12 +28,11 @@ const CheckOut = () => {
         console.log(err); 
       });
     },[idUser]);
+
     useEffect(() => {
-      // console.log(id2)
       axios
         .get(`${process.env.REACT_APP_BACKEND_URL}/address/${idAddres}`)
         .then((response) => {
-          // console.log(response.data.token.data)
           console.log(response.data);
           setDataAddres(response.data.data)
           localStorage.setItem('address', JSON.stringify(response.data.data[0]));
@@ -53,10 +45,9 @@ const CheckOut = () => {
 
   const add = (num) => {
     total += num;
-    // console.log(total)
     localStorage.setItem('Pembayaran', JSON.stringify(total));
   }
-  // console.log(total)
+  
   return (
     <div className={`vw-100 vh-100`}>
 			<Navs />
@@ -161,7 +152,7 @@ const CheckOut = () => {
                       <div className="wrapper-item-co row">
                         <div className="content-img col-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2 col-xxl-2 d-flex align-items-center justify-content-center pt-1 pb-1">
                           <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
+                            src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo.split('||')[0]}`}
                             alt="item co"
                             style={{
                               height: "100px",

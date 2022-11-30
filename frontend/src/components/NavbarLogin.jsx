@@ -5,12 +5,13 @@ import notif from '../assets/images/notif.png';
 import mail from '../assets/images/mail.png';
 import card from '../assets/images/cart.png';
 import style from '../assets/style/style.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 const NavbarLogin = () => {
+  const location = useLocation();
   const [color, setColor] = useState("black");
   const [size, setSize] = useState(true);
   const navigate = useNavigate();
@@ -28,7 +29,11 @@ const NavbarLogin = () => {
     e.preventDefault();
 
     localStorage.setItem('name', JSON.stringify(search));
-    return navigate('/category');
+    if(location.pathname === '/category'){
+      window.location.reload();
+    }else{
+      return navigate('/category');
+    }
   };
 
   return (
@@ -54,12 +59,13 @@ const NavbarLogin = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className={`me-auto mb-2 mb-lg-0 mt-md-0 mt-2 col-md-6 col-12`}>
-              <form className={`d-flex`} role="search">
+              <form className={`d-flex`} role="search" onSubmit={onSubmitHandler}>
                 <input
                   className={`me-2 form-control col-md-10 ${style.navSearch}`}
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  onChange={(e) => setSearch(e.target.value)}
                 />
                 <button
                   type="button"

@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import style from "../../assets/style/style.module.css";
-import thubms1 from "../../assets/images/bajuMuslim1.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -21,21 +20,24 @@ const OtherProduct = () => {
 	}, [id_product]);
 
 	useEffect(() => {
-		const data = {
-			product_name: null,
-			color: null,
-			size: null,
-			category: `${details.category}`,
-		};
+		if(details.category){
+			const data = {
+				product_name: null,
+				color: null,
+				size: null,
+				category: details.category,
+				page: 1,
+			};
 
-		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}/product/filter`, data)
-			.then((response) => {
-				setCategory(response.data.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+			axios
+				.post(`${process.env.REACT_APP_BACKEND_URL}/product/filter`, data)
+				.then((response) => {
+					setCategory(response.data.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 	}, [details]);
 
 	return (
@@ -45,7 +47,7 @@ const OtherProduct = () => {
 				<p className="text-secondary">You’ve never seen it before!</p>
 				<div
 					className={`d-flex flex-row col-12 ${style.cardMobiles} flex-md-wrap ${style.margins}`}>
-					{category.length == undefined ? (
+					{category && category.length == undefined ? (
 						<h1>No product found!</h1>
 					) : (
 						category.map((item, index) => (
@@ -54,7 +56,7 @@ const OtherProduct = () => {
 								key={index}>
 								<div className={`card`}>
 									<img
-										src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
+										src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo.split('||')[0]}`}
 										className={`card-img-top ${style.cardsImage}`}
 										alt="..."
 									/>
@@ -68,7 +70,7 @@ const OtherProduct = () => {
 										</p>
 										<p
 											className={`fontMedium text-secondary ${style.cardProductShop} ${style.ups}`}>
-											{item.store_desc}
+											{item.name}
 										</p>
 									</div>
 								</div>

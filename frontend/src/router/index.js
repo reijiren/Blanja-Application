@@ -40,7 +40,7 @@ const AdminRoute = () => {
 const PrivateRoute = () => {
 	const user = useSelector((state) => state.user.user)
 
-	if(user.user_type === 0 || user.user_type === 1){
+	if(user.user_type === 1 || user.user_type === 2){
 		return <Outlet />;
 	} else {
 		Swal.fire({

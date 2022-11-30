@@ -85,13 +85,12 @@ const Product = () => {
 											className={`${style.mobiles} d-flex col-12 flex-row overflow-scroll`}>
 											{details.id_product &&
 												details.photo.split("||").map((item, index) => (
-													<div key={index}>
-														<img
-															src={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
-															alt=""
-															className={`col-md-10 col-10 pe-1 mb-2 ${style.thumbs} ${style.thumbnails}`}
-														/>
-													</div>
+													<img
+														key={index}
+														src={`${process.env.REACT_APP_BACKEND_URL}/${item}`}
+														alt=""
+														className={`col-md-10 col-10 pe-1 mb-2 ${style.thumbs} ${style.thumbnails}`}
+													/>
 												))}
 										</div>
 									</div>
@@ -143,7 +142,8 @@ const Product = () => {
 																	)}
 																</div>
 															</div>
-														))}
+														))
+													}
 												</div>
 											</div>
 											<div className="d-flex flex-row">

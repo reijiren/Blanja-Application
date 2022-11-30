@@ -14,8 +14,6 @@ const MyBag = () => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/order/user/${id}`)
       .then((response) => {
-        // console.log(response.data.token.data)
-        console.log(response.data.data);
         setData2(response.data.data);
       })
       .catch((err) => {
@@ -23,28 +21,11 @@ const MyBag = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   // console.log(data2.seller)
-  //   const id ={ }
-  //   axios
-  //     .get(`${process.env.REACT_APP_BACKEND_URL}/user/${data2.seller}`)
-  //     .then((response) => {
-  //       // console.log(response.data.token.data)
-  //       console.log(response.data.data);
-  //       setData2(response.data.data)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   },[]);
-
   const add = (num) => {
     total += num;
-    // console.log(total)
   };
   return (
     <>
-      {/* {JSON.stringify(data2 )} */}
       <Navs />
       <div style={{ marginTop: "60px" }} className="container ">
         <div className="row ">
@@ -77,8 +58,8 @@ const MyBag = () => {
                             <div className="d-flex align-items-center">
                               <input className={style.check} type="checkbox" />
                               <img
-                                src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`}
-                                alt="suite"
+                                src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo.split('||')[0]}`}
+                                alt={item.product_name}
                               />
                               <div className={style.brand}>
                                 <h5>
@@ -90,9 +71,9 @@ const MyBag = () => {
                             <div
                               className={`d-flex align-items-center ${style.countProduct}`}
                             >
-                              <div className={style.circle}>-</div>
-                              <p className={style.sum}>{item.quantity}</p>
-                              <div className={style.circle}>+</div>
+                              <div></div>
+                              <p className={style.sum}>({item.quantity})</p>
+                              <div></div>
                             </div>
                             <p className={style.price}>
                               ${item.quantity * item.price} {""}{" "}

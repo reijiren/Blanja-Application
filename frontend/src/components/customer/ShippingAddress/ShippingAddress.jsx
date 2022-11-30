@@ -3,7 +3,6 @@ import AddNewAddress from "../../AddNewAddress/AddNewAddress";
 import ChangeAddress from "../../ChangeAddress/ChangeAddress";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// action
 import { getUserAddresses } from "../../../redux/action/address";
 import { updateCustomer } from "../../../redux/action/user";
 
@@ -23,7 +22,6 @@ const ShippingAddress = () => {
     getUserAddresses(user.id_user, handleSuccess);
   }, []);
 
-  
   const setMainAddress = (id, index) => {   
     const handleSuccess = (data) => {
       alert("success change main address")
@@ -36,9 +34,6 @@ const ShippingAddress = () => {
     updateCustomer(user.id_user, body, handleSuccess);
   }
 
-  useEffect(() => {
-    // console.log(listAddressUser[0].main_address === null)
-  })
   return (
     <>
       {

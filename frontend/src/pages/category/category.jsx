@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import style from '../category/category.module.css';
 import { Link } from 'react-router-dom';
-import product from '../../assets/images/gez-xavier-mansfield-b34E1vh1tYU-unsplash 1.jpg';
 import Navs from '../../components/Navs';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Category = () => {
   const [getProduct, setProduct] = useState([]);
@@ -33,7 +31,7 @@ const Category = () => {
   const [asc, setAsc] = useState('asc');
 
   useEffect(() => {
-    getData(sort, asc, 3, currentPage);
+    getData(sort, asc, 5, currentPage);
   }, [sort, asc, currentPage]);
 
   const getData = (sort, asc, limit, page) => {
@@ -113,7 +111,7 @@ const Category = () => {
               getProduct.map((item, index) => (
                 <Link key={index} to={`/product/${item.id_product}`} className={`${style.links}`}>
                   <div className="card " style={{ width: '14rem', top: '10px' }}>
-                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo}`} height="200px" className="card-img-top" alt="..." />
+                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.photo.split('||')[0]}`} height="200px" className="card-img-top" alt="..." />
                     <div className="card-body">
                       <h4 className="card-text">{item.product_name}</h4>
                       <h4 className="card-text text-danger">$ {item.price}.0</h4>

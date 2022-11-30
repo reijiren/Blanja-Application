@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-// style
 import "./style.css";
-// images
 import sampleImage from "../../../assets/images/sample-image.png";
 import dummyTools from "../../../assets/images/dummy-tools.png";
-// react-redux
 import { useSelector, useDispatch } from "react-redux";
 import { insertProduct } from "../../../redux/action/product";
+import Swal from 'sweetalert2';
 
 const SellingProduct = () => {
   // page logic
@@ -50,12 +48,18 @@ const SellingProduct = () => {
     });
   };
   const onSubmitHandler = (e) => {
-    // console.log(user);
     e.preventDefault();
-    const handleSuccess = (data) => {
+    const handleSuccess = async(data) => {
       console.log("insert", data);
-      alert("success insert product")
-      return window.location.reload();
+      if(data.data.status === 'success'){
+        await Swal.fire({
+          icon: 'success',
+          title: 'New product posted successfully!',
+          showConfirmButton: false,
+          timer: 1800,
+        })
+        return window.location.reload();
+      }
     };
 
     const body = {
@@ -73,9 +77,7 @@ const SellingProduct = () => {
     console.log(body);
     dispatch(insertProduct(body, handleSuccess));
   };
-  // useEffect(() => {
-  //   const id_seller
-  // })
+  
   return (
     <div className="w-90 m-3 mt-5">
       <div className="wrapper m-4">

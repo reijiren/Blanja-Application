@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-// components
 import MyProfile from "../../../components/customer/MyProfile/MyProfile";
 import ShippingAddress from "../ShippingAddress/ShippingAddress";
 import MyOrder from "../MyOrder/MyOrder";
-// images
-import johanesMikael from "../../../assets/images/johanes mikael.png";
-// react-redux
 import { useSelector, useDispatch } from "react-redux";
-// redux action
-import { detailById } from "../../../redux/action/user";
-import { getByMainAddress } from "../../../redux/action/address";
 import { getOrderUser } from "../../../redux/action/order";
 
 // conditional page
@@ -39,18 +32,14 @@ const MainContentCust = () => {
     setShowMyOrder(true);
   };
 
-  // logic page
   const { user, isLoading, isError } = useSelector((state) => {
     return state.user;
-  });
-  const address = useSelector((state) => {
-    return state.address;
   });
 
   useEffect(() => {
     setProfilePicture(user.image);
     dispatch(getOrderUser(user.id_user))
-  });
+  }, []);
 
   return (
     <>
