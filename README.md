@@ -71,9 +71,9 @@ npm install
 3. Add .env file at root folder project, and add following
 ```sh
 DB_USERNAME = your_db_user
-DB_HOST = your_host
+DB_HOST = your_db_host
 DB_DATABASE = your_db_name
-DB_PASSWORD = your_password
+DB_PASSWORD = your_db_password
 DB_PORT = your_db_port
 PORT = 3001
 SECRET_KEY = secret_key_for_JWT
