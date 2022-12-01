@@ -70,17 +70,13 @@ npm install
 ```
 3. Add .env file at root folder project, and add following
 ```sh
-DB_USER = your_db_user
+DB_USERNAME = your_db_user
 DB_HOST = your_host
-DB_NAME = your_db_name
+DB_DATABASE = your_db_name
 DB_PASSWORD = your_password
 DB_PORT = your_db_port
-
-PORT = 5000
-
+PORT = 3001
 SECRET_KEY = secret_key_for_JWT
-NODE_ENV = "Development"
-
 ```
 
 
