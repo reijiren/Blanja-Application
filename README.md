@@ -30,7 +30,7 @@
 ## About The Project
 
 
-Blanja is an e-commerce application where customers can find any products that is being posted by sellers and then make an order. There are 2 types of user in this application: Customer and Seller. Customers can find and buy any products, and then proceed to payment to complete the purchase. Sellers are able to see orders from customers that are buying their product and see the payment status. Sellers might also post their product from their profile and edit the products. 
+Blanja is an e-commerce application where customers can find any products that are posted by sellers and then make an order. There are 2 types of user in this application: Customers and Sellers. Customers can find and buy any products, and then proceed to payment to complete the purchase. Sellers are able to see orders from customers that are buying their product and see the payment status. Sellers might also post their product from their profile and edit the products.
 
 ### Built With
 
@@ -51,9 +51,7 @@ Blanja is an e-commerce application where customers can find any products that i
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
 Please visit [FRONTEND](https://github.com/reijiren/Blanja-Application/tree/main/frontend) and [BACKEND](https://github.com/reijiren/Blanja-Application/tree/main/backend) documentation to see prerequisites and example on how to run Blanja Application.
-
 
 
 <!-- CONTACT -->
@@ -65,7 +63,7 @@ Contributors name and contact info
   * Muhammad Rhefa Farizi [@reijiren](https://github.com/reijiren)
   * Rahmat Furqon [@sukron21](https://github.com/sukron21)
 
-* FRONTEND TIM
+* FRONTEND TEAM
   * Ainur Ridwan [@ainurcoding](https://github.com/ainurcoding)
   * Ichsan Ramadhan Mokodompit [@IchsanR](https://github.com/IchsanR)
   * Muhamad Iqbal Aprido [@Iqbalapredo](https://github.com/Iqbalapredo)
