@@ -39,7 +39,7 @@ const MyBag = () => {
                   >
                     <input className={style.check} type="checkbox" />
                     Select all items{" "}
-                    <span className={style.selected}>(2 items selected)</span>
+                    <span className={style.selected}></span>
                     <span
                       className={`${style.delete} d-flex justify-content-end`}
                     >
