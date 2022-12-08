@@ -3,7 +3,7 @@
 
   <h3 align="center">Blanja Application</h3>
   <p align="center">
-    <image align="center" width="200" src='./assets/' />
+    <image align="center" width="200" src='https://github.com/ainurcoding/Blanja-Application/blob/main/frontend/src/assets/images/blanja_icon.png' />
   </p>
 </p>
 
