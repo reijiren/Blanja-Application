@@ -70,7 +70,7 @@ const ProductOptions = () => {
 								<img src={star} alt="tydac ramah" />
 							</div>
 							<p className={`text-secondary my-auto ${style.review}`}>
-								Tydac ramah bintang 1
+								5
 							</p>
 						</div>
 						<div className="my-3">

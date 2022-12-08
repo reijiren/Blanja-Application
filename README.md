@@ -22,9 +22,6 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Related Project](#related-project-backend)
 * [Contact](#contact)
 
 
@@ -40,6 +37,7 @@ Blanja is an e-commerce application where customers can find any products that i
 #### Backend API
 * [Node JS](https://nodejs.org/en/docs/)
 * [Express JS](https://expressjs.com/)
+* [PostgreSQL](https://www.postgresql.org/)
 * [Socket.IO](https://socket.io/)
 
 #### Frontend App
@@ -47,59 +45,14 @@ Blanja is an e-commerce application where customers can find any products that i
 * [Redux](https://redux.js.org/)
 * [Bootstrap](https://getbootstrap.com/)
 * [Axios](https://axios-http.com/)
+* [Socket.IO Client](https://socket.io/docs/v4/client-api/)
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Prerequisites
 
-This is an example of things you will need to use the software and how to install them.
-
-* [nodejs](https://nodejs.org/en/download/)
-
-### Installation
-
-1. Clone the repo
-```sh
-git clone https://github.com/reijiren
-```
-2. Install NPM packages
-```sh
-npm install
-```
-3. Add .env file at root folder project, and add following
-```sh
-DB_USER = your_db_user
-DB_HOST = your_host
-DB_NAME = your_db_name
-DB_PASSWORD = your_password
-DB_PORT = your_db_port
-
-PORT = 5000
-
-SECRET_KEY = secret_key_for_JWT
-NODE_ENV = "Development"
-
-```
-
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b your/branch`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/yourbranch`)
-5. Open a Pull Request
-
-
-
-## Related Project
+Please visit [FRONTEND](https://github.com/reijiren/Blanja-Application/tree/main/frontend) and [BACKEND](https://github.com/reijiren/Blanja-Application/tree/main/backend) documentation to see prerequisites and example on how to run Blanja Application.
 
 
 

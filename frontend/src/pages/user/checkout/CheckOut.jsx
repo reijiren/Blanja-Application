@@ -77,11 +77,11 @@ const CheckOut = () => {
                       {item.address},
                     </span>{" "}
                     <span className="city-or-subdistric">
-                      {item.city}, Jawa Tengah.
+                      {item.city}.
                     </span>{" "}
-                    <span className="postal-code">{item.post_code}</span>{" "}
+                    <span className="postal-code">{item.post_code}.</span>{" "}
                     <span className="tokopaedi-note">
-                      [ Note: {item.address_name}] Kab/Kota. {item.city},
+                      [Note: {item.address_name}] Kab/Kota. {item.city},
                     </span>{" "}
                     <span className="postal-code">{item.post_code}</span>
                   </p>

@@ -171,7 +171,7 @@ const MyOrder = () => {
                 Completed
               </button>
             </li>
-            <li className="col-4">
+            <li className="col-2">
               <button
                 type="button"
                 className="btn"
