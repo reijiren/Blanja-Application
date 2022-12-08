@@ -56,11 +56,6 @@ const productModel = {
 	},
 	store: (data) => {
 		return new Promise((resolve, reject) => {
-			console.log(`
-            INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
-            VALUES
-            (${data.seller},'${data.product_name}',${data.price},${data.stock},${data.condition},'${data.photo}','${data.color}','${data.size}','${data.category}','${data.description}')
-            `)
 			db.query(
 				`
             INSERT INTO product (seller,product_name, price ,stock,condition,photo,color,size,category,description)
