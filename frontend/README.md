@@ -184,7 +184,7 @@ Blanja is an e-commerce application where customers can find any products that i
   <summary>
     Admin List Product
   </summary>
-<img src="./screenshot/admin/product_list.png" alt="admin list product" />
+<img src="./screenshot/admin/admin_product_list.png" alt="admin list product" />
 </details>
 
 ### Built With
